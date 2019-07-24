@@ -1,0 +1,450 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh-CN" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh-CN" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>OS Security &mdash; Documentation for Clear Linux* project</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'zh_CN',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="Stateless" href="stateless.html" />
+    <link rel="prev" title="mixer" href="mixer.html" />
+
+<link rel="stylesheet" href="../_static/tcs_theme.css" type="text/css" />
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #007ab2" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Clear Linux* Project Docs
+          
+
+          
+            
+            <img src="../_static/clearlinux.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Clear Linux</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Language Versions</dt>
+        
+          <dd><a href="/clearlinux/tooling/security.html">English</a></dd>
+        
+          <dd><a href="/clearlinux/zh_CN/tooling/security.html">Chinese</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Document Versions</dt>
+        
+          <dd><a href="/clearlinux/tooling/security.html">latest</a></dd>
+        
+          <dd><a href="/clearlinux/L19.01/tooling/security.html">L19.01</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>clearlinux.org links</dt>
+          <dd>
+            <a href="https://www.clearlinux.org/">Project Home</a>
+          </dd>
+          <dd>
+            <a href="https://github.com/clearlinux/clear-linux-documentation">GitHub</a>
+          </dd>
+      </dl>
+    </div>
+  </div>
+  
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/get-started.html">Get started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="tooling.html">How to Clear</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="autoproxy.html">Autoproxy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autospec.html">autospec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compatible-kernels.html">Kernels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debug.html">Debug system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ister.html">ister.py image builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mixer.html">mixer</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">OS Security</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#security-in-updates">Security in updates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#the-latest-linux-codebase">The latest Linux* codebase</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#automated-effective-updating">Automated effective updating</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#automated-cve-scanning-and-remediation">Automated CVE scanning and remediation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#security-in-software">Security in software</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#minimized-attack-surface">Minimized attack surface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#verified-trust">Verified trust</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#compiled-with-secure-options">Compiled with secure options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#security-in-system-design">Security in system design</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="stateless.html">Stateless</a></li>
+<li class="toctree-l2"><a class="reference internal" href="swupd-guide.html">swupd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/telemetrics/telem-guide.html">Telemetrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tooling.html#training">Training</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/guides.html">Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ/faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Clear Linux* Project Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+
+<header id="header">
+  <div class="padding-md--left-right">
+
+    <div class="header__site_info">
+           <div class="header__site_info_name">
+             <a href ="https://clearlinux.org"> Clear Linux* Project</a>
+           </div>
+    </div>
+    <nav class="header__menu">
+        <ul class="header__menu_list">
+                         <li class="header__menu_list_item green  ">
+                <a tabindex='1' href="https://clearlinux.org/about">About</a>
+              </li>
+                         <li class="header__menu_list_item purple  ">
+                <a tabindex='1' href="https://clearlinux.org/developer">Developer</a>
+              </li>
+                         <li class="header__menu_list_item blue  ">
+                <a tabindex='1' href="https://clearlinux.org/software">Software</a>
+              </li>
+        </ul>
+    </nav>
+
+  </div>
+
+
+
+</header>
+
+
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="tooling.html">How to Clear</a> &raquo;</li>
+        
+      <li>OS Security</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/clearlinux/clear-linux-documentation/blob/rtd-theme/source/tooling/security.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="os-security">
+<span id="security"></span><h1>OS Security</h1>
+<p>Clear Linux* OS aims to make systemic and layered security-conscious decisions
+that are both performant and practical. This security philosophy is rooted
+within the project’s codebase and operating culture.</p>
+<div class="contents local topic" id="id1">
+<ul class="simple">
+<li><a class="reference internal" href="#security-in-updates" id="id2">Security in updates</a></li>
+<li><a class="reference internal" href="#security-in-software" id="id3">Security in software</a></li>
+<li><a class="reference internal" href="#security-in-system-design" id="id4">Security in system design</a></li>
+</ul>
+</div>
+<div class="section" id="security-in-updates">
+<h2><a class="toc-backref" href="#id2">Security in updates</a></h2>
+<p>The Clear Linux OS team believes in the benefits of software security through open
+sourcing, incremental updates, and rapidly resolving known security advisories.</p>
+<div class="section" id="the-latest-linux-codebase">
+<h3>The latest Linux* codebase</h3>
+<p>Clear Linux OS uses the newest version of the Linux kernel which allows the operating
+system to leverage the latest features from the upstream Linux kernel,
+including security fixes.</p>
+</div>
+<div class="section" id="automated-effective-updating">
+<h3>Automated effective updating</h3>
+<p>Clear Linux OS is incrementally updated multiple times per day.</p>
+<p>This <a class="reference external" href="https://en.wikipedia.org/wiki/Rolling_release">rolling release</a> model allows Clear Linux OS to consume the latest security fixes
+of software packages as soon as they become available. There is no waiting for
+major or minor releases on Clear Linux OS.</p>
+<p>An update is not effective if it is just simply downloaded onto a system.
+It needs to be obtained <em>AND</em> ensured that the new patched copy is being
+used; not an older copy loaded into memory. Clear Linux OS will let you know when a
+service needs to be rebooted or do it for your automatically after
+a software update, if desired.</p>
+<p>In Clear Linux OS updates are delivered automatically, efficiently, and effectively. For
+more information about software updates in Clear Linux OS, refer to the <a class="reference internal" href="swupd-guide.html#swupd-guide"><span class="std std-ref">swupd</span></a>
+guide.</p>
+</div>
+<div class="section" id="automated-cve-scanning-and-remediation">
+<h3>Automated CVE scanning and remediation</h3>
+<p>The sheer number of software packages and security vulnerabilities is growing
+exponentially. Repositories of Common Vulnerabilities and Exposures (CVEs)
+and their fixes, if known, are published by <abbr>NIST</abbr> in a
+National Vulnerability Database <a href="https://nvd.nist.gov/" target="_blank">https://nvd.nist.gov/</a> and at <a href="https://cve.mitre.org/" target="_blank">https://cve.mitre.org/</a> .</p>
+<p>Clear Linux OS employs a proactive and measured approach to addressing known
+and fixable <abbr title="Common Vulnerabilities and Exposures">CVEs</abbr>.
+Packages are automatically scanned against CVEs daily, and security
+patches are deployed as soon as they are available.</p>
+<p>These combined practices minimize the amount of time Clear Linux OS systems are exposed to unnecessary security risk.</p>
+</div>
+</div>
+<div class="section" id="security-in-software">
+<h2><a class="toc-backref" href="#id3">Security in software</a></h2>
+<div class="section" id="minimized-attack-surface">
+<h3>Minimized attack surface</h3>
+<p>Clear Linux OS removes legacy, unneeded, or redundant standards and components as much as
+possible to enable the use of best known security standards. Below are some
+examples:</p>
+<ul class="simple">
+<li><cite>RC4</cite>, <cite>SSLv3</cite>, <cite>3DES</cite>, and <cite>SHA-1</cite> ciphers which have had known
+vulnerabilities, have been explicitly disabled within many Clear Linux OS packages to
+avoid their accidental usage.</li>
+<li>Services and subsystems which expose sensitive system information
+have been removed such as the <cite>finger</cite> and <cite>tcpwrappers</cite>.</li>
+<li><cite>SFTP</cite> has been disabled by default due to security considerations.</li>
+</ul>
+</div>
+<div class="section" id="verified-trust">
+<h3>Verified trust</h3>
+<p>Clear Linux OS encourages the use of secure practices such as encryption
+and digital signature verification throughout the system and discourages blind
+trust. Below are some examples:</p>
+<ul class="simple">
+<li>All update operations from swupd are transparently encrypted and checked
+against the Clear Linux OS maintainers’ public key for authenticity.
+More information about swupd security can be found in the
+<a class="reference external" href="https://clearlinux.org/blogs/security-software-update-clear-linux-os-intel-architecture">Security for software update in Clear Linux* OS</a> blog post.</li>
+<li>Before being built, packages available from Clear Linux OS verify checksums and
+signatures provided by third party project codebases and maintainers.</li>
+<li>Clear Linux OS features a unified certificate store, <a class="reference external" href="https://github.com/clearlinux/clrtrust">clrtrust</a> which comes
+ready to work with well-known Certificate Authorities out of the box.
+clrtrust also offers an easy to use command line interface for managing
+system-wide chains of trust, instead of ignoring foreign certificates.</li>
+</ul>
+</div>
+<div class="section" id="compiled-with-secure-options">
+<h3>Compiled with secure options</h3>
+<p>While Clear Linux OS packages are optimized for performance on Intel® architecture,
+security conscious kernel and compiler options are sensibly taken advantage of.
+Below are some examples:</p>
+<ul class="simple">
+<li>Kernels shipped with Clear Linux OS are signed and disallow the usage of
+custom kernel modules to maintain verifiable system integrity.</li>
+<li><a class="reference external" href="https://en.wikipedia.org/wiki/Address_space_layout_randomization">Address space layout randomization (ASLR)</a> and
+<a class="reference external" href="https://lwn.net/Articles/569635/">Kernel address space layout randomization (KASLR)</a>  are kernel features
+which defend against certain memory based attacks.
+More information about PIE executables can be found in the
+<a class="reference external" href="https://clearlinux.org/blogs/recent-gnu-c-library-improvements">Recent GNU* C library improvements</a> blog post.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="security-in-system-design">
+<h2><a class="toc-backref" href="#id4">Security in system design</a></h2>
+<p>Simple, yet effective, techniques are used throughout the Clear Linux OS system design to
+defend against common attack vectors and enable good security hygiene. Below are
+some examples:</p>
+<ul class="simple">
+<li>Full disk encryption using <abbr title="Linux Unified Key Setup">LUKS</abbr> is available
+during installation. Refer to <a class="reference external" href="https://gitlab.com/cryptsetup/cryptsetup/">cryptsetup</a> for additional information about
+LUKS.</li>
+<li>Clear Linux OS uses the PAM cracklib module to harden user login and password
+security resulting in:<ul>
+<li>No default username or root password set out of the box with
+Clear Linux OS, you will be asked to set your own password immediately.</li>
+<li>Simple password schemes, which are known to be easily compromised,
+cannot be set in Clear Linux OS.</li>
+<li>A password blacklist, to avoid system passwords being set to
+passwords which have been compromised in the past.</li>
+</ul>
+</li>
+<li><a class="reference external" href="https://github.com/clearlinux/tallow">Tallow</a>, a lightweight service which monitors and blocks suspicious SSH
+login patterns, is installed with the <strong class="command">openssh-server</strong> bundle.</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="stateless.html" class="btn btn-neutral float-right" title="Stateless" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="mixer.html" class="btn btn-neutral float-left" title="mixer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, many
+      <span class="lastupdated">
+        最后更新于 7月 24, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+
+<script type="text/javascript" src="../_static/tcs_theme.js"></script>
+
+
+
+</body>
+</html>

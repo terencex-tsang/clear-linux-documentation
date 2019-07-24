@@ -1,0 +1,718 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh-CN" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh-CN" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Enable AWS Greengrass* and OpenVINO™ toolkit &mdash; Documentation for Clear Linux* project</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'',
+              LANGUAGE:'zh_CN',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" />
+    <link rel="next" title="Deep Learning Reference Stack" href="dlrs/dlrs.html" />
+    <link rel="prev" title="Data Analytics Reference Stack" href="dars.html" />
+
+<link rel="stylesheet" href="../../_static/tcs_theme.css" type="text/css" />
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #007ab2" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Clear Linux* Project Docs
+          
+
+          
+            
+            <img src="../../_static/clearlinux.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Clear Linux</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Language Versions</dt>
+        
+          <dd><a href="/clearlinux/guides/stacks/greengrass.html">English</a></dd>
+        
+          <dd><a href="/clearlinux/zh_CN/guides/stacks/greengrass.html">Chinese</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Document Versions</dt>
+        
+          <dd><a href="/clearlinux/guides/stacks/greengrass.html">latest</a></dd>
+        
+          <dd><a href="/clearlinux/L19.01/guides/stacks/greengrass.html">L19.01</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>clearlinux.org links</dt>
+          <dd>
+            <a href="https://www.clearlinux.org/">Project Home</a>
+          </dd>
+          <dd>
+            <a href="https://github.com/clearlinux/clear-linux-documentation">GitHub</a>
+          </dd>
+      </dl>
+    </div>
+  </div>
+  
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/get-started.html">Get started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tooling/tooling.html">How to Clear</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides.html">Guides</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../guides.html#maintenance">Maintenance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides.html#network">Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides.html#kernel">Kernel</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../guides.html#stacks">Stacks</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="dars.html">Data Analytics Reference Stack</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Enable AWS Greengrass* and OpenVINO™ toolkit</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#supported-platforms">Supported platforms</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#install-the-os-on-the-edge-device">Install the OS on the edge device</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configure-aws-greengrass-group">Configure AWS Greengrass group</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#create-and-package-lambda-function">Create and package Lambda function</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configure-lambda-function">Configure Lambda function</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#deploy-lambda-function">Deploy Lambda function</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="dlrs/dlrs.html">Deep Learning Reference Stack</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../FAQ/faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Clear Linux* Project Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+
+<header id="header">
+  <div class="padding-md--left-right">
+
+    <div class="header__site_info">
+           <div class="header__site_info_name">
+             <a href ="https://clearlinux.org"> Clear Linux* Project</a>
+           </div>
+    </div>
+    <nav class="header__menu">
+        <ul class="header__menu_list">
+                         <li class="header__menu_list_item green  ">
+                <a tabindex='1' href="https://clearlinux.org/about">About</a>
+              </li>
+                         <li class="header__menu_list_item purple  ">
+                <a tabindex='1' href="https://clearlinux.org/developer">Developer</a>
+              </li>
+                         <li class="header__menu_list_item blue  ">
+                <a tabindex='1' href="https://clearlinux.org/software">Software</a>
+              </li>
+        </ul>
+    </nav>
+
+  </div>
+
+
+
+</header>
+
+
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../guides.html">Guides</a> &raquo;</li>
+        
+      <li>Enable AWS Greengrass* and OpenVINO™ toolkit</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/clearlinux/clear-linux-documentation/blob/rtd-theme/source/guides/stacks/greengrass.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="enable-aws-greengrass-and-openvino-toolkit">
+<span id="greengrass"></span><h1>Enable AWS Greengrass* and OpenVINO™ toolkit</h1>
+<p>This guide explains how to enable AWS Greengrass* and OpenVINO™ toolkit.
+Specifically, the guide demonstrates how to:</p>
+<ul class="simple">
+<li>Set up the Intel® edge device with Clear Linux* OS</li>
+<li>Install the OpenVINO™ toolkit and Amazon Web Services* (AWS*)
+Greengrass* software stacks</li>
+<li>Use AWS Greengrass* and AWS Lambda* to deploy the FaaS samples from
+the cloud</li>
+</ul>
+<div class="contents local topic" id="id1">
+<ul class="simple">
+<li><a class="reference internal" href="#overview" id="id4">Overview</a></li>
+<li><a class="reference internal" href="#supported-platforms" id="id5">Supported platforms</a></li>
+<li><a class="reference internal" href="#install-the-os-on-the-edge-device" id="id6">Install the OS on the edge device</a></li>
+<li><a class="reference internal" href="#configure-aws-greengrass-group" id="id7">Configure AWS Greengrass group</a></li>
+<li><a class="reference internal" href="#create-and-package-lambda-function" id="id8">Create and package Lambda function</a></li>
+<li><a class="reference internal" href="#configure-lambda-function" id="id9">Configure Lambda function</a></li>
+<li><a class="reference internal" href="#deploy-lambda-function" id="id10">Deploy Lambda function</a></li>
+<li><a class="reference internal" href="#references" id="id11">References</a></li>
+</ul>
+</div>
+<div class="section" id="overview">
+<h2><a class="toc-backref" href="#id4">Overview</a></h2>
+<p>Hardware accelerated Function-as-a-Service (FaaS) enables cloud developers to
+deploy inference functionalities [1] on Intel® IoT edge devices with
+accelerators (CPU, Integrated GPU, Intel® FPGA, and Intel® Movidius™
+technology). These functions provide a great developer experience and
+seamless migration of visual analytics from cloud to edge in a secure manner
+using a containerized environment. Hardware-accelerated FaaS provides the
+best-in-class performance by accessing optimized deep learning libraries on
+Intel® IoT edge devices with accelerators.</p>
+</div>
+<div class="section" id="supported-platforms">
+<h2><a class="toc-backref" href="#id5">Supported platforms</a></h2>
+<ul class="simple">
+<li>Operating System: Clear Linux OS latest release</li>
+<li>Hardware:       Intel® core platforms (that support inference on CPU only)</li>
+</ul>
+<div class="section" id="sample-description">
+<h3>Sample description</h3>
+<p>The AWS Greengrass samples are located at <a class="reference external" href="https://github.com/intel/Edge-Analytics-FaaS/tree/v1.0/AWS%20Greengrass">Edge-Analytics-FaaS</a>. This
+guide uses the 1.0 version of the source code.</p>
+<p>Clear Linux OS provides the following AWS Greengrass samples:</p>
+<ul>
+<li><p class="first"><a class="reference external" href="https://github.com/intel/Edge-Analytics-FaaS/blob/v1.0/AWS%20Greengrass/greengrass_classification_sample.py">greengrass_classification_sample.py</a></p>
+<p>This AWS Greengrass sample classifies a video stream using classification
+networks such as AlexNet and GoogLeNet and publishes top-10 results on AWS*
+IoT Cloud every second.</p>
+</li>
+<li><p class="first"><a class="reference external" href="https://github.com/intel/Edge-Analytics-FaaS/blob/v1.0/AWS%20Greengrass/greengrass_object_detection_sample_ssd.py">greengrass_object_detection_sample_ssd.py</a></p>
+<p>This AWS Greengrass sample detects objects in a video stream and
+classifies them using single-shot multi-box detection (SSD) networks such
+as SSD Squeezenet, SSD Mobilenet, and SSD300. This sample publishes
+detection outputs such as class label, class confidence, and bounding box
+coordinates on AWS IoT Cloud every second.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="install-the-os-on-the-edge-device">
+<h2><a class="toc-backref" href="#id6">Install the OS on the edge device</a></h2>
+<p>Start with a clean installation of Clear Linux OS on a new system, using the
+<a class="reference internal" href="../../get-started/bare-metal-install-desktop/bare-metal-install-desktop.html#bare-metal-install-desktop"><span class="std std-ref">Install Clear Linux* OS from the live desktop</span></a>, found in <a class="reference internal" href="../../get-started/get-started.html#get-started"><span class="std std-ref">Get started</span></a>.</p>
+<div class="section" id="create-user-accounts">
+<h3>Create user accounts</h3>
+<p>After Clear Linux OS is installed, create two user accounts. Create an administrative
+user in Clear Linux OS and create a user account for the Greengrass services to use (
+see Greengrass user below).</p>
+<ol class="arabic">
+<li><p class="first">Create a new user and set a password for that user. Enter the following
+commands as <code class="docutils literal notranslate"><span class="pre">root</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>useradd &lt;userid&gt;
+passwd &lt;userid&gt;
+</pre></div>
+</div>
+</li>
+<li><p class="first">Next, enable the <strong class="command">sudo</strong> command for your new &lt;userid&gt;. Add
+&lt;userid&gt; to the <cite>wheel</cite> group:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>usermod -G wheel -a &lt;userid&gt;
+</pre></div>
+</div>
+</li>
+<li><p class="first">Create a <code class="file docutils literal notranslate"><span class="pre">/etc/fstab</span></code> file.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>touch /etc/fstab
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">By default, Clear Linux OS does not create an <code class="file docutils literal notranslate"><span class="pre">/etc/fstab</span></code> file.
+You must create this file before the Greengrass service runs.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="add-required-bundles">
+<h3>Add required bundles</h3>
+<p>Use the <strong class="command">swupd</strong> software updater utility to add the prerequisite bundles
+for the OpenVINO software stack:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>swupd bundle-add os-clr-on-clr desktop-autostart computer-vision-basic
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">Learn more about how to <a class="reference internal" href="../../tooling/swupd-guide.html#swupd-guide"><span class="std std-ref">swupd</span></a>.</p>
+</div>
+<p>The <strong class="command">computer-vision-basic</strong> bundle installs the OpenVINO™ toolkit,
+and the sample models optimized for Intel® edge platforms.</p>
+</div>
+<div class="section" id="convert-deep-learning-models">
+<h3>Convert deep learning models</h3>
+<div class="section" id="locate-sample-models">
+<h4>Locate sample models</h4>
+<p>There are two types of provided models that can be used in conjunction with
+AWS Greengrass for this guide: classification or object detection.</p>
+<p>To complete this guide using an image classification model,
+download the BVLC AlexNet model files <a class="reference external" href="http://dl.caffe.berkeleyvision.org/bvlc_alexnet.caffemodel">bvlc_alexnet.caffemodel</a> and
+<a class="reference external" href="https://github.com/BVLC/caffe/blob/master/models/bvlc_alexnet/deploy.prototxt">deploy.prototxt</a> to the default model_location at
+<code class="file docutils literal notranslate"><span class="pre">/usr/share/openvino/models</span></code>. Any custom pre-trained classification models
+can be used with the classification sample.</p>
+<p>For object detection, the sample models optimized for Intel® edge platforms
+are included with the computer-vision-basic bundle installation at
+<code class="file docutils literal notranslate"><span class="pre">/usr/share/openvino/models</span></code>. These models are provided as an example;
+you may also use a custom SSD model with the Greengrass object detection sample.</p>
+</div>
+<div class="section" id="run-model-optimizer">
+<h4>Run model optimizer</h4>
+<p>Follow the instructions in the <a class="reference external" href="https://software.intel.com/en-us/articles/OpenVINO-ModelOptimizer">Model Optimizer Developer Guide</a> for converting
+deep learning models to Intermediate Representation using Model Optimizer. To
+optimize either of the sample models described above, run one of the following commands.</p>
+<p>For classification using BVLC AlexNet model:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3 mo.py --framework caffe --input_model
+&lt;model_location&gt;/bvlc_alexnet.caffemodel --input_proto
+&lt;model_location&gt;/deploy.prototxt --data_type &lt;data_type&gt; --output_dir
+&lt;output_dir&gt; --input_shape <span class="o">[</span><span class="m">1</span>,3,227,227<span class="o">]</span>
+</pre></div>
+</div>
+<p>For object detection using SqueezeNetSSD-5Class model:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3 mo.py --framework caffe --input_model
+&lt;model_location&gt;/<span class="s1">&#39;SqueezeNet 5-Class detection&#39;</span>/SqueezeNetSSD-5Class.caffemodel
+--input_proto &lt;model_location&gt;/<span class="s1">&#39;SqueezeNet 5-Class detection&#39;</span>/SqueezeNetSSD-5Class.prototxt
+--data_type &lt;data_type&gt; --output_dir &lt;output_dir&gt;
+</pre></div>
+</div>
+<p>In these examples:</p>
+<ul class="simple">
+<li><cite>&lt;model_location&gt;</cite> is <code class="file docutils literal notranslate"><span class="pre">/usr/share/openvino/models</span></code>.</li>
+<li><cite>&lt;data_type&gt;</cite> is FP32 or FP16, depending on target device.</li>
+<li><cite>&lt;output_dir&gt;</cite> is the directory where the Intermediate Representation
+(IR) is stored. IR contains .xml format corresponding to the network
+structure and .bin format corresponding to weights. This .xml file should be
+passed to <strong class="command">&lt;PARAM_MODEL_XML&gt;</strong>.</li>
+<li>In the BVLC AlexNet model, the prototxt defines the input shape with
+batch size 10 by default. In order to use any other batch size, the
+entire input shape must be provided as an argument to the model
+optimizer. For example, to use batch size 1, you must provide:
+<cite>–input_shape [1,3,227,227]</cite></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="configure-aws-greengrass-group">
+<h2><a class="toc-backref" href="#id7">Configure AWS Greengrass group</a></h2>
+<p>For each Intel® edge platform, you must create a new AWS Greengrass group
+and install AWS Greengrass core software to establish the connection between
+cloud and edge.</p>
+<ol class="arabic">
+<li><p class="first">To create an AWS Greengrass group, follow the instructions in
+<a class="reference external" href="https://docs.aws.amazon.com/greengrass/latest/developerguide/gg-config.html">Configure AWS IoT Greengrass on AWS IoT</a>.</p>
+</li>
+<li><p class="first">To install and configure AWS Greengrass core on edge platform, follow
+the instructions in <a class="reference external" href="https://docs.aws.amazon.com/greengrass/latest/developerguide/gg-device-start.html">Start AWS Greengrass on the Core Device</a>. In
+step 8(b), download the x86_64 Ubuntu* configuration of the AWS Greengrass
+core software.</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">You do not need to run the <code class="file docutils literal notranslate"><span class="pre">cgroupfs-mount.sh</span></code> script in step #6
+of Module 1 of the <a class="reference external" href="https://docs.aws.amazon.com/greengrass/latest/developerguide/what-is-gg.html">AWS Greengrass Developer Guide</a> because this is
+enabled already in Clear Linux OS.</p>
+</div>
+</li>
+<li><p class="first">Be sure to download both the security resources and the AWS Greengrass
+core software.</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">Security certificates are linked to your AWS account.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="create-and-package-lambda-function">
+<h2><a class="toc-backref" href="#id8">Create and package Lambda function</a></h2>
+<ol class="arabic">
+<li><p class="first">Complete steps 1-4 of the AWS Greengrass guide at
+<a class="reference external" href="https://docs.aws.amazon.com/greengrass/latest/developerguide/create-lambda.html">Create and Package a Lambda Function</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">This creates the tarball needed to create the AWS Greengrass
+environment on the edge device.</p>
+</div>
+</li>
+<li><p class="first">In step 5, replace <code class="file docutils literal notranslate"><span class="pre">greengrassHelloWorld.py</span></code> with the classification or
+object detection Greengrass sample from <a class="reference external" href="https://github.com/intel/Edge-Analytics-FaaS/tree/v1.0/AWS%20Greengrass">Edge-Analytics-Faas</a>:</p>
+<ul class="simple">
+<li>Classification: <a class="reference external" href="https://github.com/intel/Edge-Analytics-FaaS/blob/v1.0/AWS%20Greengrass/greengrass_classification_sample.py">greengrass_classification_sample.py</a></li>
+<li>Object Detection: <a class="reference external" href="https://github.com/intel/Edge-Analytics-FaaS/blob/v1.0/AWS%20Greengrass/greengrass_object_detection_sample_ssd.py">greengrass_object_detection_sample_ssd.py</a></li>
+</ul>
+</li>
+<li><p class="first">Zip the selected Greengrass sample with the extracted Greengrass SDK folders
+from the previous step into <code class="file docutils literal notranslate"><span class="pre">greengrass_sample_python_lambda.zip</span></code>.</p>
+<p>The zip should contain:</p>
+<ul class="simple">
+<li>greengrasssdk</li>
+<li>greengrass classification or object detection sample</li>
+</ul>
+<p>For example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>zip -r greengrass_lambda.zip greengrasssdk
+greengrass_object_detection_sample_ssd.py
+</pre></div>
+</div>
+</li>
+<li><p class="first">Return to the AWS documentation section called
+<a class="reference external" href="https://docs.aws.amazon.com/greengrass/latest/developerguide/create-lambda.html">Create and Package a Lambda Function</a> and complete the procedure.</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p>In step 9(a) of the AWS documentation, while uploading the zip file,
+make sure to name the handler to one of the following, depending on the
+AWS Greengrass sample you are using:</p>
+<ul class="last simple">
+<li>greengrass_object_detection_sample_ssd.function_handler</li>
+<li>greengrass_classification_sample.function_handler</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="configure-lambda-function">
+<h2><a class="toc-backref" href="#id9">Configure Lambda function</a></h2>
+<p>After creating the Greengrass group and the Lambda function, start
+configuring the Lambda function for AWS Greengrass.</p>
+<ol class="arabic">
+<li><p class="first">Follow steps 1-8 in <a class="reference external" href="https://docs.aws.amazon.com/greengrass/latest/developerguide/config-lambda.html">Configure the Lambda Function for AWS IoT Greengrass</a>
+in the AWS documentation.</p>
+</li>
+<li><p class="first">In addition to the details mentioned in step 8, change the Memory limit
+to 2048 MB to accommodate large input video streams.</p>
+</li>
+<li><p class="first">Add the following environment variables as key-value pairs when editing
+the Lambda configuration and click on update:</p>
+<table border="1" class="colwidths-given docutils" id="id2">
+<caption><span class="caption-text"><strong>Table 1.  Environment variables: Lambda configuration</strong></span></caption>
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key</th>
+<th class="head">Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>PARAM_MODEL_XML</td>
+<td>&lt;MODEL_DIR&gt;/&lt;IR.xml&gt;, where &lt;MODEL_DIR&gt; is user specified and
+contains IR.xml, the Intermediate Representation file from Intel® Model Optimizer.
+For this guide, &lt;MODEL_DIR&gt; should be set to ‘/usr/share/openvino/models’
+or one of its subdirectories.</td>
+</tr>
+<tr class="row-odd"><td>PARAM_INPUT_SOURCE</td>
+<td><dl class="first last docutils">
+<dt>&lt;DATA_DIR&gt;/input.webm to be specified by user. Holds both input and</dt>
+<dd>output data. For webcam, set PARAM_INPUT_SOURCE to ‘/dev/video0’</dd>
+</dl>
+</td>
+</tr>
+<tr class="row-even"><td>PARAM_DEVICE</td>
+<td>“CPU”</td>
+</tr>
+<tr class="row-odd"><td>PARAM_CPU_EXTENSION_PATH</td>
+<td>/usr/lib64/libcpu_extension.so</td>
+</tr>
+<tr class="row-even"><td>PARAM_OUTPUT_DIRECTORY</td>
+<td>&lt;DATA_DIR&gt; to be specified by user. Holds both input and output
+data</td>
+</tr>
+<tr class="row-odd"><td>PARAM_NUM_TOP_RESULTS</td>
+<td>User specified for classification sample.
+(e.g. 1 for top-1 result, 5 for top-5 results)</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p class="first">Add subscription to subscribe, or publish messages from AWS Greengrass
+Lambda function by completing the procedure in <a class="reference external" href="https://docs.aws.amazon.com/greengrass/latest/developerguide/config-lambda.html">Configure the Lambda Function for AWS IoT Greengrass</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">The optional topic filter field is the topic mentioned inside the Lambda function. In this guide, sample topics include the following:
+<strong class="command">openvino/ssd</strong> or <strong class="command">openvino/classification</strong></p>
+</div>
+</li>
+</ol>
+<div class="section" id="add-local-resources">
+<h3>Add local resources</h3>
+<p>Refer to the AWS documentation <a class="reference external" href="https://docs.aws.amazon.com/greengrass/latest/developerguide/access-local-resources.html">Access Local Resources with Lambda Functions and Connectors</a>
+for details about local resources and access privileges.</p>
+<p>The following table describes the local resources needed for the CPU:</p>
+<table border="1" class="colwidths-given docutils" id="id3">
+<caption><span class="caption-text"><strong>Local resources</strong></span></caption>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Resource type</th>
+<th class="head">Local path</th>
+<th class="head">Access</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>ModelDir</td>
+<td>Volume</td>
+<td>&lt;MODEL_DIR&gt; to be specified by user</td>
+<td>Read-Only</td>
+</tr>
+<tr class="row-odd"><td>Webcam</td>
+<td>Device</td>
+<td>/dev/video0</td>
+<td>Read-Only</td>
+</tr>
+<tr class="row-even"><td>DataDir</td>
+<td>Volume</td>
+<td>&lt;DATA_DIR&gt; to be specified by user. Holds both input and output
+data.</td>
+<td>Read and Write</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="deploy-lambda-function">
+<h2><a class="toc-backref" href="#id10">Deploy Lambda function</a></h2>
+<p>Refer to the AWS documentation <a class="reference external" href="https://docs.aws.amazon.com/greengrass/latest/developerguide/configs-core.html">Deploy Cloud Configurations to an AWS IoT Greengrass Core Device</a> for instructions on how to deploy the lambda function to AWS
+Greengrass core device. Select <em>Deployments</em> on the group page and follow the instructions.</p>
+<div class="section" id="output-consumption">
+<h3>Output consumption</h3>
+<p>There are four options available for output consumption. These options are
+used to report, stream, upload, or store inference output at an interval
+defined by the variable <strong class="command">reporting_interval</strong> in the AWS Greengrass samples.</p>
+<ol class="arabic">
+<li><p class="first">IoT cloud output:</p>
+<p>This option is enabled by default in the AWS Greengrass samples using the
+<strong class="command">enable_iot_cloud_output</strong> variable. You can use it to verify the lambda
+running on the edge device. It enables publishing messages to IoT cloud
+using the subscription topic specified in the lambda. (For example, topics
+may include <strong class="command">openvino/classification</strong> for classification and <strong class="command">openvino/ssd</strong>
+for object detection samples.) For classification, top-1 result with class
+label are published to IoT cloud. For SSD object detection, detection
+results such as bounding box coordinates of objects, class label, and
+class confidence are published.</p>
+<p>Refer to the AWS documentation
+<a class="reference external" href="https://docs.aws.amazon.com/greengrass/latest/developerguide/lambda-check.html">Verify the Lambda Function Is Running on the Device</a> for instructions on
+how to view the output on IoT cloud.</p>
+</li>
+<li><p class="first">Kinesis streaming:</p>
+<p>This option enables inference output to be streamed from the edge device
+to cloud using Kinesis [3] streams when <strong class="command">enable_kinesis_output</strong> is set
+to True. The edge devices act as data producers and continually push
+processed data to the cloud. You must set up and specify
+Kinesis stream name, Kinesis shard, and AWS region in the AWS Greengrass
+samples.</p>
+</li>
+<li><p class="first">Cloud storage using AWS S3 bucket:</p>
+<p>When the <strong class="command">enable_s3_jpeg_output</strong> variable is set to True, it enables
+uploading and storing processed frames (in jpeg format) in an AWS S3
+bucket. You must set up and specify the S3 bucket name in the AWS
+Greengrass samples to store the JPEG images. The images are named using the
+timestamp and uploaded to S3.</p>
+</li>
+<li><p class="first">Local storage:</p>
+<p>When the <strong class="command">enable_s3_jpeg_output</strong> variable is set to True, it enables
+storing processed frames (in jpeg format) on the edge device. The images
+are named using the timestamp and stored in a directory specified by
+<strong class="command">PARAM_OUTPUT_DIRECTORY</strong>.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="references">
+<h2><a class="toc-backref" href="#id11">References</a></h2>
+<ol class="arabic simple">
+<li>AWS Greengrass: <a class="reference external" href="https://aws.amazon.com/greengrass/">https://aws.amazon.com/greengrass/</a></li>
+<li>AWS Lambda: <a class="reference external" href="https://aws.amazon.com/lambda/">https://aws.amazon.com/lambda/</a></li>
+<li>AWS Kinesis: <a class="reference external" href="https://aws.amazon.com/kinesis/">https://aws.amazon.com/kinesis/</a></li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="dlrs/dlrs.html" class="btn btn-neutral float-right" title="Deep Learning Reference Stack" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="dars.html" class="btn btn-neutral float-left" title="Data Analytics Reference Stack" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, many
+      <span class="lastupdated">
+        最后更新于 7月 24, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+
+<script type="text/javascript" src="../../_static/tcs_theme.js"></script>
+
+
+
+</body>
+</html>

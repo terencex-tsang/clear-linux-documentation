@@ -1,0 +1,537 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh-CN" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh-CN" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Deploy at Scale &mdash; Documentation for Clear Linux* project</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'zh_CN',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="Build a custom Clear Linux* OS based Docker container image" href="network/custom-clear-container.html" />
+    <link rel="prev" title="Validate signatures" href="maintenance/validate-signatures.html" />
+
+<link rel="stylesheet" href="../_static/tcs_theme.css" type="text/css" />
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #007ab2" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Clear Linux* Project Docs
+          
+
+          
+            
+            <img src="../_static/clearlinux.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Clear Linux</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Language Versions</dt>
+        
+          <dd><a href="/clearlinux/guides/deploy-at-scale.html">English</a></dd>
+        
+          <dd><a href="/clearlinux/zh_CN/guides/deploy-at-scale.html">Chinese</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Document Versions</dt>
+        
+          <dd><a href="/clearlinux/guides/deploy-at-scale.html">latest</a></dd>
+        
+          <dd><a href="/clearlinux/L19.01/guides/deploy-at-scale.html">L19.01</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>clearlinux.org links</dt>
+          <dd>
+            <a href="https://www.clearlinux.org/">Project Home</a>
+          </dd>
+          <dd>
+            <a href="https://github.com/clearlinux/clear-linux-documentation">GitHub</a>
+          </dd>
+      </dl>
+    </div>
+  </div>
+  
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/get-started.html">Get started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tooling/tooling.html">How to Clear</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="guides.html">Guides</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="guides.html#maintenance">Maintenance</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="maintenance/architect-lifecycle.html">Architect the life-cycle of Clear Linux* OS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="maintenance/assign-static-ip.html">Assign a static IP address</a></li>
+<li class="toctree-l3"><a class="reference internal" href="maintenance/bulk-provision.html">Bulk provision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="maintenance/cpu-performance.html">CPU Power and Performance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="maintenance/developer-workstation.html">Developer Workstation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="maintenance/download-verify-decompress.html">Download, verify, and decompress a Clear Linux* OS image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="maintenance/enable-user-space.html">Create and enable a new user space</a></li>
+<li class="toctree-l3"><a class="reference internal" href="maintenance/fix-broken-install.html">Fix a broken installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="maintenance/hostname.html">Modify hostname</a></li>
+<li class="toctree-l3"><a class="reference internal" href="maintenance/increase-virtual-disk-size.html">Increase virtual disk size of an image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="maintenance/query-upstream.html">Query package info from upstream repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="maintenance/restart.html">Restart system services after an OS update</a></li>
+<li class="toctree-l3"><a class="reference internal" href="maintenance/time.html">Set the time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="maintenance/validate-signatures.html">Validate signatures</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Deploy at Scale</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pick-a-usage-and-update-strategy">Pick a usage and update strategy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pick-an-image-distribution-strategy">Pick an image distribution strategy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#considerations-with-stateless-systems">Considerations with stateless systems</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="guides.html#network">Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides.html#kernel">Kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides.html#stacks">Stacks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ/faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Clear Linux* Project Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+
+<header id="header">
+  <div class="padding-md--left-right">
+
+    <div class="header__site_info">
+           <div class="header__site_info_name">
+             <a href ="https://clearlinux.org"> Clear Linux* Project</a>
+           </div>
+    </div>
+    <nav class="header__menu">
+        <ul class="header__menu_list">
+                         <li class="header__menu_list_item green  ">
+                <a tabindex='1' href="https://clearlinux.org/about">About</a>
+              </li>
+                         <li class="header__menu_list_item purple  ">
+                <a tabindex='1' href="https://clearlinux.org/developer">Developer</a>
+              </li>
+                         <li class="header__menu_list_item blue  ">
+                <a tabindex='1' href="https://clearlinux.org/software">Software</a>
+              </li>
+        </ul>
+    </nav>
+
+  </div>
+
+
+
+</header>
+
+
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="guides.html">Guides</a> &raquo;</li>
+        
+      <li>Deploy at Scale</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/clearlinux/clear-linux-documentation/blob/rtd-theme/source/guides/deploy-at-scale.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="deploy-at-scale">
+<span id="id1"></span><h1>Deploy at Scale</h1>
+<p>This guide describes deployment considerations and strategies when deploying
+Clear Linux* OS at scale in your environment.</p>
+<div class="contents local topic" id="id2">
+<ul class="simple">
+<li><a class="reference internal" href="#overview" id="id4">Overview</a></li>
+<li><a class="reference internal" href="#pick-a-usage-and-update-strategy" id="id5">Pick a usage and update strategy</a></li>
+<li><a class="reference internal" href="#pick-an-image-distribution-strategy" id="id6">Pick an image distribution strategy</a></li>
+<li><a class="reference internal" href="#considerations-with-stateless-systems" id="id7">Considerations with stateless systems</a></li>
+</ul>
+</div>
+<div class="section" id="overview">
+<h2><a class="toc-backref" href="#id4">Overview</a></h2>
+<p>In this guide the term <em>endpoint</em> refers to a system targeted for Clear Linux OS
+installation, whether that is a datacenter system or unit deployed in field.</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p>This guide is not a replacement or blueprint for designing your own IT
+operating environment.</p>
+<p>Implementation details for a scale deployment are beyond the scope of this
+guide.</p>
+<p class="last">Your Clear Linux OS deployment should complement your existing environment and
+available tools. It is assumed core IT dependencies of your environment,
+such as your network, are healthy and scaled to suit the deployment.</p>
+</div>
+</div>
+<div class="section" id="pick-a-usage-and-update-strategy">
+<h2><a class="toc-backref" href="#id5">Pick a usage and update strategy</a></h2>
+<p>Different business scenarios call for different deployment methodologies.
+Clear Linux OS offers the flexibility to continue consuming the upstream Clear Linux OS
+distribution or the option to fork away from the Clear Linux OS distribution and
+act as your own <abbr title="Operating System Vendor">OSV</abbr>.</p>
+<p>Below is an overview of some considerations.</p>
+<div class="section" id="create-your-own-linux-distribution-mix">
+<h3>Create your own Linux distribution (mix)</h3>
+<p>This approach forks away from the Clear Linux OS upstream and has you act as your own
+<abbr title="Operating System Vendor">OSV</abbr> by leveraging the <a class="reference internal" href="../tooling/mixer.html#mixer"><span class="std std-ref">mixer</span></a> process to
+create customized images based on Clear Linux OS. This is a level of responsibility
+that requires having more infrastructure and processes to adopt. In return,
+this approach <em>offers you a high degree of control and customization</em>. Consider:</p>
+<ul>
+<li><p class="first">Development systems that generate bundles and updates should have
+sufficient performance for the task and be separate from the swupd update
+webservers that serve update content to production machines.</p>
+</li>
+<li><p class="first">swupd update webservers that serve update content to production machines
+should be appropriately scaled. Specific implementation details for a scalable,
+resilient web server are beyond the scope of this document.</p>
+<p>(See <a class="reference internal" href="../tooling/mixer.html#mixer"><span class="std std-ref">mixer</span></a> for more information about update servers.)</p>
+</li>
+</ul>
+</div>
+<div class="section" id="adopt-an-agile-methodology">
+<h3>Adopt an agile methodology</h3>
+<p>The cloud, and other scaled deployments, are all about flexibility and speed.
+It only makes sense that any Clear Linux OS deployment strategy should follow suit.</p>
+<p>Manually rebuilding your own bundles or mix for every release is not
+sustainable at a large scale. A Clear Linux OS deployment pipeline should be agile
+enough to validate and produce new versions with speed. Whether or not those
+updates actually make their way to your production can be separate
+business decision. However this <em>ability to frequently roll new versions</em> of
+software to your endpoints is an important prerequisite.</p>
+<p>You own the validation and lifecycle of the OS and should treat it like any
+other software development lifecycle. Below are some pointers:</p>
+<ul class="simple">
+<li>Thoroughly understand the custom software packages that you will need to
+integrate with Clear Linux OS and maintain along with their dependencies.</li>
+<li>Setup a path to production for building Clear Linux OS based images. At minimum this
+should include:<ul>
+<li>A development clr-on-clr environment to test building packages and
+bundles for Clear Linux OS systems.</li>
+<li>A pre-production environment to deploy Clear Linux OS versions to before
+production</li>
+</ul>
+</li>
+<li>Employ a continuous integration and continuous deployment (CI/CD)
+philosophy in order to:<ul>
+<li>Automatically pull custom packages as they are updated from their
+upstream projects or vendors.</li>
+<li>Generate Clear Linux OS bundles and potentially bootable images with your
+customizations, if any.</li>
+<li>Measure against metrics and indicators which are relevant to your
+business (e.g. performance, power, etc) from release to release.</li>
+<li>Integrate with your organization’s governance processes, such as change
+control.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="versioning-infrastructure">
+<h3>Versioning infrastructure</h3>
+<p>Clear Linux OS version numbers are very important as they apply to the whole
+infrastructure stack from OS components to libraries and applications.</p>
+<p>Good record keeping is important, so you should keep a detailed registry and
+history of previously deployed versions and their contents.</p>
+<p>With a glance at the Clear Linux OS version numbers deployed, you should be able to
+tell if your Clear systems are patched against a particular security
+vulnerability or incorporate a critical new feature.</p>
+</div>
+</div>
+<div class="section" id="pick-an-image-distribution-strategy">
+<h2><a class="toc-backref" href="#id6">Pick an image distribution strategy</a></h2>
+<p>Once you have decided on a usage and update strategy, you should understand
+<em>how</em> Clear Linux OS will be deployed to your endpoints. In a large scale deployment,
+interactive installers should be avoided in favor of automated installations
+or prebuilt images.</p>
+<p>There are many well-known ways to install an operating system at scale. Each
+have their own benefits, and one may lend itself easier in your environment
+depending on the resources available to you.</p>
+<p>See the available <a class="reference internal" href="../reference/image-types.html#image-types"><span class="std std-ref">Clear Linux* OS image types</span></a>.</p>
+<p>Below are some common ways to install Clear Linux OS to systems at scale:</p>
+<div class="section" id="bare-metal">
+<h3>Bare metal</h3>
+<p>Preboot Execution Environments (PXE) or other out-of-band booting options are
+one way to distribute Clear Linux OS to physical bare metal systems on a LAN.</p>
+<p>This option works well if your customizations are fairly small in size
+and infrastructure can be stateless.</p>
+<p>The Clear Linux OS <a class="reference external" href="https://clearlinux.org/downloads/">Downloads</a> page offers a live image that can be deployed as
+a PXE boot server if one doesn’t already exist in your environment. Also see
+documentation on how to <a class="reference internal" href="../get-started/bare-metal-install-server/bare-metal-install-server.html#bare-metal-install-server"><span class="std std-ref">Install Clear Linux* OS on bare metal with live server</span></a>.</p>
+</div>
+<div class="section" id="cloud-instances-or-virtual-machines">
+<h3>Cloud instances or virtual machines</h3>
+<p>Image templates in the form of cloneable disks are an effective way to
+distribute Clear Linux OS for virtual machine environments, whether on-premises or
+hosted by a Cloud Solution Provider (CSP).</p>
+<p>When used in concert with cloud VM migration features, this can be a good option
+for allowing your applications a degree of high availability and workload
+mobility; VMs can be restarted on a cluster of hypervisor host or moved between
+datacenters transparently.</p>
+<p>The Clear Linux OS <a class="reference external" href="https://clearlinux.org/downloads/">Downloads</a> page offers example prebuilt VM images and is readily
+available on popular CSPs. Also see documentation on how to
+<a class="reference internal" href="../get-started/get-started.html#virtual-machine-install"><span class="std std-ref">Install in a virtual machine</span></a>.</p>
+</div>
+<div class="section" id="containers">
+<h3>Containers</h3>
+<p>Containerization platforms allow images to be pulled from a repository and
+deployed repeatedly as isolated containers.</p>
+<p>Containers with a Clear Linux OS image can be a good option to blueprint and ship
+your application, including all its dependencies, as an artifact while
+allowing you or your customers to dynamically orchestrate and scale
+applications.</p>
+<p>Clear Linux OS is capable of running a Docker host, has a container image which can
+be pulled from DockerHub, or can be built as a customized container.
+For more information visit the <a class="reference external" href="https://clearlinux.org/downloads/containers">Containers</a> page.</p>
+</div>
+</div>
+<div class="section" id="considerations-with-stateless-systems">
+<h2><a class="toc-backref" href="#id7">Considerations with stateless systems</a></h2>
+<p>An important Clear Linux OS concept is statelessness and partitioning of system data
+from user data. This concept can change the way you think about an at scale
+deployment.</p>
+<div class="section" id="backup-strategy">
+<h3>Backup strategy</h3>
+<p>A Clear Linux OS system and its infrastructure should be considered a commodity and
+be easily reproducible. Avoid focusing on backing up the operating system
+itself or default values.</p>
+<p>Instead, focus on backing up what’s important and unique - the application
+and data.  In other words, only focus on backing up critical areas like
+<code class="file docutils literal notranslate"><span class="pre">/home</span></code>, <code class="file docutils literal notranslate"><span class="pre">/etc</span></code>, and <code class="file docutils literal notranslate"><span class="pre">/var</span></code>.</p>
+</div>
+<div class="section" id="meaningful-logging-telemetry">
+<h3>Meaningful logging &amp; telemetry</h3>
+<p>Offload logging and telemetry from endpoints to external servers, so it is
+persistent and can be accessed on another server when an issue occurs.</p>
+<ul>
+<li><p class="first">Remote syslogging in Clear Linux OS is available through the
+<a class="reference external" href="https://www.freedesktop.org/software/systemd/man/systemd-journal-remote.service.html">systemd-journal-remote.service</a></p>
+</li>
+<li><p class="first">Clear Linux OS offers a <a class="reference internal" href="telemetrics/telem-guide.html#telem-guide"><span class="std std-ref">Telemetrics</span></a>, which can be a powerful tool
+for a large deployment to quickly crowdsource issues of interest. Take
+advantage of this feature with careful consideration of the target audience
+and the kind of data that would be valuable, and expose events
+appropriately.</p>
+<p>Like any web server, the telemetry server should be appropriately scaled and
+resilient. Specific implementation details for a scalable, resilient web
+server are beyond the scope of this document.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="orchestration-and-configuration-management">
+<h3>Orchestration and configuration management</h3>
+<p>In cloud environments, where systems can be ephemeral, being able to
+configure and maintain generic instances is valuable.</p>
+<p>Clear Linux OS offers an efficient cloud-init style solution, <a class="reference external" href="https://github.com/clearlinux/micro-config-drive">micro-config-drive</a>,
+through the <em>os-cloudguest</em> bundles which allow you to configure many Day 1
+tasks such as setting hostname, creating users, or placing
+SSH keys in an automated way at boot. For more information on
+automating configuration during deployment of Clear Linux OS endpoints see the
+<a class="reference internal" href="maintenance/bulk-provision.html#bulk-provision"><span class="std std-ref">Bulk provision</span></a> guide.</p>
+<p>A configuration management tool is useful for maintaining consistent system
+and application-level configuration. Ansible* is offered through the
+<em>sysadmin-hostmgmt</em> bundle as a configuration management and automation
+tool.</p>
+</div>
+<div class="section" id="cloud-native-applications">
+<h3>Cloud-native applications</h3>
+<p>An Infrastructure OS can design for good behavior, but it is ultimately up
+to applications to make agile design choices. Applications deployed
+on Clear Linux OS should aim to be host-aware but not depend on any specific host to
+run. References should be relative and dynamic when possible.</p>
+<p>The application architecture should incorporate an appropriate tolerance for
+infrastructure outages. Don’t just keep stateless design as a noted feature.
+Continuously test its use; Automate its use by redeploying Clear Linux OS and
+application on new hosts. This naturally minimizes configuration drift,
+challenges your monitoring systems, and business continuity plans.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="network/custom-clear-container.html" class="btn btn-neutral float-right" title="Build a custom Clear Linux* OS based Docker container image" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="maintenance/validate-signatures.html" class="btn btn-neutral float-left" title="Validate signatures" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, many
+      <span class="lastupdated">
+        最后更新于 7月 24, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+
+<script type="text/javascript" src="../_static/tcs_theme.js"></script>
+
+
+
+</body>
+</html>

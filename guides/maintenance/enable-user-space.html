@@ -1,0 +1,411 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Create and enable a new user space &mdash; Documentation for Clear Linux* project</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Fix a broken installation" href="fix-broken-install.html" />
+    <link rel="prev" title="Download, verify, and decompress a Clear Linux* OS image" href="download-verify-decompress.html" />
+
+<link rel="stylesheet" href="../../_static/tcs_theme.css" type="text/css" />
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #007ab2" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Clear Linux* Project Docs
+          
+
+          
+            
+            <img src="../../_static/clearlinux.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Clear Linux</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Language Versions</dt>
+        
+          <dd><a href="/clearlinux/guides/maintenance/enable-user-space.html">English</a></dd>
+        
+          <dd><a href="/clearlinux/zh_CN/guides/maintenance/enable-user-space.html">Chinese</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Document Versions</dt>
+        
+          <dd><a href="/clearlinux/guides/maintenance/enable-user-space.html">latest</a></dd>
+        
+          <dd><a href="/clearlinux/L19.01/guides/maintenance/enable-user-space.html">L19.01</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>clearlinux.org links</dt>
+          <dd>
+            <a href="https://www.clearlinux.org/">Project Home</a>
+          </dd>
+          <dd>
+            <a href="https://github.com/clearlinux/clear-linux-documentation">GitHub</a>
+          </dd>
+      </dl>
+    </div>
+  </div>
+  
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/get-started.html">Get started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tooling/tooling.html">How to Clear</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides.html">Guides</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../guides.html#maintenance">Maintenance</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="architect-lifecycle.html">Architect the life-cycle of Clear Linux* OS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="assign-static-ip.html">Assign a static IP address</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bulk-provision.html">Bulk provision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cpu-performance.html">CPU Power and Performance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer-workstation.html">Developer Workstation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="download-verify-decompress.html">Download, verify, and decompress a Clear Linux* OS image</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Create and enable a new user space</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#create-a-new-user">Create a new user</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#add-the-new-user-to-the-wheel-group">Add the new user to the <em>wheel</em> group</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#install-and-update-the-os-software-to-its-current-version">Install and update the OS software to its current version</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#add-a-bundle">Add a bundle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#next-steps">Next steps</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="fix-broken-install.html">Fix a broken installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hostname.html">Modify hostname</a></li>
+<li class="toctree-l3"><a class="reference internal" href="increase-virtual-disk-size.html">Increase virtual disk size of an image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="query-upstream.html">Query package info from upstream repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="restart.html">Restart system services after an OS update</a></li>
+<li class="toctree-l3"><a class="reference internal" href="time.html">Set the time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="validate-signatures.html">Validate signatures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deploy-at-scale.html">Deploy at Scale</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides.html#network">Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides.html#kernel">Kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides.html#stacks">Stacks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../FAQ/faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Clear Linux* Project Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+
+<header id="header">
+  <div class="padding-md--left-right">
+
+    <div class="header__site_info">
+           <div class="header__site_info_name">
+             <a href ="https://clearlinux.org"> Clear Linux* Project</a>
+           </div>
+    </div>
+    <nav class="header__menu">
+        <ul class="header__menu_list">
+                         <li class="header__menu_list_item green  ">
+                <a tabindex='1' href="https://clearlinux.org/about">About</a>
+              </li>
+                         <li class="header__menu_list_item purple  ">
+                <a tabindex='1' href="https://clearlinux.org/developer">Developer</a>
+              </li>
+                         <li class="header__menu_list_item blue  ">
+                <a tabindex='1' href="https://clearlinux.org/software">Software</a>
+              </li>
+        </ul>
+    </nav>
+
+  </div>
+
+
+
+</header>
+
+
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../guides.html">Guides</a> &raquo;</li>
+        
+      <li>Create and enable a new user space</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/clearlinux/clear-linux-documentation/blob/rtd-theme/source/guides/maintenance/enable-user-space.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="create-and-enable-a-new-user-space">
+<span id="enable-user-space"></span><h1>Create and enable a new user space</h1>
+<p>This guide provides steps to complete the following basic setup tasks for
+a newly installed Clear Linux* OS system:</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#create-a-new-user" id="id1">Create a new user</a></li>
+<li><a class="reference internal" href="#add-the-new-user-to-the-wheel-group" id="id2">Add the new user to the <em>wheel</em> group</a></li>
+<li><a class="reference internal" href="#install-and-update-the-os-software-to-its-current-version" id="id3">Install and update the OS software to its current version</a></li>
+<li><a class="reference internal" href="#add-a-bundle" id="id4">Add a bundle</a></li>
+<li><a class="reference internal" href="#next-steps" id="id5">Next steps</a></li>
+</ul>
+</div>
+<div class="section" id="create-a-new-user">
+<h2><a class="toc-backref" href="#id1">Create a new user</a></h2>
+<p>To create a new user and set a password for that user, enter the following
+commands as a root user:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>useradd &lt;userid&gt;
+passwd &lt;userid&gt;
+</pre></div>
+</div>
+<p>Replace the &lt;userid&gt; with the name of the user account you want to create
+including the password for that user. The <strong class="command">passwd</strong> command prompts
+you to enter a new password. Retype the new password for the new user
+account just created.</p>
+</div>
+<div class="section" id="add-the-new-user-to-the-wheel-group">
+<h2><a class="toc-backref" href="#id2">Add the new user to the <em>wheel</em> group</a></h2>
+<p>Before logging off as root and logging into your new user account,
+enable the <strong class="command">sudo</strong> command for your new &lt;userid&gt;.</p>
+<p>To be able to execute all applications with root privileges, add the
+&lt;userid&gt; to the <a class="reference external" href="https://en.wikipedia.org/wiki/Wheel_(Unix_term)">wheel group</a>.</p>
+<ol class="arabic">
+<li><p class="first">Add &lt;userid&gt; to the wheel group:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>usermod -G wheel -a &lt;userid&gt;
+</pre></div>
+</div>
+</li>
+<li><p class="first">Log out of root and into the new &lt;userid&gt;.</p>
+<p>To log off as root, enter <strong class="command">exit</strong>.</p>
+</li>
+<li><p class="first">Enter the new &lt;userid&gt; and the password created earlier.</p>
+<p>You will now be in the home directory of &lt;userid&gt;.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="install-and-update-the-os-software-to-its-current-version">
+<h2><a class="toc-backref" href="#id3">Install and update the OS software to its current version</a></h2>
+<p>The Clear Linux OS software utility <a class="reference internal" href="../../tooling/swupd-guide.html#swupd-guide"><span class="std std-ref">swupd</span></a> allows you to perform
+system updates while reaping the benefits of upstream development.</p>
+<p>To update your newly installed OS, run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo swupd update
+</pre></div>
+</div>
+</div>
+<div class="section" id="add-a-bundle">
+<h2><a class="toc-backref" href="#id4">Add a bundle</a></h2>
+<p>Software applications are installed as bundles using the command
+<strong class="command">swupd bundle-add</strong>. Experienced Linux users might compare swupd
+to running <strong class="command">apt-get</strong> or <strong class="command">yum install</strong> for package
+management. However Clear Linux OS manages packages at the level of bundles, which
+are integrated stacks of packages.</p>
+<p>For example, the <strong class="command">sysadmin-basic</strong> bundle installs the majority of
+applications useful to a system administrator. To install it, enter:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>swupd bundle-add sysadmin-basic
+</pre></div>
+</div>
+<p>View a full list of bundles and packages installed with the <a class="reference external" href="https://github.com/clearlinux/clr-bundles/blob/master/bundles/sysadmin-basic">sysadmin-basic</a>
+bundle. You can also view all <a class="reference external" href="https://github.com/clearlinux/clr-bundles/tree/master/bundles">bundles</a> for Clear Linux OS, active or deprecated.</p>
+<p>Expand your knowledge of <strong class="command">swupd</strong> and check out our developer resources:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../tooling/swupd-guide.html#swupd-guide"><span class="std std-ref">swupd</span></a></li>
+<li><a class="reference internal" href="developer-workstation.html#developer-workstation"><span class="std std-ref">Developer Workstation</span></a></li>
+</ul>
+</div>
+<div class="section" id="next-steps">
+<h2><a class="toc-backref" href="#id5">Next steps</a></h2>
+<p>Check out our guides and tutorials.</p>
+<ul class="simple">
+<li><a class="reference internal" href="../guides.html#guides"><span class="std std-ref">Guides</span></a></li>
+<li><a class="reference internal" href="../../tutorials/tutorials.html#tutorials"><span class="std std-ref">Tutorials</span></a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="fix-broken-install.html" class="btn btn-neutral float-right" title="Fix a broken installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="download-verify-decompress.html" class="btn btn-neutral float-left" title="Download, verify, and decompress a Clear Linux* OS image" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, many
+      <span class="lastupdated">
+        Last updated on Jul 24, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+
+<script type="text/javascript" src="../../_static/tcs_theme.js"></script>
+
+
+
+</body>
+</html>

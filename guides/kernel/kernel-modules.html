@@ -1,0 +1,502 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Add kernel modules manually &mdash; Documentation for Clear Linux* project</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Add kernel modules with DKMS" href="kernel-modules-dkms.html" />
+    <link rel="prev" title="Kernel development" href="kernel-development.html" />
+
+<link rel="stylesheet" href="../../_static/tcs_theme.css" type="text/css" />
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #007ab2" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Clear Linux* Project Docs
+          
+
+          
+            
+            <img src="../../_static/clearlinux.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Clear Linux</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Language Versions</dt>
+        
+          <dd><a href="/clearlinux/guides/kernel/kernel-modules.html">English</a></dd>
+        
+          <dd><a href="/clearlinux/zh_CN/guides/kernel/kernel-modules.html">Chinese</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Document Versions</dt>
+        
+          <dd><a href="/clearlinux/guides/kernel/kernel-modules.html">latest</a></dd>
+        
+          <dd><a href="/clearlinux/L19.01/guides/kernel/kernel-modules.html">L19.01</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>clearlinux.org links</dt>
+          <dd>
+            <a href="https://www.clearlinux.org/">Project Home</a>
+          </dd>
+          <dd>
+            <a href="https://github.com/clearlinux/clear-linux-documentation">GitHub</a>
+          </dd>
+      </dl>
+    </div>
+  </div>
+  
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/get-started.html">Get started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tooling/tooling.html">How to Clear</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides.html">Guides</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../guides.html#maintenance">Maintenance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides.html#network">Network</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../guides.html#kernel">Kernel</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="kernel-development.html">Kernel development</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Add kernel modules manually</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#kernel-module-availability">Kernel module availability</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#build-install-and-load-an-out-of-tree-module">Build, install, and load an out-of-tree module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#related-topic">Related topic</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="kernel-modules-dkms.html">Add kernel modules with DKMS</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides.html#stacks">Stacks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../FAQ/faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Clear Linux* Project Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+
+<header id="header">
+  <div class="padding-md--left-right">
+
+    <div class="header__site_info">
+           <div class="header__site_info_name">
+             <a href ="https://clearlinux.org"> Clear Linux* Project</a>
+           </div>
+    </div>
+    <nav class="header__menu">
+        <ul class="header__menu_list">
+                         <li class="header__menu_list_item green  ">
+                <a tabindex='1' href="https://clearlinux.org/about">About</a>
+              </li>
+                         <li class="header__menu_list_item purple  ">
+                <a tabindex='1' href="https://clearlinux.org/developer">Developer</a>
+              </li>
+                         <li class="header__menu_list_item blue  ">
+                <a tabindex='1' href="https://clearlinux.org/software">Software</a>
+              </li>
+        </ul>
+    </nav>
+
+  </div>
+
+
+
+</header>
+
+
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../guides.html">Guides</a> &raquo;</li>
+        
+      <li>Add kernel modules manually</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/clearlinux/clear-linux-documentation/blob/rtd-theme/source/guides/kernel/kernel-modules.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="add-kernel-modules-manually">
+<span id="kernel-modules"></span><h1>Add kernel modules manually</h1>
+<p>This guide describes how to add kernel modules manually.</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#overview" id="id1">Overview</a></li>
+<li><a class="reference internal" href="#description" id="id2">Description</a></li>
+<li><a class="reference internal" href="#kernel-module-availability" id="id3">Kernel module availability</a></li>
+<li><a class="reference internal" href="#build-install-and-load-an-out-of-tree-module" id="id4">Build, install, and load an out-of-tree module</a></li>
+<li><a class="reference internal" href="#examples" id="id5">Examples</a></li>
+<li><a class="reference internal" href="#related-topic" id="id6">Related topic</a></li>
+</ul>
+</div>
+<div class="section" id="overview">
+<h2><a class="toc-backref" href="#contents">Overview</a></h2>
+<p>Certain kernel modules are enabled by default in Clear Linux* OS. To use additional
+kernel modules that are not part of the Linux source tree, you may need to
+build out-of-tree kernel modules. Use this guide to add kernel modules
+manually, or refer to <a class="reference internal" href="kernel-modules-dkms.html#kernel-modules-dkms"><span class="std std-ref">Add kernel modules with DKMS</span></a>.</p>
+</div>
+<div class="section" id="description">
+<h2><a class="toc-backref" href="#contents">Description</a></h2>
+<p>Kernel modules are additional pieces of software capable of being inserted
+into the Linux kernel to add functionality, such as a hardware driver.
+Kernel modules may already be part of the Linux source tree (in-tree) or may
+come from an external source, such as directly from a vendor (out-of-tree).</p>
+</div>
+<div class="section" id="kernel-module-availability">
+<span id="kernel-modules-availability-begin"></span><h2><a class="toc-backref" href="#contents">Kernel module availability</a></h2>
+<p>Clear Linux OS comes with many upstream kernel modules available for use. Using an
+existing module is significantly easier to maintain and retains signature
+verification of the Clear Linux OS kernel. For more information on Clear Linux OS security
+practices, see the <a class="reference internal" href="../../tooling/security.html#security"><span class="std std-ref">OS Security</span></a> page.</p>
+<p>Before continuing, check if the kernel module you’re looking for is already
+available in Clear Linux OS or submit a request to add the module.</p>
+<div class="section" id="check-if-the-module-is-already-available">
+<h3>Check if the module is already available</h3>
+<p>You can search for kernel module file names, which end with the <code class="file docutils literal notranslate"><span class="pre">.ko</span></code>
+file extension, using the <strong class="command">swupd search</strong> command, as shown in the
+following example. See <a class="reference internal" href="../../tooling/swupd-guide.html#swupd-guide"><span class="std std-ref">swupd</span></a> for more information.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo swupd search <span class="si">${</span><span class="nv">module_name</span><span class="si">}</span>.ko
+</pre></div>
+</div>
+</div>
+<div class="section" id="submit-a-request-to-add-the-module">
+<h3>Submit a request to add the module</h3>
+<p>If the kernel module you need is already open source (for example, in the Linux
+upstream) and likely to be useful to others, consider submitting a request to
+add or enable it in the Clear Linux OS kernel.</p>
+<p>Make enhancement requests to the Clear Linux OS ‘Distribution Project’_ on GitHub.</p>
+</div>
+</div>
+<div class="section" id="build-install-and-load-an-out-of-tree-module">
+<span id="kernel-modules-availability-end"></span><h2><a class="toc-backref" href="#contents">Build, install, and load an out-of-tree module</a></h2>
+<p>Follow the steps in this section if you are an individual user or testing, and
+you need an out-of-tree kernel module that is not available through Clear Linux OS. For
+a more scalable and customizable approach, we recommend using the
+<a class="reference internal" href="../../tooling/mixer.html#mixer"><span class="std std-ref">mixer</span></a> to provide a custom kernel and updates.</p>
+<div class="section" id="prerequisites">
+<h3>Prerequisites</h3>
+<p>Before you begin, you must:</p>
+<ul class="simple">
+<li>Disable Secure Boot.</li>
+<li>Disable kernel module integrity checking.</li>
+<li>Have a kernel module package in the form of source code.</li>
+<li>Rebuild the module against new versions of the Linux kernel.</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Any time the kernel is upgraded on your Clear Linux system, you must
+rebuild your out-of-tree modules.</p>
+</div>
+</div>
+<div class="section" id="build-and-install-kernel-module">
+<h3>Build and install kernel module</h3>
+<ol class="arabic">
+<li><p class="first">Determine which kernel variant is running on Clear Linux OS. In the example below,
+the <em>native</em> kernel is in use.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ uname -r
+<span class="m">5</span>.XX.YY-ZZZZ.native
+</pre></div>
+</div>
+</li>
+<li><p class="first">Install the kernel dev bundle corresponding to the installed kernel. The
+kernel dev bundle contains the kernel headers, which are required for
+compiling kernel modules. For example:</p>
+<ul class="simple">
+<li><strong class="command">linux-dev</strong> for developing against the native kernel.</li>
+<li><strong class="command">linux-lts-dev</strong> for developing against the LTS kernel.</li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo swupd bundle-add linux-dev
+</pre></div>
+</div>
+</li>
+<li><p class="first">Follow instructions from the kernel module source code to compile the
+kernel module. For example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl -O http://&lt;URL-TO-KERNEL-MODULE-SOURCE&gt;.tar.gz
+tar -xvf &lt;KERNEL-MODULE-SOURCE&gt;.tar.gz
+<span class="nb">cd</span> &lt;KERNEL-MODULE-SOURCE&gt;/
+cat README
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="load-kernel-module">
+<h3>Load kernel module</h3>
+<ol class="arabic">
+<li><p class="first">Disable Secure Boot in your system’s UEFI settings, if you have enabled
+it. The loading of new out-of-tree modules modifies the signatures that
+Secure Boot relies on for trust.</p>
+</li>
+<li><p class="first">Disable signature checking for the kernel by modifying the kernel boot
+parameters and reboot the system.</p>
+<p>All kernel modules from Clear Linux OS have been signed to enforce kernel security.
+However, out-of-tree modules break this chain of trust so this mechanism
+needs to be disabled.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo mkdir -p /etc/kernel/cmdline.d
+<span class="nb">echo</span> <span class="s2">&quot;module.sig_unenforce&quot;</span> <span class="p">|</span> sudo tee /etc/kernel/cmdline.d/allow-unsigned-modules.conf
+</pre></div>
+</div>
+</li>
+<li><p class="first">Update the boot manager and reboot the system to implement the changed
+kernel parameters.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo clr-boot-manager update
+sudo reboot
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If successful, the <strong class="command">clr-boot-manager update</strong> command does not
+return any console output.</p>
+</div>
+</li>
+<li><p class="first">After rebooting, manually load out-of-tree modules using the
+<strong class="command">insmod</strong> command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo insmod &lt;/PATH/TO/MODULE.ko&gt;
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="examples">
+<h2><a class="toc-backref" href="#contents">Examples</a></h2>
+<div class="section" id="optional-specify-module-options-and-aliases">
+<span id="kernel-modules-autoload-begin"></span><h3>Optional: Specify module options and aliases</h3>
+<p>Use the <strong class="command">modprobe</strong> command to load a module and set options.</p>
+<p><strong class="command">modprobe</strong> may add or remove more than one module due to module
+interdependencies. You can specify which options to use with individual modules,
+by using configuration files under the <code class="file docutils literal notranslate"><span class="pre">/etc/modprobe.d</span></code> directory.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo mkdir /etc/modprobe.d
+</pre></div>
+</div>
+<p>All files underneath the <code class="file docutils literal notranslate"><span class="pre">/etc/modprobe.d</span></code> directory that end with the
+<code class="file docutils literal notranslate"><span class="pre">.conf</span></code> extension specify module options to use when loading. You can use
+<code class="file docutils literal notranslate"><span class="pre">.conf</span></code> files to create convenient aliases for modules or to override the
+normal loading behavior altogether for those with special requirements.</p>
+<p>Learn more about <strong class="command">modprobe</strong> on the modprobe.d manual page:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>man modprobe.d
+</pre></div>
+</div>
+</div>
+<div class="section" id="optional-configure-kernel-modules-to-load-at-boot">
+<h3>Optional: Configure kernel modules to load at boot</h3>
+<p>Use the <code class="file docutils literal notranslate"><span class="pre">/etc/modules-load.d</span></code> configuration directory to specify kernel
+modules to load automatically at boot.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo mkdir /etc/modules-load.d
+</pre></div>
+</div>
+<p>All files underneath the <code class="file docutils literal notranslate"><span class="pre">/etc/modules-load.d</span></code> directory that end with
+the <code class="file docutils literal notranslate"><span class="pre">.conf</span></code> extension contain a list of module names of aliases (one per
+line) to load at boot.</p>
+<p>Learn more about module loading in the modules-load.d manual page:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>man modules-load.d
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="related-topic">
+<span id="kernel-modules-autoload-end"></span><h2><a class="toc-backref" href="#contents">Related topic</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="kernel-modules-dkms.html#kernel-modules-dkms"><span class="std std-ref">Add kernel modules with DKMS</span></a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="kernel-modules-dkms.html" class="btn btn-neutral float-right" title="Add kernel modules with DKMS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="kernel-development.html" class="btn btn-neutral float-left" title="Kernel development" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, many
+      <span class="lastupdated">
+        Last updated on Jul 24, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+
+<script type="text/javascript" src="../../_static/tcs_theme.js"></script>
+
+
+
+</body>
+</html>

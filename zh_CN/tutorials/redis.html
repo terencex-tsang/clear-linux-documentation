@@ -1,0 +1,509 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh-CN" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh-CN" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Run Redis on Clear Linux* OS &mdash; Documentation for Clear Linux* project</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'zh_CN',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="Setting up proxy" href="tutorial-proxy.html" />
+    <link rel="prev" title="Install NVIDIA* Drivers" href="nvidia.html" />
+
+<link rel="stylesheet" href="../_static/tcs_theme.css" type="text/css" />
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #007ab2" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Clear Linux* Project Docs
+          
+
+          
+            
+            <img src="../_static/clearlinux.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Clear Linux</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Language Versions</dt>
+        
+          <dd><a href="/clearlinux/tutorials/redis.html">English</a></dd>
+        
+          <dd><a href="/clearlinux/zh_CN/tutorials/redis.html">Chinese</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Document Versions</dt>
+        
+          <dd><a href="/clearlinux/tutorials/redis.html">latest</a></dd>
+        
+          <dd><a href="/clearlinux/L19.01/tutorials/redis.html">L19.01</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>clearlinux.org links</dt>
+          <dd>
+            <a href="https://www.clearlinux.org/">Project Home</a>
+          </dd>
+          <dd>
+            <a href="https://github.com/clearlinux/clear-linux-documentation">GitHub</a>
+          </dd>
+      </dl>
+    </div>
+  </div>
+  
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/get-started.html">Get started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tooling/tooling.html">How to Clear</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/guides.html">Guides</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="tutorials.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="wordpress/wordpress.html">WordPress* on Clear Linux* OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="flatpak/flatpak.html">Use Flatpak* to install applications on Clear Linux* OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="machine-learning/machine-learning.html">TensorFlow* machine learning on Clear Linux* OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker/docker.html">Run Docker* on Clear Linux* OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="azure.html">Run Clear Linux* OS using Microsoft Azure CLI 2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hadoop.html">Set up a single node cluster with Hadoop*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fmv.html">Use the function multi-version patch generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aws-web/aws-web.html">Create and launch Clear Linux* OS from Amazon Web Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smb/smb.html">Enable simple file sharing with a Windows* machine using Samba*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smb/smb-desktop.html">Connect to Windows* shared location from Clear Linux* OS desktop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spark.html">Set up a standalone cluster system using Apache* Spark*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kata.html">Install Kata Containers*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kata_migration.html">Migrate Clear Containers to Kata Containers*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kubernetes/kubernetes.html">Run Kubernetes*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kubernetes/kubernetes-bp.html">Kubernetes Best Practices on Clear Linux OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="yubikey-u2f.html">Enable YubiKey U2F Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nvidia.html">Install NVIDIA* Drivers</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Run Redis on Clear Linux* OS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-the-redis-bundle">Install the redis bundle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#start-the-redis-server">Start the redis-server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-1-use-the-redis-cli-and-try-commands">Example 1: Use the redis-cli and try commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-2-run-the-cl-redis-docker-image">Example 2: Run the Clear Linux OS redis docker image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial-proxy.html">Setting up proxy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ/faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Clear Linux* Project Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+
+<header id="header">
+  <div class="padding-md--left-right">
+
+    <div class="header__site_info">
+           <div class="header__site_info_name">
+             <a href ="https://clearlinux.org"> Clear Linux* Project</a>
+           </div>
+    </div>
+    <nav class="header__menu">
+        <ul class="header__menu_list">
+                         <li class="header__menu_list_item green  ">
+                <a tabindex='1' href="https://clearlinux.org/about">About</a>
+              </li>
+                         <li class="header__menu_list_item purple  ">
+                <a tabindex='1' href="https://clearlinux.org/developer">Developer</a>
+              </li>
+                         <li class="header__menu_list_item blue  ">
+                <a tabindex='1' href="https://clearlinux.org/software">Software</a>
+              </li>
+        </ul>
+    </nav>
+
+  </div>
+
+
+
+</header>
+
+
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="tutorials.html">Tutorials</a> &raquo;</li>
+        
+      <li>Run Redis on Clear Linux* OS</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/clearlinux/clear-linux-documentation/blob/rtd-theme/source/tutorials/redis.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="run-redis-on-cl-attr">
+<span id="redis"></span><h1>Run Redis on Clear Linux* OS</h1>
+<p>Redis is an in-memory key:value store designed for quick lookups, accessible
+over the network. In this tutorial, you’ll install redis and launch a
+redis-server on Clear Linux OS, plus learn a few basic redis commands. We also invite
+you to pull our <a class="reference external" href="https://hub.docker.com/r/clearlinux/redis">Clear Linux Redis instance</a> on dockerhub* for application
+or infrastructure development.</p>
+<p>While the <a class="reference external" href="https://redis.io/">redis data structure store</a> can serve as a NoSQL database for a Web application, it’s also easy to integrate in an existing stack. For example, you could use the Redis caching layer for real-time responses on a leaderboard in a gaming app. Redis offers many client libraries with language-specific bindings for Python, Perl, Ruby, and more.</p>
+<div class="contents local topic" id="id1">
+<ul class="simple">
+<li><a class="reference internal" href="#prerequisites" id="id2">Prerequisites</a></li>
+<li><a class="reference internal" href="#install-the-redis-bundle" id="id3">Install the redis bundle</a></li>
+<li><a class="reference internal" href="#start-the-redis-server" id="id4">Start the redis-server</a></li>
+<li><a class="reference internal" href="#example-1-use-the-redis-cli-and-try-commands" id="id5">Example 1: Use the redis-cli and try commands</a></li>
+<li><a class="reference internal" href="#example-2-run-the-cl-redis-docker-image" id="id6">Example 2: Run the Clear Linux OS redis docker image</a></li>
+<li><a class="reference internal" href="#next-steps" id="id7">Next Steps</a></li>
+</ul>
+</div>
+<div class="section" id="prerequisites">
+<h2><a class="toc-backref" href="#id2">Prerequisites</a></h2>
+<ul class="simple">
+<li>Install the <cite>redis-native</cite> bundle in Clear Linux OS</li>
+<li>Install the <cite>containers-basic</cite> bundle in Clear Linux OS (only required in Example 2)</li>
+</ul>
+</div>
+<div class="section" id="install-the-redis-bundle">
+<h2><a class="toc-backref" href="#id3">Install the redis bundle</a></h2>
+<p>In Clear Linux OS, find redis in the <cite>redis-native</cite> bundle.</p>
+<ol class="arabic simple">
+<li>Open a Terminal and login as an administrative user.</li>
+<li>Add <code class="file docutils literal notranslate"><span class="pre">redis-native</span></code>.</li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo swupd bundle-add redis-native
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">If the bundle already exists, no action is required.</p>
+</div>
+</div>
+<div class="section" id="start-the-redis-server">
+<h2><a class="toc-backref" href="#id4">Start the redis-server</a></h2>
+<p>A <cite>systemd</cite> service unit is available to control the redis server.
+By default, redis runs on port 6379.</p>
+<ol class="arabic">
+<li><p class="first">Start the service.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>systemctl start redis
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">To stop redis run <strong class="command">systemctl stop redis</strong>.</p>
+</div>
+</li>
+<li><p class="first">Assure the service is running.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>systemctl status redis
+</pre></div>
+</div>
+</li>
+<li><p class="first">Verify the redis-server sends a reply.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>redis-cli ping
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">Expected output: <cite>PONG</cite>.</p>
+</div>
+</li>
+<li><p class="first">Optional: If you wish to apply advanced configuration, copy the
+<cite>redis.conf</cite> into /etc/ directory.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo cp /usr/share/defaults/etc/redis.conf /etc/
+</pre></div>
+</div>
+</li>
+</ol>
+<p>The redis-server is now ready to use on Clear Linux OS. Try some examples below.</p>
+</div>
+<div class="section" id="example-1-use-the-redis-cli-and-try-commands">
+<h2><a class="toc-backref" href="#id5">Example 1: Use the redis-cli and try commands</a></h2>
+<p>One advantage of redis over other NoSQL databases is that developers can
+easily access data structures like lists, sets, sorted sets, strings, and
+hashes using collection operations commands similar to those found in many
+programming languages. These exercises are inspired by <a class="reference external" href="https://try.redis.io/">try redis io</a>.</p>
+<p>After your <cite>redis-server</cite> is running, try some basic commands.</p>
+<ol class="arabic">
+<li><p class="first">Enter the <cite>redis-cli</cite>. It provides syntax suggestions as you type.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>redis-cli
+</pre></div>
+</div>
+</li>
+<li><p class="first">SET key to hold string value. In the set create connections and increment.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>SET server:name <span class="s2">&quot;clearlinux&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>MGET server:name
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">If the key does not exist or hold a key value, <cite>nil</cite> is returned.</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>SET connections <span class="m">100</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>INCR connections
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>INCR connections
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>DEL connections
+</pre></div>
+</div>
+</li>
+<li><p class="first">Create a <cite>friends</cite> list and insert new values at the end of the list.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>RPUSH friends <span class="s2">&quot;Deb&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>RPUSH friends <span class="s2">&quot;David&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>RPUSH friends <span class="s2">&quot;Mary&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Modify <cite>friends</cite> list, using a common slice method with a 0-index.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>LRANGE friends <span class="m">0</span> <span class="m">1</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>LLEN friends
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>LPOP friends
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>RPOP friends
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>LLEN friends
+</pre></div>
+</div>
+</li>
+<li><p class="first">Consider using a hash, a very useful data type, which maps string fields
+and string values, offering multiple lookup methods.</p>
+<p>Enter many user key:values with <cite>HMSET</cite>. Then try <cite>HGET</cite> and <cite>HGETALL</cite>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>HMSET user:1000 name <span class="s2">&quot;Robert Noyce&quot;</span> password <span class="s2">&quot;SuperEngi9eer&quot;</span> email <span class="s2">&quot;robert.noyce@intel.com&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>HGET user:1000 name
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>HGET user:1000 email
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>HGETALL user:1000
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="example-2-run-the-cl-redis-docker-image">
+<h2><a class="toc-backref" href="#id6">Example 2: Run the Clear Linux OS redis docker image</a></h2>
+<p>We also provide a <a class="reference external" href="https://hub.docker.com/r/clearlinux/redis">Clear Linux Redis instance</a>, which is
+updated continuously and maintained by Clear Linux OS development.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo swupd bundle-add containers-basic
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo systemctl start docker
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo -E docker pull clearlinux/redis
+</pre></div>
+</div>
+</div>
+<div class="section" id="next-steps">
+<h2><a class="toc-backref" href="#id7">Next Steps</a></h2>
+<ul class="simple">
+<li>Follow the <a class="reference external" href="https://redis.io/topics/quickstart">redis quickstart tutorial</a> to expand potential uses.</li>
+<li>Learn to <a class="reference internal" href="docker/docker.html#docker"><span class="std std-ref">Run Docker* on Clear Linux* OS</span></a>.</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="tutorial-proxy.html" class="btn btn-neutral float-right" title="Setting up proxy" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="nvidia.html" class="btn btn-neutral float-left" title="Install NVIDIA* Drivers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, many
+      <span class="lastupdated">
+        最后更新于 7月 24, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+
+<script type="text/javascript" src="../_static/tcs_theme.js"></script>
+
+
+
+</body>
+</html>

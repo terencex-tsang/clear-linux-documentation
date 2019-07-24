@@ -1,0 +1,427 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh-CN" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh-CN" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Install Kata Containers* &mdash; Documentation for Clear Linux* project</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'zh_CN',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="Migrate Clear Containers to Kata Containers*" href="kata_migration.html" />
+    <link rel="prev" title="Set up a standalone cluster system using Apache* Spark*" href="spark.html" />
+
+<link rel="stylesheet" href="../_static/tcs_theme.css" type="text/css" />
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #007ab2" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Clear Linux* Project Docs
+          
+
+          
+            
+            <img src="../_static/clearlinux.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Clear Linux</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Language Versions</dt>
+        
+          <dd><a href="/clearlinux/tutorials/kata.html">English</a></dd>
+        
+          <dd><a href="/clearlinux/zh_CN/tutorials/kata.html">Chinese</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Document Versions</dt>
+        
+          <dd><a href="/clearlinux/tutorials/kata.html">latest</a></dd>
+        
+          <dd><a href="/clearlinux/L19.01/tutorials/kata.html">L19.01</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>clearlinux.org links</dt>
+          <dd>
+            <a href="https://www.clearlinux.org/">Project Home</a>
+          </dd>
+          <dd>
+            <a href="https://github.com/clearlinux/clear-linux-documentation">GitHub</a>
+          </dd>
+      </dl>
+    </div>
+  </div>
+  
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/get-started.html">Get started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tooling/tooling.html">How to Clear</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/guides.html">Guides</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="tutorials.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="wordpress/wordpress.html">WordPress* on Clear Linux* OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="flatpak/flatpak.html">Use Flatpak* to install applications on Clear Linux* OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="machine-learning/machine-learning.html">TensorFlow* machine learning on Clear Linux* OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker/docker.html">Run Docker* on Clear Linux* OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="azure.html">Run Clear Linux* OS using Microsoft Azure CLI 2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hadoop.html">Set up a single node cluster with Hadoop*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fmv.html">Use the function multi-version patch generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aws-web/aws-web.html">Create and launch Clear Linux* OS from Amazon Web Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smb/smb.html">Enable simple file sharing with a Windows* machine using Samba*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smb/smb-desktop.html">Connect to Windows* shared location from Clear Linux* OS desktop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spark.html">Set up a standalone cluster system using Apache* Spark*</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Install Kata Containers*</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Install Kata Containers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-kata-containers">Run Kata Containers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#more-information-about-docker">More information about Docker</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="kata_migration.html">Migrate Clear Containers to Kata Containers*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kubernetes/kubernetes.html">Run Kubernetes*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kubernetes/kubernetes-bp.html">Kubernetes Best Practices on Clear Linux OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="yubikey-u2f.html">Enable YubiKey U2F Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nvidia.html">Install NVIDIA* Drivers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="redis.html">Run Redis on Clear Linux* OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial-proxy.html">Setting up proxy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ/faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Clear Linux* Project Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+
+<header id="header">
+  <div class="padding-md--left-right">
+
+    <div class="header__site_info">
+           <div class="header__site_info_name">
+             <a href ="https://clearlinux.org"> Clear Linux* Project</a>
+           </div>
+    </div>
+    <nav class="header__menu">
+        <ul class="header__menu_list">
+                         <li class="header__menu_list_item green  ">
+                <a tabindex='1' href="https://clearlinux.org/about">About</a>
+              </li>
+                         <li class="header__menu_list_item purple  ">
+                <a tabindex='1' href="https://clearlinux.org/developer">Developer</a>
+              </li>
+                         <li class="header__menu_list_item blue  ">
+                <a tabindex='1' href="https://clearlinux.org/software">Software</a>
+              </li>
+        </ul>
+    </nav>
+
+  </div>
+
+
+
+</header>
+
+
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="tutorials.html">Tutorials</a> &raquo;</li>
+        
+      <li>Install Kata Containers*</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/clearlinux/clear-linux-documentation/blob/rtd-theme/source/tutorials/kata.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <blockquote>
+<div></div></blockquote>
+<div class="section" id="install-kata-containers">
+<span id="kata"></span><h1>Install Kata Containers*</h1>
+<p>This tutorial describes how to install, configure, and run <a class="reference external" href="https://katacontainers.io/">Kata Containers</a>
+on Clear Linux* OS. Kata Containers is an open source project developing a
+lightweight implementation of <abbr title="Virtual Machines">VMs</abbr> that offer the
+speed of containers and the security of VMs.</p>
+<div class="section" id="prerequisites">
+<h2>Prerequisites</h2>
+<p>This tutorial assumes you have installed Clear Linux OS on your host system.
+For detailed instructions on installing Clear Linux OS on a bare metal system, follow
+the <a class="reference internal" href="../get-started/bare-metal-install-desktop/bare-metal-install-desktop.html#bare-metal-install-desktop"><span class="std std-ref">bare metal installation tutorial</span></a>.</p>
+<p>If you have Clear Containers installed on your Clear Linux OS system, then follow the
+<a class="reference internal" href="kata_migration.html#kata-migration"><span class="std std-ref">migrate Clear Containers to Kata Containers tutorial</span></a>.</p>
+<p>Before you install any new packages, update Clear Linux OS with the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo swupd update
+</pre></div>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>Install Kata Containers</h2>
+<p>Kata Containers is included in the <code class="file docutils literal notranslate"><span class="pre">containers-virt</span></code> bundle.
+To install the framework, enter the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo swupd bundle-add containers-virt
+</pre></div>
+</div>
+<p>Restart the Docker* and Kata Containers systemd services.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo systemctl daemon-reload
+sudo systemctl restart docker
+</pre></div>
+</div>
+</div>
+<div class="section" id="run-kata-containers">
+<h2>Run Kata Containers</h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo docker run -ti busybox sh
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p>If you use a proxy server and your proxy environment variables are already
+set, run the following commands as a shell script to configure Docker:</p>
+<div class="last highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">docker_service_dir</span><span class="o">=</span><span class="s2">&quot;/etc/systemd/system/docker.service.d/&quot;</span>
+sudo mkdir -p <span class="s2">&quot;</span><span class="nv">$docker_service_dir</span><span class="s2">&quot;</span>
+cat <span class="s">&lt;&lt;EOF | sudo tee &quot;$docker_service_dir/proxy.conf&quot;</span>
+<span class="s">[Service]</span>
+<span class="s">Environment=&quot;HTTP_PROXY=$http_proxy&quot;</span>
+<span class="s">Environment=&quot;HTTPS_PROXY=$https_proxy&quot;</span>
+<span class="s">EOF</span>
+<span class="nb">echo</span> <span class="s2">&quot;Reloading unit files and starting docker service&quot;</span>
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+sudo docker info
+</pre></div>
+</div>
+</div>
+<p><strong>Congratulations!</strong></p>
+<p>You’ve successfully installed and set up Kata Containers on Clear Linux OS.</p>
+</div>
+<div class="section" id="more-information-about-docker">
+<h2>More information about Docker</h2>
+<p>Docker on Clear Linux OS provides a <code class="file docutils literal notranslate"><span class="pre">docker.service</span></code> file to start the Docker
+daemon. The daemon will use runc or kata-runtime depending on the
+environment:</p>
+<ul class="simple">
+<li>If you are running Clear Linux OS on bare metal or on a VM with Nested
+Virtualization activated, Docker uses kata-runtime as the
+default runtime.</li>
+<li>If you are running Clear Linux OS on a VM without Nested Virtualization,
+Docker uses runc as the default runtime.</li>
+</ul>
+<p>You do not need to manually configure the runtime for Docker, because
+it automatically uses the runtime supported by the system.</p>
+<div class="section" id="troubleshooting">
+<h3>Troubleshooting</h3>
+<ul>
+<li><p class="first">To change the Docker storage driver, see
+<a class="reference internal" href="docker/docker.html#additional-docker-configuration"><span class="std std-ref">Additional Docker configuration</span></a>.</p>
+</li>
+<li><p class="first">For some Clear Linux OS versions before 27000, you may need to manually
+configure Docker* to use Kata Containers by default.</p>
+<p>To do so, enter:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo mkdir -p /etc/systemd/system/docker.service.d/
+cat <span class="s">&lt;&lt;EOF | sudo tee /etc/systemd/system/docker.service.d/50-runtime.conf</span>
+<span class="s">[Service]</span>
+<span class="s">Environment=&quot;DOCKER_DEFAULT_RUNTIME=--default-runtime kata-runtime&quot;</span>
+<span class="s">EOF</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">To check the version of Clear Linux OS on your system, enter:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo swupd info
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="kata_migration.html" class="btn btn-neutral float-right" title="Migrate Clear Containers to Kata Containers*" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="spark.html" class="btn btn-neutral float-left" title="Set up a standalone cluster system using Apache* Spark*" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, many
+      <span class="lastupdated">
+        最后更新于 7月 24, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+
+<script type="text/javascript" src="../_static/tcs_theme.js"></script>
+
+
+
+</body>
+</html>

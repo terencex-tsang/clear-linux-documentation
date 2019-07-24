@@ -1,0 +1,439 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Fix a broken installation &mdash; Documentation for Clear Linux* project</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Modify hostname" href="hostname.html" />
+    <link rel="prev" title="Create and enable a new user space" href="enable-user-space.html" />
+
+<link rel="stylesheet" href="../../_static/tcs_theme.css" type="text/css" />
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #007ab2" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Clear Linux* Project Docs
+          
+
+          
+            
+            <img src="../../_static/clearlinux.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Clear Linux</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Language Versions</dt>
+        
+          <dd><a href="/clearlinux/guides/maintenance/fix-broken-install.html">English</a></dd>
+        
+          <dd><a href="/clearlinux/zh_CN/guides/maintenance/fix-broken-install.html">Chinese</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Document Versions</dt>
+        
+          <dd><a href="/clearlinux/guides/maintenance/fix-broken-install.html">latest</a></dd>
+        
+          <dd><a href="/clearlinux/L19.01/guides/maintenance/fix-broken-install.html">L19.01</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>clearlinux.org links</dt>
+          <dd>
+            <a href="https://www.clearlinux.org/">Project Home</a>
+          </dd>
+          <dd>
+            <a href="https://github.com/clearlinux/clear-linux-documentation">GitHub</a>
+          </dd>
+      </dl>
+    </div>
+  </div>
+  
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/get-started.html">Get started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tooling/tooling.html">How to Clear</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides.html">Guides</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../guides.html#maintenance">Maintenance</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="architect-lifecycle.html">Architect the life-cycle of Clear Linux* OS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="assign-static-ip.html">Assign a static IP address</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bulk-provision.html">Bulk provision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cpu-performance.html">CPU Power and Performance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer-workstation.html">Developer Workstation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="download-verify-decompress.html">Download, verify, and decompress a Clear Linux* OS image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="enable-user-space.html">Create and enable a new user space</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Fix a broken installation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#boot-a-live-desktop-image-to-fix-target-system">Boot a live desktop image to fix target system</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#install-from-live-image">Install from live image</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mount-root-partition-verify-and-fix">Mount root partition, verify, and fix</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="hostname.html">Modify hostname</a></li>
+<li class="toctree-l3"><a class="reference internal" href="increase-virtual-disk-size.html">Increase virtual disk size of an image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="query-upstream.html">Query package info from upstream repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="restart.html">Restart system services after an OS update</a></li>
+<li class="toctree-l3"><a class="reference internal" href="time.html">Set the time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="validate-signatures.html">Validate signatures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deploy-at-scale.html">Deploy at Scale</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides.html#network">Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides.html#kernel">Kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides.html#stacks">Stacks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../FAQ/faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Clear Linux* Project Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+
+<header id="header">
+  <div class="padding-md--left-right">
+
+    <div class="header__site_info">
+           <div class="header__site_info_name">
+             <a href ="https://clearlinux.org"> Clear Linux* Project</a>
+           </div>
+    </div>
+    <nav class="header__menu">
+        <ul class="header__menu_list">
+                         <li class="header__menu_list_item green  ">
+                <a tabindex='1' href="https://clearlinux.org/about">About</a>
+              </li>
+                         <li class="header__menu_list_item purple  ">
+                <a tabindex='1' href="https://clearlinux.org/developer">Developer</a>
+              </li>
+                         <li class="header__menu_list_item blue  ">
+                <a tabindex='1' href="https://clearlinux.org/software">Software</a>
+              </li>
+        </ul>
+    </nav>
+
+  </div>
+
+
+
+</header>
+
+
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../guides.html">Guides</a> &raquo;</li>
+        
+      <li>Fix a broken installation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/clearlinux/clear-linux-documentation/blob/rtd-theme/source/guides/maintenance/fix-broken-install.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="fix-a-broken-installation">
+<span id="fix-broken-install"></span><h1>Fix a broken installation</h1>
+<p>This guide explains how to fix a broken installation of Clear Linux* OS using a live
+desktop image on a USB.</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#overview" id="id2">Overview</a></li>
+<li><a class="reference internal" href="#prerequisites" id="id3">Prerequisites</a></li>
+<li><a class="reference internal" href="#boot-a-live-desktop-image-to-fix-target-system" id="id4">Boot a live desktop image to fix target system</a></li>
+<li><a class="reference internal" href="#install-from-live-image" id="id5">Install from live image</a></li>
+<li><a class="reference internal" href="#mount-root-partition-verify-and-fix" id="id6">Mount root partition, verify, and fix</a></li>
+</ul>
+</div>
+<div class="section" id="overview">
+<h2><a class="toc-backref" href="#id2">Overview</a></h2>
+<p>This guide assumes you have installed Clear Linux OS on a target system, but the OS
+does not boot or function properly.</p>
+<p>The process described in this guide can only verify and fix files that
+<a class="reference internal" href="../../tooling/swupd-guide.html#swupd-guide"><span class="std std-ref">swupd</span></a> owns in <code class="file docutils literal notranslate"><span class="pre">/usr</span></code>. Files outside of this path, such
+as <code class="file docutils literal notranslate"><span class="pre">/home/</span></code>, <code class="file docutils literal notranslate"><span class="pre">/etc</span></code>, <code class="file docutils literal notranslate"><span class="pre">/var</span></code>, etc., cannot be repaired by this
+process.</p>
+</div>
+<div class="section" id="prerequisites">
+<h2><a class="toc-backref" href="#id3">Prerequisites</a></h2>
+<ul class="simple">
+<li>Download and install the live desktop image on a USB. See
+<a class="reference internal" href="../../get-started/bare-metal-install-desktop/bare-metal-install-desktop.html#bare-metal-install-desktop"><span class="std std-ref">Install Clear Linux* OS from the live desktop</span></a> for install instructions.</li>
+</ul>
+</div>
+<div class="section" id="boot-a-live-desktop-image-to-fix-target-system">
+<h2><a class="toc-backref" href="#id4">Boot a live desktop image to fix target system</a></h2>
+<ol class="arabic simple">
+<li>Boot the Clear Linux OS live desktop image.</li>
+</ol>
+</div>
+<div class="section" id="install-from-live-image">
+<h2><a class="toc-backref" href="#id5">Install from live image</a></h2>
+<p>After you download and burn the live desktop image on a USB drive, follow
+these steps.</p>
+<ol class="arabic">
+<li><p class="first">Insert the USB drive into an available USB slot.</p>
+</li>
+<li><p class="first">Power on the system.</p>
+</li>
+<li><p class="first">Open the system BIOS setup menu by pressing the <kbd class="kbd docutils literal notranslate">F2</kbd> key.
+Your BIOS setup menu entry point may vary.</p>
+</li>
+<li><p class="first">In the setup menu, enable the UEFI boot and set the USB drive as the
+first option in the device boot order.</p>
+</li>
+<li><p class="first">Save these settings, e.g. <kbd class="kbd docutils literal notranslate">F10</kbd>, and exit.</p>
+</li>
+<li><p class="first">Reboot the target system.</p>
+</li>
+<li><p class="first">Select <span class="guilabel">Clear Linux OS</span> in the boot menu, shown in Figure 1.</p>
+<div class="figure" id="id1">
+<a class="reference internal image-reference" href="../../_images/bare-metal-install-desktop-011.png"><img alt="Clear Linux OS in boot menu" src="../../_images/bare-metal-install-desktop-011.png" style="width: 660.0px; height: 405.0px;" /></a>
+<p class="caption"><span class="caption-text">Figure 1: Clear Linux OS in boot menu</span></p>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="mount-root-partition-verify-and-fix">
+<h2><a class="toc-backref" href="#id6">Mount root partition, verify, and fix</a></h2>
+<ol class="arabic">
+<li><p class="first">Open a Terminal window.</p>
+</li>
+<li><p class="first">Ensure the system is connected to the network.</p>
+</li>
+<li><p class="first">Mount the system’s root partition.</p>
+<ol class="arabic">
+<li><p class="first">To find the root partition, run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>lsblk
+</pre></div>
+</div>
+<p>We’ll use <code class="file docutils literal notranslate"><span class="pre">/dev/sda3/</span></code> as the root partition example.</p>
+</li>
+<li><p class="first">Next, mount the partition to the <code class="file docutils literal notranslate"><span class="pre">/mnt</span></code> folder.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo mount /dev/sda3 /mnt
+</pre></div>
+</div>
+</li>
+</ol>
+</li>
+<li><p class="first">Verify that you mounted the correct root partition by checking for some
+files commonly found on Clear Linux OS systems.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat /mnt/usr/lib/os-release
+ls /mnt/usr/share/clear/bundles
+</pre></div>
+</div>
+</li>
+<li><p class="first">Next, run swupd to fix any issues on the target system.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo swupd repair --picky --path<span class="o">=</span>/mnt
+</pre></div>
+</div>
+<p><a class="reference internal" href="../../tooling/swupd-guide.html#swupd-guide"><span class="std std-ref">Learn more about how swupd works</span></a>.</p>
+</li>
+<li><p class="first">After the process is complete, unmount the root partition:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo umount /mnt
+</pre></div>
+</div>
+</li>
+<li><p class="first">Reboot the system, remove the live desktop USB drive,
+and boot into the repaired system.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo reboot
+</pre></div>
+</div>
+</li>
+</ol>
+<p><strong>Congratulations!</strong> You successfully restored Clear Linux OS.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="hostname.html" class="btn btn-neutral float-right" title="Modify hostname" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="enable-user-space.html" class="btn btn-neutral float-left" title="Create and enable a new user space" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, many
+      <span class="lastupdated">
+        Last updated on Jul 24, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+
+<script type="text/javascript" src="../../_static/tcs_theme.js"></script>
+
+
+
+</body>
+</html>

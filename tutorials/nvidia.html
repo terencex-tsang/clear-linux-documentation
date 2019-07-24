@@ -1,0 +1,663 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Install NVIDIA* Drivers &mdash; Documentation for Clear Linux* project</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Run Redis on Clear Linux* OS" href="redis.html" />
+    <link rel="prev" title="Enable YubiKey U2F Support" href="yubikey-u2f.html" />
+
+<link rel="stylesheet" href="../_static/tcs_theme.css" type="text/css" />
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #007ab2" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Clear Linux* Project Docs
+          
+
+          
+            
+            <img src="../_static/clearlinux.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Clear Linux</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Language Versions</dt>
+        
+          <dd><a href="/clearlinux/tutorials/nvidia.html">English</a></dd>
+        
+          <dd><a href="/clearlinux/zh_CN/tutorials/nvidia.html">Chinese</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Document Versions</dt>
+        
+          <dd><a href="/clearlinux/tutorials/nvidia.html">latest</a></dd>
+        
+          <dd><a href="/clearlinux/L19.01/tutorials/nvidia.html">L19.01</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>clearlinux.org links</dt>
+          <dd>
+            <a href="https://www.clearlinux.org/">Project Home</a>
+          </dd>
+          <dd>
+            <a href="https://github.com/clearlinux/clear-linux-documentation">GitHub</a>
+          </dd>
+      </dl>
+    </div>
+  </div>
+  
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/get-started.html">Get started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tooling/tooling.html">How to Clear</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/guides.html">Guides</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="tutorials.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="wordpress/wordpress.html">WordPress* on Clear Linux* OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="flatpak/flatpak.html">Use Flatpak* to install applications on Clear Linux* OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="machine-learning/machine-learning.html">TensorFlow* machine learning on Clear Linux* OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker/docker.html">Run Docker* on Clear Linux* OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="azure.html">Run Clear Linux* OS using Microsoft Azure CLI 2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hadoop.html">Set up a single node cluster with Hadoop*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fmv.html">Use the function multi-version patch generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aws-web/aws-web.html">Create and launch Clear Linux* OS from Amazon Web Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smb/smb.html">Enable simple file sharing with a Windows* machine using Samba*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smb/smb-desktop.html">Connect to Windows* shared location from Clear Linux* OS desktop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spark.html">Set up a standalone cluster system using Apache* Spark*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kata.html">Install Kata Containers*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kata_migration.html">Migrate Clear Containers to Kata Containers*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kubernetes/kubernetes.html">Run Kubernetes*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kubernetes/kubernetes-bp.html">Kubernetes Best Practices on Clear Linux OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="yubikey-u2f.html">Enable YubiKey U2F Support</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Install NVIDIA* Drivers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-dkms">Install DKMS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#download-and-install-the-nvidia-drivers">Download and install the NVIDIA Drivers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#download-the-nvidia-drivers-for-linux">Download the NVIDIA Drivers for Linux</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#disable-the-nouveau-driver">Disable the nouveau Driver</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configure-alternative-software-paths">Configure Alternative Software Paths</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#install-the-nvidia-drivers">Install the NVIDIA Drivers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#updating-the-nvidia-drivers">Updating the NVIDIA Drivers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uninstalling-the-nvidia-drivers">Uninstalling the NVIDIA Drivers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#debugging-installation-of-nvidia-drivers">Debugging Installation of NVIDIA Drivers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#additional-resources">Additional resources</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="redis.html">Run Redis on Clear Linux* OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial-proxy.html">Setting up proxy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ/faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Clear Linux* Project Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+
+<header id="header">
+  <div class="padding-md--left-right">
+
+    <div class="header__site_info">
+           <div class="header__site_info_name">
+             <a href ="https://clearlinux.org"> Clear Linux* Project</a>
+           </div>
+    </div>
+    <nav class="header__menu">
+        <ul class="header__menu_list">
+                         <li class="header__menu_list_item green  ">
+                <a tabindex='1' href="https://clearlinux.org/about">About</a>
+              </li>
+                         <li class="header__menu_list_item purple  ">
+                <a tabindex='1' href="https://clearlinux.org/developer">Developer</a>
+              </li>
+                         <li class="header__menu_list_item blue  ">
+                <a tabindex='1' href="https://clearlinux.org/software">Software</a>
+              </li>
+        </ul>
+    </nav>
+
+  </div>
+
+
+
+</header>
+
+
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="tutorials.html">Tutorials</a> &raquo;</li>
+        
+      <li>Install NVIDIA* Drivers</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/clearlinux/clear-linux-documentation/blob/rtd-theme/source/tutorials/nvidia.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="install-nvidia-drivers">
+<span id="nvidia"></span><h1>Install NVIDIA* Drivers</h1>
+<p>NVIDIA manufactures graphics processing units (GPU), also known as
+graphics cards.</p>
+<p>NVIDIA devices on Linux* have two popular device driver options: the
+opensource drivers from the <a class="reference external" href="https://nouveau.freedesktop.org/wiki/">nouveau project</a> or the proprietary drivers
+published by NVIDIA. The nouveau drivers are built into the Clear Linux* OS
+kernel and are loaded automatically at system boot if a compatible card
+is detected.</p>
+<p>These instructions show how to use the proprietary NVIDIA drivers, which
+require a manual installation.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>Software installed outside of <a class="reference internal" href="../concepts/swupd-about.html#swupd-about"><span class="std std-ref">swupd</span></a> is not updated
+with Clear Linux OS updates and must be updated and maintained manually.</p>
+<p class="last">For example, the file <code class="file docutils literal notranslate"><span class="pre">/usr/lib/libGL.so</span></code> conflicts between the one
+provided by the mesa package in Clear Linux OS and the one NVIDIA provides. If a Clear Linux OS
+update overwrites these files, a reinstallation of the NVIDIA driver might
+be required.</p>
+</div>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#prerequisites" id="id1">Prerequisites</a></li>
+<li><a class="reference internal" href="#install-dkms" id="id2">Install DKMS</a></li>
+<li><a class="reference internal" href="#download-and-install-the-nvidia-drivers" id="id3">Download and install the NVIDIA Drivers</a><ul>
+<li><a class="reference internal" href="#download-the-nvidia-drivers-for-linux" id="id4">Download the NVIDIA Drivers for Linux</a></li>
+<li><a class="reference internal" href="#disable-the-nouveau-driver" id="id5">Disable the nouveau Driver</a></li>
+<li><a class="reference internal" href="#configure-alternative-software-paths" id="id6">Configure Alternative Software Paths</a></li>
+<li><a class="reference internal" href="#install-the-nvidia-drivers" id="id7">Install the NVIDIA Drivers</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#updating-the-nvidia-drivers" id="id8">Updating the NVIDIA Drivers</a></li>
+<li><a class="reference internal" href="#uninstalling-the-nvidia-drivers" id="id9">Uninstalling the NVIDIA Drivers</a></li>
+<li><a class="reference internal" href="#debugging-installation-of-nvidia-drivers" id="id10">Debugging Installation of NVIDIA Drivers</a></li>
+<li><a class="reference internal" href="#additional-resources" id="id11">Additional resources</a></li>
+</ul>
+</div>
+<div class="section" id="prerequisites">
+<h2><a class="toc-backref" href="#id1">Prerequisites</a></h2>
+<ul class="simple">
+<li>A Clear Linux OS system with a desktop installed</li>
+<li>An NVIDIA device installed</li>
+</ul>
+</div>
+<div class="section" id="install-dkms">
+<h2><a class="toc-backref" href="#id2">Install DKMS</a></h2>
+<p>The <a class="reference internal" href="../guides/kernel/kernel-modules-dkms.html#kernel-modules-dkms"><span class="std std-ref">Dynamic Kernel Module System (DKMS)</span></a> allows the NVIDIA kernel modules to be automatically
+integrated when kernel updates occur in Clear Linux OS.</p>
+<p>Install the appropriate DKMS bundle using the instructions below:</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The Long Term Support (LTS) kernel variant is more likely to remain
+compatible between updates with NVIDIA drivers.</p>
+</div>
+<p>The <strong class="command">kernel-native-dkms</strong> bundle provides the <strong class="command">dkms</strong> program and
+Linux kernel headers, which are required for compiling kernel modules.</p>
+<p>The <strong class="command">kernel-native-dkms</strong> bundle also:</p>
+<ul class="simple">
+<li>Adds a <cite>systemd</cite> update trigger
+(<code class="file docutils literal notranslate"><span class="pre">/usr/lib/systemd/system/dkms-new-kernel.service</span></code>) to automatically
+run DKMS to rebuild modules after a kernel upgrade occurs with <a class="reference internal" href="../tooling/swupd-guide.html#swupd-guide"><span class="std std-ref">swupd
+update</span></a>.</li>
+<li>Disables kernel module signature verification by appending a kernel
+command-line parameter (<strong class="command">module.sig_unenforce</strong>) from the
+<code class="file docutils literal notranslate"><span class="pre">/usr/share/kernel/cmdline.d/clr-ignore-mod-sig.conf</span></code> file.</li>
+<li>Adds a notification to the Message of the Day (MOTD) indicating kernel
+module signature verification is disabled.</li>
+</ul>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">We recommend that you always review the <strong class="command">swupd update</strong> output
+to make sure kernel modules were successfully rebuilt against the new
+kernel. This is especially important for systems where a successful boot
+relies on a kernel module.</p>
+</div>
+<p>Install the <strong class="command">kernel-native-dkms</strong> or <strong class="command">kernel-lts-dkms</strong>
+bundle:</p>
+<ol class="arabic">
+<li><p class="first">Determine which kernel variant is running on Clear Linux OS. Only the <em>native</em>
+and <em>lts</em> kernels are enabled to build and load out-of-tree kernel modules
+with DKMS.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ uname -r
+<span class="m">5</span>.XX.YY-ZZZZ.native
+</pre></div>
+</div>
+<p>Ensure <em>.native</em> or <em>.lts</em> is in the kernel name.</p>
+</li>
+<li><p class="first">Install the DKMS bundle corresponding to the installed kernel. Use
+<strong class="command">kernel-native-dkms</strong> for the native kernel or
+<strong class="command">kernel-lts-dkms</strong> for the lts kernel.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo swupd bundle-add kernel-native-dkms
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo swupd bundle-add kernel-lts-dkms
+</pre></div>
+</div>
+</li>
+<li><p class="first">Update the Clear Linux OS bootloader and reboot.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo clr-boot-manager update
+reboot
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="download-and-install-the-nvidia-drivers">
+<h2><a class="toc-backref" href="#id3">Download and install the NVIDIA Drivers</a></h2>
+<div class="section" id="download-the-nvidia-drivers-for-linux">
+<h3><a class="toc-backref" href="#id4">Download the NVIDIA Drivers for Linux</a></h3>
+<ol class="arabic">
+<li><p class="first">Identify the model of NVIDIA GPU that is installed.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo lshw -C display
+</pre></div>
+</div>
+</li>
+<li><p class="first">Go to the <a class="reference external" href="https://www.nvidia.com/download/index.aspx">NVIDIA Driver Downloads website</a> . Search for and download the
+appropriate driver based on the model of  NVIDIA GPU you have with <em>Linux
+64-bit</em> selected as the Operating System .</p>
+</li>
+<li><p class="first">Open a terminal and navigate to where the
+<code class="file docutils literal notranslate"><span class="pre">NVIDIA-Linux-x86_64-&lt;VERSION&gt;.run</span></code> file was saved. In this
+example, it was saved in the Downloads folder.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/Downloads/
+</pre></div>
+</div>
+</li>
+<li><p class="first">Make the <code class="file docutils literal notranslate"><span class="pre">NVIDIA-Linux-x86_64-&lt;VERSION&gt;.run</span></code> file executable.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chmod +x :file:<span class="sb">`</span>NVIDIA-Linux-x86_64-&lt;VERSION&gt;.run<span class="sb">`</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="disable-the-nouveau-driver">
+<h3><a class="toc-backref" href="#id5">Disable the nouveau Driver</a></h3>
+<p>The proprietary NVIDIA driver is incompatible with the nouveau driver and
+must be disabled before installation can continue.</p>
+<ol class="arabic">
+<li><p class="first">Disable the nouveau driver by creating a blacklist file under
+<code class="file docutils literal notranslate"><span class="pre">/etc/modprobe.d</span></code> and reboot.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo mkdir /etc/modprobe.d
+
+<span class="nb">printf</span> <span class="s2">&quot;blacklist nouveau \noptions nouveau modeset=0 \n&quot;</span> <span class="p">|</span> sudo tee --append /etc/modprobe.d/disable-nouveau.conf
+</pre></div>
+</div>
+</li>
+<li><p class="first">Reboot the system and log back in. It is normal for the graphical
+environment not to start without the NVIDIA driver loaded.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="configure-alternative-software-paths">
+<h3><a class="toc-backref" href="#id6">Configure Alternative Software Paths</a></h3>
+<p>The NVIDIA installer will be directed to install files under
+<code class="file docutils literal notranslate"><span class="pre">/opt/nvidia</span></code> as much as possible to keep its contents isolated from the
+rest of the Clear Linux OS system files under <code class="file docutils literal notranslate"><span class="pre">/usr</span></code>.  The dynamic linker and X
+server must be configured to use the content under
+<code class="file docutils literal notranslate"><span class="pre">/opt/nvidia</span></code>.</p>
+<ol class="arabic">
+<li><p class="first">Configure the dynamic linker to look for and to cache shared libraries under
+<code class="file docutils literal notranslate"><span class="pre">/opt/nvidia/lib</span></code> and <code class="file docutils literal notranslate"><span class="pre">/opt/nvidia/lib32</span></code> in addition to the
+default paths.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s2">&quot;include /etc/ld.so.conf.d/*.conf&quot;</span> <span class="p">|</span>  sudo tee --append /etc/ld.so.conf
+
+sudo mkdir /etc/ld.so.conf.d
+<span class="nb">printf</span> <span class="s2">&quot;/opt/nvidia/lib \n/opt/nvidia/lib32 \n&quot;</span> <span class="p">|</span> sudo tee --append /etc/ld.so.conf.d/nvidia.conf
+</pre></div>
+</div>
+</li>
+<li><p class="first">Reload the dynamic linker run-time bindings and library cache.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo ldconfig
+</pre></div>
+</div>
+</li>
+<li><p class="first">Create a Xorg configuration file to search for modules under
+<code class="file docutils literal notranslate"><span class="pre">/opt/nvidia</span></code> in addition to the default path.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo mkdir -p /etc/X11/xorg.conf.d/
+
+sudo tee /etc/X11/xorg.conf.d/nvidia-files-opt.conf &gt; /dev/null <span class="s">&lt;&lt;&#39;EOF&#39;</span>
+<span class="s">Section &quot;Files&quot;</span>
+<span class="s">        ModulePath      &quot;/usr/lib64/xorg/modules&quot;</span>
+<span class="s">        ModulePath      &quot;/opt/nvidia/lib64/xorg/modules&quot;</span>
+<span class="s">EndSection</span>
+<span class="s">EOF</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="install-the-nvidia-drivers">
+<h3><a class="toc-backref" href="#id7">Install the NVIDIA Drivers</a></h3>
+<ol class="arabic">
+<li><p class="first">A terminal not running on <em>/dev/tty1</em> is useful to view uninterrupted
+installation progress. Switch to a secondary virtual terminal by pushing
+<strong class="command">CTRL + ALT + F2</strong> or remotely login over SSH.</p>
+</li>
+<li><p class="first">Navigate into the directory where the NVIDIA installer was downloaded.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/Downloads/
+</pre></div>
+</div>
+</li>
+<li><p class="first">Run the installer with the advanced options below.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo ./NVIDIA-Linux-x86_64-&lt;VERSION&gt;.run <span class="se">\</span>
+--utility-prefix<span class="o">=</span>/opt/nvidia <span class="se">\</span>
+--opengl-prefix<span class="o">=</span>/opt/nvidia <span class="se">\</span>
+--compat32-prefix<span class="o">=</span>/opt/nvidia <span class="se">\</span>
+--compat32-libdir<span class="o">=</span>lib32 <span class="se">\</span>
+--x-prefix<span class="o">=</span>/opt/nvidia <span class="se">\</span>
+--x-module-path<span class="o">=</span>/opt/nvidia/lib64/xorg/modules <span class="se">\</span>
+--x-library-path<span class="o">=</span>/opt/nvidia/lib64 <span class="se">\</span>
+--x-sysconfig-path<span class="o">=</span>/etc/X11/xorg.conf.d <span class="se">\</span>
+--documentation-prefix<span class="o">=</span>/opt/nvidia <span class="se">\</span>
+--application-profile-path<span class="o">=</span>/etc/nvidia <span class="se">\</span>
+--no-precompiled-interface <span class="se">\</span>
+--no-nvidia-modprobe <span class="se">\</span>
+--no-distro-scripts <span class="se">\</span>
+--force-libglx-indirect <span class="se">\</span>
+--glvnd-egl-config-path<span class="o">=</span>/etc/glvnd/egl_vendor.d <span class="se">\</span>
+--egl-external-platform-config-path<span class="o">=</span>/etc/egl/egl_external_platform.d  <span class="se">\</span>
+--dkms <span class="se">\</span>
+--silent
+</pre></div>
+</div>
+</li>
+<li><p class="first">The graphical interface may automatically start after the NVIDIA driver
+is loaded. Return to the working terminal and log back in if necessary.</p>
+</li>
+<li><p class="first">Confirm that the NVIDIA kernel modules are loaded.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>lsmod <span class="p">|</span> grep ^nvidia
+</pre></div>
+</div>
+</li>
+<li><p class="first">Run a Clear Linux OS system verification to restore files that the NVIDIA installer
+likely deleted.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo swupd repair --quick --bundles<span class="o">=</span>lib-opengl
+</pre></div>
+</div>
+</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The NVIDIA software places some files under the <code class="file docutils literal notranslate"><span class="pre">/usr</span></code> subdirectory
+which are not managed by Clear Linux OS and conflict with the Clear Linux OS stateless design.</p>
+<p class="last">Although a limited version of <strong class="command">swupd repair</strong> is run above,
+other uses of the <strong class="command">swupd repair</strong> command should be avoided
+with the proprietary NVIDIA drivers installed.</p>
+</div>
+</div>
+</div>
+<div class="section" id="updating-the-nvidia-drivers">
+<h2><a class="toc-backref" href="#id8">Updating the NVIDIA Drivers</a></h2>
+<p>The proprietary NVIDIA drivers are installed manually outside of <a class="reference internal" href="../concepts/swupd-about.html#swupd-about"><span class="std std-ref">swupd</span></a> and must be updated manually when needed.</p>
+<p>Updating the NVIDIA drivers follows the same steps as initial installation,
+however the desktop environment must first be stopped so that the drivers are
+not in use.</p>
+<ol class="arabic">
+<li><p class="first">Follow the steps in the <a class="reference internal" href="#download-the-nvidia-drivers-for-linux">Download the NVIDIA Drivers for Linux</a> section
+to get the latest NVIDIA drivers.</p>
+</li>
+<li><p class="first">Temporarily set the default boot target to the <em>multi-user</em>, which is
+a non-graphical runtime.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo systemctl set-default multi-user.target
+</pre></div>
+</div>
+</li>
+<li><p class="first">Reboot the system and log back in. It is normal for the graphical
+environment not to start.</p>
+</li>
+<li><p class="first">Follow the steps in the <a class="reference internal" href="#install-the-nvidia-drivers">Install the NVIDIA Drivers</a> section to update
+the NVIDIA drivers. This installation will overwrite the previous NVIDIA
+drivers and files.</p>
+</li>
+<li><p class="first">Set the default boot target back to the <em>graphical</em> target.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo systemctl set-default graphical.target
+</pre></div>
+</div>
+</li>
+<li><p class="first">Reboot the system and log back in.</p>
+</li>
+<li><p class="first">Trigger a flatpak update which will download the runtime corresponding
+with the new NVIDIA drivers for the flatpak apps that require it.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>flatpak update
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="uninstalling-the-nvidia-drivers">
+<h2><a class="toc-backref" href="#id9">Uninstalling the NVIDIA Drivers</a></h2>
+<p>The NVIDIA drivers and associated software can be uninstalled and nouveau
+driver restored with the instructions in this section.</p>
+<ol class="arabic">
+<li><p class="first">Remove the <code class="file docutils literal notranslate"><span class="pre">modprobe.d</span></code> file that prevents nouveau from loading.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo rm /etc/modprobe.d/disable-nouveau.conf
+</pre></div>
+</div>
+</li>
+<li><p class="first">Remove the <code class="file docutils literal notranslate"><span class="pre">xorg.conf.d</span></code> file that adds a search path for X modules.</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">rm</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">X11</span><span class="o">/</span><span class="n">xorg</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">nvidia</span><span class="o">-</span><span class="n">files</span><span class="o">-</span><span class="n">opt</span><span class="o">.</span><span class="n">conf</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Run the <strong class="command">sudo /opt/nvidia/bin/nvidia-uninstall</strong></p>
+</li>
+<li><p class="first">Follow the prompts on the screen and reboot the system.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="debugging-installation-of-nvidia-drivers">
+<h2><a class="toc-backref" href="#id10">Debugging Installation of NVIDIA Drivers</a></h2>
+<ul class="simple">
+<li>The NVIDIA driver places installer and uninstaller logs under
+<code class="file docutils literal notranslate"><span class="pre">/var/log/nvidia-install</span></code> and <code class="file docutils literal notranslate"><span class="pre">/var/log/nvidia-uninstall</span></code>.</li>
+<li><code class="file docutils literal notranslate"><span class="pre">NVIDIA-Linux-x86_64-&lt;VERSION&gt;.run</span> <span class="pre">--advanced-options</span></code> shows many
+parameters to control installation behavior.</li>
+<li><code class="file docutils literal notranslate"><span class="pre">NVIDIA-Linux-x86_64-&lt;VERSION&gt;.run</span> <span class="pre">--extract-only</span></code> extracts
+installation files into a directory named
+<code class="file docutils literal notranslate"><span class="pre">NVIDIA-Linux-x86_64-&lt;VERSION&gt;</span></code>.</li>
+</ul>
+</div>
+<div class="section" id="additional-resources">
+<h2><a class="toc-backref" href="#id11">Additional resources</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://nvidia.custhelp.com/app/answers/detail/a_id/1849/kw/Linux">Why aren’t the NVIDIA Linux drivers open source?</a></li>
+<li><a class="reference external" href="https://nvidia.custhelp.com/app/answers/detail/a_id/44/kw/linux">Where can I get support for NVIDIA Linux drivers?</a></li>
+<li><a class="reference external" href="https://download.nvidia.com/XFree86/Linux-x86_64/">NVIDIA Accelerated Linux Graphics Driver Installation Guides</a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="redis.html" class="btn btn-neutral float-right" title="Run Redis on Clear Linux* OS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="yubikey-u2f.html" class="btn btn-neutral float-left" title="Enable YubiKey U2F Support" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, many
+      <span class="lastupdated">
+        Last updated on Jul 24, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+
+<script type="text/javascript" src="../_static/tcs_theme.js"></script>
+
+
+
+</body>
+</html>

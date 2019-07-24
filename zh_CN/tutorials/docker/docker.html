@@ -1,0 +1,529 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh-CN" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh-CN" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Run Docker* on Clear Linux* OS &mdash; Documentation for Clear Linux* project</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'',
+              LANGUAGE:'zh_CN',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" />
+    <link rel="next" title="Run Clear Linux* OS using Microsoft Azure CLI 2.0" href="../azure.html" />
+    <link rel="prev" title="TensorFlow* machine learning on Clear Linux* OS" href="../machine-learning/machine-learning.html" />
+
+<link rel="stylesheet" href="../../_static/tcs_theme.css" type="text/css" />
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #007ab2" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Clear Linux* Project Docs
+          
+
+          
+            
+            <img src="../../_static/clearlinux.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Clear Linux</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Language Versions</dt>
+        
+          <dd><a href="/clearlinux/tutorials/docker/docker.html">English</a></dd>
+        
+          <dd><a href="/clearlinux/zh_CN/tutorials/docker/docker.html">Chinese</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Document Versions</dt>
+        
+          <dd><a href="/clearlinux/tutorials/docker/docker.html">latest</a></dd>
+        
+          <dd><a href="/clearlinux/L19.01/tutorials/docker/docker.html">L19.01</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>clearlinux.org links</dt>
+          <dd>
+            <a href="https://www.clearlinux.org/">Project Home</a>
+          </dd>
+          <dd>
+            <a href="https://github.com/clearlinux/clear-linux-documentation">GitHub</a>
+          </dd>
+      </dl>
+    </div>
+  </div>
+  
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/get-started.html">Get started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tooling/tooling.html">How to Clear</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/guides.html">Guides</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../tutorials.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../wordpress/wordpress.html">WordPress* on Clear Linux* OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../flatpak/flatpak.html">Use Flatpak* to install applications on Clear Linux* OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/machine-learning.html">TensorFlow* machine learning on Clear Linux* OS</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Run Docker* on Clear Linux* OS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-the-containers-basic-bundle">Install the containers-basic bundle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#integration-with-kata-containers-optional">Integration with Kata Containers* (optional)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#additional-docker-configuration">Additional Docker configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pulling-and-running-an-image-from-docker-hub">Pulling and running an image from Docker Hub</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-a-docker-swarm-cluster">Creating a Docker swarm cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#related-topics">Related topics</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../azure.html">Run Clear Linux* OS using Microsoft Azure CLI 2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hadoop.html">Set up a single node cluster with Hadoop*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fmv.html">Use the function multi-version patch generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../aws-web/aws-web.html">Create and launch Clear Linux* OS from Amazon Web Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../smb/smb.html">Enable simple file sharing with a Windows* machine using Samba*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../smb/smb-desktop.html">Connect to Windows* shared location from Clear Linux* OS desktop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../spark.html">Set up a standalone cluster system using Apache* Spark*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kata.html">Install Kata Containers*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kata_migration.html">Migrate Clear Containers to Kata Containers*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kubernetes/kubernetes.html">Run Kubernetes*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kubernetes/kubernetes-bp.html">Kubernetes Best Practices on Clear Linux OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yubikey-u2f.html">Enable YubiKey U2F Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nvidia.html">Install NVIDIA* Drivers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../redis.html">Run Redis on Clear Linux* OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial-proxy.html">Setting up proxy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../FAQ/faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Clear Linux* Project Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+
+<header id="header">
+  <div class="padding-md--left-right">
+
+    <div class="header__site_info">
+           <div class="header__site_info_name">
+             <a href ="https://clearlinux.org"> Clear Linux* Project</a>
+           </div>
+    </div>
+    <nav class="header__menu">
+        <ul class="header__menu_list">
+                         <li class="header__menu_list_item green  ">
+                <a tabindex='1' href="https://clearlinux.org/about">About</a>
+              </li>
+                         <li class="header__menu_list_item purple  ">
+                <a tabindex='1' href="https://clearlinux.org/developer">Developer</a>
+              </li>
+                         <li class="header__menu_list_item blue  ">
+                <a tabindex='1' href="https://clearlinux.org/software">Software</a>
+              </li>
+        </ul>
+    </nav>
+
+  </div>
+
+
+
+</header>
+
+
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../tutorials.html">Tutorials</a> &raquo;</li>
+        
+      <li>Run Docker* on Clear Linux* OS</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/clearlinux/clear-linux-documentation/blob/rtd-theme/source/tutorials/docker/docker.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="run-docker-on-cl-attr">
+<span id="docker"></span><h1>Run Docker* on Clear Linux* OS</h1>
+<p>Clear Linux* OS supports multiple containerization platforms, including a Docker
+solution. Clear Linux OS has many unique features including a minimal default
+installation, which makes it compelling to use as a host for container
+workloads, management, and orchestration.</p>
+<p>This tutorial covers:</p>
+<div class="contents local topic" id="id1">
+<ul class="simple">
+<li><a class="reference internal" href="#prerequisites" id="id3">Prerequisites</a></li>
+<li><a class="reference internal" href="#install-the-containers-basic-bundle" id="id4">Install the containers-basic bundle</a></li>
+<li><a class="reference internal" href="#integration-with-kata-containers-optional" id="id5">Integration with Kata Containers* (optional)</a></li>
+<li><a class="reference internal" href="#additional-docker-configuration" id="id6">Additional Docker configuration</a></li>
+<li><a class="reference internal" href="#pulling-and-running-an-image-from-docker-hub" id="id7">Pulling and running an image from Docker Hub</a></li>
+<li><a class="reference internal" href="#creating-a-docker-swarm-cluster" id="id8">Creating a Docker swarm cluster</a></li>
+<li><a class="reference internal" href="#related-topics" id="id9">Related topics</a></li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">This tutorial focuses on the installaton of the Docker ecosystem.
+If you want to use Clear Linux OS as a Docker container image, refer to the
+official Clear Linux OS container image
+<a class="reference external" href="https://hub.docker.com/_/clearlinux/">published on Docker* Hub</a>
+and our guide to <a class="reference internal" href="../../guides/network/custom-clear-container.html#custom-clear-container"><span class="std std-ref">Build a custom Clear Linux* OS based Docker container image</span></a>.</p>
+</div>
+<div class="section" id="prerequisites">
+<h2><a class="toc-backref" href="#id3">Prerequisites</a></h2>
+<p>This tutorial assumes you have installed Clear Linux OS on your host system.
+For detailed instructions on installing Clear Linux OS on a bare metal system, follow
+the <a class="reference internal" href="../../get-started/bare-metal-install-server/bare-metal-install-server.html#bare-metal-install-server"><span class="std std-ref">bare metal installation instructions</span></a>.</p>
+<p>Before you install any new packages, update Clear Linux OS with the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo swupd update
+</pre></div>
+</div>
+<p>Additionally, you should have:</p>
+<ul class="simple">
+<li>A basic understanding of Linux* and Docker.</li>
+<li>Clear Linux OS environment that has transparent network access to the Internet.
+If you are behind a HTTP proxy server, in a corporate setting for example,
+please refer to the <a class="reference external" href="https://docs.docker.com/config/daemon/systemd/#httphttps-proxy">Docker proxy instructions</a> .</li>
+</ul>
+</div>
+<div class="section" id="install-the-containers-basic-bundle">
+<h2><a class="toc-backref" href="#id4">Install the containers-basic bundle</a></h2>
+<p>Software in Clear Linux OS is offered in the form of <a class="reference external" href="https://clearlinux.org/documentation/clear-linux/concepts/bundles-about#related-concepts">bundles</a> to provide a
+complete function. The <em>containers-basic</em> provides all the required software
+packages to run Docker images as containers.</p>
+<ol class="arabic">
+<li><p class="first">First, install the <em>containers-basic</em> bundle by running this
+<strong class="command">swupd</strong> command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo swupd bundle-add containers-basic
+</pre></div>
+</div>
+</li>
+<li><p class="first">Start the Docker daemon through systemd manager by running this command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo systemctl start docker
+</pre></div>
+</div>
+<p>If you want Docker to start automatically on boot, enable the
+systemd service by running this command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo systemctl <span class="nb">enable</span> docker
+</pre></div>
+</div>
+</li>
+<li><p class="first">Finally, verify <strong class="command">docker</strong> has been installed by running this
+command and checking the version output for both <em>client</em> and <em>server</em>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo docker version
+</pre></div>
+</div>
+</li>
+</ol>
+<p>Congratulations! At this point, you have a working installation of Docker
+on Clear Linux OS. You are ready to start using container images on your system.</p>
+</div>
+<div class="section" id="integration-with-kata-containers-optional">
+<h2><a class="toc-backref" href="#id5">Integration with Kata Containers* (optional)</a></h2>
+<p><a class="reference external" href="https://katacontainers.io/">Kata Containers</a>, is an open source project aiming to increase security
+of containers by using a hardware-backed virtual machine container runtime
+rather than software namespace containers that are provided by the standard
+Docker <em>runc</em> runtime.</p>
+<p>Clear Linux OS provides easy integration of the <em>kata-runtime</em> with Docker.
+More information on installing and using  the <em>kata-runtime</em> may be found at <a class="reference internal" href="../kata.html#kata"><span class="std std-ref">Install Kata Containers*</span></a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">The remaining sections of this tutorial are standard to Docker setup
+and configuration. If you are familiar with Docker basics, you do not
+need to continue reading. The following sections are provided here for
+sake of completeness.</p>
+</div>
+</div>
+<div class="section" id="additional-docker-configuration">
+<span id="id2"></span><h2><a class="toc-backref" href="#id6">Additional Docker configuration</a></h2>
+<p>Perform additional Docker daemon configuration via a configuration file
+typically located at <code class="file docutils literal notranslate"><span class="pre">/etc/docker/daemon.json</span></code>. Clear Linux OS features a
+<a class="reference internal" href="../../tooling/stateless.html#stateless"><span class="std std-ref">Stateless</span></a> system  so the configuration file <code class="file docutils literal notranslate"><span class="pre">daemon.json</span></code> does
+<em>NOT</em> exist by default.</p>
+<ol class="arabic">
+<li><p class="first">Create the <code class="file docutils literal notranslate"><span class="pre">daemon.json</span></code> by running this command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo touch /etc/docker/daemon.json
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">Refer to the <a class="reference external" href="https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file">Docker documentation on daemon configuration</a> for the
+full list of available configuration options and examples.</p>
+</div>
+</li>
+<li><p class="first">For production systems, we follow Docker’s recommendation to use the
+<a class="reference external" href="https://docs.docker.com/storage/storagedriver/overlayfs-driver/">OverlayFS storage driver</a> <cite>overlay2</cite>, shown below:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+   <span class="nt">&quot;storage-driver&quot;</span><span class="p">:</span> <span class="s2">&quot;overlay2&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">A testing version is found in <a class="reference external" href="https://docs.docker.com/storage/storagedriver/device-mapper-driver/">Docker Device Mapper storage driver</a>.
+If using this storage driver, a warning message may appear: “usage of
+loopback devices is strongly discouraged for production use”.</p>
+</div>
+</li>
+<li><p class="first">Save and close <code class="file docutils literal notranslate"><span class="pre">daemon.json</span></code>.</p>
+</li>
+<li><p class="first">Once you’ve made any required changes, be sure to restart the
+Docker daemon through systemd manager by running this command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo systemctl restart docker
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="pulling-and-running-an-image-from-docker-hub">
+<h2><a class="toc-backref" href="#id7">Pulling and running an image from Docker Hub</a></h2>
+<p><a class="reference external" href="https://hub.docker.com/">Docker Hub</a> is a publically available container image repository which
+comes preconfigured with Docker. In the example below we will pull and run
+an the official Docker image for nginx*, an open source reverse proxy server.</p>
+<ol class="arabic">
+<li><p class="first">First, pull a container image from Docker Hub using the
+<strong class="command">docker pull</strong> command. Download the latest nginx* Docker
+container image by running this command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo docker pull nginx
+</pre></div>
+</div>
+</li>
+<li><p class="first">Create and launch a new container using the <strong class="command">docker run</strong>
+command. Launch a nginx container by running this command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo docker run --name test-nginx -d -p <span class="m">8080</span>:80 nginx
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p>Below is an explanation of switches used in the command above. For
+detailed <strong class="command">docker run</strong> switches and syntax, refer to the
+<a class="reference external" href="https://docs.docker.com/">Docker Documentation</a> .</p>
+<ul class="last simple">
+<li>The <em>–name</em> switch lets you provide a friendly name to
+target the container for future operations</li>
+<li>The <em>-d</em> switch launches the container in the background</li>
+<li>The <em>-p</em> switch allows the container’s HTTP port (80) to be
+accessible from the Clear Linux OS host on port 8080</li>
+</ul>
+</div>
+</li>
+<li><p class="first">You can access the Welcome to Nginx! splash page running in the container
+by browsing to http://127.0.0.1:8080 or by running this <strong class="command">curl</strong>
+command from your Clear Linux OS machine:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl <span class="m">127</span>.0.0.1:8080
+</pre></div>
+</div>
+</li>
+<li><p class="first">Finally, stop and delete the nginx container by running the
+<strong class="command">docker stop</strong> and <strong class="command">docker rm</strong> commands.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo docker stop test-nginx
+sudo docker rm test-nginx
+</pre></div>
+</div>
+</li>
+</ol>
+<p>Congratulations! At this point, you have successfully pulled a nginx
+container image from <a class="reference external" href="https://hub.docker.com/">Docker Hub</a> and have run an example container.</p>
+</div>
+<div class="section" id="creating-a-docker-swarm-cluster">
+<h2><a class="toc-backref" href="#id8">Creating a Docker swarm cluster</a></h2>
+<p>Clusters of Docker hosts are referred to as <em>swarms</em>.</p>
+<p>The process in this tutorial can be repeated to install Docker on multiple
+Clear Linux OS hosts with the intent to form a Docker swarm cluster.</p>
+<p>The <a class="reference external" href="https://docs.docker.com/engine/swarm/key-concepts/">Docker documentation on swarm key concepts</a> and
+<a class="reference external" href="https://docs.docker.com/engine/swarm/swarm-tutorial/create-swarm/">Docker documentation on creating a swarm</a> can be referenced
+for further instructions on setting up a swarm.</p>
+</div>
+<div class="section" id="related-topics">
+<h2><a class="toc-backref" href="#id9">Related topics</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://www.docker.com/">Docker Home</a></li>
+<li><a class="reference external" href="https://docs.docker.com/">Docker Documentation</a></li>
+<li><a class="reference external" href="https://hub.docker.com/">Docker Hub</a></li>
+<li><a class="reference external" href="https://katacontainers.io/">Kata Containers</a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../azure.html" class="btn btn-neutral float-right" title="Run Clear Linux* OS using Microsoft Azure CLI 2.0" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../machine-learning/machine-learning.html" class="btn btn-neutral float-left" title="TensorFlow* machine learning on Clear Linux* OS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, many
+      <span class="lastupdated">
+        最后更新于 7月 24, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+
+<script type="text/javascript" src="../../_static/tcs_theme.js"></script>
+
+
+
+</body>
+</html>

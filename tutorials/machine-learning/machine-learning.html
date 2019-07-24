@@ -1,0 +1,508 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>TensorFlow* machine learning on Clear Linux* OS &mdash; Documentation for Clear Linux* project</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Run Docker* on Clear Linux* OS" href="../docker/docker.html" />
+    <link rel="prev" title="Use Flatpak* to install applications on Clear Linux* OS" href="../flatpak/flatpak.html" />
+
+<link rel="stylesheet" href="../../_static/tcs_theme.css" type="text/css" />
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #007ab2" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Clear Linux* Project Docs
+          
+
+          
+            
+            <img src="../../_static/clearlinux.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Clear Linux</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Language Versions</dt>
+        
+          <dd><a href="/clearlinux/tutorials/machine-learning/machine-learning.html">English</a></dd>
+        
+          <dd><a href="/clearlinux/zh_CN/tutorials/machine-learning/machine-learning.html">Chinese</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Document Versions</dt>
+        
+          <dd><a href="/clearlinux/tutorials/machine-learning/machine-learning.html">latest</a></dd>
+        
+          <dd><a href="/clearlinux/L19.01/tutorials/machine-learning/machine-learning.html">L19.01</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>clearlinux.org links</dt>
+          <dd>
+            <a href="https://www.clearlinux.org/">Project Home</a>
+          </dd>
+          <dd>
+            <a href="https://github.com/clearlinux/clear-linux-documentation">GitHub</a>
+          </dd>
+      </dl>
+    </div>
+  </div>
+  
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/get-started.html">Get started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tooling/tooling.html">How to Clear</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/guides.html">Guides</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../tutorials.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../wordpress/wordpress.html">WordPress* on Clear Linux* OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../flatpak/flatpak.html">Use Flatpak* to install applications on Clear Linux* OS</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">TensorFlow* machine learning on Clear Linux* OS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#set-up-a-jupyter-notebook">Set up a Jupyter notebook</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-the-jupyter-machine-learning-example-code">Run the Jupyter machine learning example code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#related-topics">Related topics</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../docker/docker.html">Run Docker* on Clear Linux* OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../azure.html">Run Clear Linux* OS using Microsoft Azure CLI 2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hadoop.html">Set up a single node cluster with Hadoop*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fmv.html">Use the function multi-version patch generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../aws-web/aws-web.html">Create and launch Clear Linux* OS from Amazon Web Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../smb/smb.html">Enable simple file sharing with a Windows* machine using Samba*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../smb/smb-desktop.html">Connect to Windows* shared location from Clear Linux* OS desktop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../spark.html">Set up a standalone cluster system using Apache* Spark*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kata.html">Install Kata Containers*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kata_migration.html">Migrate Clear Containers to Kata Containers*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kubernetes/kubernetes.html">Run Kubernetes*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kubernetes/kubernetes-bp.html">Kubernetes Best Practices on Clear Linux OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yubikey-u2f.html">Enable YubiKey U2F Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nvidia.html">Install NVIDIA* Drivers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../redis.html">Run Redis on Clear Linux* OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial-proxy.html">Setting up proxy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../FAQ/faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Clear Linux* Project Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+
+<header id="header">
+  <div class="padding-md--left-right">
+
+    <div class="header__site_info">
+           <div class="header__site_info_name">
+             <a href ="https://clearlinux.org"> Clear Linux* Project</a>
+           </div>
+    </div>
+    <nav class="header__menu">
+        <ul class="header__menu_list">
+                         <li class="header__menu_list_item green  ">
+                <a tabindex='1' href="https://clearlinux.org/about">About</a>
+              </li>
+                         <li class="header__menu_list_item purple  ">
+                <a tabindex='1' href="https://clearlinux.org/developer">Developer</a>
+              </li>
+                         <li class="header__menu_list_item blue  ">
+                <a tabindex='1' href="https://clearlinux.org/software">Software</a>
+              </li>
+        </ul>
+    </nav>
+
+  </div>
+
+
+
+</header>
+
+
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../tutorials.html">Tutorials</a> &raquo;</li>
+        
+      <li>TensorFlow* machine learning on Clear Linux* OS</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/clearlinux/clear-linux-documentation/blob/rtd-theme/source/tutorials/machine-learning/machine-learning.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="tensorflow-machine-learning-on-cl-attr">
+<span id="machine-learning"></span><h1>TensorFlow* machine learning on Clear Linux* OS</h1>
+<p>This tutorial will demonstrate the installation and execusion of a TensorFlow*
+machine learning example on Clear Linux* OS. It uses a Jupyter* Notebook and MNIST
+data for handwriting recognition.</p>
+<p>The initial steps will have you set up a Jupyter kernel and run a Notebook
+on a bare-metal Clear Linux OS system.</p>
+<div class="section" id="prerequisites">
+<h2>Prerequisites</h2>
+<p>This tutorial assumes you have installed Clear Linux OS on your host system. For
+detailed instructions on installing Clear Linux OS on a bare metal system, follow the
+<a class="reference internal" href="../../get-started/bare-metal-install-desktop/bare-metal-install-desktop.html#bare-metal-install-desktop"><span class="std std-ref">bare metal installation tutorial</span></a>.</p>
+<p>Before you install any new packages, update Clear Linux OS with the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo swupd update
+</pre></div>
+</div>
+<p>Once your system is updated, add the following bundles to your system:</p>
+<ul class="simple">
+<li><cite>machine-learning-web-ui</cite>: This bundle contains the Jupyter application.</li>
+<li><cite>machine-learning-basic</cite>: This bundle contains TensorFlow and other useful
+tools.</li>
+</ul>
+<p>To install the bundles, run the following commands in your <code class="file docutils literal notranslate"><span class="pre">$HOME</span></code>
+directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo swupd bundle-add machine-learning-web-ui
+
+sudo swupd bundle-add machine-learning-basic
+</pre></div>
+</div>
+</div>
+<div class="section" id="set-up-a-jupyter-notebook">
+<h2>Set up a Jupyter notebook</h2>
+<p>With all required packages and libraries installed, set up the file structure
+for the Jupyter Notebook.</p>
+<ol class="arabic">
+<li><p class="first">In the <code class="file docutils literal notranslate"><span class="pre">$HOME</span></code> directory, create a directory for the Jupyter
+Notebooks named <code class="file docutils literal notranslate"><span class="pre">Notebooks</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir Notebooks
+</pre></div>
+</div>
+</li>
+<li><p class="first">Within <code class="file docutils literal notranslate"><span class="pre">Notebooks</span></code>, create a directory named <code class="file docutils literal notranslate"><span class="pre">Handwriting</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir Notebooks/Handwriting
+</pre></div>
+</div>
+</li>
+<li><p class="first">Change to the new directory.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> Notebooks/Handwriting
+</pre></div>
+</div>
+</li>
+<li><p class="first">Copy the <code class="file docutils literal notranslate"><span class="pre">MNIST_example.ipynb</span></code> file into the <code class="file docutils literal notranslate"><span class="pre">Handwriting</span></code>
+directory.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">After installing the <cite>machine-learning basic</cite> bundle, you can find the
+example code under
+<code class="file docutils literal notranslate"><span class="pre">/usr/share/doc/tensorflow/MNIST_example.ipynb</span></code>.</p>
+</div>
+</li>
+</ol>
+<p>The example code downloads and decompresses the MNIST data directly into the
+<code class="file docutils literal notranslate"><span class="pre">./mnist</span></code> directory. Alternatively, download the four files directly
+from the Yann LeCun’s <a class="reference external" href="http://yann.lecun.com/exdb/mnist/">MNIST Database website</a> and save them into a
+<code class="file docutils literal notranslate"><span class="pre">mnist</span></code> directory within the <code class="file docutils literal notranslate"><span class="pre">Handwriting</span></code> directory.</p>
+<p>The files needed are:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz">train-images-idx3-ubyte.gz</a>: Training set images (9912422 bytes)</li>
+<li><a class="reference external" href="http://yann.lecun.com/exdb/mnist/train-labels-idx1-ubyte.gz">train-labels-idx1-ubyte.gz</a>: Training set labels (28881 bytes)</li>
+<li><a class="reference external" href="http://yann.lecun.com/exdb/mnist/t10k-images-idx3-ubyte.gz">t10k-images-idx3-ubyte.gz</a>: Test set images (1648877 bytes)</li>
+<li><a class="reference external" href="http://yann.lecun.com/exdb/mnist/t10k-labels-idx1-ubyte.gz">t10k-labels-idx1-ubyte.gz</a>: Test set labels (4542 bytes)</li>
+</ul>
+</div>
+<div class="section" id="run-the-jupyter-machine-learning-example-code">
+<h2>Run the Jupyter machine learning example code</h2>
+<p>With Clear Linux OS, Jupyter, and TensorFlow installed and configured, we can
+run the example code.</p>
+<ol class="arabic">
+<li><p class="first">Go to the <code class="file docutils literal notranslate"><span class="pre">($HOME)/Notebooks</span></code> directory and start Jupyter with the
+following commands:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/Notebooks
+
+jupyter notebook
+</pre></div>
+</div>
+<p>The Jupyter server starts and opens a web browser showing the Jupyter file
+manager with a list of files in the current directory, see figure 1.</p>
+<div class="figure" id="id1">
+<img alt="Jupyter file manager" src="../../_images/machine-learning-1.png" />
+<p class="caption"><span class="caption-text">Figure 1: The Jupyter file manager shows the list of available files.</span></p>
+</div>
+</li>
+<li><p class="first">Click on the <code class="file docutils literal notranslate"><span class="pre">Handwriting</span></code> directory.&nbsp;The <code class="file docutils literal notranslate"><span class="pre">MNIST_example.ipynb</span></code>
+file created earlier should be listed there, see figure 2.</p>
+<div class="figure" id="id2">
+<img alt="Example file within the Jupyter file manager" src="../../_images/machine-learning-2.png" />
+<p class="caption"><span class="caption-text">Figure 2: The example file within the Jupyter file manager.</span></p>
+</div>
+</li>
+<li><p class="first">To run the hand writing example, click on the <code class="file docutils literal notranslate"><span class="pre">MNIST_example.ipynb</span></code>
+file to load the notebook, see figure 3.</p>
+<div class="figure" id="id3">
+<img alt="The loaded MNIST_example notebook" src="../../_images/machine-learning-3.png" />
+<p class="caption"><span class="caption-text">Figure 3: The loaded MNIST_example notebook within the Jupyter file
+manager.</span></p>
+</div>
+</li>
+<li><p class="first">Click the <img alt="run-cell" src="../../_images/run-cell-button.png" /> button to execute the code in the current cell and
+move to the next.</p>
+</li>
+<li><p class="first">Select the <span class="guilabel">In [2]</span> cell and click the <img alt="run-cell" src="../../_images/run-cell-button.png" /> button to load
+the MNIST data. The successful output is shown on figure 4.</p>
+<div class="figure" id="id4">
+<img alt="Successful import of MNIST data" src="../../_images/machine-learning-4.png" />
+<p class="caption"><span class="caption-text">Figure 4: Output after successfully importing the MNIST data.</span></p>
+</div>
+<p>After the MNIST data was successfully downloaded and extracted into the
+<code class="file docutils literal notranslate"><span class="pre">mnist</span></code> directory within the <code class="file docutils literal notranslate"><span class="pre">($HOME)/Notebooks/Handwriting</span></code>
+directory, four .gz files are present and the four data sets were created:
+<cite>trainX</cite>, <cite>trainY</cite>, <cite>testX</cite> and <cite>testY</cite>.</p>
+</li>
+<li><p class="first">To inspect the imported data, the function in <span class="guilabel">In [3]</span> first
+instructs Jupyter to reshape the data into an array of 28 x 28 images and to
+plot the area in a 28 x 28 grid. Click the <img alt="run-cell" src="../../_images/run-cell-button.png" /> button twice to show
+the first two digits in the <cite>trainX</cite> dataset, see figure 5.</p>
+<div class="figure" id="id5">
+<img alt="Function to reshape data." src="../../_images/machine-learning-5.png" />
+<p class="caption"><span class="caption-text">Figure 5: A function reshapes the data and displays the first two
+digits in the <cite>trainX</cite> dataset.</span></p>
+</div>
+</li>
+<li><p class="first">The <span class="guilabel">In [4]</span> cell defines the neural network. It provides the
+inputs, defines the hidden layers, runs the training model, and sets up
+the output layer, see figure 6. Click the <img alt="run-cell" src="../../_images/run-cell-button.png" /> button four times to
+perform these operations.</p>
+<div class="figure" id="id6">
+<img alt="Defining, building and training the neural network model" src="../../_images/machine-learning-6.png" />
+<p class="caption"><span class="caption-text">Figure 6: Defining, building and training the neural network model.</span></p>
+</div>
+</li>
+<li><p class="first">To test the accuracy of the prediction the system makes, select the
+<span class="guilabel">In [8]</span> cell and click the <img alt="run-cell" src="../../_images/run-cell-button.png" /> button. In this example,
+the number 6 was predicted with a 99% accuracy, see figure 7.</p>
+<div class="figure" id="id7">
+<img alt="Prediction example" src="../../_images/machine-learning-7.png" />
+<p class="caption"><span class="caption-text">Figure 7: The system predicts a number providing the accuracy of the
+prediction.</span></p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">To retest the accuracy of a random data point’s prediction, run the
+cell <span class="guilabel">In [8]</span> again. It will take another random data point
+and predict its value.</p>
+</div>
+</li>
+<li><p class="first">To check the accuracy for the whole dataset, select the <span class="guilabel">In [10]</span>
+cell and click the <img alt="run-cell" src="../../_images/run-cell-button.png" /> button. Our example’s accuracy is
+calculated as 97.17%, see figure 8.</p>
+<div class="figure" id="id8">
+<img alt="System's accuracy" src="../../_images/machine-learning-8.png" />
+<p class="caption"><span class="caption-text">Figure 8: The system’s accuracy for the entire data set.</span></p>
+</div>
+</li>
+</ol>
+<p>For more in-depth information on the model used and the mathematics it entails,
+visit the TensorFlow tutorials
+<a class="reference external" href="https://www.tensorflow.org/get_started/mnist/beginners">TensorFlow MNIST beginners demo</a> and <a class="reference external" href="https://www.tensorflow.org/get_started/mnist/pros">TensorFlow MNIST pros demo</a>.</p>
+<p><strong>Congratulations!</strong></p>
+<p>You have successfully installed a Jupyter kernel on Clear Linux OS. In addition, you
+trained a neural network to successfully predict the values contained in a
+data set of hand-written number images.</p>
+</div>
+<div class="section" id="related-topics">
+<h2>Related topics</h2>
+<ul class="simple">
+<li><a class="reference external" href="http://yann.lecun.com/exdb/mnist/">MNIST Database website</a></li>
+<li><a class="reference external" href="https://www.tensorflow.org/get_started/mnist/beginners">TensorFlow MNIST beginners demo</a></li>
+<li><a class="reference external" href="https://www.tensorflow.org/get_started/mnist/pros">TensorFlow MNIST pros demo</a></li>
+<li><a class="reference external" href="http://jupyter.org/">Jupyter main website</a></li>
+<li><a class="reference external" href="https://jupyter.readthedocs.io/en/latest/index.html">Jupyter documentation</a></li>
+<li><a class="reference external" href="https://en.wikipedia.org/wiki/MNIST_database">MNIST at Wikipedia</a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../docker/docker.html" class="btn btn-neutral float-right" title="Run Docker* on Clear Linux* OS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../flatpak/flatpak.html" class="btn btn-neutral float-left" title="Use Flatpak* to install applications on Clear Linux* OS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, many
+      <span class="lastupdated">
+        Last updated on Jul 24, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+
+<script type="text/javascript" src="../../_static/tcs_theme.js"></script>
+
+
+
+</body>
+</html>

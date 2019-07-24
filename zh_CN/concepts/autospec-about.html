@@ -1,0 +1,424 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh-CN" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh-CN" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Autospec &mdash; Documentation for Clear Linux* project</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'zh_CN',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="Bundles" href="bundles-about.html" />
+    <link rel="prev" title="Clear Linux* OS image types" href="../reference/image-types.html" />
+
+<link rel="stylesheet" href="../_static/tcs_theme.css" type="text/css" />
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #007ab2" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Clear Linux* Project Docs
+          
+
+          
+            
+            <img src="../_static/clearlinux.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Clear Linux</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Language Versions</dt>
+        
+          <dd><a href="/clearlinux/concepts/autospec-about.html">English</a></dd>
+        
+          <dd><a href="/clearlinux/zh_CN/concepts/autospec-about.html">Chinese</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Document Versions</dt>
+        
+          <dd><a href="/clearlinux/concepts/autospec-about.html">latest</a></dd>
+        
+          <dd><a href="/clearlinux/L19.01/concepts/autospec-about.html">L19.01</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>clearlinux.org links</dt>
+          <dd>
+            <a href="https://www.clearlinux.org/">Project Home</a>
+          </dd>
+          <dd>
+            <a href="https://github.com/clearlinux/clear-linux-documentation">GitHub</a>
+          </dd>
+      </dl>
+    </div>
+  </div>
+  
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/get-started.html">Get started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tooling/tooling.html">How to Clear</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/guides.html">Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../reference/reference.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../reference/compatible-hardware.html">Compatible Hardware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/bundle-commands.html">Useful bundle commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/bundles/bundles.html">Available bundles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/bundles/openssh-server.html">openssh-server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/collaboration/collaboration.html">Documentation guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/system-requirements.html">Recommended minimum system requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/image-types.html">Clear Linux* OS image types</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../reference/reference.html#clear-linux-concepts">Clear Linux concepts</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Autospec</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#how-autospec-works">How autospec works</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#control-files">Control files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#related-topics">Related topics</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="bundles-about.html">Bundles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mixer-about.html">Mixer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="swupd-about.html">swupd: software updater</a></li>
+<li class="toctree-l3"><a class="reference internal" href="telemetry-about.html">Telemetrics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tooling/stateless.html">Stateless</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tooling/security.html">OS Security</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ/faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Clear Linux* Project Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+
+<header id="header">
+  <div class="padding-md--left-right">
+
+    <div class="header__site_info">
+           <div class="header__site_info_name">
+             <a href ="https://clearlinux.org"> Clear Linux* Project</a>
+           </div>
+    </div>
+    <nav class="header__menu">
+        <ul class="header__menu_list">
+                         <li class="header__menu_list_item green  ">
+                <a tabindex='1' href="https://clearlinux.org/about">About</a>
+              </li>
+                         <li class="header__menu_list_item purple  ">
+                <a tabindex='1' href="https://clearlinux.org/developer">Developer</a>
+              </li>
+                         <li class="header__menu_list_item blue  ">
+                <a tabindex='1' href="https://clearlinux.org/software">Software</a>
+              </li>
+        </ul>
+    </nav>
+
+  </div>
+
+
+
+</header>
+
+
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../reference/reference.html">Reference</a> &raquo;</li>
+        
+      <li>Autospec</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/clearlinux/clear-linux-documentation/blob/rtd-theme/source/concepts/autospec-about.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="autospec">
+<span id="autospec-about"></span><h1>Autospec</h1>
+<p><code class="docutils literal notranslate"><span class="pre">autospec</span></code> is a tool to assist in the automated creation and maintenance of
+RPM packaging in Clear Linux* OS. Where a standard RPM build process using <code class="docutils literal notranslate"><span class="pre">rpmbuild</span></code>
+requires a tarball and .spec file to start, <code class="docutils literal notranslate"><span class="pre">autospec</span></code> requires only a tarball
+and package name to start.</p>
+<div class="section" id="how-autospec-works">
+<h2>How autospec works</h2>
+<p><code class="docutils literal notranslate"><span class="pre">autospec</span></code> attempts to infer the requirements of the .spec file by analyzing
+the source code and <code class="file docutils literal notranslate"><span class="pre">Makefile</span></code> information. It will continuously run
+updated builds based on new information discovered from build failures until it
+has a complete and valid .spec file. Although not required, you can influence
+the behavior of <code class="docutils literal notranslate"><span class="pre">autospec</span></code> by providing <a class="reference internal" href="#control-files"><span class="std std-ref">control files</span></a>.</p>
+<p>The basic process is described in the following steps:</p>
+<ol class="arabic simple">
+<li>The <strong class="command">make autospec</strong> command generates a .spec based on
+analysis of code and control files, if present.</li>
+<li><code class="docutils literal notranslate"><span class="pre">autospec</span></code> creates a <code class="docutils literal notranslate"><span class="pre">build</span> <span class="pre">root</span></code> with <code class="docutils literal notranslate"><span class="pre">mock</span></code> config.</li>
+<li><code class="docutils literal notranslate"><span class="pre">autospec</span></code> attempts to build an RPM from the generated .spec.</li>
+<li><code class="docutils literal notranslate"><span class="pre">autospec</span></code> detects any missed declarations in the .spec.</li>
+<li>If build errors occur, <code class="docutils literal notranslate"><span class="pre">autospec</span></code> will scan the build log to try and detect
+the root cause.</li>
+<li>If <code class="docutils literal notranslate"><span class="pre">autospec</span></code> detects the root cause and knows how to continue, it will restart the build
+automatically at step 1 with updated build instructions.</li>
+<li>Otherwise, <code class="docutils literal notranslate"><span class="pre">autospec</span></code> will stop the build for user inspection and editing of control files
+to resolve the errors. The user resumes the process at step 1 after errors are resolved.</li>
+</ol>
+<p>Following these steps, <code class="docutils literal notranslate"><span class="pre">autospec</span></code> continues to rebuild the package, based on
+new information discovered from build failures, until it has a valid .spec. If
+no build errors occur, RPM packages are successfully built.</p>
+</div>
+<div class="section" id="control-files">
+<span id="id1"></span><h2>Control files</h2>
+<p>It is possible to influence the behavior of <code class="docutils literal notranslate"><span class="pre">autospec</span></code> by providing control
+files. These files may be used to alter the default behavior of the configure
+routine, to blacklist build dependencies, etc. Control files must be located
+in the same directory as the resulting .spec.</p>
+<p>Table 1 shows control files used to control dependencies, for example.</p>
+<table border="1" class="colwidths-given docutils" id="id2">
+<caption><span class="caption-text"><strong>Table 1. Control files to control dependencies</strong></span></caption>
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Filename</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>buildreq_add</td>
+<td>Each line in the file provides the name of a package to add as a
+build dependency to the .spec.</td>
+</tr>
+<tr class="row-odd"><td>buildreq_ban</td>
+<td>Each line in the file is a build dependency that under no
+circumstance should be automatically added to the build dependencies.
+This is useful to block automatic configuration routines adding
+undesired functionality, or to omit any automatically discovered
+dependencies during tarball scanning.</td>
+</tr>
+<tr class="row-even"><td>pkgconfig_add</td>
+<td>Each line in the file is assumed to be a pkgconfig() build
+dependency. Add the pkg-config names here, as <code class="docutils literal notranslate"><span class="pre">autospec</span></code> will
+automatically transform the names into their <code class="docutils literal notranslate"><span class="pre">pkgconfig($name)</span></code>
+style when generating the .spec.</td>
+</tr>
+<tr class="row-odd"><td>pkgconfig_ban</td>
+<td>Each line in this file is a pkgconfig() build dependency that should
+not be added automatically to the build, much the same as
+`` buildreq_ban``. As with <code class="docutils literal notranslate"><span class="pre">pkgconfig_add</span></code>, these names are
+automatically transformed by <code class="docutils literal notranslate"><span class="pre">autospec</span></code> into their correct
+<code class="docutils literal notranslate"><span class="pre">pkgconfig($name))</span></code> style.</td>
+</tr>
+<tr class="row-even"><td>requires_add</td>
+<td>Each line in the file provides the name of a package to add as a
+runtime dependency to the .spec.</td>
+</tr>
+<tr class="row-odd"><td>requires_ban</td>
+<td>Each line in the file is a runtime dependency that under no
+circumstance should be automatically added to the runtime
+dependencies. This is useful to block automatic configuration
+routines adding undesired functionality, or to omit any automatically
+discovered dependencies during tarball scanning.</td>
+</tr>
+</tbody>
+</table>
+<p>Further control of the build can be achieved through the use of the
+<code class="docutils literal notranslate"><span class="pre">options.conf</span></code> file. If this file does not exist, it is created by
+<code class="docutils literal notranslate"><span class="pre">autospec</span></code> with default values. If certain deprecated configuration
+files exists <code class="docutils literal notranslate"><span class="pre">autospec</span></code> will use the value indicated by those files and
+remove them.</p>
+<p>For a comprehensive list of control files, view the <a class="reference external" href="https://github.com/clearlinux/autospec">autospec readme</a>.</p>
+</div>
+<div class="section" id="related-topics">
+<h2>Related topics</h2>
+<ul class="simple">
+<li><a class="reference internal" href="../tooling/autospec.html#autospec"><span class="std std-ref">autospec</span></a></li>
+<li><a class="reference internal" href="../tooling/mixer.html#mixer"><span class="std std-ref">mixer</span></a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="bundles-about.html" class="btn btn-neutral float-right" title="Bundles" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../reference/image-types.html" class="btn btn-neutral float-left" title="Clear Linux* OS image types" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, many
+      <span class="lastupdated">
+        最后更新于 7月 24, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+
+<script type="text/javascript" src="../_static/tcs_theme.js"></script>
+
+
+
+</body>
+</html>

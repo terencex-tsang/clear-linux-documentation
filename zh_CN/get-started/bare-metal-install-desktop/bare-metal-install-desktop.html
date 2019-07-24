@@ -1,0 +1,834 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh-CN" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh-CN" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Install Clear Linux* OS from the live desktop &mdash; Documentation for Clear Linux* project</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'',
+              LANGUAGE:'zh_CN',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" />
+    <link rel="next" title="Install Clear Linux* OS on bare metal with live server" href="../bare-metal-install-server/bare-metal-install-server.html" />
+    <link rel="prev" title="Create a bootable USB drive" href="../bootable-usb/bootable-usb.html" />
+
+<link rel="stylesheet" href="../../_static/tcs_theme.css" type="text/css" />
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #007ab2" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Clear Linux* Project Docs
+          
+
+          
+            
+            <img src="../../_static/clearlinux.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Clear Linux</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Language Versions</dt>
+        
+          <dd><a href="/clearlinux/get-started/bare-metal-install-desktop/bare-metal-install-desktop.html">English</a></dd>
+        
+          <dd><a href="/clearlinux/zh_CN/get-started/bare-metal-install-desktop/bare-metal-install-desktop.html">Chinese</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Document Versions</dt>
+        
+          <dd><a href="/clearlinux/get-started/bare-metal-install-desktop/bare-metal-install-desktop.html">latest</a></dd>
+        
+          <dd><a href="/clearlinux/L19.01/get-started/bare-metal-install-desktop/bare-metal-install-desktop.html">L19.01</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>clearlinux.org links</dt>
+          <dd>
+            <a href="https://www.clearlinux.org/">Project Home</a>
+          </dd>
+          <dd>
+            <a href="https://github.com/clearlinux/clear-linux-documentation">GitHub</a>
+          </dd>
+      </dl>
+    </div>
+  </div>
+  
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../get-started.html">Get started</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../get-started.html#pre-install">Pre-install</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../get-started.html#install">Install</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Install Clear Linux* OS from the live desktop</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#system-requirements">System requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#preliminary-steps">Preliminary steps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#install-from-live-image">Install from live image</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#minimum-installation-requirements">Minimum installation requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cl-desktop-installer">Clear Linux OS Desktop Installer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#navigation">Navigation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#required-options">Required options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#advanced-options">Advanced options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#finish-installation">Finish installation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../bare-metal-install-server/bare-metal-install-server.html">Install Clear Linux* OS on bare metal with live server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install-configfile.html">Install using clr-installer and a configuration file</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../get-started.html#install-in-a-virtual-machine">Install in a virtual machine</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tooling/tooling.html">How to Clear</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/guides.html">Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../FAQ/faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Clear Linux* Project Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+
+<header id="header">
+  <div class="padding-md--left-right">
+
+    <div class="header__site_info">
+           <div class="header__site_info_name">
+             <a href ="https://clearlinux.org"> Clear Linux* Project</a>
+           </div>
+    </div>
+    <nav class="header__menu">
+        <ul class="header__menu_list">
+                         <li class="header__menu_list_item green  ">
+                <a tabindex='1' href="https://clearlinux.org/about">About</a>
+              </li>
+                         <li class="header__menu_list_item purple  ">
+                <a tabindex='1' href="https://clearlinux.org/developer">Developer</a>
+              </li>
+                         <li class="header__menu_list_item blue  ">
+                <a tabindex='1' href="https://clearlinux.org/software">Software</a>
+              </li>
+        </ul>
+    </nav>
+
+  </div>
+
+
+
+</header>
+
+
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../get-started.html">Get started</a> &raquo;</li>
+        
+      <li>Install Clear Linux* OS from the live desktop</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/clearlinux/clear-linux-documentation/blob/rtd-theme/source/get-started/bare-metal-install-desktop/bare-metal-install-desktop.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="install-cl-attr-from-the-live-desktop">
+<span id="bare-metal-install-desktop"></span><h1>Install Clear Linux* OS from the live desktop</h1>
+<p>This page explains how to boot the Clear Linux* OS live desktop image, from which
+you can install Clear Linux OS or explore without modifying the host system.</p>
+<div class="contents local topic" id="id1">
+<ul class="simple">
+<li><a class="reference internal" href="#system-requirements" id="id22">System requirements</a></li>
+<li><a class="reference internal" href="#preliminary-steps" id="id23">Preliminary steps</a></li>
+<li><a class="reference internal" href="#install-from-live-image" id="id24">Install from live image</a></li>
+<li><a class="reference internal" href="#minimum-installation-requirements" id="id25">Minimum installation requirements</a></li>
+<li><a class="reference internal" href="#cl-desktop-installer" id="id26">Clear Linux OS Desktop Installer</a></li>
+<li><a class="reference internal" href="#navigation" id="id27">Navigation</a></li>
+<li><a class="reference internal" href="#required-options" id="id28">Required options</a></li>
+<li><a class="reference internal" href="#advanced-options" id="id29">Advanced options</a></li>
+<li><a class="reference internal" href="#finish-installation" id="id30">Finish installation</a></li>
+</ul>
+</div>
+<div class="section" id="system-requirements">
+<h2><a class="toc-backref" href="#id22">System requirements</a></h2>
+<p>Before installing Clear Linux OS, verify that the host system supports the
+installation:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../reference/system-requirements.html#system-requirements"><span class="std std-ref">Recommended minimum system requirements</span></a></li>
+<li><a class="reference internal" href="../compatibility-check.html#compatibility-check"><span class="std std-ref">Check processor and EFI firmware compatibility</span></a></li>
+</ul>
+</div>
+<div class="section" id="preliminary-steps">
+<h2><a class="toc-backref" href="#id23">Preliminary steps</a></h2>
+<ol class="arabic">
+<li><p class="first">Visit our <a class="reference external" href="https://clearlinux.org/downloads">Downloads</a> page.</p>
+</li>
+<li><p class="first">Download the file <code class="file docutils literal notranslate"><span class="pre">clear-&lt;release</span> <span class="pre">number&gt;-live-desktop.iso</span></code>,
+also called the Clear Linux OS Desktop.</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">&lt;release-number&gt; is the latest Clear Linux OS auto-numbered release.</p>
+</div>
+</li>
+<li><p class="first">Verify and decompress the file per your OS.</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../guides/maintenance/download-verify-decompress.html#download-verify-decompress"><span class="std std-ref">Download, verify, and decompress a Clear Linux* OS image</span></a></li>
+</ul>
+</li>
+<li><p class="first">Follow your OS instructions to create a bootable USB drive.</p>
+<ul class="simple">
+<li><a class="reference internal" href="../bootable-usb/bootable-usb.html#bootable-usb"><span class="std std-ref">Create a bootable USB drive</span></a></li>
+</ul>
+</li>
+</ol>
+</div>
+<div class="section" id="install-from-live-image">
+<span id="install-on-target-start"></span><h2><a class="toc-backref" href="#id24">Install from live image</a></h2>
+<p>After you download and burn the live desktop image on a USB drive, follow
+these steps.</p>
+<ol class="arabic">
+<li><p class="first">Insert the USB drive into an available USB slot.</p>
+</li>
+<li><p class="first">Power on the system.</p>
+</li>
+<li><p class="first">Open the system BIOS setup menu by pressing the <kbd class="kbd docutils literal notranslate">F2</kbd> key.
+Your BIOS setup menu entry point may vary.</p>
+</li>
+<li><p class="first">In the setup menu, enable the UEFI boot and set the USB drive as the
+first option in the device boot order.</p>
+</li>
+<li><p class="first">Save these settings, e.g. <kbd class="kbd docutils literal notranslate">F10</kbd>, and exit.</p>
+</li>
+<li><p class="first">Reboot the target system.</p>
+</li>
+<li><p class="first">Select <span class="guilabel">Clear Linux OS</span> in the boot menu, shown in Figure 1.</p>
+<div class="figure" id="id2">
+<a class="reference internal image-reference" href="../../_images/bare-metal-install-desktop-01.png"><img alt="Clear Linux OS in boot menu" src="../../_images/bare-metal-install-desktop-01.png" style="width: 660.0px; height: 405.0px;" /></a>
+<p class="caption"><span class="caption-text">Figure 1: Clear Linux OS in boot menu</span></p>
+</div>
+</li>
+</ol>
+<div class="section" id="software-optional">
+<span id="install-on-target-end"></span><h3>Software (optional)</h3>
+<p>Explore Clear Linux OS bundles and other software. Double-click the
+<span class="guilabel">Software</span> icon from the Activities menu, shown in Figure 2.
+Ensure a network connection exists before launching the Software application.</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">While running the Clear Linux OS live desktop image, the Software application is
+intended only for exploration. Do not attempt to install applications during
+exploration.</p>
+</div>
+</div>
+<div class="section" id="launch-the-cl-installer">
+<h3>Launch the Clear Linux OS installer</h3>
+<ol class="arabic">
+<li><p class="first">After the live desktop image boots, scroll over the vertical
+<span class="guilabel">Activities</span> menu at left.</p>
+</li>
+<li><p class="first">Click the Clear Linux OS penguin icon to launch the installer, shown in Figure 2.</p>
+<div class="figure" id="id3">
+<a class="reference internal image-reference" href="../../_images/bare-metal-install-desktop-02.png"><img alt="Install Clear Linux OS icon" src="../../_images/bare-metal-install-desktop-02.png" style="width: 660.0px; height: 370.0px;" /></a>
+<p class="caption"><span class="caption-text">Figure 2: Clear Linux OS installer icon</span></p>
+</div>
+</li>
+<li><p class="first">After the installer is launched, it will appear as shown in Figure 3.</p>
+<div class="figure" id="id4">
+<a class="reference internal image-reference" href="../../_images/bare-metal-install-desktop-03.png"><img alt="|CL| Desktop Installer" src="../../_images/bare-metal-install-desktop-03.png" style="width: 660.0px; height: 360.0px;" /></a>
+<p class="caption"><span class="caption-text">Figure 3: Clear Linux OS OS Desktop Installer</span></p>
+</div>
+</li>
+<li><p class="first">In <span class="guilabel">Select Language</span>, select a language from the options, or
+type your preferred language in the search bar.</p>
+</li>
+<li><p class="first">Select <span class="guilabel">Next</span>.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="checking-prerequisites">
+<h3>Checking prerequisites</h3>
+<p>The installer automatically launches <span class="guilabel">Checking Prerequisites</span>,
+which checks your target system for compatibility and network connectivity.</p>
+<p>After the installer shows <cite>Prerequisites passed</cite>, select <span class="guilabel">Next</span> to
+proceed with installation.</p>
+<div class="figure" id="id5">
+<a class="reference internal image-reference" href="../../_images/bare-metal-install-desktop-04.png"><img alt="Checking Prerequisites" src="../../_images/bare-metal-install-desktop-04.png" style="width: 660.0px; height: 401.0px;" /></a>
+<p class="caption"><span class="caption-text">Figure 4: Checking Prerequisites</span></p>
+</div>
+<div class="section" id="network-proxy-optional">
+<h4>Network Proxy (optional)</h4>
+<ol class="arabic simple">
+<li>Configure <span class="guilabel">Network Proxy</span> settings.</li>
+<li>In the top right menu bar, select the <span class="guilabel">Power button</span>.</li>
+<li>Select <span class="guilabel">Wired Connected</span> and then <span class="guilabel">Wired Settings</span>.<ol class="arabic">
+<li>In <span class="guilabel">Network Proxy</span>, select the <span class="guilabel">Gear</span> icon to view
+options.</li>
+<li>Select an option from <cite>Automatic</cite>, <cite>Manual</cite> or <cite>Disabled</cite>.</li>
+<li>Close <span class="guilabel">Network Proxy</span>.</li>
+</ol>
+</li>
+<li>Close <span class="guilabel">Settings</span>.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="section" id="minimum-installation-requirements">
+<span id="incl-bare-metal-beta-start"></span><h2><a class="toc-backref" href="#id25">Minimum installation requirements</a></h2>
+<p>To fulfill minimum installation requirements, complete the
+<a class="reference internal" href="#required-options">Required options</a>. We also recommend completing <a class="reference internal" href="#advanced-options">Advanced options</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<ul class="last simple">
+<li>The <kbd class="kbd docutils literal notranslate">Install</kbd> button is only highlighted <strong>after</strong> you complete
+<a class="reference internal" href="#required-options">Required options</a>.</li>
+<li>Check marks indicate a selection has been made.</li>
+<li>An Internet connection is required. You may want to launch a browser
+prior to installation to verify your Internet connection.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="cl-desktop-installer">
+<h2><a class="toc-backref" href="#id26">Clear Linux OS Desktop Installer</a></h2>
+<p>The Clear Linux OS Desktop Installer Main Menu appears as shown in Figure 5. To meet
+the minimum requirements, enter values in all submenus for the
+<span class="guilabel">Required options</span>. After you complete them, your selections appear
+below submenus and a check mark appears at right.</p>
+<div class="figure" id="id6">
+<a class="reference internal image-reference" href="../../_images/bare-metal-install-desktop-05.png"><img alt="Clear Linux OS Desktop Installer - Main Menu" src="../../_images/bare-metal-install-desktop-05.png" style="width: 660.0px; height: 349.0px;" /></a>
+<p class="caption"><span class="caption-text">Figure 5: Clear Linux OS Desktop Installer - Main Menu</span></p>
+</div>
+</div>
+<div class="section" id="navigation">
+<h2><a class="toc-backref" href="#id27">Navigation</a></h2>
+<ul class="simple">
+<li>Use the <kbd class="kbd docutils literal notranslate">mouse</kbd> to navigate or select options.</li>
+<li>Use <kbd class="kbd docutils literal notranslate">Tab</kbd> key to navigate between <span class="guilabel">Required options</span>
+and <span class="guilabel">Advanced options</span></li>
+<li>Use <kbd class="kbd docutils literal notranslate">Up</kbd> or <kbd class="kbd docutils literal notranslate">Down</kbd> arrow keys to navigate the submenus.</li>
+<li>Select <kbd class="kbd docutils literal notranslate">Confirm</kbd>, or <kbd class="kbd docutils literal notranslate">Cancel</kbd> in submenus.</li>
+</ul>
+</div>
+<div class="section" id="required-options">
+<h2><a class="toc-backref" href="#id28">Required options</a></h2>
+<div class="section" id="select-time-zone">
+<h3>Select Time Zone</h3>
+<ol class="arabic">
+<li><p class="first">From the Main Menu, select <span class="guilabel">Select Time Zone</span>. <cite>UTC</cite> is selected
+by default.</p>
+</li>
+<li><p class="first">In <span class="guilabel">Select Time Zone</span>, navigate to the desired time zone.
+Or start typing the region and then the city.
+(.e.g., <code class="file docutils literal notranslate"><span class="pre">America/Los_Angeles</span></code>).</p>
+</li>
+<li><p class="first">Select <span class="guilabel">Confirm</span>.</p>
+<div class="figure" id="id7">
+<a class="reference internal image-reference" href="../../_images/bare-metal-install-desktop-06.png"><img alt="Select System Timezone" src="../../_images/bare-metal-install-desktop-06.png" style="width: 660.0px; height: 350.0px;" /></a>
+<p class="caption"><span class="caption-text">Figure 6: Select System Time Zone</span></p>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="select-keyboard">
+<h3>Select Keyboard</h3>
+<ol class="arabic">
+<li><p class="first">From the Main Menu, select <span class="guilabel">Select Keyboard</span>.</p>
+</li>
+<li><p class="first">Navigate to your desired keyboard layout. We select “us” for the
+United States.</p>
+</li>
+<li><p class="first">Select <span class="guilabel">Confirm</span>.</p>
+<div class="figure" id="id8">
+<a class="reference internal image-reference" href="../../_images/bare-metal-install-desktop-07.png"><img alt="Select Keyboard menu" src="../../_images/bare-metal-install-desktop-07.png" style="width: 660.0px; height: 400.0px;" /></a>
+<p class="caption"><span class="caption-text">Figure 7: Select Keyboard menu</span></p>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="select-installation-media">
+<h3>Select Installation Media</h3>
+<ol class="arabic">
+<li><p class="first">From the Main Menu, select <span class="guilabel">Select Installation Media</span>.</p>
+</li>
+<li><p class="first">Choose an installation method: <a class="reference internal" href="#safe-installation">Safe Installation</a> or
+<a class="reference internal" href="#destructive-installation">Destructive Installation</a>.</p>
+<div class="figure" id="id9">
+<a class="reference internal image-reference" href="../../_images/bare-metal-install-desktop-08.png"><img alt="Select Installation Media" src="../../_images/bare-metal-install-desktop-08.png" style="width: 660.0px; height: 350.0px;" /></a>
+<p class="caption"><span class="caption-text">Figure 8: Select Installation Media</span></p>
+</div>
+</li>
+</ol>
+<div class="section" id="safe-installation">
+<h4>Safe Installation</h4>
+<p>Use this method to safely install Clear Linux OS on media with available space, or
+alongside existing partitions, and accept the <a class="reference internal" href="#default-partition-schema">Default partition schema</a>.
+If enough free space exists, safe installation is allowed.</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">Clear Linux OS allows installation alongside another OS. Typically, when you boot
+your system, you can press an <cite>F key</cite> to view and select a bootable
+device or partition during the BIOS POST stage. Some BIOSes present the
+Clear Linux OS partition, and you can select and boot it. However, other
+BIOSes may only show the primary partition, in which case you will not be
+able boot Clear Linux OS. Be aware of this possible limitation.</p>
+</div>
+</div>
+<div class="section" id="destructive-installation">
+<h4>Destructive Installation</h4>
+<p>Use this method to destroy the contents of the target device, install Clear Linux OS
+on it, and accept the <a class="reference internal" href="#default-partition-schema">Default partition schema</a>.</p>
+</div>
+</div>
+<div class="section" id="disk-encryption">
+<h3>Disk encryption</h3>
+<p>For greater security, disk encryption is supported using LUKS. Encryption is
+optional.</p>
+<ol class="arabic">
+<li><p class="first">To encrypt the root partition, select <span class="guilabel">Enable Encryption</span>,
+as shown in Figure 9.</p>
+<div class="figure" id="id10">
+<a class="reference internal image-reference" href="../../_images/bare-metal-install-desktop-09.png"><img alt="Enable Encryption" src="../../_images/bare-metal-install-desktop-09.png" style="width: 660.0px; height: 350.0px;" /></a>
+<p class="caption"><span class="caption-text">Figure 9: Enable Encryption</span></p>
+</div>
+</li>
+<li><p class="first">When <span class="guilabel">Encryption Passphrase</span> appears, enter a passphrase.</p>
+<div class="figure" id="id11">
+<a class="reference internal image-reference" href="../../_images/bare-metal-install-desktop-10.png"><img alt="Encryption Passphrase" src="../../_images/bare-metal-install-desktop-10.png" style="width: 660.0px; height: 348.0px;" /></a>
+<p class="caption"><span class="caption-text">Figure 10: Encryption Passphrase</span></p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">Minimum length is 8 characters. Maximum length is 94 characters.</p>
+</div>
+</li>
+<li><p class="first">Enter the same passphrase in the second field.</p>
+</li>
+<li><p class="first">Select <span class="guilabel">Confirm</span> in the dialogue box.</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last"><span class="guilabel">Confirm</span> is only highlighted if passphrases match.</p>
+</div>
+</li>
+<li><p class="first">Select <span class="guilabel">Confirm</span> in submenu.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="manage-user">
+<h3>Manage User</h3>
+<ol class="arabic">
+<li><p class="first">In Required Options, select <span class="guilabel">Manage User</span>.</p>
+</li>
+<li><p class="first">In <span class="guilabel">User Name</span>, enter a user name.</p>
+<div class="figure" id="id12">
+<a class="reference internal image-reference" href="../../_images/bare-metal-install-desktop-11.png"><img alt="Manage User" src="../../_images/bare-metal-install-desktop-11.png" style="width: 660.0px; height: 405.0px;" /></a>
+<p class="caption"><span class="caption-text">Figure 11: Manage User</span></p>
+</div>
+</li>
+<li><p class="first">In <span class="guilabel">Login</span>, create a login name. It must start with a letter
+and can use numbers, hyphens, and underscores. Maximum length is 31
+characters.</p>
+</li>
+<li><p class="first">In <span class="guilabel">Password</span>, enter a password. Minimum length is
+8 characters. Maximum length is 255 characters.</p>
+</li>
+<li><p class="first">In <span class="guilabel">Confirm</span>, enter the same password.</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last"><span class="guilabel">Administrator</span> rights are selected by default.
+For security purposes, the default user must be assigned as an
+Administrator.</p>
+</div>
+</li>
+<li><p class="first">Select <kbd class="kbd docutils literal notranslate">Confirm</kbd>.</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">Select <span class="guilabel">Cancel</span> to return to the Main Menu.</p>
+</div>
+</li>
+</ol>
+<div class="section" id="modify-user">
+<h4>Modify User</h4>
+<ol class="arabic">
+<li><p class="first">In Manager User, select <span class="guilabel">Manage User</span>.</p>
+</li>
+<li><p class="first">Modify user details as desired.</p>
+</li>
+<li><p class="first">Select <span class="guilabel">Confirm</span> to save the changes you made.</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">Optional: Select <span class="guilabel">Cancel</span> to return to the Main Menu to
+revert changes.</p>
+</div>
+</li>
+</ol>
+<p>Optional: Skip to <a class="reference internal" href="#finish-installation">Finish installation</a>.</p>
+</div>
+</div>
+<div class="section" id="telemetry">
+<h3>Telemetry</h3>
+<p>Choose whether to participate in <cite>telemetry</cite>. <a class="reference internal" href="../../guides/telemetrics/telem-guide.html#telem-guide"><span class="std std-ref">Telemetrics</span></a> is a Clear Linux OS
+feature that reports failures and crashes to the Clear Linux OS development
+team for improvements. For more information, see <a class="reference internal" href="../../concepts/telemetry-about.html#telemetry-about"><span class="std std-ref">Telemetrics</span></a>.</p>
+<ol class="arabic">
+<li><p class="first">From <span class="guilabel">Required Options</span>, select <span class="guilabel">Telemetry</span>.</p>
+</li>
+<li><p class="first">Select <kbd class="kbd docutils literal notranslate">Yes</kbd>.</p>
+<div class="figure" id="id13">
+<a class="reference internal image-reference" href="../../_images/bare-metal-install-desktop-12.png"><img alt="Enable Telemetry" src="../../_images/bare-metal-install-desktop-12.png" style="width: 664.0px; height: 405.0px;" /></a>
+<p class="caption"><span class="caption-text">Figure 12: Enable Telemetry</span></p>
+</div>
+</li>
+<li><p class="first">If you don’t wish to participate, select <kbd class="kbd docutils literal notranslate">No</kbd>.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="advanced-options">
+<h2><a class="toc-backref" href="#id29">Advanced options</a></h2>
+<p>After you complete the <a class="reference internal" href="#required-options">Required options</a>, we recommend completing
+<span class="guilabel">Advanced options</span>–though they’re not required. Doing so
+customizes your development environment, so you’re ready to go immediately
+after reboot.</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">You can always add more bundles later with <a class="reference internal" href="../../tooling/swupd-guide.html#swupd-guide"><span class="std std-ref">swupd</span></a>.</p>
+</div>
+<div class="section" id="bundle-selection">
+<h3>Bundle Selection</h3>
+<ol class="arabic">
+<li><p class="first">On the Advanced menu, select <span class="guilabel">Bundle Selection</span></p>
+</li>
+<li><p class="first">Select your desired bundles.</p>
+<div class="figure" id="id14">
+<a class="reference internal image-reference" href="../../_images/bare-metal-install-desktop-13.png"><img alt="Bundle Selection" src="../../_images/bare-metal-install-desktop-13.png" style="width: 660.0px; height: 350.0px;" /></a>
+<p class="caption"><span class="caption-text">Figure 13: Bundle Selection</span></p>
+</div>
+</li>
+<li><p class="first">Select <kbd class="kbd docutils literal notranslate">Confirm</kbd>.</p>
+</li>
+<li><p class="first">View the bundles that you selected.</p>
+<div class="figure" id="id15">
+<a class="reference internal image-reference" href="../../_images/bare-metal-install-desktop-14.png"><img alt="Bundle Selections - Advanced Options" src="../../_images/bare-metal-install-desktop-14.png" style="width: 660.0px; height: 405.0px;" /></a>
+<p class="caption"><span class="caption-text">Figure 14: Bundle Selections - Advanced Options</span></p>
+</div>
+</li>
+</ol>
+<p>Optional: Skip to <a class="reference internal" href="#finish-installation">Finish installation</a>.</p>
+</div>
+<div class="section" id="assign-hostname">
+<h3>Assign Hostname</h3>
+<ol class="arabic">
+<li><p class="first">In Advanced Options, select <span class="guilabel">Assign Hostname</span>.</p>
+</li>
+<li><p class="first">In <span class="guilabel">Hostname</span>, enter the hostname only (excluding the domain).</p>
+<div class="figure" id="id16">
+<a class="reference internal image-reference" href="../../_images/bare-metal-install-desktop-15.png"><img alt="Assign Hostname" src="../../_images/bare-metal-install-desktop-15.png" style="width: 660.0px; height: 350.0px;" /></a>
+<p class="caption"><span class="caption-text">Figure 15: Assign Hostname</span></p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">Hostname does not allow empty spaces. Hostname must start with an
+alphanumeric character but may also contain hyphens. Maximum length of
+63 characters.</p>
+</div>
+</li>
+<li><p class="first">Select <kbd class="kbd docutils literal notranslate">Confirm</kbd>.</p>
+</li>
+</ol>
+<p>Optional: Skip to <a class="reference internal" href="#finish-installation">Finish installation</a>.</p>
+</div>
+<div class="section" id="kernel-configuration">
+<h3>Kernel Configuration</h3>
+<ol class="arabic">
+<li><p class="first">In <span class="guilabel">Kernel Configuration</span>, navigate to select your desired
+kernel. <span class="guilabel">Native</span> is selected by default.</p>
+<div class="figure" id="id17">
+<a class="reference internal image-reference" href="../../_images/bare-metal-install-desktop-16.png"><img alt="Kernel Configuration" src="../../_images/bare-metal-install-desktop-16.png" style="width: 660.0px; height: 380.0px;" /></a>
+<p class="caption"><span class="caption-text">Figure 16: Kernel Configuration</span></p>
+</div>
+</li>
+<li><p class="first">To add arguments, enter the argument in <span class="guilabel">Add Extra Arguments</span>.</p>
+</li>
+<li><p class="first">To remove an argument, enter the argument in <span class="guilabel">Remove Arguments</span>.</p>
+</li>
+<li><p class="first">Select <kbd class="kbd docutils literal notranslate">Confirm</kbd>.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="software-updater-configuration">
+<h3>Software Updater Configuration</h3>
+<ol class="arabic">
+<li><p class="first">In Advanced Options, select <span class="guilabel">Software Updater Configuration</span>.</p>
+</li>
+<li><p class="first">In <span class="guilabel">Mirror URL</span>, follow the instructions if you wish to
+specify a different installation source.</p>
+</li>
+<li><p class="first"><span class="guilabel">Enable Auto Updates</span> is selected by default. If you <strong>do not</strong>
+wish to enable automatic software updates, uncheck the box.</p>
+<div class="figure" id="id18">
+<a class="reference internal image-reference" href="../../_images/bare-metal-install-desktop-17.png"><img alt="Software Updater Configuration" src="../../_images/bare-metal-install-desktop-17.png" style="width: 660.0px; height: 405.0px;" /></a>
+<p class="caption"><span class="caption-text">Figure 17: Software Updater Configuration</span></p>
+</div>
+</li>
+<li><p class="first">Select <kbd class="kbd docutils literal notranslate">Confirm</kbd>.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="finish-installation">
+<h2><a class="toc-backref" href="#id30">Finish installation</a></h2>
+<ol class="arabic">
+<li><p class="first">When you are satisfied with your installation configuration, select
+<span class="guilabel">Install</span>.</p>
+<div class="figure" id="id19">
+<a class="reference internal image-reference" href="../../_images/bare-metal-install-desktop-18.png"><img alt="Assign Hostname" src="../../_images/bare-metal-install-desktop-18.png" style="width: 660.0px; height: 350.0px;" /></a>
+<p class="caption"><span class="caption-text">Figure 18: Finish installation</span></p>
+</div>
+</li>
+<li><p class="first">If you do not enter a selection for all <span class="guilabel">Required Options</span>,
+the <span class="guilabel">Install</span> button remains disabled, as shown
+in Figure 19. Return to <a class="reference internal" href="#required-options">Required Options</a> and make selections.</p>
+<div class="figure" id="id20">
+<a class="reference internal image-reference" href="../../_images/bare-metal-install-desktop-19.png"><img alt="Required Options - Incomplete" src="../../_images/bare-metal-install-desktop-19.png" style="width: 660.0px; height: 350.0px;" /></a>
+<p class="caption"><span class="caption-text">Figure 19: Required Options - Incomplete</span></p>
+</div>
+</li>
+<li><p class="first">After installation is complete, select <span class="guilabel">Exit</span>.</p>
+</li>
+<li><p class="first">Shut down the target system.</p>
+</li>
+<li><p class="first">Remove the USB or any installation media.</p>
+</li>
+<li><p class="first">Power on your system.</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">Allow time for the graphical login to appear. A login prompt shows the administrative user that you created.</p>
+</div>
+</li>
+<li><p class="first">Log in as the administrative user.</p>
+</li>
+</ol>
+<p>Congratulations. You successfully installed Clear Linux OS.</p>
+<div class="section" id="default-partition-schema">
+<h3>Default partition schema</h3>
+<p>Create partitions per requirements in Table 1.</p>
+<table border="1" class="colwidths-given docutils" id="id21">
+<caption><span class="caption-text"><strong>Table 1. Default partition schema</strong></span></caption>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">FileSystem</th>
+<th class="head">Label</th>
+<th class="head">Mount Point</th>
+<th class="head">Default size</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><strong>VFAT(FAT32)</strong></td>
+<td>boot</td>
+<td>/boot</td>
+<td>150MB</td>
+</tr>
+<tr class="row-odd"><td><strong>linux-swap</strong></td>
+<td>swap</td>
+<td>&#160;</td>
+<td>256MB</td>
+</tr>
+<tr class="row-even"><td><strong>ext[234] or XFS</strong></td>
+<td>root</td>
+<td>/</td>
+<td><em>Size depends upon use case/desired bundles.</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../bare-metal-install-server/bare-metal-install-server.html" class="btn btn-neutral float-right" title="Install Clear Linux* OS on bare metal with live server" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../bootable-usb/bootable-usb.html" class="btn btn-neutral float-left" title="Create a bootable USB drive" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, many
+      <span class="lastupdated">
+        最后更新于 7月 24, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+
+<script type="text/javascript" src="../../_static/tcs_theme.js"></script>
+
+
+
+</body>
+</html>

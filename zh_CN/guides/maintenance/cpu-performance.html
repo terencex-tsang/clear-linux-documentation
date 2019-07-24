@@ -1,0 +1,484 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh-CN" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh-CN" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>CPU Power and Performance &mdash; Documentation for Clear Linux* project</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'',
+              LANGUAGE:'zh_CN',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" />
+    <link rel="next" title="Developer Workstation" href="developer-workstation.html" />
+    <link rel="prev" title="Bulk provision" href="bulk-provision.html" />
+
+<link rel="stylesheet" href="../../_static/tcs_theme.css" type="text/css" />
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #007ab2" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Clear Linux* Project Docs
+          
+
+          
+            
+            <img src="../../_static/clearlinux.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Clear Linux</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Language Versions</dt>
+        
+          <dd><a href="/clearlinux/guides/maintenance/cpu-performance.html">English</a></dd>
+        
+          <dd><a href="/clearlinux/zh_CN/guides/maintenance/cpu-performance.html">Chinese</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Document Versions</dt>
+        
+          <dd><a href="/clearlinux/guides/maintenance/cpu-performance.html">latest</a></dd>
+        
+          <dd><a href="/clearlinux/L19.01/guides/maintenance/cpu-performance.html">L19.01</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>clearlinux.org links</dt>
+          <dd>
+            <a href="https://www.clearlinux.org/">Project Home</a>
+          </dd>
+          <dd>
+            <a href="https://github.com/clearlinux/clear-linux-documentation">GitHub</a>
+          </dd>
+      </dl>
+    </div>
+  </div>
+  
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/get-started.html">Get started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tooling/tooling.html">How to Clear</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides.html">Guides</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../guides.html#maintenance">Maintenance</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="architect-lifecycle.html">Architect the life-cycle of Clear Linux* OS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="assign-static-ip.html">Assign a static IP address</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bulk-provision.html">Bulk provision</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">CPU Power and Performance</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cpu-power-saving-mechanisms">CPU power saving mechanisms</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#linux-cpu-clock-frequency-scaling">Linux CPU clock frequency scaling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#thermal-management">Thermal management</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="developer-workstation.html">Developer Workstation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="download-verify-decompress.html">Download, verify, and decompress a Clear Linux* OS image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="enable-user-space.html">Create and enable a new user space</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fix-broken-install.html">Fix a broken installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hostname.html">Modify hostname</a></li>
+<li class="toctree-l3"><a class="reference internal" href="increase-virtual-disk-size.html">Increase virtual disk size of an image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="query-upstream.html">Query package info from upstream repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="restart.html">Restart system services after an OS update</a></li>
+<li class="toctree-l3"><a class="reference internal" href="time.html">Set the time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="validate-signatures.html">Validate signatures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deploy-at-scale.html">Deploy at Scale</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides.html#network">Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides.html#kernel">Kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides.html#stacks">Stacks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../FAQ/faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Clear Linux* Project Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+
+<header id="header">
+  <div class="padding-md--left-right">
+
+    <div class="header__site_info">
+           <div class="header__site_info_name">
+             <a href ="https://clearlinux.org"> Clear Linux* Project</a>
+           </div>
+    </div>
+    <nav class="header__menu">
+        <ul class="header__menu_list">
+                         <li class="header__menu_list_item green  ">
+                <a tabindex='1' href="https://clearlinux.org/about">About</a>
+              </li>
+                         <li class="header__menu_list_item purple  ">
+                <a tabindex='1' href="https://clearlinux.org/developer">Developer</a>
+              </li>
+                         <li class="header__menu_list_item blue  ">
+                <a tabindex='1' href="https://clearlinux.org/software">Software</a>
+              </li>
+        </ul>
+    </nav>
+
+  </div>
+
+
+
+</header>
+
+
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../guides.html">Guides</a> &raquo;</li>
+        
+      <li>CPU Power and Performance</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/clearlinux/clear-linux-documentation/blob/rtd-theme/source/guides/maintenance/cpu-performance.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="cpu-power-and-performance">
+<span id="cpu-performance"></span><h1>CPU Power and Performance</h1>
+<p>This guide explains the CPU power and performance mechanisms in Clear Linux* OS.</p>
+<div class="contents local topic" id="id1">
+<ul class="simple">
+<li><a class="reference internal" href="#overview" id="id3">Overview</a></li>
+<li><a class="reference internal" href="#cpu-power-saving-mechanisms" id="id4">CPU power saving mechanisms</a></li>
+<li><a class="reference internal" href="#linux-cpu-clock-frequency-scaling" id="id5">Linux CPU clock frequency scaling</a></li>
+<li><a class="reference internal" href="#thermal-management" id="id6">Thermal management</a></li>
+</ul>
+</div>
+<div class="section" id="overview">
+<h2><a class="toc-backref" href="#id3">Overview</a></h2>
+<p>Modern x86 <abbr title="central processing units">CPUs</abbr> employ a number of features
+and technologies to balance performance, energy, and thermal efficiencies.</p>
+<p>By default, Clear Linux OS prioritizes maximum CPU performance with the philosophy that
+the faster the program finishes execution, the faster the CPU can return to a
+low energy idle state. It is important to understand and evaluate all of these
+technologies when troubleshooting or considering changing the defaults.</p>
+</div>
+<div class="section" id="cpu-power-saving-mechanisms">
+<h2><a class="toc-backref" href="#id4">CPU power saving mechanisms</a></h2>
+<p>C-states and P-states are both CPU power saving mechanisms that are entered
+under different operating conditions. The tradeoff is a slightly longer time
+to exit these states when the CPU is needed once again.</p>
+<div class="section" id="c-states-idle-states">
+<span id="c-states-section"></span><h3>C-states (idle states)</h3>
+<p>C-states are hardware sleep states that are entered when it is determined that
+the CPU is idle and not executing instructions.</p>
+<p>C-states aim to reduce power utilization by increasingly reducing clock
+frequency, voltages, and features in each state.</p>
+<p>Although C-states can typically be limited or disabled in a system’s UEFI or
+BIOS configuration, these settings are overridden when the <a class="reference external" href="https://github.com/torvalds/linux/blob/master/drivers/idle/intel_idle.c">intel_idle driver</a>
+is in use.</p>
+<p>To view the current cpuidle driver run this command in a terminal:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cat</span> <span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">devices</span><span class="o">/</span><span class="n">system</span><span class="o">/</span><span class="n">cpu</span><span class="o">/</span><span class="n">cpuidle</span><span class="o">/</span><span class="n">current_driver</span>
+</pre></div>
+</div>
+<p>For troubleshooting, C-states can be limited with a kernel command line boot
+parameter by adding <strong class="command">processor.max_cstate=N intel_idle.max_cstate=N</strong>
+or completely disabled with <strong class="command">idle=poll</strong>.</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<ul class="last simple">
+<li><strong class="command">processor.max_cstate=0</strong> is changed to <strong class="command">processor.max_cstate=1</strong>
+by the kernel to be a valid value.</li>
+<li><strong class="command">intel_idle.max_cstate=0</strong> disables the Intel Idle driver, not set
+it to C-state 0.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="p-states-performance-states">
+<span id="p-states-section"></span><h3>P-states (performance states)</h3>
+<p>P-states, also known as <em>Intel SpeedStep® technology</em> on Intel processors or
+<em>Cool’n’Quiet</em> on AMD processors, are states entered while the CPU is active and
+executing instructions.</p>
+<p>P-states aim to reduce power utilization by adjusting CPU clock frequency and
+voltages based on CPU demand.</p>
+<p>P-states can typically be limited or disabled in a system’s firmware (UEFI/BIOS).</p>
+<div class="section" id="turbo-boost">
+<h4>Turbo boost</h4>
+<p><a class="reference external" href="https://www.intel.com/content/www/us/en/architecture-and-technology/turbo-boost/turbo-boost-technology.html">Intel® Turbo Boost Technology</a>, found on some modern Intel CPUs, allows core(s) on
+a processor to temporarily operate at a higher than rated CPU clock frequency
+to accommodate demanding workloads if the CPU is under defined power and
+thermal thresholds.</p>
+<p>Turbo boost is an extension of P-states. As such, changing or limiting
+C-states or P-states impact the ability of a process to enter Turbo boost.</p>
+<p>Turbo boost can be disabled in a system’s UEFI or BIOS. Turbo boost can also
+be disabled within Clear Linux OS with the command:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">echo</span> <span class="mi">1</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">tee</span> <span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">devices</span><span class="o">/</span><span class="n">system</span><span class="o">/</span><span class="n">cpu</span><span class="o">/</span><span class="n">intel_pstate</span><span class="o">/</span><span class="n">no_turbo</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="linux-cpu-clock-frequency-scaling">
+<h2><a class="toc-backref" href="#id5">Linux CPU clock frequency scaling</a></h2>
+<p>The CPUFreq subsystem in Linux allows the OS to control <a class="reference internal" href="#c-states-section"><span class="std std-ref">C-states</span></a> and <a class="reference internal" href="#p-states-section"><span class="std std-ref">P-states</span></a>
+via CPU drivers and governors that provide algorithms that define how and when
+to enter these states.</p>
+<div class="section" id="scaling-driver">
+<h3>Scaling driver</h3>
+<p>Linux uses the <a class="reference external" href="https://www.kernel.org/doc/Documentation/cpu-freq/intel-pstate.txt">Intel P-state driver</a>, <strong class="command">intel_pstate</strong>, for modern Intel
+processors from the Sandy Bridge generation or newer. Other processors may
+default to the <strong class="command">acpi-cpufreq*</strong> driver which reads values from the systems
+UEFI or BIOS.</p>
+<p>To view the current CPU frequency scaling driver run this command in a terminal:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cat</span> <span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">devices</span><span class="o">/</span><span class="n">system</span><span class="o">/</span><span class="n">cpu</span><span class="o">/</span><span class="n">cpu</span><span class="o">*/</span><span class="n">cpufreq</span><span class="o">/</span><span class="n">scaling_driver</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="scaling-governor">
+<h3>Scaling governor</h3>
+<p>Clear Linux OS sets the CPU governor to <em>performance</em> which calls for the CPU to operate
+at maximum clock frequency. In other words, P-state P0. While this may sound
+wasteful at first, it is important to remember that power utilization does not
+increase significantly simply because of a locked clock frequency without a
+workload.</p>
+<p>To view the current CPU frequency scaling governor run this command in a terminal:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cat</span> <span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">devices</span><span class="o">/</span><span class="n">system</span><span class="o">/</span><span class="n">cpu</span><span class="o">/</span><span class="n">cpu</span><span class="o">*/</span><span class="n">cpufreq</span><span class="o">/</span><span class="n">scaling_governor</span>
+</pre></div>
+</div>
+<p>To change the CPU frequency scaling governor:</p>
+<ol class="arabic">
+<li><p class="first">Disable Clear Linux OS enforcement of certain power and performance settings:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">mask</span> <span class="n">clr</span><span class="o">-</span><span class="n">power</span><span class="o">.</span><span class="n">timer</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Change the governor. In the example below, the governor is set to
+<em>performance</em>:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">echo</span> <span class="n">performance</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">tee</span> <span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">devices</span><span class="o">/</span><span class="n">system</span><span class="o">/</span><span class="n">cpu</span><span class="o">/</span><span class="n">cpu</span><span class="o">*/</span><span class="n">cpufreq</span><span class="o">/</span><span class="n">scaling_governor</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>The list of all governors can be found in the Linux kernel documentation on
+<a class="reference external" href="https://www.kernel.org/doc/Documentation/cpu-freq/governors.txt">CPUFreq Governors</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">The intel_pstate driver only supports <em>performance</em> and <em>powersave</em> governors.</p>
+</div>
+</div>
+</div>
+<div class="section" id="thermal-management">
+<h2><a class="toc-backref" href="#id6">Thermal management</a></h2>
+<p><a class="reference external" href="https://01.org/linux-thermal-daemon">thermald</a> is a Linux thermal management daemon used to prevent the
+overheating of platforms. When temperature thresholds are exceeded, thermald
+forces a C-state by inserting CPU sleep cycles and adjusts available cooling
+methods. This can be especially desirable for laptops.</p>
+<p>By default, thermald is disabled in Clear Linux OS and starts automatically if battery
+power is detected. thermald can be manually enabled using the systemd service
+by running the command:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">enable</span> <span class="n">thermald</span>
+<span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">start</span> <span class="n">thermald</span>
+</pre></div>
+</div>
+<p>For more information, see the thermald man page:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">man</span> <span class="n">thermald</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="https://github.com/intel/thermal_daemon/tree/master/tools/thermal_monitor">ThermalMonitor</a> is a GUI application that can visually graph and log
+temperatures from thermald. To use ThermalMonitor, add the
+<strong class="command">desktop-apps-extras</strong> bundle and add your user account to the power
+group:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">swupd</span> <span class="n">bundle</span><span class="o">-</span><span class="n">add</span> <span class="n">desktop</span><span class="o">-</span><span class="n">apps</span><span class="o">-</span><span class="n">extras</span>
+<span class="n">sudo</span> <span class="n">usermod</span> <span class="o">-</span><span class="n">a</span> <span class="o">-</span><span class="n">G</span> <span class="n">power</span> <span class="o">&lt;</span><span class="n">USER</span><span class="o">&gt;</span>
+<span class="n">ThermalMonitor</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">After adding a new group, you must log out and log back in for the new group
+to take effect.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="developer-workstation.html" class="btn btn-neutral float-right" title="Developer Workstation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="bulk-provision.html" class="btn btn-neutral float-left" title="Bulk provision" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, many
+      <span class="lastupdated">
+        最后更新于 7月 24, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+
+<script type="text/javascript" src="../../_static/tcs_theme.js"></script>
+
+
+
+</body>
+</html>

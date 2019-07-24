@@ -1,0 +1,616 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Install over the network with iPXE &mdash; Documentation for Clear Linux* project</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Combine multiple interfaces with network bonding" href="network-bonding.html" />
+    <link rel="prev" title="Use DPDK to send packets between platforms" href="dpdk.html" />
+
+<link rel="stylesheet" href="../../_static/tcs_theme.css" type="text/css" />
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #007ab2" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Clear Linux* Project Docs
+          
+
+          
+            
+            <img src="../../_static/clearlinux.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Clear Linux</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Language Versions</dt>
+        
+          <dd><a href="/clearlinux/guides/network/ipxe-install.html">English</a></dd>
+        
+          <dd><a href="/clearlinux/zh_CN/guides/network/ipxe-install.html">Chinese</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Document Versions</dt>
+        
+          <dd><a href="/clearlinux/guides/network/ipxe-install.html">latest</a></dd>
+        
+          <dd><a href="/clearlinux/L19.01/guides/network/ipxe-install.html">L19.01</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>clearlinux.org links</dt>
+          <dd>
+            <a href="https://www.clearlinux.org/">Project Home</a>
+          </dd>
+          <dd>
+            <a href="https://github.com/clearlinux/clear-linux-documentation">GitHub</a>
+          </dd>
+      </dl>
+    </div>
+  </div>
+  
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/get-started.html">Get started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tooling/tooling.html">How to Clear</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides.html">Guides</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../guides.html#maintenance">Maintenance</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../guides.html#network">Network</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="custom-clear-container.html">Build a custom Clear Linux* OS based Docker container image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dpdk.html">Use DPDK to send packets between platforms</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Install over the network with iPXE</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="network-bonding.html">Combine multiple interfaces with network bonding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vnc.html">Remote-desktop to a host using VNC</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides.html#kernel">Kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides.html#stacks">Stacks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../FAQ/faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Clear Linux* Project Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+
+<header id="header">
+  <div class="padding-md--left-right">
+
+    <div class="header__site_info">
+           <div class="header__site_info_name">
+             <a href ="https://clearlinux.org"> Clear Linux* Project</a>
+           </div>
+    </div>
+    <nav class="header__menu">
+        <ul class="header__menu_list">
+                         <li class="header__menu_list_item green  ">
+                <a tabindex='1' href="https://clearlinux.org/about">About</a>
+              </li>
+                         <li class="header__menu_list_item purple  ">
+                <a tabindex='1' href="https://clearlinux.org/developer">Developer</a>
+              </li>
+                         <li class="header__menu_list_item blue  ">
+                <a tabindex='1' href="https://clearlinux.org/software">Software</a>
+              </li>
+        </ul>
+    </nav>
+
+  </div>
+
+
+
+</header>
+
+
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../guides.html">Guides</a> &raquo;</li>
+        
+      <li>Install over the network with iPXE</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/clearlinux/clear-linux-documentation/blob/rtd-theme/source/guides/network/ipxe-install.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="install-over-the-network-with-ipxe">
+<span id="ipxe-install"></span><h1>Install over the network with iPXE</h1>
+<p>This guide describes how to install Clear Linux* OS using <abbr title="Pre-boot Execution Environment">PXE</abbr> over the network.</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#overview" id="id3">Overview</a></li>
+<li><a class="reference internal" href="#prerequisites" id="id4">Prerequisites</a></li>
+<li><a class="reference internal" href="#configuration" id="id5">Configuration</a></li>
+</ul>
+</div>
+<div class="section" id="overview">
+<h2><a class="toc-backref" href="#id3">Overview</a></h2>
+<p>PXE is an industry standard that describes client-server interaction with
+network-boot software and uses the DHCP and TFTP protocols. This guide shows one
+method of using the PXE environment to install Clear Linux OS.</p>
+<p>The PXE extension called <a class="reference external" href="http://ipxe.org/">iPXE</a> adds support for additional protocols such as
+HTTP, <abbr title="Internet Small Computer Systems Interface">iSCSI</abbr>, <abbr title="ATA over Ethernet*">AoE</abbr>, and <abbr title="Fiber Channel over Ethernet*">FCoE</abbr>. iPXE
+enables network booting on computers with no built-in PXE support.</p>
+<p>To install Clear Linux OS through iPXE, you must create a PXE client. Figure 1 depicts
+the flow of information between a PXE server and a PXE client.</p>
+<div class="figure" id="id1">
+<img alt="PXE information flow" src="../../_images/network-boot-flow.png" />
+<p class="caption"><span class="caption-text">Figure 1: PXE information flow.</span></p>
+</div>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">The Clear Linux OS image that boots through the PXE process automatically erases all
+data and partitions on the PXE client system and creates 3 new partitions
+to install onto.</p>
+</div>
+</div>
+<div class="section" id="prerequisites">
+<h2><a class="toc-backref" href="#id4">Prerequisites</a></h2>
+<p>Before booting with iPXE, make the following preparations.</p>
+<p>Connect the PXE server and PXE clients to a switch on a private network, as
+shown in figure 2.</p>
+<div class="figure" id="id2">
+<img alt="Network topology" src="../../_images/network-boot-setup.png" />
+<p class="caption"><span class="caption-text">Figure 2: Network topology.</span></p>
+</div>
+<p>Your PXE client must have a boot order where the network boot option is
+prioritized before the disk boot option.</p>
+<p>Your PXE server must have:</p>
+<ul class="simple">
+<li>Ethernet/LAN boot option.</li>
+<li>At least two network adapters.</li>
+<li>Connection to a public network.</li>
+<li>Secure boot option disabled.</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You must disable the secure boot option in the BIOS because the UEFI
+binaries used to boot Clear Linux OS are not signed.</p>
+</div>
+</div>
+<div class="section" id="configuration">
+<h2><a class="toc-backref" href="#id5">Configuration</a></h2>
+<p>To set up Clear Linux OS using iPXE automatically, use the <code class="file docutils literal notranslate"><span class="pre">configure-ipxe.sh</span></code>
+script included with <abbr title="Ister Cloud Init Service">ICIS</abbr>. For additional
+instructions on the script, refer to the guide on the <a class="reference external" href="https://github.com/clearlinux/ister-cloud-init-svc">ister-cloud-init-svc</a>
+GitHub* repository.</p>
+<p>To set up Clear Linux OS manually, perform the steps below.</p>
+<ol class="arabic">
+<li><p class="first">Define the variables used for iPXE boot configuration.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">ipxe_app_name=ipxe</span>
+<span class="go">ipxe_port=50000</span>
+<span class="go">web_root=/var/www</span>
+<span class="go">ipxe_root=$web_root/$ipxe_app_name</span>
+<span class="go">tftp_root=/srv/tftp</span>
+<span class="go">external_iface=eno1</span>
+<span class="go">internal_iface=eno2</span>
+<span class="go">pxe_subnet=192.168.1</span>
+<span class="go">pxe_internal_ip=$pxe_subnet.1</span>
+<span class="go">pxe_subnet_mask_ip=255.255.255.0</span>
+<span class="go">pxe_subnet_bitmask=16</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Log in and get root privilege.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo -s
+</pre></div>
+</div>
+</li>
+<li><p class="first">Add the <strong class="command">pxe-server</strong> bundle to your Clear Linux OS system. The bundle contains all
+files needed to run a PXE server.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo swupd bundle-add pxe-server
+</pre></div>
+</div>
+</li>
+<li><p class="first">Download the latest network-bootable release of Clear Linux OS and extract the
+files.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo mkdir -p <span class="nv">$ipxe_root</span>
+sudo curl -o /tmp/clear-pxe.tar.xz <span class="se">\</span>
+  https://cdn.download.clearlinux.org/current/clear-<span class="k">$(</span>curl <span class="se">\</span>
+  https://cdn.download.clearlinux.org/latest<span class="k">)</span>-pxe.tar.xz
+sudo tar -xJf /tmp/clear-pxe.tar.xz -C <span class="nv">$ipxe_root</span>
+sudo ln -sf <span class="k">$(</span>ls <span class="nv">$ipxe_root</span> <span class="p">|</span> grep <span class="s1">&#39;org.clearlinux.*&#39;</span><span class="k">)</span> <span class="nv">$ipxe_root</span>/linux
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Ensure that the initial ramdisk file is named <code class="file docutils literal notranslate"><span class="pre">initrd</span></code> and
+the kernel file is named <code class="file docutils literal notranslate"><span class="pre">linux</span></code>, which is a symbolic link to the
+actual kernel file.</p>
+</div>
+</li>
+<li><p class="first">Create an iPXE boot script with the following contents. During an iPXE
+boot, the iPXE boot script directs the PXE client to download the files to
+boot and install Clear Linux OS. Use the names previously given to the initial
+ramdisk and kernel files.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo cat &gt; $ipxe_root/ipxe_boot_script.ipxe &lt;&lt; EOF</span>
+<span class="gp">#</span>!ipxe
+<span class="go">kernel linux quiet init=/usr/lib/systemd/systemd-bootchart \</span>
+<span class="go">initcall_debug tsc=reliable no_timer_check noreplace-smp rw \</span>
+<span class="go">initrd=initrd</span>
+<span class="go">initrd initrd</span>
+<span class="go">boot</span>
+<span class="go">EOF</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">The <strong class="command">pxe-server</strong> bundle contains a lightweight web-server known as
+nginx. Create a configuration file for nginx to serve Clear Linux OS to PXE
+clients with the following contents:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo mkdir -p /etc/nginx/conf.d</span>
+<span class="go">sudo cat &gt; /etc/nginx/conf.d/$ipxe_app_name.conf &lt;&lt; EOF</span>
+<span class="go">server {</span>
+<span class="go">  listen $ipxe_port;</span>
+<span class="go">  server_name localhost;</span>
+<span class="go">  location /$ipxe_app_name/ {</span>
+<span class="go">    root $web_root;</span>
+<span class="go">    autoindex on;</span>
+<span class="go">  }</span>
+<span class="go">}</span>
+<span class="go">EOF</span>
+
+<span class="go">sudo cp /usr/share/nginx/conf/nginx.conf.example /etc/nginx/nginx.conf</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Create a separate nginx configuration file to serve network-bootable
+images on a non-standard port number. This action saves existing nginx
+configurations.</p>
+</div>
+</li>
+<li><p class="first">Start nginx and enable the startup on boot option.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo systemctl start nginx
+sudo systemctl <span class="nb">enable</span> nginx
+</pre></div>
+</div>
+</li>
+<li><p class="first">The <strong class="command">pxe-server</strong> bundle contains a lightweight DNS server which
+conflicts with the DNS stub listener provided in <cite>systemd-resolved</cite>.
+Disable the DNS stub listener and temporarily stop <cite>systemd-resolved</cite>.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo mkdir -p /etc/systemd</span>
+<span class="go">sudo cat &gt; /etc/systemd/resolved.conf &lt;&lt; EOF</span>
+<span class="go">[Resolve]</span>
+<span class="go">DNSStubListener=no</span>
+<span class="go">EOF</span>
+
+<span class="go">sudo systemctl stop systemd-resolved</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Assign a static IP address to the network adapter for the private network
+and restart <cite>systemd-networkd</cite> with the following commands:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo mkdir -p /etc/systemd/network</span>
+<span class="go">sudo cat &gt; /etc/systemd/network/70-internal-static.network &lt;&lt; EOF</span>
+<span class="go">[Match]</span>
+<span class="go">Name=$internal_iface</span>
+<span class="go">[Network]</span>
+<span class="go">DHCP=no</span>
+<span class="go">Address=$pxe_internal_ip/$pxe_subnet_bitmask</span>
+<span class="go">EOF</span>
+
+<span class="go">sudo systemctl restart systemd-networkd</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Configure <abbr title="Network Address Translation">NAT</abbr> to route traffic from
+the private network to the public network. This action makes the PXE
+server act as a router. To make these changes persistent during reboots, save the
+changes to the firewall with the following commands:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo iptables -t nat -F POSTROUTING
+sudo iptables -t nat -A POSTROUTING -o <span class="nv">$external_iface</span> -j MASQUERADE
+sudo systemctl <span class="nb">enable</span> iptables-save.service
+sudo systemctl restart iptables-save.service
+sudo systemctl <span class="nb">enable</span> iptables-restore.service
+sudo systemctl restart iptables-restore.service
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The firewall masks packets to make them appear as coming from the PXE
+server and hides PXE clients from the public network.</p>
+</div>
+</li>
+<li><p class="first">Configure the kernel to forward network packets to different
+interfaces. Otherwise, NAT will not work.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo mkdir -p /etc/sysctl.d
+sudo <span class="nb">echo</span> net.ipv4.ip_forward<span class="o">=</span><span class="m">1</span> &gt; /etc/sysctl.d/80-nat-forwarding.conf
+sudo <span class="nb">echo</span> <span class="m">1</span> &gt; /proc/sys/net/ipv4/ip_forward
+</pre></div>
+</div>
+</li>
+<li><p class="first">The <strong class="command">pxe-server</strong> bundle contains iPXE firmware images that allow computers
+without an iPXE implementation to perform an iPXE boot. Create a TFTP
+hosting directory and populate the directory with the iPXE firmware images
+with the following commands:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo mkdir -p <span class="nv">$tftp_root</span>
+sudo ln -sf /usr/share/ipxe/undionly.kpxe <span class="nv">$tftp_root</span>/undionly.kpxe
+</pre></div>
+</div>
+</li>
+<li><p class="first">The <strong class="command">pxe-server</strong> bundle contains a lightweight TFTP, DNS, and DHCP
+server known as <cite>dnsmasq</cite>. Create a configuration file for <cite>dnsmasq</cite>
+to listen on a dedicated IP address for those functions. PXE clients on
+the private network will use this IP address.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo cat &gt; /etc/dnsmasq.conf &lt;&lt; EOF</span>
+<span class="go">listen-address=$pxe_internal_ip</span>
+<span class="go">EOF</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Add the options to serve iPXE firmware images to PXE clients over TFTP to
+the <cite>dnsmasq</cite> configuration file.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo cat &gt;&gt; /etc/dnsmasq.conf &lt;&lt; EOF</span>
+<span class="go">enable-tftp</span>
+<span class="go">tftp-root=$tftp_root</span>
+<span class="go">EOF</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Add the options to host a DHCP server for PXE clients to the <code class="file docutils literal notranslate"><span class="pre">dnsmasq</span></code>
+configuration file.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo cat &gt;&gt; /etc/dnsmasq.conf &lt;&lt; EOF</span>
+<span class="go">dhcp-leasefile=/var/db/dnsmasq.leases</span>
+
+<span class="go">dhcp-authoritative</span>
+<span class="gp">dhcp-option=option:router,$</span>pxe_internal_ip
+<span class="gp">dhcp-option=option:dns-server,$</span>pxe_internal_ip
+
+<span class="go">dhcp-match=set:pxeclient,60,PXEClient*</span>
+<span class="gp">dhcp-range=tag:pxeclient,$pxe_subnet.2,$pxe_subnet.253,$</span>pxe_subnet_mask_ip,15m
+<span class="gp">dhcp-range=tag:!pxeclient,$pxe_subnet.2,$pxe_subnet.253,$</span>pxe_subnet_mask_ip,6h
+
+<span class="go">dhcp-match=set:ipxeboot,175</span>
+<span class="gp">dhcp-boot=tag:ipxeboot,http://$pxe_internal_ip:$ipxe_port/$</span>ipxe_app_name/ipxe_boot_script.ipxe
+<span class="gp">dhcp-boot=tag:!ipxeboot,undionly.kpxe,$</span>pxe_internal_ip
+<span class="go">EOF</span>
+</pre></div>
+</div>
+<p>The configuration provides the following important functions:</p>
+<ul class="simple">
+<li>Directs PXE clients without an iPXE implementation to the TFTP server
+to acquire architecture-specific iPXE firmware images that allow them
+to perform an iPXE boot.</li>
+<li>Activates only on the network adapter that has an IP address on the
+defined subnet.</li>
+<li>Directs PXE clients to the DNS server.</li>
+<li>Directs PXE clients to the PXE server for routing via NAT.</li>
+<li>Divides the private network into two pools of IP addresses. One pool
+is for network boot and one pool is used after boot. Each pool has
+their own lease times.</li>
+</ul>
+</li>
+<li><p class="first">Create a file for <cite>dnsmasq</cite> to record the IP addresses it provides
+to PXE clients.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo mkdir -p /var/db
+sudo touch /var/db/dnsmasq.leases
+</pre></div>
+</div>
+</li>
+<li><p class="first">Start <cite>dnsmasq</cite> and enable startup on boot.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo systemctl <span class="nb">enable</span> dnsmasq
+sudo systemctl restart dnsmasq
+</pre></div>
+</div>
+</li>
+<li><p class="first">Start <cite>systemd-resolved</cite>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo systemctl start systemd-resolved
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><cite>systemd-resolved</cite> dynamically updates the list of DNS servers for the
+private network if you use the <cite>dnsmasq</cite> DNS server. The setup creates a
+pass-through DNS server that relies on the DNS servers listed in
+<code class="file docutils literal notranslate"><span class="pre">/etc/resolv.conf</span></code>.</p>
+</div>
+</li>
+<li><p class="first">Power on the PXE client and watch the client boot and install Clear Linux OS.</p>
+<p>After booting, Clear Linux OS automatically partitions the hard drive,
+installs itself, updates to the latest version, and reboots.</p>
+</li>
+</ol>
+<p><strong>Congratulations!</strong> You have successfully installed and configured a PXE
+server that enables PXE clients to boot and install Clear Linux OS over the network.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="network-bonding.html" class="btn btn-neutral float-right" title="Combine multiple interfaces with network bonding" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="dpdk.html" class="btn btn-neutral float-left" title="Use DPDK to send packets between platforms" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, many
+      <span class="lastupdated">
+        Last updated on Jul 24, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+
+<script type="text/javascript" src="../../_static/tcs_theme.js"></script>
+
+
+
+</body>
+</html>

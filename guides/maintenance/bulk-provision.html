@@ -1,0 +1,484 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Bulk provision &mdash; Documentation for Clear Linux* project</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="CPU Power and Performance" href="cpu-performance.html" />
+    <link rel="prev" title="Assign a static IP address" href="assign-static-ip.html" />
+
+<link rel="stylesheet" href="../../_static/tcs_theme.css" type="text/css" />
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #007ab2" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Clear Linux* Project Docs
+          
+
+          
+            
+            <img src="../../_static/clearlinux.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Clear Linux</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Language Versions</dt>
+        
+          <dd><a href="/clearlinux/guides/maintenance/bulk-provision.html">English</a></dd>
+        
+          <dd><a href="/clearlinux/zh_CN/guides/maintenance/bulk-provision.html">Chinese</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Document Versions</dt>
+        
+          <dd><a href="/clearlinux/guides/maintenance/bulk-provision.html">latest</a></dd>
+        
+          <dd><a href="/clearlinux/L19.01/guides/maintenance/bulk-provision.html">L19.01</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>clearlinux.org links</dt>
+          <dd>
+            <a href="https://www.clearlinux.org/">Project Home</a>
+          </dd>
+          <dd>
+            <a href="https://github.com/clearlinux/clear-linux-documentation">GitHub</a>
+          </dd>
+      </dl>
+    </div>
+  </div>
+  
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/get-started.html">Get started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tooling/tooling.html">How to Clear</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides.html">Guides</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../guides.html#maintenance">Maintenance</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="architect-lifecycle.html">Architect the life-cycle of Clear Linux* OS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="assign-static-ip.html">Assign a static IP address</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Bulk provision</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cpu-performance.html">CPU Power and Performance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer-workstation.html">Developer Workstation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="download-verify-decompress.html">Download, verify, and decompress a Clear Linux* OS image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="enable-user-space.html">Create and enable a new user space</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fix-broken-install.html">Fix a broken installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hostname.html">Modify hostname</a></li>
+<li class="toctree-l3"><a class="reference internal" href="increase-virtual-disk-size.html">Increase virtual disk size of an image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="query-upstream.html">Query package info from upstream repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="restart.html">Restart system services after an OS update</a></li>
+<li class="toctree-l3"><a class="reference internal" href="time.html">Set the time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="validate-signatures.html">Validate signatures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deploy-at-scale.html">Deploy at Scale</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides.html#network">Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides.html#kernel">Kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides.html#stacks">Stacks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../FAQ/faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Clear Linux* Project Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+
+<header id="header">
+  <div class="padding-md--left-right">
+
+    <div class="header__site_info">
+           <div class="header__site_info_name">
+             <a href ="https://clearlinux.org"> Clear Linux* Project</a>
+           </div>
+    </div>
+    <nav class="header__menu">
+        <ul class="header__menu_list">
+                         <li class="header__menu_list_item green  ">
+                <a tabindex='1' href="https://clearlinux.org/about">About</a>
+              </li>
+                         <li class="header__menu_list_item purple  ">
+                <a tabindex='1' href="https://clearlinux.org/developer">Developer</a>
+              </li>
+                         <li class="header__menu_list_item blue  ">
+                <a tabindex='1' href="https://clearlinux.org/software">Software</a>
+              </li>
+        </ul>
+    </nav>
+
+  </div>
+
+
+
+</header>
+
+
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../guides.html">Guides</a> &raquo;</li>
+        
+      <li>Bulk provision</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/clearlinux/clear-linux-documentation/blob/rtd-theme/source/guides/maintenance/bulk-provision.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="bulk-provision">
+<span id="id1"></span><h1>Bulk provision</h1>
+<p>This guide explains how to perform a bulk provision of Clear Linux* OS using a
+combination of the Clear Linux OS installer, Ister, and
+<abbr title="Ister Cloud Init Service">ICIS</abbr>.</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#overview" id="id3">Overview</a></li>
+<li><a class="reference internal" href="#prerequisites" id="id4">Prerequisites</a></li>
+<li><a class="reference internal" href="#configuration" id="id5">Configuration</a></li>
+</ul>
+</div>
+<div class="section" id="overview">
+<h2><a class="toc-backref" href="#id3">Overview</a></h2>
+<p>To configure a bulk provision:</p>
+<ul class="simple">
+<li>Define Ister configuration files to customize the installation process</li>
+<li>Define cloud-init* files to customize the installation instance</li>
+<li>Host the configuration files in ICIS to allow Ister to use them during
+the installation</li>
+</ul>
+<p>Figure 1 depicts the flow of information between a PXE server and a PXE
+client that needs to be set up to perform a bulk provision.</p>
+<div class="figure" id="id2">
+<img alt="Bulk provision information flow" src="../../_images/bulk-provision-flow.png" />
+<p class="caption"><span class="caption-text">Figure 1: Bulk provision information flow</span></p>
+</div>
+</div>
+<div class="section" id="prerequisites">
+<h2><a class="toc-backref" href="#id4">Prerequisites</a></h2>
+<p>Before performing a bulk provision, verify you have a PXE server capable
+of performing network boots of Clear Linux OS. Please refer to our
+<a class="reference internal" href="../network/ipxe-install.html#ipxe-install"><span class="std std-ref">guide on how to perform an iPXE boot</span></a> using
+<abbr title="network address translation">NAT</abbr> for details.</p>
+<p>Because a bulk provision relies on a reboot, ensure the following
+preparations have been made:</p>
+<ul class="simple">
+<li>No existing disks are bootable.</li>
+<li>The network boot option must come immediately after the disk boot option
+on any computer performing the installation.</li>
+</ul>
+</div>
+<div class="section" id="configuration">
+<h2><a class="toc-backref" href="#id5">Configuration</a></h2>
+<ol class="arabic">
+<li><p class="first">Install ICIS by following the getting started guide on the
+<a class="reference external" href="https://github.com/clearlinux/ister-cloud-init-svc">ICIS</a> GitHub* repository.</p>
+</li>
+<li><p class="first">Create an Ister installation file and save it to the
+<code class="file docutils literal notranslate"><span class="pre">static/ister</span></code> directory within the web hosting directory for
+ICIS. The installation file is a JSON block and provides Ister
+with the steps it needs to perform an installation. The file outlines
+what partitions, file systems, and mount points Ister should set
+up. Lastly, the file outlines which bundles to install. See our
+<a class="reference internal" href="../../reference/bundles/bundles.html#bundles"><span class="std std-ref">Available bundles</span></a> document for the list of available bundles. The
+following example shows the contents of an Ister installation file:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;DestinationType&quot;</span><span class="p">:</span><span class="s2">&quot;physical&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;PartitionLayout&quot;</span><span class="p">:[</span>
+        <span class="p">{</span><span class="nt">&quot;disk&quot;</span><span class="p">:</span><span class="s2">&quot;sda&quot;</span><span class="p">,</span> <span class="nt">&quot;partition&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="nt">&quot;size&quot;</span><span class="p">:</span><span class="s2">&quot;512M&quot;</span><span class="p">,</span> <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;EFI&quot;</span><span class="p">},</span>
+        <span class="p">{</span><span class="nt">&quot;disk&quot;</span><span class="p">:</span><span class="s2">&quot;sda&quot;</span><span class="p">,</span> <span class="nt">&quot;partition&quot;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="nt">&quot;size&quot;</span><span class="p">:</span><span class="s2">&quot;512M&quot;</span><span class="p">,</span> <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;swap&quot;</span><span class="p">},</span>
+        <span class="p">{</span><span class="nt">&quot;disk&quot;</span><span class="p">:</span><span class="s2">&quot;sda&quot;</span><span class="p">,</span> <span class="nt">&quot;partition&quot;</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="nt">&quot;size&quot;</span><span class="p">:</span><span class="s2">&quot;rest&quot;</span><span class="p">,</span> <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;linux&quot;</span><span class="p">}</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;FilesystemTypes&quot;</span><span class="p">:[</span>
+        <span class="p">{</span><span class="nt">&quot;disk&quot;</span><span class="p">:</span><span class="s2">&quot;sda&quot;</span><span class="p">,</span> <span class="nt">&quot;partition&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;vfat&quot;</span><span class="p">},</span>
+        <span class="p">{</span><span class="nt">&quot;disk&quot;</span><span class="p">:</span><span class="s2">&quot;sda&quot;</span><span class="p">,</span> <span class="nt">&quot;partition&quot;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;swap&quot;</span><span class="p">},</span>
+        <span class="p">{</span><span class="nt">&quot;disk&quot;</span><span class="p">:</span><span class="s2">&quot;sda&quot;</span><span class="p">,</span> <span class="nt">&quot;partition&quot;</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;ext4&quot;</span><span class="p">}</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;PartitionMountPoints&quot;</span><span class="p">:[</span>
+        <span class="p">{</span><span class="nt">&quot;disk&quot;</span><span class="p">:</span><span class="s2">&quot;sda&quot;</span><span class="p">,</span> <span class="nt">&quot;partition&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="nt">&quot;mount&quot;</span><span class="p">:</span><span class="s2">&quot;/boot&quot;</span><span class="p">},</span>
+        <span class="p">{</span><span class="nt">&quot;disk&quot;</span><span class="p">:</span><span class="s2">&quot;sda&quot;</span><span class="p">,</span> <span class="nt">&quot;partition&quot;</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="nt">&quot;mount&quot;</span><span class="p">:</span><span class="s2">&quot;/&quot;</span><span class="p">}</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;Version&quot;</span><span class="p">:</span><span class="s2">&quot;latest&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;Bundles&quot;</span><span class="p">:[</span>
+        <span class="s2">&quot;kernel-native&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;os-core&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;os-core-update&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;os-cloudguest&quot;</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;IsterCloudInitSvc&quot;</span><span class="p">:</span><span class="s2">&quot;http://192.168.1.1:60000/icis/&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">Every Ister installation file hosted on ICIS must contain the
+the <cite>IsterCloudInitSvc</cite> parameter as well as the <strong class="command">os-cloudguest</strong>
+bundle. These entries allow Ister to customize an instance of of an
+install.</p>
+</div>
+</li>
+<li><p class="first">Create an Ister configuration file to define the location of the
+Ister installation file. Save it to the <code class="file docutils literal notranslate"><span class="pre">static/ister</span></code> directory
+within the web hosting directory of ICIS. The following example shows
+an Ister configuration file:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>template=http://192.168.1.1:60000/icis/static/ister/ister.json
+</pre></div>
+</div>
+</li>
+<li><p class="first">Modify the iPXE boot script by adding a kernel parameter to the command line
+for booting the network image. Add the kernel parameter <cite>isterconf</cite> with
+the location of the Ister configuration file hosted on ICIS as the
+kernel parameter value.  The following example shows an iPXE boot script
+with the <cite>isterconf</cite> parameter:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#!ipxe
+kernel linux quiet init=/usr/lib/systemd/systemd-bootchart initcall_debug tsc=reliable no_timer_check noreplace-smp rw initrd=initrd isterconf=http://192.168.1.1:60000/icis/static/ister/ister.conf
+initrd initrd
+boot
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">After the network image of Clear Linux OS boots, Ister inspects the
+parameters used during boot in <code class="file docutils literal notranslate"><span class="pre">/proc/cmdline</span></code> to find the
+location of the Ister configuration file.</p>
+</div>
+</li>
+<li><p class="first">Write a cloud-init document to customize the instance of the installation
+according to your requirements. The <a class="reference external" href="https://cloudinit.readthedocs.io">cloud-init</a> documentation provides a
+guide on how to write a cloud-init document. The guide covers the
+customization options provided by cloud-init after an installation.</p>
+</li>
+<li><p class="first">Save the cloud-init document to the <code class="file docutils literal notranslate"><span class="pre">static/roles</span></code> directory within
+the web hosting directory for ICIS with the name of a role you would
+like to create. For example, a role may be “database”, “web”, or “ciao”.</p>
+</li>
+<li><p class="first">After creating the roles, also known as cloud-init files, assign roles to
+MAC addresses of PXE clients. To do so, modify the <code class="file docutils literal notranslate"><span class="pre">config.txt</span></code> file
+in the <code class="file docutils literal notranslate"><span class="pre">static</span></code> directory within the web hosting directory of ICIS.
+The following example shows an example assignment:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># MAC address,role
+00:01:02:03:04:05,ciao
+</pre></div>
+</div>
+<p>If MAC addresses of PXE clients are not listed within the
+<code class="file docutils literal notranslate"><span class="pre">config.txt</span></code> file, a default role for those MAC address may be
+defined as follows:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># MAC address,role
+default,ciao
+</pre></div>
+</div>
+</li>
+<li><p class="first">Verify the following URLs are accessible on your local network:</p>
+<ul class="simple">
+<li>http://192.168.1.1:60000/icis/static/ister/ister.conf</li>
+<li>http://192.168.1.1:60000/icis/static/ister/ister.json</li>
+<li>http://192.168.1.1:60000/icis/get_config/&lt;MAC address&gt;</li>
+<li>http://192.168.1.1:60000/icis/get_role/&lt;role&gt;</li>
+<li>http://192.168.1.1:60000/ipxe/ipxe_boot_script.txt</li>
+</ul>
+</li>
+<li><p class="first">Power on the PXE client and watch it boot and install Clear Linux OS.</p>
+</li>
+<li><p class="first">Power-cycle the PXE client and watch it customize the Clear Linux OS installation.</p>
+</li>
+</ol>
+<p><strong>Congratulations!</strong> You have successfully performed a bulk provision of Clear Linux OS.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="cpu-performance.html" class="btn btn-neutral float-right" title="CPU Power and Performance" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="assign-static-ip.html" class="btn btn-neutral float-left" title="Assign a static IP address" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, many
+      <span class="lastupdated">
+        Last updated on Jul 24, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+
+<script type="text/javascript" src="../../_static/tcs_theme.js"></script>
+
+
+
+</body>
+</html>

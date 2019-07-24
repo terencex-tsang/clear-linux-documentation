@@ -1,0 +1,444 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Autoproxy &mdash; Documentation for Clear Linux* project</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="autospec" href="autospec.html" />
+    <link rel="prev" title="How to Clear" href="tooling.html" />
+
+<link rel="stylesheet" href="../_static/tcs_theme.css" type="text/css" />
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #007ab2" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Clear Linux* Project Docs
+          
+
+          
+            
+            <img src="../_static/clearlinux.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Clear Linux</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Language Versions</dt>
+        
+          <dd><a href="/clearlinux/tooling/autoproxy.html">English</a></dd>
+        
+          <dd><a href="/clearlinux/zh_CN/tooling/autoproxy.html">Chinese</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Document Versions</dt>
+        
+          <dd><a href="/clearlinux/tooling/autoproxy.html">latest</a></dd>
+        
+          <dd><a href="/clearlinux/L19.01/tooling/autoproxy.html">L19.01</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>clearlinux.org links</dt>
+          <dd>
+            <a href="https://www.clearlinux.org/">Project Home</a>
+          </dd>
+          <dd>
+            <a href="https://github.com/clearlinux/clear-linux-documentation">GitHub</a>
+          </dd>
+      </dl>
+    </div>
+  </div>
+  
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/get-started.html">Get started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="tooling.html">How to Clear</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Autoproxy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-it-works">How it works</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="autospec.html">autospec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compatible-kernels.html">Kernels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debug.html">Debug system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ister.html">ister.py image builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mixer.html">mixer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">OS Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stateless.html">Stateless</a></li>
+<li class="toctree-l2"><a class="reference internal" href="swupd-guide.html">swupd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/telemetrics/telem-guide.html">Telemetrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tooling.html#training">Training</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/guides.html">Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ/faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Clear Linux* Project Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+
+<header id="header">
+  <div class="padding-md--left-right">
+
+    <div class="header__site_info">
+           <div class="header__site_info_name">
+             <a href ="https://clearlinux.org"> Clear Linux* Project</a>
+           </div>
+    </div>
+    <nav class="header__menu">
+        <ul class="header__menu_list">
+                         <li class="header__menu_list_item green  ">
+                <a tabindex='1' href="https://clearlinux.org/about">About</a>
+              </li>
+                         <li class="header__menu_list_item purple  ">
+                <a tabindex='1' href="https://clearlinux.org/developer">Developer</a>
+              </li>
+                         <li class="header__menu_list_item blue  ">
+                <a tabindex='1' href="https://clearlinux.org/software">Software</a>
+              </li>
+        </ul>
+    </nav>
+
+  </div>
+
+
+
+</header>
+
+
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="tooling.html">How to Clear</a> &raquo;</li>
+        
+      <li>Autoproxy</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/clearlinux/clear-linux-documentation/blob/rtd-theme/source/tooling/autoproxy.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="autoproxy">
+<span id="id1"></span><h1>Autoproxy</h1>
+<p>Autoproxy is provided to enable Clear Linux* OS to work smoothly behind a
+corporate proxy.</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#description" id="id3">Description</a></li>
+<li><a class="reference internal" href="#how-it-works" id="id4">How it works</a></li>
+</ul>
+</div>
+<div class="section" id="description">
+<h2><a class="toc-backref" href="#id3">Description</a></h2>
+<p>Autoproxy tries to detect a Proxy Auto-Config (PAC) script and use it to
+automatically resolve the proxy needed for a given connection. With
+Autoproxy, you can use Clear Linux OS inside any proxy environment without having to
+manually configure the proxies.</p>
+<p>Corporate and private networks can be very complex, needing to restrict and
+control network connections for security reasons. The typical side effects
+are limited or blocked connectivity, and require manual configuration of
+proxies to perform the most mundane tasks, such as cloning a repo or checking
+for updates. With Clear Linux OS, all of the work is done behind the scenes to
+effortlessly use your network and have connections “just work”.</p>
+<p>This feature removes severe complications with network connectivity due to
+proxy issues. You can automate tasks, such as unit testing, without worrying
+about the proxy not being set, and you can remove unset proxies from the
+equation when dealing with network unavailability across systems.</p>
+</div>
+<div class="section" id="how-it-works">
+<h2><a class="toc-backref" href="#id4">How it works</a></h2>
+<p>We designed Autoproxy around tools provided by most Linux*
+distributions with a few minor additions and modifications. We leveraged the
+DHCP and network information obtained from systemd and created a
+PAC-discovery daemon. The daemon uses the information to resolve a URL for a
+PAC file. The daemon then passes the URL into PACrunner*. PACrunner
+downloads the PAC file and uses the newly implemented Duktape* engine to
+parse it.</p>
+<div class="figure" id="id2">
+<a class="reference internal image-reference" href="../_images/autoproxy_0.png"><img alt="../_images/autoproxy_0.png" src="../_images/autoproxy_0.png" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-text">Figure 1: Autoproxy Flow</span></p>
+</div>
+<p>From that point on, any cURL* or network requests query PACrunner for the
+correct proxy to use. We modified the cURL library to communicate with
+PACrunner over DBus. However, cURL will ignore PACrunner and run normally if
+no PAC file is loaded or if you manually set any proxies. Thus, your
+environment settings are respected and no time is wasted trying to resolve a
+proxy. All these steps happen in the background with no user interaction.</p>
+<div class="section" id="troubleshooting">
+<h3>Troubleshooting</h3>
+<p>Autoproxy allows Clear Linux OS to operate seamlessly behind a proxy
+because <a class="reference internal" href="swupd-guide.html#swupd-guide"><span class="std std-ref">swupd</span></a> and other Clear Linux OS tools are implemented on
+top of libcurl. Tools that do not use libcurl, like git, must
+be configured independently.</p>
+<p>If you are familiar with PAC files and WPAD, you can use
+<strong class="command">pacdiscovery</strong> and <strong class="command">FindProxyForURL</strong> to
+troubleshoot problems with autproxy.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Learn more about WPAD, PAC files, and PAC functions at <a class="reference external" href="http://findproxyforurl.com/">findproxyforurl</a>.</p>
+</div>
+<p>Run <strong class="command">pacdiscovery</strong> with no arguments to indicate</p>
+<ol class="arabic">
+<li><p class="first">if there is a problem resolving the <strong class="command">WPAD</strong> host name resolution:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pacdiscovery
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">failed getaddrinfo: No address associated with hostname</span>
+<span class="go">Unable to find wpad host</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">or if the <strong class="command">pacrunner</strong> service is disabled (masked).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pacdiscovery
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">PAC url: http://autoproxy.your.domain.com/wpad.dat</span>
+<span class="go">Failed to create proxy config: Unit pacrunner.service is masked.</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>Unmask the <strong class="command">pacrunner</strong> service by running:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>systemctl unmask pacrunner.service
+</pre></div>
+</div>
+<p><strong class="command">FindProxyForURL</strong> with <strong class="command">busctl</strong> can also indicate if the
+<strong class="command">pacrunner.service</strong> is masked.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>busctl call org.pacrunner /org/pacrunner/client org.pacrunner.Client
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">FindProxyForURL ss &quot;http://www.google.com&quot; &quot;google.com&quot;</span>
+<span class="go">Unit pacrunner.service is masked.</span>
+<span class="go">dig wpad, dig wpad.&lt;domain&gt;</span>
+</pre></div>
+</div>
+<p><strong class="command">FindProxyForURL</strong> returns the URL and port of the proxy server when
+an external URL and host are provided as arguments.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>busctl call org.pacrunner /org/pacrunner/client org.pacrunner.Client
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">FindProxyForURL ss &quot;http://www.google.com&quot; &quot;google.com&quot;</span>
+<span class="go">s &quot;PROXY proxy.your.domain.com:&lt;port&gt;&quot;</span>
+</pre></div>
+</div>
+<p>If a proxy server is not avialable, or if <strong class="command">pacrunner</strong> is running
+without a PAC file, <strong class="command">FindProxyForURL</strong> will return “DIRECT”.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>busctl call org.pacrunner /org/pacrunner/client org.pacrunner.Client
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">FindProxyForURL ss &quot;http://www.google.com&quot; &quot;google.com&quot;</span>
+<span class="go">s &quot;DIRECT&quot;</span>
+</pre></div>
+</div>
+<p>Once <strong class="command">pacdiscovery</strong> is able to look up <strong class="command">WPAD</strong>, restart the
+<strong class="command">pacrunner</strong> service:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>systemctl stop pacrunner
+systemctl restart pacdiscovery
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">A “domain” or “search” entry in <code class="file docutils literal notranslate"><span class="pre">/etc/resolv.conf</span></code> is required
+for short name lookups to resolve. The <code class="file docutils literal notranslate"><span class="pre">resolv.conf</span></code> man page has
+additional details.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="autospec.html" class="btn btn-neutral float-right" title="autospec" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="tooling.html" class="btn btn-neutral float-left" title="How to Clear" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, many
+      <span class="lastupdated">
+        Last updated on Jul 24, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+
+<script type="text/javascript" src="../_static/tcs_theme.js"></script>
+
+
+
+</body>
+</html>

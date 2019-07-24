@@ -1,0 +1,788 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh-CN" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh-CN" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>autospec &mdash; Documentation for Clear Linux* project</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'zh_CN',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="Kernels" href="compatible-kernels.html" />
+    <link rel="prev" title="Autoproxy" href="autoproxy.html" />
+
+<link rel="stylesheet" href="../_static/tcs_theme.css" type="text/css" />
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #007ab2" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Clear Linux* Project Docs
+          
+
+          
+            
+            <img src="../_static/clearlinux.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Clear Linux</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Language Versions</dt>
+        
+          <dd><a href="/clearlinux/tooling/autospec.html">English</a></dd>
+        
+          <dd><a href="/clearlinux/zh_CN/tooling/autospec.html">Chinese</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Document Versions</dt>
+        
+          <dd><a href="/clearlinux/tooling/autospec.html">latest</a></dd>
+        
+          <dd><a href="/clearlinux/L19.01/tooling/autospec.html">L19.01</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>clearlinux.org links</dt>
+          <dd>
+            <a href="https://www.clearlinux.org/">Project Home</a>
+          </dd>
+          <dd>
+            <a href="https://github.com/clearlinux/clear-linux-documentation">GitHub</a>
+          </dd>
+      </dl>
+    </div>
+  </div>
+  
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/get-started.html">Get started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="tooling.html">How to Clear</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="autoproxy.html">Autoproxy</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">autospec</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-it-works">How it works</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#create-an-rpm">Create an RPM</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#example-1-build-rpm-with-an-existing-spec-file">Example 1: Build RPM with an existing spec file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example-2-build-a-new-rpm">Example 2: Build a new RPM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example-3-generate-a-new-spec-file-with-a-pre-defined-package">Example 3: Generate a new spec file with a pre-defined package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example-4-provide-control-files-to-autospec">Example 4: Provide control files to autospec</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#test-packaged-software">Test packaged software</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#test-in-a-cl-virtual-machine">Test in a Clear Linux OS virtual machine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#test-directly-on-a-development-machine">Test directly on a development machine</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#setup-environment-to-build-source">Setup environment to build source</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#related-topics">Related topics</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="compatible-kernels.html">Kernels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debug.html">Debug system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ister.html">ister.py image builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mixer.html">mixer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">OS Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stateless.html">Stateless</a></li>
+<li class="toctree-l2"><a class="reference internal" href="swupd-guide.html">swupd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/telemetrics/telem-guide.html">Telemetrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tooling.html#training">Training</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/guides.html">Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ/faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Clear Linux* Project Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+
+<header id="header">
+  <div class="padding-md--left-right">
+
+    <div class="header__site_info">
+           <div class="header__site_info_name">
+             <a href ="https://clearlinux.org"> Clear Linux* Project</a>
+           </div>
+    </div>
+    <nav class="header__menu">
+        <ul class="header__menu_list">
+                         <li class="header__menu_list_item green  ">
+                <a tabindex='1' href="https://clearlinux.org/about">About</a>
+              </li>
+                         <li class="header__menu_list_item purple  ">
+                <a tabindex='1' href="https://clearlinux.org/developer">Developer</a>
+              </li>
+                         <li class="header__menu_list_item blue  ">
+                <a tabindex='1' href="https://clearlinux.org/software">Software</a>
+              </li>
+        </ul>
+    </nav>
+
+  </div>
+
+
+
+</header>
+
+
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="tooling.html">How to Clear</a> &raquo;</li>
+        
+      <li>autospec</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/clearlinux/clear-linux-documentation/blob/rtd-theme/source/tooling/autospec.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="autospec">
+<span id="id1"></span><h1>autospec</h1>
+<p><strong>autospec</strong> is a tool used to assist with the automated creation and maintenance of
+RPM packaging in Clear Linux* OS. Where a standard <abbr title="RPM Package Manager">RPM</abbr> build process using
+<strong class="command">rpmbuild</strong> requires a tarball and <code class="file docutils literal notranslate"><span class="pre">.spec</span></code> file to start, autospec
+requires only a tarball and package name to start.</p>
+<div class="contents local topic" id="id2">
+<ul class="simple">
+<li><a class="reference internal" href="#description" id="id5">Description</a></li>
+<li><a class="reference internal" href="#how-it-works" id="id6">How it works</a></li>
+<li><a class="reference internal" href="#examples" id="id7">Examples</a></li>
+<li><a class="reference internal" href="#test-packaged-software" id="id8">Test packaged software</a></li>
+<li><a class="reference internal" href="#references" id="id9">References</a></li>
+<li><a class="reference internal" href="#related-topics" id="id10">Related topics</a></li>
+</ul>
+</div>
+<div class="section" id="description">
+<h2><a class="toc-backref" href="#id5">Description</a></h2>
+<p>The autospec tool attempts to infer the requirements of the <code class="file docutils literal notranslate"><span class="pre">.spec</span></code> file
+by analyzing the source code and <code class="file docutils literal notranslate"><span class="pre">Makefile</span></code> information. It
+continuously runs updated builds based on new information discovered from build
+failures until it has a complete and valid <code class="file docutils literal notranslate"><span class="pre">.spec</span></code> file. If needed, you
+can influence the behavior of autospec and customize the build by providing
+optional <a class="reference external" href="https://github.com/clearlinux/autospec#control-files">control files</a> to the autospec tool.</p>
+<p>autospec uses <strong>mock</strong> as a sandbox to run the builds. Visit the <a class="reference external" href="https://github.com/rpm-software-management/mock/wiki">mock wiki</a> for
+additional information on using mock.</p>
+<p>For a general understanding of how an RPM works, visit
+the <a class="reference external" href="http://rpm.org">rpm website</a> or the <a class="reference external" href="https://rpm-packaging-guide.github.io/">RPM Packaging Guide</a> .</p>
+</div>
+<div class="section" id="how-it-works">
+<h2><a class="toc-backref" href="#id6">How it works</a></h2>
+<p>Learn the autospec tool set up and process.</p>
+<div class="contents local topic" id="id3">
+<ul class="simple">
+<li><a class="reference internal" href="#prerequisites" id="id11">Prerequisites</a></li>
+<li><a class="reference internal" href="#create-an-rpm" id="id12">Create an RPM</a></li>
+</ul>
+</div>
+<div class="section" id="prerequisites">
+<h3><a class="toc-backref" href="#id11">Prerequisites</a></h3>
+<p>The setup for building source in Clear Linux OS must be completed before using the
+autospec tool.</p>
+<p>Refer to <a class="reference internal" href="#setup-environment-to-build-source">Setup environment to build source</a> for instructions on completing
+the setup.</p>
+</div>
+<div class="section" id="create-an-rpm">
+<h3><a class="toc-backref" href="#id12">Create an RPM</a></h3>
+<p>The basic autospec process is described in the following steps:</p>
+<ol class="arabic">
+<li><p class="first">The <strong class="command">make autospec</strong> command generates a <code class="file docutils literal notranslate"><span class="pre">.spec</span></code> file based on
+the analysis of code and existing control files.</p>
+<p>Any control files should be located in the same directory as the resulting
+<code class="file docutils literal notranslate"><span class="pre">.spec</span></code> file.</p>
+<p>View the <a class="reference external" href="https://github.com/clearlinux/autospec">autospec README</a> for more information on <a class="reference external" href="https://github.com/clearlinux/autospec#control-files">control files</a>.</p>
+</li>
+<li><p class="first">autospec creates a build root with mock config.</p>
+</li>
+<li><p class="first">autospec attempts to build an RPM from the generated <code class="file docutils literal notranslate"><span class="pre">.spec</span></code>.</p>
+</li>
+<li><p class="first">autospec detects any missed declarations in the <code class="file docutils literal notranslate"><span class="pre">.spec</span></code>.</p>
+</li>
+<li><p class="first">If build errors occur, autospec scans the build log to try to detect
+the root cause.</p>
+</li>
+<li><p class="first">If autospec detects the root cause and knows how to continue, it restarts
+the build automatically at step 1 with updated build instructions.</p>
+</li>
+<li><p class="first">Otherwise, autospec stops the build for user inspection to resolve the
+errors. Respond to the build process output by fixing source code issues
+and/or editing control files to resolve issues, which may include
+dependencies or exclusions. See <a class="reference external" href="https://github.com/clearlinux/autospec">autospec README</a> for more information on
+control files.</p>
+<p>The user resumes the process at step 1 after errors are resolved.</p>
+<p>If a binary dependency doesn’t exist in Clear Linux OS, you must build it
+before running autospec again.</p>
+</li>
+</ol>
+<p>Following these steps, autospec continues to rebuild the package, based on
+new information discovered from build failures, until it has a valid
+<code class="file docutils literal notranslate"><span class="pre">.spec</span></code>. If no build errors occur, RPM packages are successfully built.</p>
+</div>
+</div>
+<div class="section" id="examples">
+<h2><a class="toc-backref" href="#id7">Examples</a></h2>
+<p>Complete <a class="reference internal" href="#setup-environment-to-build-source">Setup environment to build source</a> before using these examples.</p>
+<div class="contents local topic" id="id4">
+<ul class="simple">
+<li><a class="reference internal" href="#example-1-build-rpm-with-an-existing-spec-file" id="id13">Example 1: Build RPM with an existing spec file</a></li>
+<li><a class="reference internal" href="#example-2-build-a-new-rpm" id="id14">Example 2: Build a new RPM</a></li>
+<li><a class="reference internal" href="#example-3-generate-a-new-spec-file-with-a-pre-defined-package" id="id15">Example 3: Generate a new spec file with a pre-defined package</a></li>
+<li><a class="reference internal" href="#example-4-provide-control-files-to-autospec" id="id16">Example 4: Provide control files to autospec</a></li>
+</ul>
+</div>
+<div class="section" id="example-1-build-rpm-with-an-existing-spec-file">
+<h3><a class="toc-backref" href="#id13">Example 1: Build RPM with an existing spec file</a></h3>
+<p>This example shows how to build a RPM from a pre-packaged upstream package with
+an existing spec file. The example uses the <code class="docutils literal notranslate"><span class="pre">dmidecode</span></code> package.</p>
+<ol class="arabic">
+<li><p class="first">Navigate to the autospec workspace and clone the <code class="docutils literal notranslate"><span class="pre">dmidecode</span></code> package:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/clearlinux
+make clone_dmidecode
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p>You can clone all package repos at once using the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make <span class="o">[</span>-j NUM<span class="o">]</span> clone-packages
+</pre></div>
+</div>
+<p>The optional NUM is the number of threads to use.</p>
+<p class="last">For a list of available packages, view the
+<code class="file docutils literal notranslate"><span class="pre">~/clearlinux/projects/common/packages</span></code> file.</p>
+</div>
+</li>
+<li><p class="first">Navigate to the local copy of the <code class="docutils literal notranslate"><span class="pre">dmidecode</span></code> package and build it:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/clearlinux/packages/dmidecode/
+make build
+</pre></div>
+</div>
+</li>
+<li><p class="first">The resulting RPMs are in <code class="file docutils literal notranslate"><span class="pre">./rpms</span></code>. Build logs and additional RPMs are
+in <code class="file docutils literal notranslate"><span class="pre">./results</span></code>.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="example-2-build-a-new-rpm">
+<h3><a class="toc-backref" href="#id14">Example 2: Build a new RPM</a></h3>
+<p>This example shows how to build a new RPM with no spec file. The example will
+create a simple helloclear RPM.</p>
+<ol class="arabic">
+<li><p class="first">Navigate to the autospec workspace and build the helloclear RPM. The
+<code class="file docutils literal notranslate"><span class="pre">Makefile</span></code> provides a <strong class="command">make autospecnew</strong> that can
+automatically generate an RPM package using the autospec tool. You must pass
+the URL to the source tarball and the NAME of the RPM you wish to create:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/clearlinux
+make autospecnew <span class="nv">URL</span><span class="o">=</span><span class="s2">&quot;https://github.com/clearlinux/helloclear/archive/helloclear-v1.0.tar.gz&quot;</span> <span class="nv">NAME</span><span class="o">=</span><span class="s2">&quot;helloclear&quot;</span>
+</pre></div>
+</div>
+<p>The resulting RPMs are in <code class="file docutils literal notranslate"><span class="pre">./packages/helloclear/rpms</span></code>. Build logs and
+additional RPMs are in <code class="file docutils literal notranslate"><span class="pre">./packages/helloclear/results</span></code>.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="example-3-generate-a-new-spec-file-with-a-pre-defined-package">
+<h3><a class="toc-backref" href="#id15">Example 3: Generate a new spec file with a pre-defined package</a></h3>
+<p>This example shows how to modify an existing package to create a custom RPM. In
+this example you will make a simple change to the <code class="docutils literal notranslate"><span class="pre">dmidecode</span></code> package and
+rebuild the package.</p>
+<ol class="arabic">
+<li><p class="first">Navigate to the autospec workspace and clone the <code class="docutils literal notranslate"><span class="pre">dmidecode</span></code> package:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/clearlinux
+make clone_dmidecode
+</pre></div>
+</div>
+</li>
+<li><p class="first">Navigate into the <em>dmidecode</em> directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> packages/dmidecode
+</pre></div>
+</div>
+</li>
+<li><p class="first">Open the <code class="file docutils literal notranslate"><span class="pre">excludes</span></code> file with an editor and add these lines:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">/usr/bin/biosdecode</span>
+<span class="go">/usr/bin/ownership</span>
+<span class="go">/usr/bin/vpddecode</span>
+<span class="go">/usr/share/man/man8/biosdecode.8</span>
+<span class="go">/usr/share/man/man8/ownership.8</span>
+<span class="go">/usr/share/man/man8/vpddecode.8</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">These files aren’t needed by dmidecode, so we can remove them without
+any issues.</p>
+</div>
+</li>
+<li><p class="first">In the <code class="file docutils literal notranslate"><span class="pre">dmidecode</span></code> directory, build the modified <code class="docutils literal notranslate"><span class="pre">dmidecode</span></code> package:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make autospec
+</pre></div>
+</div>
+</li>
+<li><p class="first">The resulting RPMs are in <code class="file docutils literal notranslate"><span class="pre">./rpms</span></code>. Logs are in <code class="file docutils literal notranslate"><span class="pre">./results</span></code>.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="example-4-provide-control-files-to-autospec">
+<h3><a class="toc-backref" href="#id16">Example 4: Provide control files to autospec</a></h3>
+<p>This example shows how to modify control files to correct build failures that
+autospec is unable to resolve. In this example, you will add a missing license
+and dependencies so autospec can complete a successful build.</p>
+<ol class="arabic">
+<li><p class="first">Navigate to the autospec workspace:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/clearlinux
+</pre></div>
+</div>
+</li>
+<li><p class="first">If you have not already, clone all upstream package repos:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make <span class="o">[</span>-j NUM<span class="o">]</span> clone-packages
+</pre></div>
+</div>
+<p>The optional NUM is the number of threads to use.</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">In a later step of this example, we will search the cloned package repos
+for a missing dependency.</p>
+</div>
+</li>
+<li><p class="first">Build the opae-sdk RPM:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make autospecnew <span class="nv">URL</span><span class="o">=</span><span class="s2">&quot;https://github.com/OPAE/opae-sdk/archive/0.13.0.tar.gz&quot;</span> <span class="nv">NAME</span><span class="o">=</span><span class="s2">&quot;opae-sdk&quot;</span>
+</pre></div>
+</div>
+<p>This results in an error for a missing license file:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">[FATAL]    Cannot find any license or opae-sdk.license file!</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Navigate to the package with build failures:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> packages/opae-sdk
+</pre></div>
+</div>
+</li>
+<li><p class="first">Add one or more valid license identifiers from the
+<a class="reference external" href="https://spdx.org/licenses/">SPDX License List</a>.
+In the example below, two different licenses are appropriate based on the
+opae-sdk project licensing:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s2">&quot;BSD-3-Clause MIT&quot;</span> &gt; opae-sdk.license
+</pre></div>
+</div>
+</li>
+<li><p class="first">Run autospec again:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make autospec
+</pre></div>
+</div>
+<p>This results in a generic error:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">[FATAL]    Build failed, aborting</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Open the build log to view the error details:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat ./results/build.log
+</pre></div>
+</div>
+<p>The build log contains details for the specific failures. In this
+instance, there are missing dependencies:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">CMake Error: The following variables are used in this project, but they are set to NOTFOUND.  Please set them or make sure they are set and tested correctly in the CMake files:</span>
+<span class="go">CJSON_LIBRARY</span>
+<span class="go">   linked by target &quot;opae-c++-utils&quot; in directory /builddir/build/BUILD/opae-sdk-0.13.0/tools/c++utilslib</span>
+<span class="go">json-c_LIBRARIES</span>
+<span class="go">   linked by target &quot;opae-c&quot; in directory /builddir/build/BUILD/opae-sdk-0.13.0/libopae</span>
+<span class="go">libuuid_LIBRARIES</span>
+<span class="go">   linked by target &quot;opae-c&quot; in directory /builddir/build/BUILD/opae-sdk-0.13.0/libopae</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Search the spec files of upstream Clear Linux OS packages to see if the json-c library
+is available. In this case, it does exist and we’ll add the json-c ‘dev’
+package into the buildreq_add:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>grep <span class="s1">&#39;json-c\.so$&#39;</span> ~/clearlinux/packages/*/*.spec
+<span class="nb">echo</span> <span class="s2">&quot;json-c-dev&quot;</span> &gt;&gt; buildreq_add
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">This search step works only if the user cloned all of the upstream package
+repos. In this example, upstream package repos were cloned in a previous
+step.</p>
+</div>
+</li>
+<li><p class="first">Search the spec files of upstream Clear Linux OS packages to see if the libuuid library
+is available. In this case, it exists in the util-linux package, so we’ll add
+util-linux-dev package into the buildreq_add:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>grep <span class="s1">&#39;libuuid\.so$&#39;</span> ~/clearlinux/packages/*/*.spec
+<span class="nb">echo</span> <span class="s2">&quot;util-linux-dev&quot;</span> &gt;&gt; buildreq_add
+</pre></div>
+</div>
+</li>
+<li><p class="first">Run autospec again and find the successfully-generated RPMs in the <code class="file docutils literal notranslate"><span class="pre">rpms</span></code>
+directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make autospec
+</pre></div>
+</div>
+</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p>If you need a dependency that does not exist in the Clear Linux OS repo, you must first
+build it manually (see <a class="reference internal" href="#example-2-build-a-new-rpm">Example 2: Build a new RPM</a>), then add the repo so
+that autospec knows the package exists. For example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/clearlinux/packages/&lt;package-name&gt;
+make repoadd
+make repostatus
+</pre></div>
+</div>
+<p class="last">You only need to add the dependency to the <code class="file docutils literal notranslate"><span class="pre">buildreq_add</span></code> control file
+if autospec is not able to automatically find the correct dependency on its
+own.</p>
+</div>
+</div>
+</div>
+<div class="section" id="test-packaged-software">
+<h2><a class="toc-backref" href="#id8">Test packaged software</a></h2>
+<p>After software has been packaged with autospec, the resulting RPMs can be
+tested for functionality before being integrated and deployed into a Clear Linux OS
+image with the <a class="reference internal" href="mixer.html#mixer"><span class="std std-ref">Mixer tool</span></a>.</p>
+<p>The Clear Linux OS development tooling offers two ways to quickly test autospec
+generated RPMs.</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">The methods outlined below should only be used for temporary testing on
+development systems.</p>
+</div>
+<div class="section" id="test-in-a-cl-virtual-machine">
+<h3>Test in a Clear Linux OS virtual machine</h3>
+<p>The Clear Linux OS development tooling includes a method to install RPMs into a Clear Linux OS
+virtual machine running on the KVM hypervisor. Using a <abbr title="Virtual Machine">VM</abbr> allows testing in a completely isolated environment.</p>
+<p>To test an autospec-created package inside a VM:</p>
+<ol class="arabic">
+<li><p class="first">Download the Clear Linux OS KVM image into the <code class="file docutils literal notranslate"><span class="pre">~/clearlinux</span></code> directory as
+<code class="file docutils literal notranslate"><span class="pre">clear.img</span></code>. The location and name <code class="file docutils literal notranslate"><span class="pre">clear.img.xz</span></code> is important
+for the tooling to work:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/clearlinux
+curl -o clear.img.xz https://download.clearlinux.org/image/<span class="k">$(</span>curl https://download.clearlinux.org/image/latest-images <span class="p">|</span> grep <span class="s1">&#39;[0-9]&#39;</span>-kvm<span class="k">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Extract the downloaded Clear Linux OS KVM image:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>unxz -v clear.img.xz
+</pre></div>
+</div>
+</li>
+<li><p class="first">Copy the QEMU start script and virtual firmware needed for KVM into the
+<code class="file docutils literal notranslate"><span class="pre">~/clearlinux</span></code> directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cp ~/clearlinux/projects/common/start_qemu.sh .
+cp /usr/share/qemu/OVMF.fd .
+</pre></div>
+</div>
+</li>
+<li><p class="first">Run <strong class="command">make install</strong> from the package’s autospec directory. The
+<strong class="command">make install</strong> command mounts the downloaded Clear Linux OS KVM image and
+installs the autospec-created RPM into it:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/clearlinux/packages/&lt;package-name&gt;
+make install
+</pre></div>
+</div>
+<p>The code that makes this possible can be viewed by searching for the
+<em>install:</em>  target in the <a class="reference external" href="https://github.com/clearlinux/common/blob/master/Makefile.common">Makefile.common</a> file on GitHub.</p>
+</li>
+<li><p class="first">Return to the <code class="file docutils literal notranslate"><span class="pre">~/clearlinux</span></code> directory and start the Clear Linux OS VM:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/clearlinux/
+sudo ./start_qemu.sh clear.img
+</pre></div>
+</div>
+</li>
+<li><p class="first">A new Clear Linux OS VM will launch in the console. Log into the VM as <em>root</em> and set
+a new pasword for the VM.</p>
+</li>
+<li><p class="first">Check that the software is installed in the Clear Linux OS VM as expected and perform
+any relevant tests.</p>
+</li>
+<li><p class="first">After testing has been completed, the Clear Linux OS VM can be powered off and
+deleted:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>poweroff
+rm clear.img
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="test-directly-on-a-development-machine">
+<h3>Test directly on a development machine</h3>
+<p>The Clear Linux OS development tooling also includes a method to extract
+autospec-created RPMs locally onto a Clear Linux OS development system for testing.
+Extracting an RPM directly onto a system  offers quicker testing; however
+conflicts may occur and responsibility to remove the software after testing is
+up to the developer.</p>
+<p>To test an autospec created package directly on the Clear Linux OS development system:</p>
+<ol class="arabic">
+<li><p class="first">Run <strong class="command">make install-local</strong> from the package’s autospec directory.
+The <strong class="command">make install-local</strong> command extracts the RPM directly onto
+the filesystem of the running Clear Linux OS system:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/clearlinux/packages/&lt;package-name&gt;
+make install-local
+</pre></div>
+</div>
+<p>The code that makes this possible can be viewed by searching for the
+<em>install-local:</em>  target in the <a class="reference external" href="https://github.com/clearlinux/common/blob/master/Makefile.common">Makefile.common</a>  file on GitHub.</p>
+</li>
+<li><p class="first">Check that the software is installed as expected and perform any relevant
+tests.</p>
+</li>
+<li><p class="first">After testing has been completed, the software and any related files must
+be identified and deleted. The <strong class="command">swupd repair --picky</strong>
+command can help restore the state of the <code class="file docutils literal notranslate"><span class="pre">/usr</span></code> directory (see
+<a class="reference internal" href="../concepts/swupd-about.html#swupd-about"><span class="std std-ref">swupd</span></a>) however any other files must be cleaned up
+manually.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="references">
+<h2><a class="toc-backref" href="#id9">References</a></h2>
+<p>Reference the <a class="reference external" href="https://github.com/clearlinux/autospec">autospec README</a> for details regarding <cite>autospec</cite> commands and options.</p>
+<div class="section" id="setup-environment-to-build-source">
+<h3>Setup environment to build source</h3>
+<p id="install-tooling-after-header">Setup of the workspace and tooling used for building source in Clear Linux OS is mostly
+automated for you with a setup script. It uses tools from the
+<strong class="command">os-clr-on-clr</strong> bundle.</p>
+<p>The setup script creates a workspace in the <code class="file docutils literal notranslate"><span class="pre">clearlinux</span></code> folder, with the
+subfolders <code class="file docutils literal notranslate"><span class="pre">Makefile</span></code>, <code class="file docutils literal notranslate"><span class="pre">packages</span></code>, and <code class="file docutils literal notranslate"><span class="pre">projects</span></code>. The
+<code class="file docutils literal notranslate"><span class="pre">projects</span></code> folder contains the main tools used for making packages in
+Clear Linux OS <code class="file docutils literal notranslate"><span class="pre">autospec</span></code> and <code class="file docutils literal notranslate"><span class="pre">common</span></code>.</p>
+<p>Follow these steps to setup the workspace and tooling for building source:</p>
+<ol class="arabic">
+<li><p class="first">Install the <strong class="command">os-clr-on-clr</strong> bundle:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo swupd bundle-add os-clr-on-clr
+</pre></div>
+</div>
+</li>
+<li><p class="first">Download the <code class="file docutils literal notranslate"><span class="pre">user-setup.sh</span></code> script:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl -O https://raw.githubusercontent.com/clearlinux/common/master/user-setup.sh
+</pre></div>
+</div>
+</li>
+<li><p class="first">Make <code class="file docutils literal notranslate"><span class="pre">user-setup.sh</span></code> executable:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chmod +x user-setup.sh
+</pre></div>
+</div>
+</li>
+<li><p class="first">Run the script as an unprivileged user:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./user-setup.sh
+</pre></div>
+</div>
+</li>
+<li><p class="first">After the script completes, log out and log in again to complete the setup
+process.</p>
+</li>
+<li><p class="first">Set your Git user email and username for the repos on your system:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git config --global user.email <span class="s2">&quot;you@example.com&quot;</span>
+git config --global user.name <span class="s2">&quot;Your Name&quot;</span>
+</pre></div>
+</div>
+<p>This global setting is used by Clear Linux OS tools that make use of Git.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="related-topics">
+<span id="install-tooling-end"></span><h2><a class="toc-backref" href="#id10">Related topics</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="mixer.html#mixer"><span class="std std-ref">Mixer tool</span></a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="compatible-kernels.html" class="btn btn-neutral float-right" title="Kernels" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="autoproxy.html" class="btn btn-neutral float-left" title="Autoproxy" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, many
+      <span class="lastupdated">
+        最后更新于 7月 24, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+
+<script type="text/javascript" src="../_static/tcs_theme.js"></script>
+
+
+
+</body>
+</html>

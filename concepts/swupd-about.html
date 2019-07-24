@@ -1,0 +1,401 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>swupd: software updater &mdash; Documentation for Clear Linux* project</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Telemetrics" href="telemetry-about.html" />
+    <link rel="prev" title="Mixer" href="mixer-about.html" />
+
+<link rel="stylesheet" href="../_static/tcs_theme.css" type="text/css" />
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #007ab2" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Clear Linux* Project Docs
+          
+
+          
+            
+            <img src="../_static/clearlinux.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Clear Linux</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Language Versions</dt>
+        
+          <dd><a href="/clearlinux/concepts/swupd-about.html">English</a></dd>
+        
+          <dd><a href="/clearlinux/zh_CN/concepts/swupd-about.html">Chinese</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Document Versions</dt>
+        
+          <dd><a href="/clearlinux/concepts/swupd-about.html">latest</a></dd>
+        
+          <dd><a href="/clearlinux/L19.01/concepts/swupd-about.html">L19.01</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>clearlinux.org links</dt>
+          <dd>
+            <a href="https://www.clearlinux.org/">Project Home</a>
+          </dd>
+          <dd>
+            <a href="https://github.com/clearlinux/clear-linux-documentation">GitHub</a>
+          </dd>
+      </dl>
+    </div>
+  </div>
+  
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/get-started.html">Get started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tooling/tooling.html">How to Clear</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/guides.html">Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../reference/reference.html">Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../reference/compatible-hardware.html">Compatible Hardware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/bundle-commands.html">Useful bundle commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/bundles/bundles.html">Available bundles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/bundles/openssh-server.html">openssh-server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/collaboration/collaboration.html">Documentation guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/system-requirements.html">Recommended minimum system requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/image-types.html">Clear Linux* OS image types</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../reference/reference.html#clear-linux-concepts">Clear Linux concepts</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="autospec-about.html">Autospec</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bundles-about.html">Bundles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mixer-about.html">Mixer</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">swupd: software updater</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#versioning">Versioning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#updating">Updating</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bundles">Bundles</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="telemetry-about.html">Telemetrics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tooling/stateless.html">Stateless</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tooling/security.html">OS Security</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ/faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Clear Linux* Project Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+
+<header id="header">
+  <div class="padding-md--left-right">
+
+    <div class="header__site_info">
+           <div class="header__site_info_name">
+             <a href ="https://clearlinux.org"> Clear Linux* Project</a>
+           </div>
+    </div>
+    <nav class="header__menu">
+        <ul class="header__menu_list">
+                         <li class="header__menu_list_item green  ">
+                <a tabindex='1' href="https://clearlinux.org/about">About</a>
+              </li>
+                         <li class="header__menu_list_item purple  ">
+                <a tabindex='1' href="https://clearlinux.org/developer">Developer</a>
+              </li>
+                         <li class="header__menu_list_item blue  ">
+                <a tabindex='1' href="https://clearlinux.org/software">Software</a>
+              </li>
+        </ul>
+    </nav>
+
+  </div>
+
+
+
+</header>
+
+
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../reference/reference.html">Reference</a> &raquo;</li>
+        
+      <li>swupd: software updater</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/clearlinux/clear-linux-documentation/blob/rtd-theme/source/concepts/swupd-about.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="swupd-software-updater">
+<span id="swupd-about"></span><h1>swupd: software updater</h1>
+<p><strong class="command">swupd</strong> is an operating system software manager and update program
+that operates at a file-level to enable verifiable integrity and update
+efficiency.</p>
+<p>Visit the <a class="reference external" href="https://github.com/clearlinux/swupd-client/blob/master/docs/swupd.1.rst">swupd man page</a> for more details.</p>
+<div class="section" id="versioning">
+<h2>Versioning</h2>
+<p>Using package managers to keep track of software version compatibility or compare multiple systems on many Linux distributions can be cumbersome.</p>
+<p>With Clear Linux OS <strong class="command">swupd</strong>, versioning happens at the individual
+file-level. This means Clear Linux OS generates an entirely new OS version with any set
+of software changes to the system (including software downgrades or removals). This rolling release versioning model is similar to
+<strong class="command">git</strong> internal version tracking, where any of the individual file
+commits are tracked and move the pointer forward when changed.</p>
+<p>While administrators can pick and choose which <a class="reference internal" href="#bundles">bundles</a> a system has
+installed, a single Clear Linux OS version number strictly represents one combination
+of all software versions that can be installed onto a system of that Clear Linux OS
+version. This method of whole OS versioning offers unique advantages.
+Namely, system administrators can quickly compare multiple Clear Linux OS systems that share the same version for important software and security fixes.</p>
+</div>
+<div class="section" id="updating">
+<h2>Updating</h2>
+<p>Clear Linux OS promotes regular and automated updating of software to ensure
+integration of new enhancements and security fixes. Refer to <a class="reference internal" href="../tooling/security.html#security"><span class="std std-ref">OS Security</span></a>
+documentation for more information.</p>
+<p>Learn how to update your system using <a class="reference internal" href="../tooling/swupd-guide.html#swupd-guide"><span class="std std-ref">swupd</span></a>.</p>
+<div class="section" id="update-efficiency">
+<h3>Update efficiency</h3>
+<p>Because <strong class="command">swupd</strong> operates at the individual file-level instead of a
+package-level, Clear Linux OS updates are small and fast.</p>
+<p>On many Linux* distributions, updates to a particular software package
+require the whole software package to be downloaded and replaced
+–even for one line of code.</p>
+<p>In Clear Linux OS, updates are generated using the <a class="reference internal" href="mixer-about.html#mixer-about"><span class="std std-ref">mixer</span></a> tool. Mixer calculates the difference between two Clear Linux OS versions and makes available
+<em>binary deltas</em>, which contain only the changed portion of files. This
+<em>binary delta technology</em> <a class="footnote-reference" href="#id2" id="id1">[1]</a> means <strong class="command">swupd</strong> on Clear Linux OS systems only
+needs to download and apply a small fraction of a package in order to
+receive an update.</p>
+<p>The <a class="reference internal" href="mixer-about.html#mixer-about"><span class="std std-ref">mixer</span></a> tool additionally computes updates files in
+multiple compression formats, allowing <strong class="command">swupd</strong> to utilize the most
+efficiently compressed format for a Clear Linux OS system to minimize the cost
+to update.</p>
+</div>
+<div class="section" id="update-integrity">
+<h3>Update integrity</h3>
+<p>This is the basis of the <strong class="command">swupd diagnose</strong> subcommand, which allows a Clear Linux OS system to check for any discrepancies to system files. As necessary,
+<strong class="command">swupd repair</strong> provides a useful way for software developers to remediate these discrepancies and return to a known filesystem state.</p>
+</div>
+</div>
+<div class="section" id="bundles">
+<h2>Bundles</h2>
+<p>Clear Linux* OS approaches software management differently than many other
+Linux-based operating systems.</p>
+<p>Instead of deploying granular software packages, Clear Linux OS uses the concept of
+bundles with pre-associated software. Each bundle encapsulates a particular
+use-case, which is enabled by composing all the required upstream open-source
+projects and packages into one logical unit.</p>
+<p>This bundle-based approach offers some unique advantages:</p>
+<ul class="simple">
+<li>Bundles provide a particular functionality, or stack, which
+include all associated runtime dependencies.</li>
+<li>Software package dependencies are resolved on the server, so file-level
+conflicts do not occur on the target system after an update.</li>
+<li>All combinations of bundles are able to co-exist on a Clear Linux OS system.</li>
+</ul>
+<p>For more information on bundles, visit:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../reference/bundles/bundles.html#bundles"><span class="std std-ref">Available bundles</span></a></li>
+<li><a class="reference internal" href="bundles-about.html#bundles-about"><span class="std std-ref">Bundles</span></a></li>
+<li><a class="reference internal" href="../reference/bundle-commands.html#bundle-commands"><span class="std std-ref">Useful bundle commands</span></a></li>
+<li><a class="reference internal" href="../tooling/compatible-kernels.html#compatible-kernels"><span class="std std-ref">Kernels</span></a></li>
+</ul>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>The software update technology for Clear Linux* OS was first presented at the Linux Plumbers conference in 2012.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="telemetry-about.html" class="btn btn-neutral float-right" title="Telemetrics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="mixer-about.html" class="btn btn-neutral float-left" title="Mixer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, many
+      <span class="lastupdated">
+        Last updated on Jul 24, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+
+<script type="text/javascript" src="../_static/tcs_theme.js"></script>
+
+
+
+</body>
+</html>

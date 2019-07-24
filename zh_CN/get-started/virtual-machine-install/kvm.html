@@ -1,0 +1,554 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh-CN" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh-CN" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Run Clear Linux* OS as a KVM guest OS &mdash; Documentation for Clear Linux* project</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'',
+              LANGUAGE:'zh_CN',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" />
+    <link rel="next" title="Install a Clear Linux* OS VM in VirtualBox*" href="virtualbox-cl-installer.html" />
+    <link rel="prev" title="Use Hyper-V*" href="hyper-v.html" />
+
+<link rel="stylesheet" href="../../_static/tcs_theme.css" type="text/css" />
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #007ab2" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Clear Linux* Project Docs
+          
+
+          
+            
+            <img src="../../_static/clearlinux.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Clear Linux</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Language Versions</dt>
+        
+          <dd><a href="/clearlinux/get-started/virtual-machine-install/kvm.html">English</a></dd>
+        
+          <dd><a href="/clearlinux/zh_CN/get-started/virtual-machine-install/kvm.html">Chinese</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Document Versions</dt>
+        
+          <dd><a href="/clearlinux/get-started/virtual-machine-install/kvm.html">latest</a></dd>
+        
+          <dd><a href="/clearlinux/L19.01/get-started/virtual-machine-install/kvm.html">L19.01</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>clearlinux.org links</dt>
+          <dd>
+            <a href="https://www.clearlinux.org/">Project Home</a>
+          </dd>
+          <dd>
+            <a href="https://github.com/clearlinux/clear-linux-documentation">GitHub</a>
+          </dd>
+      </dl>
+    </div>
+  </div>
+  
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../get-started.html">Get started</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../get-started.html#pre-install">Pre-install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../get-started.html#install">Install</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../get-started.html#install-in-a-virtual-machine">Install in a virtual machine</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="gce.html">Launch Clear Linux* OS Compute Engine on Google Cloud Platform*</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hyper-v.html">Use Hyper-V*</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Run Clear Linux* OS as a KVM guest OS</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#install-qemu-kvm">Install QEMU-KVM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#download-and-launch-the-virtual-machine">Download and launch the virtual machine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ssh-access-into-the-virtual-machine">SSH access into the virtual machine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#optional-add-the-gnome-display-manager-gdm">Optional: Add the GNOME Display Manager (GDM)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="virtualbox-cl-installer.html">Install a Clear Linux* OS VM in VirtualBox*</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmw-player.html">Install Clear Linux* OS as a VMware* Workstation Player guest OS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmw-player-preconf.html">Run pre-configured Clear Linux* OS image as a VMware* Workstation Player guest OS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmware-esxi-install-cl.html">Install Clear Linux* OS as a VMware* ESXi guest OS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vmware-esxi-preconfigured-cl-image.html">Run preconfigured Clear Linux* OS image as a VMware* ESXi guest OS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../guides/maintenance/increase-virtual-disk-size.html">Increase virtual disk size of an image</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tooling/tooling.html">How to Clear</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/guides.html">Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../FAQ/faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Clear Linux* Project Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+
+<header id="header">
+  <div class="padding-md--left-right">
+
+    <div class="header__site_info">
+           <div class="header__site_info_name">
+             <a href ="https://clearlinux.org"> Clear Linux* Project</a>
+           </div>
+    </div>
+    <nav class="header__menu">
+        <ul class="header__menu_list">
+                         <li class="header__menu_list_item green  ">
+                <a tabindex='1' href="https://clearlinux.org/about">About</a>
+              </li>
+                         <li class="header__menu_list_item purple  ">
+                <a tabindex='1' href="https://clearlinux.org/developer">Developer</a>
+              </li>
+                         <li class="header__menu_list_item blue  ">
+                <a tabindex='1' href="https://clearlinux.org/software">Software</a>
+              </li>
+        </ul>
+    </nav>
+
+  </div>
+
+
+
+</header>
+
+
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../get-started.html">Get started</a> &raquo;</li>
+        
+      <li>Run Clear Linux* OS as a KVM guest OS</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/clearlinux/clear-linux-documentation/blob/rtd-theme/source/get-started/virtual-machine-install/kvm.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="run-cl-attr-as-a-kvm-guest-os">
+<span id="kvm"></span><h1>Run Clear Linux* OS as a KVM guest OS</h1>
+<p>This page explains how to run Clear Linux* OS in a virtualized environment using
+<abbr title="Kernel-based Virtual Machine">KVM</abbr>.</p>
+<div class="contents local topic" id="id1">
+<ul class="simple">
+<li><a class="reference internal" href="#install-qemu-kvm" id="id3">Install QEMU-KVM</a></li>
+<li><a class="reference internal" href="#download-and-launch-the-virtual-machine" id="id4">Download and launch the virtual machine</a></li>
+<li><a class="reference internal" href="#ssh-access-into-the-virtual-machine" id="id5">SSH access into the virtual machine</a></li>
+<li><a class="reference internal" href="#optional-add-the-gnome-display-manager-gdm" id="id6">Optional: Add the GNOME Display Manager (GDM)</a></li>
+</ul>
+</div>
+<div class="section" id="install-qemu-kvm">
+<h2><a class="toc-backref" href="#id3">Install QEMU-KVM</a></h2>
+<ol class="arabic">
+<li><p class="first">Enable the <a class="reference external" href="https://www.intel.com/content/www/us/en/virtualization/virtualization-technology/intel-virtualization-technology.html">Intel® Virtualization Technology</a> (Intel® VT) and the
+<a class="reference external" href="https://software.intel.com/en-us/articles/intel-virtualization-technology-for-directed-io-vt-d-enhancing-intel-platforms-for-efficient-virtualization-of-io-devices">Intel® Virtualization Technology for Directed I/O</a> (Intel® VT-d) in the
+host machine’s BIOS.</p>
+</li>
+<li><p class="first">Log in and open a terminal emulator.</p>
+</li>
+<li><p class="first">Install <cite>QEMU*-KVM</cite> on the host machine. Below are some example distros.</p>
+<ul>
+<li><p class="first">On Clear Linux OS:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo swupd bundle-add kvm-host
+</pre></div>
+</div>
+</li>
+<li><p class="first">On Ubuntu* 18.04 LTS Desktop:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt-get install qemu-kvm
+</pre></div>
+</div>
+</li>
+<li><p class="first">On Mint* 19.1 “Cinnamon” Desktop:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt-get install qemu-kvm
+</pre></div>
+</div>
+</li>
+<li><p class="first">On Fedora* 30 Workstation:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo dnf install qemu-kvm
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ol>
+</div>
+<div class="section" id="download-and-launch-the-virtual-machine">
+<h2><a class="toc-backref" href="#id4">Download and launch the virtual machine</a></h2>
+<ol class="arabic">
+<li><p class="first">Download the latest pre-built Clear Linux OS KVM image file from
+the <a class="reference external" href="https://cdn.download.clearlinux.org/image/">image</a> directory. Look for
+<code class="docutils literal notranslate"><span class="pre">clear-&lt;version&gt;-kvm.img.xz</span></code>.  You can also use this command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl -O https://cdn.download.clearlinux.org/image/<span class="k">$(</span>curl https://cdn.download.clearlinux.org/image/latest-images <span class="p">|</span> grep <span class="s1">&#39;[0-9]&#39;</span>-kvm<span class="s1">&#39;\.&#39;</span><span class="k">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Uncompress the downloaded image:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>unxz -v clear-&lt;version&gt;-kvm.img.xz
+</pre></div>
+</div>
+</li>
+<li><p class="first">Download the 3 OVMF files (<cite>OVMF.fd</cite>, <cite>OVMF_CODE.fd</cite>, <cite>OVMF_VARS.fd</cite>) that
+provides UEFI  support for virtual machines.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl -O https://cdn.download.clearlinux.org/image/OVMF.fd
+curl -O https://cdn.download.clearlinux.org/image/OVMF_CODE.fd
+curl -O https://cdn.download.clearlinux.org/image/OVMF_VARS.fd
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">The default OVMF files from Clear Linux OS may not work for some distro version(s).
+You may get an <cite>ASSERT</cite> in the <cite>debug.log</cite> file when starting the VM.
+If that is the case, use the distro-specific-OVMF files instead.
+For example, the Clear Linux OS OVMF files work for Ubuntu 18.04 LTS, but not for Ubuntu 19.04 LTS.
+Installing and using the OVMF files for Ubuntu 19.04 LTS resolved the <cite>ASSERT</cite> issue.</p>
+</div>
+</li>
+<li><p class="first">Download the <a class="reference external" href="https://cdn.download.clearlinux.org/image/start_qemu.sh">start_qemu.sh</a> script from the
+<a class="reference external" href="https://cdn.download.clearlinux.org/image/">image</a> directory.  This script
+will launch the Clear Linux OS VM and provide console interaction within the same
+terminal emulator window.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl -O https://cdn.download.clearlinux.org/image/start_qemu.sh
+</pre></div>
+</div>
+</li>
+<li><p class="first">Make the script executable:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chmod +x start_qemu.sh
+</pre></div>
+</div>
+</li>
+<li><p class="first">Start the Clear Linux OS KVM virtual machine:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo ./start_qemu.sh clear-&lt;version&gt;-kvm.img
+</pre></div>
+</div>
+</li>
+<li><p class="first">Log in as <code class="docutils literal notranslate"><span class="pre">root</span></code> user and set a new password.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="ssh-access-into-the-virtual-machine">
+<h2><a class="toc-backref" href="#id5">SSH access into the virtual machine</a></h2>
+<p>To interact with the Clear Linux OS VM through SSH instead of the console it was
+launched from, follow these steps.</p>
+<ol class="arabic">
+<li><p class="first">Configure SSH in the Clear Linux OS VM to allow root login:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat &gt; /etc/ssh/sshd_config <span class="s">&lt;&lt; EOF</span>
+<span class="s">  PermitRootLogin yes</span>
+<span class="s">  EOF</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Enable and start SSH server in the Clear Linux OS VM:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>systemctl <span class="nb">enable</span> sshd
+systemctl start sshd
+</pre></div>
+</div>
+</li>
+<li><p class="first">Determine the IP address of the host on which you will launch the VM.
+Substitute &lt;ip-addr-of-kvm-host&gt; in the next step with this information.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ip a
+</pre></div>
+</div>
+</li>
+<li><p class="first">SSH into the Clear Linux OS VM using the default port of  <cite>10022</cite>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh -p <span class="m">10022</span> root@&lt;ip-addr-of-kvm-host&gt;
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="optional-add-the-gnome-display-manager-gdm">
+<h2><a class="toc-backref" href="#id6">Optional: Add the GNOME Display Manager (GDM)</a></h2>
+<p>To add <abbr title="GNOME Display Manager">GDM</abbr> to the Clear Linux OS VM, follow these steps:</p>
+<ol class="arabic">
+<li><p class="first">Shutdown the active Clear Linux OS VM.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>poweroff
+</pre></div>
+</div>
+</li>
+<li><p class="first">Install the Spice viewer on the local host or remote system. Below are some
+example distros.</p>
+<ul>
+<li><p class="first">On Clear Linux:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo swupd bundle-add virt-viewer
+</pre></div>
+</div>
+</li>
+<li><p class="first">On Ubuntu* 18.04 LTS Desktop:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt-get install virt-viewer
+</pre></div>
+</div>
+</li>
+<li><p class="first">On Mint* 19.1 “Cinnamon” Desktop:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt-get install virt-viewer
+</pre></div>
+</div>
+</li>
+<li><p class="first">On Fedora* 30 Workstation:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo dnf install virt-viewer
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p class="first">Modify the <code class="file docutils literal notranslate"><span class="pre">start_qemu.sh</span></code> script to increase memory (<cite>-m</cite>), add
+graphics driver (<cite>-vga</cite>), and add Spice (<cite>-spice</cite>, <cite>-usb</cite>, and
+<cite>-device</cite>) support.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">qemu-system-x86_64 \</span>
+<span class="go">    -enable-kvm \</span>
+<span class="gp">    $</span><span class="o">{</span>UEFI_BIOS<span class="o">}</span> <span class="se">\</span>
+    -smp <span class="nv">sockets</span><span class="o">=</span><span class="m">1</span>,cpus<span class="o">=</span><span class="m">4</span>,cores<span class="o">=</span><span class="m">2</span> -cpu host <span class="se">\</span>
+    -m <span class="m">4096</span> <span class="se">\</span>
+    -vga qxl <span class="se">\</span>
+    -nographic <span class="se">\</span>
+    -spice <span class="nv">port</span><span class="o">=</span><span class="m">5924</span>,disable-ticketing <span class="se">\</span>
+    -usb <span class="se">\</span>
+    -device usb-tablet,bus<span class="o">=</span>usb-bus.0 <span class="se">\</span>
+    -drive <span class="nv">file</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$IMAGE</span><span class="s2">&quot;</span>,if<span class="o">=</span>virtio,aio<span class="o">=</span>threads,format<span class="o">=</span>raw <span class="se">\</span>
+    -netdev user,id<span class="o">=</span>mynet0,hostfwd<span class="o">=</span>tcp::<span class="si">${</span><span class="nv">VMN</span><span class="si">}</span><span class="m">0022</span>-:22,hostfwd<span class="o">=</span>tcp::<span class="si">${</span><span class="nv">VMN</span><span class="si">}</span><span class="m">2375</span>-:2375 <span class="se">\</span>
+    -device virtio-net-pci,netdev<span class="o">=</span>mynet0 <span class="se">\</span>
+    -debugcon file:debug.log -global isa-debugcon.iobase<span class="o">=</span>0x402 <span class="nv">$@</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Due to changes in the <code class="file docutils literal notranslate"><span class="pre">start_qemu.sh</span></code> script from the previous step,
+using the same OVMF files will result in the VM not booting properly and
+you end up in the the UEFI shell.  The easiest way to avoid this is to delete
+the OVMF files and restore the originals before relaunching the VM.</p>
+</li>
+<li><p class="first">Increase the size of the VM by 10GB to accommodate the GDM installation:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>qemu-img resize -f raw clear-&lt;version&gt;-kvm.img +10G
+</pre></div>
+</div>
+</li>
+<li><p class="first">Relaunch the Clear Linux OS VM:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo ./start_qemu.sh clear-&lt;version&gt;-kvm.img
+</pre></div>
+</div>
+</li>
+<li><p class="first">Determine the IP address of the host on which you will launch the VM.
+Substitute &lt;ip-addr-of-kvm-host&gt; in the next step with this information.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ip a
+</pre></div>
+</div>
+</li>
+<li><p class="first">From the local host or remote system, open a new terminal emulator window
+and connect into the Clear Linux OS VM using the Spice viewer:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>remote-viewer spice://&lt;ip-address-of-kvm-host&gt;:5924
+</pre></div>
+</div>
+</li>
+<li><p class="first">Log in as <cite>root</cite> user into the Clear Linux OS VM.</p>
+</li>
+<li><p class="first">Follow these steps from <a class="reference internal" href="../../guides/maintenance/increase-virtual-disk-size.html#increase-virtual-disk-size"><span class="std std-ref">Increase virtual disk size of an image</span></a> to resize the partition of the virtual disk of the VM.</p>
+</li>
+<li><p class="first">Add GDM to the Clear Linux OS VM:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>swupd bundle-add desktop-autostart
+</pre></div>
+</div>
+</li>
+<li><p class="first">Reboot the Clear Linux OS VM to start GDM:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>reboot
+</pre></div>
+</div>
+</li>
+<li><p class="first">Go through the GDM out-of-box experience (OOBE).</p>
+</li>
+<li><p class="first">The default aspect ratio of the GDM GUI for the Clear Linux OS VM is 4:3. To change
+it, use GDM’s <cite>Devices &gt; Displays</cite> setting tool (located at the top-right corner).</p>
+</li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="virtualbox-cl-installer.html" class="btn btn-neutral float-right" title="Install a Clear Linux* OS VM in VirtualBox*" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="hyper-v.html" class="btn btn-neutral float-left" title="Use Hyper-V*" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, many
+      <span class="lastupdated">
+        最后更新于 7月 24, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+
+<script type="text/javascript" src="../../_static/tcs_theme.js"></script>
+
+
+
+</body>
+</html>

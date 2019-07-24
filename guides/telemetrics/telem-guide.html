@@ -1,0 +1,1125 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Telemetrics &mdash; Documentation for Clear Linux* project</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Guides" href="../guides.html" />
+    <link rel="prev" title="swupd" href="../../tooling/swupd-guide.html" />
+
+<link rel="stylesheet" href="../../_static/tcs_theme.css" type="text/css" />
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #007ab2" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Clear Linux* Project Docs
+          
+
+          
+            
+            <img src="../../_static/clearlinux.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Clear Linux</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Language Versions</dt>
+        
+          <dd><a href="/clearlinux/guides/telemetrics/telem-guide.html">English</a></dd>
+        
+          <dd><a href="/clearlinux/zh_CN/guides/telemetrics/telem-guide.html">Chinese</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Document Versions</dt>
+        
+          <dd><a href="/clearlinux/guides/telemetrics/telem-guide.html">latest</a></dd>
+        
+          <dd><a href="/clearlinux/L19.01/guides/telemetrics/telem-guide.html">L19.01</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>clearlinux.org links</dt>
+          <dd>
+            <a href="https://www.clearlinux.org/">Project Home</a>
+          </dd>
+          <dd>
+            <a href="https://github.com/clearlinux/clear-linux-documentation">GitHub</a>
+          </dd>
+      </dl>
+    </div>
+  </div>
+  
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/get-started.html">Get started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../tooling/tooling.html">How to Clear</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../tooling/autoproxy.html">Autoproxy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tooling/autospec.html">autospec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tooling/compatible-kernels.html">Kernels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tooling/debug.html">Debug system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tooling/ister.html">ister.py image builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tooling/mixer.html">mixer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tooling/security.html">OS Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tooling/stateless.html">Stateless</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tooling/swupd-guide.html">swupd</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Telemetrics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#architecture">Architecture</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-use">How to use</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#scenarios">Scenarios</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#enable-or-disable-telemetry">Enable or disable telemetry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#saving-data-locally">Saving data locally</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#set-up-a-back-end-server-to-collect-telemetry-records">Set up a back-end server to collect telemetry records</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#create-records-with-telem-record-gen">Create records with telem-record-gen</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#set-a-static-machine-id">Set a static machine id</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#instrument-your-code-with-the-libtelemetry-api">Instrument your code with the libtelemetry API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#reference">Reference</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#the-telemetry-api">The telemetry API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#client-configuration">Client configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#client-run-time-options">Client run-time options</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../tooling/tooling.html#training">Training</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides.html">Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../FAQ/faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Clear Linux* Project Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+
+<header id="header">
+  <div class="padding-md--left-right">
+
+    <div class="header__site_info">
+           <div class="header__site_info_name">
+             <a href ="https://clearlinux.org"> Clear Linux* Project</a>
+           </div>
+    </div>
+    <nav class="header__menu">
+        <ul class="header__menu_list">
+                         <li class="header__menu_list_item green  ">
+                <a tabindex='1' href="https://clearlinux.org/about">About</a>
+              </li>
+                         <li class="header__menu_list_item purple  ">
+                <a tabindex='1' href="https://clearlinux.org/developer">Developer</a>
+              </li>
+                         <li class="header__menu_list_item blue  ">
+                <a tabindex='1' href="https://clearlinux.org/software">Software</a>
+              </li>
+        </ul>
+    </nav>
+
+  </div>
+
+
+
+</header>
+
+
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../tooling/tooling.html">How to Clear</a> &raquo;</li>
+        
+      <li>Telemetrics</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/clearlinux/clear-linux-documentation/blob/rtd-theme/source/guides/telemetrics/telem-guide.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="telemetrics">
+<span id="telem-guide"></span><h1>Telemetrics</h1>
+<p>This guide describes the Clear Linux* OS telemetry solution.</p>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">Telemetry in Clear Linux OS is <strong>opt-in</strong>. The telemetry client is <strong>not</strong>  active
+and sends <strong>no</strong> data until you explicitly enable it.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The telemetry functionality adheres to <a class="reference external" href="https://www.intel.com/content/www/us/en/privacy/intel-privacy-notice.html">Intel privacy policies</a> regarding
+the collection and use of <abbr title="Personally Identifiable Information">PII</abbr>
+and is open source.</p>
+<p class="last">No intentionally identifiable information about the user or system owner is
+collected.</p>
+</div>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#overview" id="id5">Overview</a></li>
+<li><a class="reference internal" href="#how-to-use" id="id6">How to use</a></li>
+<li><a class="reference internal" href="#examples" id="id7">Examples</a></li>
+<li><a class="reference internal" href="#reference" id="id8">Reference</a></li>
+</ul>
+</div>
+<div class="section" id="overview">
+<h2><a class="toc-backref" href="#id5">Overview</a></h2>
+<p>Telemetrics in Clear Linux OS is a client and server solution used to collect
+data from running Clear Linux OS systems to help quickly identify and fix bugs in the
+OS. Both client and server are customizable, and an API is available on the
+client side for instrumenting your code for debug and analysis.</p>
+<p>Telemetry, one of the key features of Clear Linux OS, enables developers to observe and
+proactively address issues in the OS before end users are impacted.</p>
+<p>Telemetrics is a combination word made from:</p>
+<ul class="simple">
+<li>Telemetry, which is sensing and reporting data.</li>
+<li>Analytics, which is using visualization and statistical inferencing to make
+sense of the reported data.</li>
+</ul>
+<p>Clear Linux OS telemetry reports system-level debug/crash information using specialized
+probes. The probes monitor system tasks such as swupd, kernel oops, machine
+error checks, and the BIOS error report table for unhandled hardware
+failures. Telemetry enables real-time issue reporting to allow system
+developers to focus quickly on an issue and monitor corrective actions.</p>
+<p>Clear Linux OS telemetry is fully customizable and can be used during software
+development for debugging purposes. You can use the libtelemetry library in
+your code to create custom telemetry records. You can also use the
+telem-record-gen utility in script files for light-touch record creation
+where instrumenting code files doesn’t make sense.</p>
+<p>The Clear Linux OS telemetrics solution is an <strong>opt-in</strong> choice on the client side.
+By default, the telemetry client is disabled until you choose to enable it.
+Enabling the client is covered in this guide.</p>
+<div class="section" id="architecture">
+<h3>Architecture</h3>
+<p>Clear Linux OS telemetry has two fundamental components, which are shown in Figure 1:</p>
+<ul class="simple">
+<li>Client: generates and delivers records to the backend server via the network.</li>
+<li>Backend: receives records sent from the client and displays the cumulative
+content through a specialized web interface.</li>
+</ul>
+<div class="figure" id="id3">
+<img alt="Figure 1, Telemetry Architecture" src="../../_images/telemetry-e2e1.png" />
+<p class="caption"><span class="caption-text">Figure 1: <span class="guilabel">|CL| Telemetry Architecture</span></span></p>
+</div>
+<p>The telemetry client provides the front end of the telemetrics solution and
+includes the following components:</p>
+<ul class="simple">
+<li>telemprobd, which is a daemon that receives and prepares telemetry records
+from probes and spools them to disk.</li>
+<li>telempostd, which is a daemon that manages spooled telemetry records and
+delivers these records according to configurable settings.</li>
+<li>probes, which collect specific types of data from the operating system.</li>
+<li>libtelemetry, which is the API that telemetrics probes use to create records.</li>
+</ul>
+<p>The telemetry backend provides the server-side component of the telemetrics
+solution and consists of:</p>
+<ul class="simple">
+<li>Nginx web server.</li>
+<li>Two Flask apps:<ul>
+<li>Collector, which is an ingestion web app for records received from client
+probes.</li>
+<li>TelemetryUI, which is a web app that exposes different views to visualize
+the telemetry data.</li>
+</ul>
+</li>
+<li>PostgreSQL as the underlying database server.</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The default telemetry backend server is hosted by the Intel Clear Linux OS development
+team and is not viewable outside the Intel firewall. To collect your own
+records, you must set up your own telemetry backend server.</p>
+</div>
+</div>
+</div>
+<div class="section" id="how-to-use">
+<h2><a class="toc-backref" href="#id6">How to use</a></h2>
+<p>From a workflow perspective, the Clear Linux OS telemetrics system is straightforward.
+On the client side, the main decisions after installation and enabling
+telemetry involve what to do with the record data generated by the probes.
+You can send the data to the default or a custom backend server, keep the data
+local to the system, or both. The backend server has a more complex setup, but
+once it’s running, it is simple to use and configure.</p>
+<p>This section describes some of the possible scenarios for configuring
+the Clear Linux OS telemetrics system, and suggests which ones make sense according to
+your needs.</p>
+<div class="section" id="scenarios">
+<h3>Scenarios</h3>
+<ol class="arabic">
+<li><p class="first">Enable telemetry:</p>
+<p>Before probes can generate records, the telemetry client daemons must be
+enabled. You can configure the client before enabling by creating a custom
+<code class="file docutils literal notranslate"><span class="pre">telemetrics.conf</span></code> file that you place in the <code class="file docutils literal notranslate"><span class="pre">/etc/telemetrics</span></code>
+directory. If you choose to use the default settings, records will be sent
+to the telemetrics backend server managed by the Clear Linux OS development team at
+Intel.</p>
+</li>
+<li><p class="first">Save record data locally:</p>
+<p>You can configure the telemetry client to save records locally. This is
+convenient when you want instant feedback during a development cycle, or to
+track system issues if you believe there is a machine specific problem. The
+client can be set not to send records at all, or to both keep the records
+locally and send to the backend server.</p>
+</li>
+<li><p class="first">Set up a server to collect data:</p>
+<p>Whether you are managing a network of Clear Linux OS systems or you don’t want to
+send records to the default telemetry server, you can set up a backend
+server to collect your records. The backend server can be installed on any
+Linux system and provides the same dashboard as the default server.</p>
+</li>
+<li><p class="first">Instrument your code with the libtelemetry API:</p>
+<p>The <strong class="command">telemetrics</strong> bundle includes the libtelemetry C library, which
+exposes an API used by the telemprobd and telempostd daemons. You can use
+these in your applications as well. The API documentation is found in the
+<code class="file docutils literal notranslate"><span class="pre">telemetry.h</span></code> file in <a class="reference external" href="https://github.com/clearlinux/telemetrics-client/">Telemetrics client</a> repository.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="examples">
+<h2><a class="toc-backref" href="#id7">Examples</a></h2>
+<div class="contents local topic" id="id1">
+<ul class="simple">
+<li><a class="reference internal" href="#enable-or-disable-telemetry" id="id9">Enable or disable telemetry</a></li>
+<li><a class="reference internal" href="#saving-data-locally" id="id10">Saving data locally</a></li>
+<li><a class="reference internal" href="#set-up-a-back-end-server-to-collect-telemetry-records" id="id11">Set up a back-end server to collect telemetry records</a></li>
+<li><a class="reference internal" href="#create-records-with-telem-record-gen" id="id12">Create records with telem-record-gen</a></li>
+<li><a class="reference internal" href="#set-a-static-machine-id" id="id13">Set a static machine id</a></li>
+<li><a class="reference internal" href="#instrument-your-code-with-the-libtelemetry-api" id="id14">Instrument your code with the libtelemetry API</a></li>
+</ul>
+</div>
+<div class="section" id="enable-or-disable-telemetry">
+<h3><a class="toc-backref" href="#id9">Enable or disable telemetry</a></h3>
+<ol class="arabic">
+<li><p class="first">Enabling during installation:</p>
+<p>During the initial installation of Clear Linux OS, you are requested to join the
+stability enhancement program and allow Clear Linux OS to collect anonymous reports to
+improve system stability. If you choose not to join this program, then the
+telemetry software bundle is not added to your system. Choosing to join will
+automatically enable telemetry on your system after installation is
+complete.</p>
+</li>
+<li><p class="first">Enabling after install:</p>
+<p>To start telemetry on your system, run the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo telemctl start
+</pre></div>
+</div>
+<p>This enables and starts the <strong class="command">telemprobd</strong> and <strong class="command">telempostd</strong>
+daemons. Your system will begin to send telemetry data to the server defined
+in the file <code class="file docutils literal notranslate"><span class="pre">/etc/telemetrics/telemetrics.conf</span></code>. If this file does not
+exist, the <strong class="command">telemprobd</strong> and <strong class="command">telempostd</strong> daemons will use
+the file <code class="file docutils literal notranslate"><span class="pre">/usr/share/defaults/telemetrics/telemetrics.conf</span></code>.</p>
+</li>
+<li><p class="first">Disabling after install:</p>
+<p>To disable both of the telemetry daemons, run the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo telemctl stop
+</pre></div>
+</div>
+</li>
+<li><p class="first">Opt in to telemetry:</p>
+<p>To opt-in to the telemetry services, simply enter the opt-in command, which
+also starts the service:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo telemctl opt-in
+</pre></div>
+</div>
+<p>This removes the <code class="file docutils literal notranslate"><span class="pre">/etc/telemetrics/opt-out</span></code> file, if it exists, and
+starts the telemetry services.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">To opt-in but not immediately start telemetry services, you must
+run the command <strong class="command">sudo telemctl stop</strong> after the <strong class="command">opt-in</strong>
+command is entered. Once you are ready to start the service, enter the
+command <strong class="command">sudo telemctl start</strong>.</p>
+</div>
+</li>
+<li><p class="first">Opt out of telemetry:</p>
+<p>To stop sending telemetrics data from your system, opt out of the telemetry
+service:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo telemctl opt-out
+</pre></div>
+</div>
+<p>This creates the file <code class="file docutils literal notranslate"><span class="pre">/etc/telemetrics/opt-out</span></code> and stops the
+telemetry services.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="saving-data-locally">
+<h3><a class="toc-backref" href="#id10">Saving data locally</a></h3>
+<p>This example requires Clear Linux OS to be installed and telemetry to be enabled on the
+system.</p>
+<p>To change how records are managed, copy the default
+<code class="file docutils literal notranslate"><span class="pre">/usr/share/defaults/telemetrics/telemetrics.conf</span></code> file to
+<code class="file docutils literal notranslate"><span class="pre">/etc/telemetrics/telemetrics.conf</span></code> and edit it. The changes in the
+<code class="file docutils literal notranslate"><span class="pre">/etc/telemetrics/telemetrics.conf</span></code> file will override the defaults in
+the <code class="file docutils literal notranslate"><span class="pre">/usr/share/defaults/telemetrics/telemetrics.conf</span></code> file. You may need
+root permissions to create and edit files in <code class="file docutils literal notranslate"><span class="pre">/etc</span></code>. For each
+example, and for any time you make changes to the configuration file, you must
+restart the client daemons to pick up the changes:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo telemctl restart
+</pre></div>
+</div>
+<p>The <strong class="command">telemctl journal</strong> command gives you access to features and
+options of the telemetry journal to assist with system analytics and debug.
+<strong class="command">telemctl journal</strong> has a number of options to help filter records.
+Use <strong class="command">-h</strong> or <strong class="command">--help</strong> to view usage options.</p>
+<ol class="arabic">
+<li><p class="first">Keep a local copy and send records to backend server:</p>
+<p>To keep a local copy of the telemetry record and also send it on to the
+backend server, we will need to change the
+<span class="guilabel">record_retention_enabled</span> configuration key value to
+<span class="guilabel">true</span>.</p>
+</li>
+<li><p class="first">Keep all records  – don’t send to backend server:</p>
+<p>To keep records on the system without sending them to a backend server, set
+the <span class="guilabel">record_server_delivery_enabled</span> key value to
+<span class="guilabel">false</span>. Note that you will also need to ensure the
+<span class="guilabel">record_retention_enabled</span> configuration key value is set to
+<span class="guilabel">true</span> or the system will not keep local copies.</p>
+</li>
+<li><p class="first">Keep and send records to custom server:</p>
+<p>This assumes you have set up a custom server according to the next example.</p>
+<p>The server is identified by the <span class="guilabel">server</span> setting, and by default
+records are sent to the Clear Linux OS server
+<span class="guilabel">server=https://clr.telemetry.intel.com/v2/collector</span>. To change
+this, you can use an IP address or fully qualified domain name.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="set-up-a-back-end-server-to-collect-telemetry-records">
+<h3><a class="toc-backref" href="#id11">Set up a back-end server to collect telemetry records</a></h3>
+<p>For this example, start with a clean installation of Clear Linux OS on a new system
+using the <a class="reference internal" href="../../get-started/bare-metal-install-server/bare-metal-install-server.html#bare-metal-install-server"><span class="std std-ref">Install Clear Linux* OS on bare metal with live server</span></a> getting started guide and:</p>
+<ol class="arabic">
+<li><p class="first">Join the <span class="guilabel">Stability Enhancement Program</span> to install and
+enable the telemetrics components.</p>
+</li>
+<li><p class="first">Select the manual installation method with the following settings:</p>
+<ul class="simple">
+<li>Set the hostname to <span class="guilabel">clr-telem-server</span>,</li>
+<li>Create an administrative user named <span class="guilabel">clear</span> and add this user
+to sudoers</li>
+</ul>
+</li>
+<li><p class="first">Log in with your administrative user, from your <code class="file docutils literal notranslate"><span class="pre">$HOME</span></code> directory,
+run <strong class="command">git</strong> to clone the <span class="guilabel">telemetrics-backend</span> repository
+into the <code class="file docutils literal notranslate"><span class="pre">$HOME/telemetrics-backend</span></code> directory:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">git clone https://github.com/clearlinux/telemetrics-backend</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You may need to set up the <span class="target" id="index-0"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">https_proxy</span></code> environment variable if
+you have issues reaching github.com.</p>
+</div>
+</li>
+<li><p class="first">Change your current working directory to <code class="file docutils literal notranslate"><span class="pre">telemetrics-backend/scripts</span></code>.</p>
+</li>
+<li><p class="first">Before you install the telemetrics backend with the <code class="file docutils literal notranslate"><span class="pre">deploy.sh</span></code> script
+file in the next step, here is an explanation of the options to be specified:</p>
+<ul class="simple">
+<li><strong class="command">-a install</strong> to perform an install</li>
+<li><strong class="command">-d clr</strong> to install to a Clear Linux OS distro</li>
+<li><strong class="command">-H localhost</strong> to set the domain to localhost</li>
+</ul>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">The <code class="file docutils literal notranslate"><span class="pre">deploy.sh</span></code> shell script has minimal error checking and makes
+several changes to your system. Be sure that the options you define on
+the cmdline are correct before proceeding.</p>
+</div>
+</li>
+<li><p class="first">Run the shell script from the <code class="file docutils literal notranslate"><span class="pre">$HOME/telemetrics-backend/scripts</span></code>
+directory:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">./deploy.sh -H localhost -a install -d clr</span>
+</pre></div>
+</div>
+<p>The script starts and lists all the defined options and prompts you for
+the <span class="guilabel">PostgreSQL</span> database password.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Options:</span>
+<span class="go"> host: localhost</span>
+<span class="go"> distro: clr</span>
+<span class="go"> action: install</span>
+<span class="go"> repo: https://github.com/clearlinux/telemetrics-backend</span>
+<span class="go"> source: master</span>
+<span class="go"> type: git</span>
+<span class="go"> DB password: (default: postgres):</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">For the <span class="guilabel">DB password:</span>, press the <kbd class="kbd docutils literal notranslate">Enter</kbd> key to accept the
+default password <cite>postgres</cite>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <code class="file docutils literal notranslate"><span class="pre">deploy.sh</span></code> script uses <strong class="command">sudo</strong> to run commands and you
+may be prompted to enter your user password at any time while the script
+is executing. If this occurs, enter your user password to execute the
+<strong class="command">sudo</strong> command.</p>
+</div>
+</li>
+<li><p class="first">After all the server components have been installed, you are prompted to
+enter the <span class="guilabel">PostgreSQL</span> database password to change it as
+illustrated below:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Enter password for &#39;postgres&#39; user:</span>
+<span class="go">New password:</span>
+<span class="go">Retype new password:</span>
+<span class="go">passwd: password updated successfully</span>
+</pre></div>
+</div>
+<p>Enter <cite>postgres</cite> for the current value of the password and then enter a new
+password, retype it to verify the new password and the <span class="guilabel">PostgreSQL</span>
+database password will be updated.</p>
+</li>
+<li><p class="first">After the installation is complete, you can use your web browser to view the
+new server by opening the browser on the system and typing in localhost
+in the address bar. You should see a web page similar to the one shown in
+Figure 2 below.</p>
+<div class="figure" id="id4">
+<img alt="Telemetry UI" src="../../_images/telemetry-backend-1.png" />
+<p class="caption"><span class="caption-text">Figure 2: <span class="guilabel">Telemetry UI</span></span></p>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="create-records-with-telem-record-gen">
+<h3><a class="toc-backref" href="#id12">Create records with telem-record-gen</a></h3>
+<p>The telemetrics bundle provides a record generator tool called
+<cite>telem-record-gen</cite>. This tool can be used to create records from shell
+scripts or the command line when writing a probe in C is not desirable.
+Records are sent to the backend server, and can also be echoed to stdout.</p>
+<p>There are three ways to supply the payload to the record.</p>
+<ol class="arabic">
+<li><p class="first">On the command line, use the <strong class="command">-p &lt;string&gt;</strong> option:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>telem-record-gen -c a/b/c -n -o -p <span class="s1">&#39;payload goes here&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">record_format_version: 4</span>
+<span class="go">classification: a/b/c</span>
+<span class="go">severity: 1</span>
+<span class="go">machine_id: FFFFFFFF</span>
+<span class="go">creation_timestamp: 1539023189</span>
+<span class="go">arch: x86_64</span>
+<span class="go">host_type: innotek GmbH|VirtualBox|1.2</span>
+<span class="go">build: 25180</span>
+<span class="go">kernel_version: 4.14.71-404.lts</span>
+<span class="go">payload_format_version: 1</span>
+<span class="go">system_name: clear-linux-os</span>
+<span class="go">board_name: VirtualBox|Oracle Corporation</span>
+<span class="go">cpu_model: Intel(R) Core(TM) i7-4650U CPU @ 1.70GHz</span>
+<span class="go">bios_version: VirtualBox</span>
+<span class="go">event_id: 2236710e4fc11e4a646ce956c7802788</span>
+
+<span class="go">payload goes here</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Specify a file that contains the payload with the option
+<strong class="command">-P path/to/file</strong>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>telem-record-gen -c a/b/c -n -o -P ./payload_file.txt
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">record_format_version: 4</span>
+<span class="go">classification: a/b/c</span>
+<span class="go">severity: 1</span>
+<span class="go">machine_id: FFFFFFFF</span>
+<span class="go">creation_timestamp: 1539023621</span>
+<span class="go">arch: x86_64</span>
+<span class="go">host_type: innotek GmbH|VirtualBox|1.2</span>
+<span class="go">build: 25180</span>
+<span class="go">kernel_version: 4.14.71-404.lts</span>
+<span class="go">payload_format_version: 1</span>
+<span class="go">system_name: clear-linux-os</span>
+<span class="go">board_name: VirtualBox|Oracle Corporation</span>
+<span class="go">cpu_model: Intel(R) Core(TM) i7-4650U CPU @ 1.70GHz</span>
+<span class="go">bios_version: VirtualBox</span>
+<span class="go">event_id: d73d6040afd7693cccdfece479df9795</span>
+
+<span class="go">payload read from file</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">If the <strong class="command">-p</strong> or <strong class="command">-P</strong> options are absent, the tool reads
+from stdin so you can use it in a <code class="file docutils literal notranslate"><span class="pre">heredoc</span></code> in scripts.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#telem-record-gen -c a/b/c -n -o &lt;&lt; HEOF</span>
+payload <span class="nb">read</span> from stdin
+HEOF
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">record_format_version: 4</span>
+<span class="go">classification: a/b/c</span>
+<span class="go">severity: 1</span>
+<span class="go">machine_id: FFFFFFFF</span>
+<span class="go">creation_timestamp: 1539023621</span>
+<span class="go">arch: x86_64</span>
+<span class="go">host_type: innotek GmbH|VirtualBox|1.2</span>
+<span class="go">build: 25180</span>
+<span class="go">kernel_version: 4.14.71-404.lts</span>
+<span class="go">payload_format_version: 1</span>
+<span class="go">system_name: clear-linux-os</span>
+<span class="go">board_name: VirtualBox|Oracle Corporation</span>
+<span class="go">cpu_model: Intel(R) Core(TM) i7-4650U CPU @ 1.70GHz</span>
+<span class="go">bios_version: VirtualBox</span>
+<span class="go">event_id: 2f070e8e71679f2b1f28794e3a6c42ee</span>
+
+<span class="go">payload read from stdin</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="set-a-static-machine-id">
+<h3><a class="toc-backref" href="#id13">Set a static machine id</a></h3>
+<p>The machine id reported by the telemetry client is rotated every three days
+for privacy reasons. If you wish to have a static machine id for testing
+purposes, you can opt in by creating a file named <cite>opt-in-static-machine-id</cite>
+in the directory  <code class="file docutils literal notranslate"><span class="pre">/etc/telemetrics/</span></code>.</p>
+<ol class="arabic">
+<li><p class="first">Create a directory <cite>telemetrics</cite>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo mkdir -p /etc/telemetrics
+</pre></div>
+</div>
+</li>
+<li><p class="first">Create the file and replace the “unique machine ID” with your desired
+static machine ID.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s2">&quot;unique machine ID&quot;</span> <span class="p">|</span> sudo tee /etc/telemetrics/opt-in-static-machine-id
+</pre></div>
+</div>
+</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The machine ID is different than the system hostname.</p>
+</div>
+</div>
+<div class="section" id="instrument-your-code-with-the-libtelemetry-api">
+<h3><a class="toc-backref" href="#id14">Instrument your code with the libtelemetry API</a></h3>
+<div class="section" id="prerequisites">
+<h4>Prerequisites</h4>
+<p>Confirm that the telemetrics header file is located on the system at
+<code class="file docutils literal notranslate"><span class="pre">usr/include/telemetry.h</span></code>  The <a class="reference external" href="https://github.com/clearlinux/telemetrics-client/tree/master/src">latest version</a> of the file can also be
+found on github for reference, but installing the <strong class="command">telemetry</strong> bundle
+will install the header file that matches your Clear Linux OS version.</p>
+<ol class="arabic">
+<li><p class="first">Includes and variables:</p>
+<p>You must include the following headers in your code to use the API:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span>define _GNU_SOURCE
+<span class="gp">#</span>include &lt;stdlib.h&gt;
+<span class="gp">#</span>include &lt;stdio.h&gt;
+<span class="gp">#</span>include &lt;string.h&gt;
+<span class="gp">#</span>include &lt;telemetry.h&gt;
+</pre></div>
+</div>
+<p>Use the following code to create the variables needed to hold the data for
+the record to be created:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">uint32_t severity = 1;</span>
+<span class="go">uint32_t payload_version = 1;</span>
+<span class="go">char classification[30] = &quot;org.clearlinux/hello/world&quot;;</span>
+<span class="go">struct telem_ref *tm_handle = NULL;</span>
+<span class="go">char *payload;</span>
+<span class="go">int ret = 0;</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>Severity:</dt>
+<dd><p class="first last">Type: uint32_t
+Value:  Severity field value. Accepted values are in the range 1-4, with
+1 being the lowest severity, and 4 being the highest severity. Values
+provided outside of this range are clamped to 1 or 4. [low, med, high,
+crit]</p>
+</dd>
+<dt>Payload_version:</dt>
+<dd><p class="first last">Type: uint32_t
+Value: Payload format version. The only supported value right now is 1,
+which indicates that the payload is a freely-formatted (unstructured)
+string. Values greater than 1 are reserved for future use.</p>
+</dd>
+<dt>Classification:</dt>
+<dd><p class="first last">Type: char array
+Value: It should have the form, DOMAIN/PROBENAME/REST: DOMAIN is the
+reverse domain to use as a namespace for the probe (e.g. org.clearlinux);
+PROBENAME is the name of the probe; and REST is an arbitrary value that
+the probe should use to classify the record. The maximum length for the
+classification string is 122 bytes. Each sub-category may be no longer
+than 40 bytes long. Two / delimiters are required.</p>
+</dd>
+<dt>Tm_handle:</dt>
+<dd><p class="first last">Type: Telem_ref struct pointer
+Value:  Struct pointer declared by the caller, The struct is initialized
+if the function returns success.</p>
+</dd>
+<dt>Payload:</dt>
+<dd><p class="first last">Type: char pointer
+Value: The payload to set</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">For this example, we’ll set the payload to “hello” by using
+<strong class="command">asprintf()</strong>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">if (asprintf(&amp;payload, &quot;hello\n&quot;) &lt; 0) {</span>
+<span class="go">  exit(EXIT_FAILURE);</span>
+<span class="go">   }</span>
+</pre></div>
+</div>
+<p>The functions <strong class="command">asprintf()</strong> and <strong class="command">vasprintf()</strong> are analogs of
+<strong class="command">sprintf(3)</strong> and <strong class="command">vsprintf(3)</strong>, except that they allocate a
+string large enough to hold the output including the terminating null byte
+(‘0’), and return a pointer to it via the first argument. This pointer
+should be passed to <strong class="command">free(3)</strong> to release the allocated storage when
+it is no longer needed.</p>
+</li>
+<li><p class="first">Create the new telemetry record:</p>
+<p>The  function  <strong class="command">tm_create_record()</strong> initializes a telemetry record and
+sets the severity and classification of that record, as well as the payload
+version number. The memory needed to store the telemetry record is allocated
+and should be freed with <strong class="command">tm_free_record()</strong> when no longer needed.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">if ((ret = tm_create_record(&amp;tm_handle, severity,    classification, payload_version)) &lt; 0) {</span>
+<span class="go">printf(&quot;Failed to create record: %s\n&quot;, strerror(-ret));</span>
+<span class="go">ret = 1;</span>
+<span class="go">goto fail;</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Set the payload field of a telemetrics record:</p>
+<p>The function <strong class="command">tm_set_payload()</strong> attaches the provided telemetry record
+data to the telemetry record. The current maximum payload size is 8192b.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">if ((ret = tm_set_payload(tm_handle, payload)) &lt; 0) {</span>
+<span class="go">   printf(&quot;Failed to set record payload: %s\n&quot;, strerror(-ret));</span>
+<span class="go">   ret = 1;</span>
+<span class="go">   goto fail;</span>
+<span class="go">}</span>
+<span class="go">free(payload);</span>
+</pre></div>
+</div>
+<p>The <strong class="command">free()</strong> function frees the memory space pointed to by <cite>ptr</cite>, which
+must have been returned by a previous call to <strong class="command">malloc()</strong>,
+<strong class="command">calloc()</strong>, or <strong class="command">realloc()</strong>. Otherwise, or if
+<strong class="command">free(ptr)</strong> has already been called before, undefined behavior
+occurs. If <cite>ptr</cite> is NULL, no operation is performed.</p>
+</li>
+<li><p class="first">Send a record to the telemetrics daemon:</p>
+<p>The function <strong class="command">tm_send_record()</strong> delivers the record to the local
+<strong class="command">telemprobd(1)</strong> service. Since the telemetry record was allocated by
+the program it should be freed with <strong class="command">tm_free_record()</strong> when it is no
+longer needed.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">if ((ret = tm_send_record(tm_handle)) &lt; 0) {</span>
+<span class="go">   printf(&quot;Failed to send record to daemon: %s\n&quot;, strerror(-ret));</span>
+<span class="go">   ret = 1;</span>
+<span class="go">   goto fail;</span>
+<span class="go">} else {</span>
+<span class="go">   printf(&quot;Successfully sent record to daemon.\n&quot;);</span>
+<span class="go">   ret = 0;</span>
+<span class="go">}</span>
+<span class="go">fail:</span>
+<span class="go">tm_free_record(tm_handle);</span>
+<span class="go">tm_handle = NULL;</span>
+
+<span class="go">return ret;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">A full sample application with compiling flags:</p>
+<p>Create a new file <code class="file docutils literal notranslate"><span class="pre">test.c</span></code> and add the following code:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span>define _GNU_SOURCE
+<span class="gp">#</span>include &lt;stdlib.h&gt;
+<span class="gp">#</span>include &lt;stdio.h&gt;
+<span class="gp">#</span>include &lt;string.h&gt;
+<span class="gp">#</span>include &lt;telemetry.h&gt;
+
+<span class="go">int main(int argc, char **argv)</span>
+<span class="go">{</span>
+<span class="go">      uint32_t severity = 1;</span>
+<span class="go">      uint32_t payload_version = 1;</span>
+<span class="go">      char classification[30] = &quot;org.clearlinux/hello/world&quot;;</span>
+<span class="go">      struct telem_ref *tm_handle = NULL;</span>
+<span class="go">      char *payload;</span>
+
+<span class="go">      int ret = 0;</span>
+
+<span class="go">      if (asprintf(&amp;payload, &quot;hello\n&quot;) &lt; 0) {</span>
+<span class="go">              exit(EXIT_FAILURE);</span>
+<span class="go">      }</span>
+
+<span class="go">      if ((ret = tm_create_record(&amp;tm_handle, severity, classification, payload_version)) &lt; 0) {</span>
+<span class="go">              printf(&quot;Failed to create record: %s\n&quot;, strerror(-ret));</span>
+<span class="go">              ret = 1;</span>
+<span class="go">              goto fail;</span>
+<span class="go">      }</span>
+
+<span class="go">      if ((ret = tm_set_payload(tm_handle, payload)) &lt; 0) {</span>
+<span class="go">              printf(&quot;Failed to set record payload: %s\n&quot;, strerror(-ret));</span>
+<span class="go">              ret = 1;</span>
+<span class="go">              goto fail;</span>
+<span class="go">      }</span>
+
+<span class="go">      free(payload);</span>
+
+<span class="go">      if ((ret = tm_send_record(tm_handle)) &lt; 0) {</span>
+<span class="go">              printf(&quot;Failed to send record to daemon: %s\n&quot;, strerror(-ret));</span>
+<span class="go">              ret = 1;</span>
+<span class="go">              goto fail;</span>
+<span class="go">      } else {</span>
+<span class="go">              printf(&quot;Successfully sent record to daemon.\n&quot;);</span>
+<span class="go">              ret = 0;</span>
+<span class="go">      }</span>
+<span class="go">fail:</span>
+<span class="go">      tm_free_record(tm_handle);</span>
+<span class="go">      tm_handle = NULL;</span>
+
+<span class="go">      return ret;</span>
+<span class="go"> }</span>
+</pre></div>
+</div>
+<p>Compile with the gcc compiler, using this command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gcc test.c -ltelemetry -o test_telem
+</pre></div>
+</div>
+<p>Test to ensure the program is working:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./test_telem
+Successfully sent record to daemon.
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">A full example of the <a class="reference external" href="https://github.com/clearlinux/telemetrics-client/tree/master/src/probes/hello.c">heartbeat probe</a> in C is documented in the
+source code.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="section" id="reference">
+<h2><a class="toc-backref" href="#id8">Reference</a></h2>
+<div class="contents local topic" id="id2">
+<ul class="simple">
+<li><a class="reference internal" href="#the-telemetry-api" id="id15">The telemetry API</a></li>
+<li><a class="reference internal" href="#client-configuration" id="id16">Client configuration</a></li>
+<li><a class="reference internal" href="#client-run-time-options" id="id17">Client run-time options</a></li>
+</ul>
+</div>
+<div class="section" id="the-telemetry-api">
+<h3><a class="toc-backref" href="#id15">The telemetry API</a></h3>
+<p>Installing the <strong class="command">telemetrics</strong> bundle includes the libtelemetry C library,
+which exposes an API used by the telemprobd and telempostd daemons. You can
+use these in your applications as well. The API documentation is found in the
+<code class="file docutils literal notranslate"><span class="pre">telemetry.h</span></code> file in <a class="reference external" href="https://github.com/clearlinux/telemetrics-client/">Telemetrics client</a> repository.</p>
+</div>
+<div class="section" id="client-configuration">
+<h3><a class="toc-backref" href="#id16">Client configuration</a></h3>
+<p>The telemetry client will look for the configuration file located at
+<code class="file docutils literal notranslate"><span class="pre">/etc/telemetrics/telemetrics.conf</span></code> and use it if it exists. If the
+file does not exist, the client will use the default configuration located
+at <code class="file docutils literal notranslate"><span class="pre">/usr/share/defaults</span> <span class="pre">telemetrics/telemetrics.conf</span></code>. To modify or
+customize the configuration, copy the file from
+<code class="file docutils literal notranslate"><span class="pre">/usr/share/defaults/telemetrics</span></code> to <code class="file docutils literal notranslate"><span class="pre">/etc/telemetrics</span></code> and edit it.</p>
+<div class="section" id="configuration-options">
+<h4>Configuration options</h4>
+<p>The client uses the following configuration options from the config file:</p>
+<dl class="docutils">
+<dt>server</dt>
+<dd>This specifies the web server to which telempostd sends the telemetry records.</dd>
+<dt>socket_path</dt>
+<dd>This specifies the path of the unix domain socket on which the telemprobd
+listens for connections from the probes.</dd>
+<dt>spool_dir</dt>
+<dd>This configuration option is related to spooling. If the daemon is not able
+to send the telemetry records to the backend server due to reasons such as
+the network availability, then it stores the records in a spool directory.
+This option specifies the path of the spool directory. This directory should
+be owned by the same user as the daemon.</dd>
+<dt>record_expiry</dt>
+<dd>This is the time, in minutes, after which the records in the spool directory
+are deleted by the daemon.</dd>
+<dt>spool_process_time</dt>
+<dd>This specifies the time interval, in seconds, that the daemon waits for
+before checking the spool directory for records. The daemon picks up the
+records in the order of modification date and tries to send the record to the
+server. It sends a maximum of 10 records at a time. If it was able to send a
+record successfully, it deletes the record from the spool. If the daemon
+finds a record older than the “record_expiry” time, then it deletes that
+record. The daemon looks at a maximum of 20 records in a single spool run loop.</dd>
+<dt>rate_limit_enabled</dt>
+<dd>This determines whether rate-limiting is enabled or disabled. When enabled,
+there is a threshold on both records sent within a window of time, and record
+bytes sent within a window a time.</dd>
+<dt>record_burst_limit</dt>
+<dd>This is the maximum amount of records allowed to be passed by the daemon
+within the record_window_length of time. If set to -1, the rate-limiting for
+record bursts is disabled.</dd>
+<dt>record_window_length</dt>
+<dd>The time, in minutes (0-59), that establishes the window length for the
+record_burst_limit. For example, if record_burst_window=1000 and
+record_window_length=15, then no more than 1000 records can be passed within
+any given fifteen-minute window.</dd>
+<dt>byte_burst_limit</dt>
+<dd>This is the maximum amount of bytes that can be passed by the daemon within
+the byte_window_length of time. If set to -1, the rate-limiting for byte
+bursts is disabled.</dd>
+<dt>byte_window_length</dt>
+<dd>This is the time, in minutes (0-59), that establishes the window length for
+the byte_burst_limit.</dd>
+<dt>rate_limit_strategy</dt>
+<dd>This is the strategy chosen once the rate-limiting threshold has been
+reached. Currently the options are ‘drop’ or ‘spool’, with spool being the
+default. If spool is chosen, records will be spooled and sent at a later time.</dd>
+<dt>record_retention_enabled</dt>
+<dd>When this key is enabled (true) the daemon saves a copy of the payload on
+disk from all valid records. To avoid the excessive use of disk space only
+the latest 100 records are kept. The default value for this configuration key
+is false.</dd>
+<dt>record_server_delivery_enabled</dt>
+<dd><blockquote class="first">
+<div>This key controls the delivery of records to server; when enabled (default
+value), the record will be posted to the address in the configuration file.
+If this configuration key is disabled (false), records will not be spooled or
+posted to backend. This configuration key can be used in combination with
+record_retention_enabled to keep copies of telemetry records locally only.</div></blockquote>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Configuration options may change as the telemetry client evolves.
+Please use the comments in the file itself as the most accurate
+reference for configuration.</p>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="client-run-time-options">
+<h3><a class="toc-backref" href="#id17">Client run-time options</a></h3>
+<p>The Clear Linux OS telemetry client provides an admin tool called <span class="guilabel">telemctl</span>
+for managing the telemetry services and probes. The tool is located in
+<code class="file docutils literal notranslate"><span class="pre">/usr/bin</span></code>. Running it with no argument results in the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo telemctl
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">/usr/bin/telemctl - Control actions for telemetry services</span>
+<span class="go">  stop       Stops all running telemetry services</span>
+<span class="go">  start      Starts all telemetry services</span>
+<span class="go">  restart    Restarts all telemetry services</span>
+<span class="go">  is-active  Checks if telemprobd and telempostd are active</span>
+<span class="go">  opt-in     Opts in to telemetry, and starts telemetry services</span>
+<span class="go">  opt-out    Opts out of telemetry, and stops telemetry services</span>
+<span class="go">  journal    Prints telemetry journal contents. Use -h argument for more</span>
+<span class="go">             options</span>
+</pre></div>
+</div>
+<div class="section" id="start-stop-restart">
+<h4>start/stop/restart</h4>
+<p>The commands to start, stop and restart the telemetry services manage all
+required services and probes on the system. There is no need to separately
+start/stop/restart the two client daemons telemprobd and telempostd.
+The <strong class="command">restart</strong> command option will call <strong class="command">telemctl stop</strong>
+followed by <strong class="command">telemctl start</strong> .</p>
+</div>
+<div class="section" id="is-active">
+<h4>is-active</h4>
+<p>The <strong class="command">is-active</strong> option reports whether the two client daemons are
+active. This is useful to verify that the <strong class="command">opt-in</strong> and
+<strong class="command">opt-out</strong> options have taken effect, or to ensure that telemetry is
+functioning on the system. Note that both daemons are verified.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo telemctl is-active
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">telemprobd : active</span>
+<span class="go">telempostd : active</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../guides.html" class="btn btn-neutral float-right" title="Guides" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../../tooling/swupd-guide.html" class="btn btn-neutral float-left" title="swupd" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, many
+      <span class="lastupdated">
+        Last updated on Jul 24, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+
+<script type="text/javascript" src="../../_static/tcs_theme.js"></script>
+
+
+
+</body>
+</html>

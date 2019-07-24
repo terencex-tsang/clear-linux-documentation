@@ -1,0 +1,367 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh-CN" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh-CN" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Get started &mdash; Documentation for Clear Linux* project</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'zh_CN',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="Check processor and EFI firmware compatibility" href="compatibility-check.html" />
+    <link rel="prev" title="Clear Linux* project" href="../index.html" />
+
+<link rel="stylesheet" href="../_static/tcs_theme.css" type="text/css" />
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #007ab2" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Clear Linux* Project Docs
+          
+
+          
+            
+            <img src="../_static/clearlinux.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Clear Linux</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Language Versions</dt>
+        
+          <dd><a href="/clearlinux/get-started/get-started.html">English</a></dd>
+        
+          <dd><a href="/clearlinux/zh_CN/get-started/get-started.html">Chinese</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Document Versions</dt>
+        
+          <dd><a href="/clearlinux/get-started/get-started.html">latest</a></dd>
+        
+          <dd><a href="/clearlinux/L19.01/get-started/get-started.html">L19.01</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>clearlinux.org links</dt>
+          <dd>
+            <a href="https://www.clearlinux.org/">Project Home</a>
+          </dd>
+          <dd>
+            <a href="https://github.com/clearlinux/clear-linux-documentation">GitHub</a>
+          </dd>
+      </dl>
+    </div>
+  </div>
+  
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Get started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pre-install">Pre-install</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="compatibility-check.html">Check processor and EFI firmware compatibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bootable-usb/bootable-usb.html">Create a bootable USB drive</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#install">Install</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="bare-metal-install-desktop/bare-metal-install-desktop.html">Install Clear Linux* OS from the live desktop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bare-metal-install-server/bare-metal-install-server.html">Install Clear Linux* OS on bare metal with live server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-configfile.html">Install using clr-installer and a configuration file</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#install-in-a-virtual-machine">Install in a virtual machine</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="virtual-machine-install/gce.html">Launch Clear Linux* OS Compute Engine on Google Cloud Platform*</a></li>
+<li class="toctree-l3"><a class="reference internal" href="virtual-machine-install/hyper-v.html">Use Hyper-V*</a></li>
+<li class="toctree-l3"><a class="reference internal" href="virtual-machine-install/kvm.html">Run Clear Linux* OS as a KVM guest OS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="virtual-machine-install/virtualbox-cl-installer.html">Install a Clear Linux* OS VM in VirtualBox*</a></li>
+<li class="toctree-l3"><a class="reference internal" href="virtual-machine-install/vmw-player.html">Install Clear Linux* OS as a VMware* Workstation Player guest OS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="virtual-machine-install/vmw-player-preconf.html">Run pre-configured Clear Linux* OS image as a VMware* Workstation Player guest OS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="virtual-machine-install/vmware-esxi-install-cl.html">Install Clear Linux* OS as a VMware* ESXi guest OS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="virtual-machine-install/vmware-esxi-preconfigured-cl-image.html">Run preconfigured Clear Linux* OS image as a VMware* ESXi guest OS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../guides/maintenance/increase-virtual-disk-size.html">Increase virtual disk size of an image</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tooling/tooling.html">How to Clear</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/guides.html">Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ/faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Clear Linux* Project Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+
+<header id="header">
+  <div class="padding-md--left-right">
+
+    <div class="header__site_info">
+           <div class="header__site_info_name">
+             <a href ="https://clearlinux.org"> Clear Linux* Project</a>
+           </div>
+    </div>
+    <nav class="header__menu">
+        <ul class="header__menu_list">
+                         <li class="header__menu_list_item green  ">
+                <a tabindex='1' href="https://clearlinux.org/about">About</a>
+              </li>
+                         <li class="header__menu_list_item purple  ">
+                <a tabindex='1' href="https://clearlinux.org/developer">Developer</a>
+              </li>
+                         <li class="header__menu_list_item blue  ">
+                <a tabindex='1' href="https://clearlinux.org/software">Software</a>
+              </li>
+        </ul>
+    </nav>
+
+  </div>
+
+
+
+</header>
+
+
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Get started</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/clearlinux/clear-linux-documentation/blob/rtd-theme/source/get-started/get-started.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="get-started">
+<span id="id1"></span><h1>Get started</h1>
+<p>The Get Started section guides you through the requirements and installation of
+Clear Linux* OS. Follow these step-by-step intructions to get started with Clear Linux OS, fast.</p>
+<div class="section" id="pre-install">
+<h2>Pre-install</h2>
+<p>There are a couple of things to take care of before you install.</p>
+<ul class="simple">
+<li><a class="reference internal" href="../reference/system-requirements.html#system-requirements"><span class="std std-ref">Recommended minimum system requirements</span></a></li>
+<li><a class="reference internal" href="compatibility-check.html#compatibility-check"><span class="std std-ref">Check processor and EFI firmware compatibility</span></a></li>
+<li><a class="reference internal" href="bootable-usb/bootable-usb.html#bootable-usb"><span class="std std-ref">Create a bootable USB drive</span></a></li>
+</ul>
+<p>When installing Clear Linux* OS in a VM, consider which kernel to use.</p>
+<ul class="simple">
+<li><a class="reference internal" href="../tooling/compatible-kernels.html#vm-kernels"><span class="std std-ref">Compatible VM kernels</span></a></li>
+</ul>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+<div class="section" id="install">
+<h2>Install</h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="bare-metal-install-desktop/bare-metal-install-desktop.html">Install Clear Linux* OS from the live desktop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bare-metal-install-server/bare-metal-install-server.html">Install Clear Linux* OS on bare metal with live server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install-configfile.html">Install using clr-installer and a configuration file</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="install-in-a-virtual-machine">
+<span id="virtual-machine-install"></span><h2>Install in a virtual machine</h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="virtual-machine-install/gce.html">Launch Clear Linux* OS Compute Engine on Google Cloud Platform*</a></li>
+<li class="toctree-l1"><a class="reference internal" href="virtual-machine-install/hyper-v.html">Use Hyper-V*</a></li>
+<li class="toctree-l1"><a class="reference internal" href="virtual-machine-install/kvm.html">Run Clear Linux* OS as a KVM guest OS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="virtual-machine-install/virtualbox-cl-installer.html">Install a Clear Linux* OS VM in VirtualBox*</a></li>
+<li class="toctree-l1"><a class="reference internal" href="virtual-machine-install/vmw-player.html">Install Clear Linux* OS as a VMware* Workstation Player guest OS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="virtual-machine-install/vmw-player-preconf.html">Run pre-configured Clear Linux* OS image as a VMware* Workstation Player guest OS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="virtual-machine-install/vmware-esxi-install-cl.html">Install Clear Linux* OS as a VMware* ESXi guest OS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="virtual-machine-install/vmware-esxi-preconfigured-cl-image.html">Run preconfigured Clear Linux* OS image as a VMware* ESXi guest OS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/maintenance/increase-virtual-disk-size.html">Increase virtual disk size of an image</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="compatibility-check.html" class="btn btn-neutral float-right" title="Check processor and EFI firmware compatibility" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../index.html" class="btn btn-neutral float-left" title="Clear Linux* project" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, many
+      <span class="lastupdated">
+        最后更新于 7月 24, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+
+<script type="text/javascript" src="../_static/tcs_theme.js"></script>
+
+
+
+</body>
+</html>

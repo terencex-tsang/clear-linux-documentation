@@ -1,0 +1,392 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh-CN" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh-CN" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Debug system &mdash; Documentation for Clear Linux* project</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'zh_CN',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="ister.py image builder" href="ister.html" />
+    <link rel="prev" title="Kernels" href="compatible-kernels.html" />
+
+<link rel="stylesheet" href="../_static/tcs_theme.css" type="text/css" />
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #007ab2" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Clear Linux* Project Docs
+          
+
+          
+            
+            <img src="../_static/clearlinux.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Clear Linux</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Language Versions</dt>
+        
+          <dd><a href="/clearlinux/tooling/debug.html">English</a></dd>
+        
+          <dd><a href="/clearlinux/zh_CN/tooling/debug.html">Chinese</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Document Versions</dt>
+        
+          <dd><a href="/clearlinux/tooling/debug.html">latest</a></dd>
+        
+          <dd><a href="/clearlinux/L19.01/tooling/debug.html">L19.01</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>clearlinux.org links</dt>
+          <dd>
+            <a href="https://www.clearlinux.org/">Project Home</a>
+          </dd>
+          <dd>
+            <a href="https://github.com/clearlinux/clear-linux-documentation">GitHub</a>
+          </dd>
+      </dl>
+    </div>
+  </div>
+  
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/get-started.html">Get started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="tooling.html">How to Clear</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="autoproxy.html">Autoproxy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autospec.html">autospec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compatible-kernels.html">Kernels</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Debug system</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#background">Background</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#implementation">Implementation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ister.html">ister.py image builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mixer.html">mixer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">OS Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stateless.html">Stateless</a></li>
+<li class="toctree-l2"><a class="reference internal" href="swupd-guide.html">swupd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/telemetrics/telem-guide.html">Telemetrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tooling.html#training">Training</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/guides.html">Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ/faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Clear Linux* Project Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+
+<header id="header">
+  <div class="padding-md--left-right">
+
+    <div class="header__site_info">
+           <div class="header__site_info_name">
+             <a href ="https://clearlinux.org"> Clear Linux* Project</a>
+           </div>
+    </div>
+    <nav class="header__menu">
+        <ul class="header__menu_list">
+                         <li class="header__menu_list_item green  ">
+                <a tabindex='1' href="https://clearlinux.org/about">About</a>
+              </li>
+                         <li class="header__menu_list_item purple  ">
+                <a tabindex='1' href="https://clearlinux.org/developer">Developer</a>
+              </li>
+                         <li class="header__menu_list_item blue  ">
+                <a tabindex='1' href="https://clearlinux.org/software">Software</a>
+              </li>
+        </ul>
+    </nav>
+
+  </div>
+
+
+
+</header>
+
+
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="tooling.html">How to Clear</a> &raquo;</li>
+        
+      <li>Debug system</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/clearlinux/clear-linux-documentation/blob/rtd-theme/source/tooling/debug.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="debug-system">
+<span id="debug"></span><h1>Debug system</h1>
+<p>Clear Linux* OS introduces a novel approach to system software debugging using
+<em>clr-debug-info</em>. On the client side, the Clear Linux OS debug system obtains any
+necessary debug information on-the-fly over a network during a debugging
+session. On the server side, the system curates and compresses debug
+information into small pieces for efficient downloading.</p>
+<p>For developers, this avoids the interruption during debugging that usually
+happens when debug information is missing. This can be especially useful on
+systems where storage is limited.</p>
+<div class="contents local topic" id="id1">
+<ul class="simple">
+<li><a class="reference internal" href="#background" id="id3">Background</a></li>
+<li><a class="reference internal" href="#usage" id="id4">Usage</a></li>
+<li><a class="reference internal" href="#implementation" id="id5">Implementation</a></li>
+</ul>
+</div>
+<div class="section" id="background">
+<h2><a class="toc-backref" href="#id3">Background</a></h2>
+<p>Software that is compiled and packaged for general usage in an operating
+system typically only contains components that are used to execute the
+program, such as binaries and libraries. Extra developer data, such as the
+actual source code and symbol information, are separated and excluded for
+efficiency.</p>
+<p>The debug information helps relate binary code to human readable source code
+lines and variables. Most of the time, this auxiliary information
+is not needed;
+however without it, debugging a program results in limited visibility.</p>
+</div>
+<div class="section" id="usage">
+<h2><a class="toc-backref" href="#id4">Usage</a></h2>
+<p>The clr-debug-info system is integrated into Clear Linux OS and seamlessly engages once
+installed.</p>
+<ol class="arabic">
+<li><p class="first">Install the <em>dev-utils</em> bundle.</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">swupd</span> <span class="n">bundle</span><span class="o">-</span><span class="n">add</span> <span class="n">dev</span><span class="o">-</span><span class="n">utils</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">The <em>telemetrics</em> and <em>performance-tools</em> bundles also include
+clr-debug-info.</p>
+</div>
+</li>
+<li><p class="first">Start a debugging session against a program using a debugger, such as GDB.
+For example, to debug <em>gnome-control-center</em> execute the following
+command:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gdb</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">gnome</span><span class="o">-</span><span class="n">control</span><span class="o">-</span><span class="n">center</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>As you step through the program and debug information is needed, the
+clr_debug_daemon obtains it in the background.</p>
+</div>
+<div class="section" id="implementation">
+<h2><a class="toc-backref" href="#id5">Implementation</a></h2>
+<p>The implementation of the Clear Linux OS debug system is open source and available on
+GitHub at: <a class="reference external" href="https://github.com/clearlinux/clr-debug-info/">https://github.com/clearlinux/clr-debug-info/</a></p>
+<div class="figure" id="id2">
+<a class="reference internal image-reference" href="../_images/debug-diagram.png"><img alt="Debug system communication flow" src="../_images/debug-diagram.png" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-text">Figure 1: The communication flow of the Clear Linux OS debug system</span></p>
+</div>
+<p>The Clear Linux OS debug system implements a <abbr title="filesystem in userspace">FUSE</abbr>
+filesystem mounted at <code class="file docutils literal notranslate"><span class="pre">/usr/lib/debug</span></code> and <code class="file docutils literal notranslate"><span class="pre">/usr/src/debug</span></code>. The
+FUSE filesystem starts automatically. You can verify its status by executing
+<strong class="command">systemctl status clr_debug_fuse.service</strong>.</p>
+<p>The <em>clr_debug_daemon</em> is responsible for fetching the appropriate package
+debug content from the server and making it available for any debugging
+programs that need it. It is socket activated whenever a request to the local
+FUSE filesystem occurs. You can verify its status with <strong class="command">systemctl
+status clr_debug_daemon.service</strong>.</p>
+<p>Clear Linux OS hosts debuginfo content packaged for consumption by Clear Linux OS debug clients at
+<a class="reference external" href="https://download.clearlinux.org/debuginfo/">https://download.clearlinux.org/debuginfo/</a></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ister.html" class="btn btn-neutral float-right" title="ister.py image builder" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="compatible-kernels.html" class="btn btn-neutral float-left" title="Kernels" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, many
+      <span class="lastupdated">
+        最后更新于 7月 24, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+
+<script type="text/javascript" src="../_static/tcs_theme.js"></script>
+
+
+
+</body>
+</html>

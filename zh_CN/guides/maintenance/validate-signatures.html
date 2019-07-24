@@ -1,0 +1,453 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh-CN" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh-CN" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Validate signatures &mdash; Documentation for Clear Linux* project</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'',
+              LANGUAGE:'zh_CN',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" />
+    <link rel="next" title="Deploy at Scale" href="../deploy-at-scale.html" />
+    <link rel="prev" title="Set the time" href="time.html" />
+
+<link rel="stylesheet" href="../../_static/tcs_theme.css" type="text/css" />
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #007ab2" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Clear Linux* Project Docs
+          
+
+          
+            
+            <img src="../../_static/clearlinux.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Clear Linux</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Language Versions</dt>
+        
+          <dd><a href="/clearlinux/guides/maintenance/validate-signatures.html">English</a></dd>
+        
+          <dd><a href="/clearlinux/zh_CN/guides/maintenance/validate-signatures.html">Chinese</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Document Versions</dt>
+        
+          <dd><a href="/clearlinux/guides/maintenance/validate-signatures.html">latest</a></dd>
+        
+          <dd><a href="/clearlinux/L19.01/guides/maintenance/validate-signatures.html">L19.01</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>clearlinux.org links</dt>
+          <dd>
+            <a href="https://www.clearlinux.org/">Project Home</a>
+          </dd>
+          <dd>
+            <a href="https://github.com/clearlinux/clear-linux-documentation">GitHub</a>
+          </dd>
+      </dl>
+    </div>
+  </div>
+  
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/get-started.html">Get started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tooling/tooling.html">How to Clear</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides.html">Guides</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../guides.html#maintenance">Maintenance</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="architect-lifecycle.html">Architect the life-cycle of Clear Linux* OS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="assign-static-ip.html">Assign a static IP address</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bulk-provision.html">Bulk provision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cpu-performance.html">CPU Power and Performance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer-workstation.html">Developer Workstation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="download-verify-decompress.html">Download, verify, and decompress a Clear Linux* OS image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="enable-user-space.html">Create and enable a new user space</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fix-broken-install.html">Fix a broken installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hostname.html">Modify hostname</a></li>
+<li class="toctree-l3"><a class="reference internal" href="increase-virtual-disk-size.html">Increase virtual disk size of an image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="query-upstream.html">Query package info from upstream repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="restart.html">Restart system services after an OS update</a></li>
+<li class="toctree-l3"><a class="reference internal" href="time.html">Set the time</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Validate signatures</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#image-content-validation">Image content validation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#update-content-validation">Update content validation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../deploy-at-scale.html">Deploy at Scale</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides.html#network">Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides.html#kernel">Kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides.html#stacks">Stacks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../FAQ/faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Clear Linux* Project Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+
+<header id="header">
+  <div class="padding-md--left-right">
+
+    <div class="header__site_info">
+           <div class="header__site_info_name">
+             <a href ="https://clearlinux.org"> Clear Linux* Project</a>
+           </div>
+    </div>
+    <nav class="header__menu">
+        <ul class="header__menu_list">
+                         <li class="header__menu_list_item green  ">
+                <a tabindex='1' href="https://clearlinux.org/about">About</a>
+              </li>
+                         <li class="header__menu_list_item purple  ">
+                <a tabindex='1' href="https://clearlinux.org/developer">Developer</a>
+              </li>
+                         <li class="header__menu_list_item blue  ">
+                <a tabindex='1' href="https://clearlinux.org/software">Software</a>
+              </li>
+        </ul>
+    </nav>
+
+  </div>
+
+
+
+</header>
+
+
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../guides.html">Guides</a> &raquo;</li>
+        
+      <li>Validate signatures</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/clearlinux/clear-linux-documentation/blob/rtd-theme/source/guides/maintenance/validate-signatures.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="validate-signatures">
+<span id="id1"></span><h1>Validate signatures</h1>
+<p>This guide describes how to validate the contents of a Clear Linux* OS image.</p>
+<div class="contents local topic" id="id2">
+<ul class="simple">
+<li><a class="reference internal" href="#overview" id="id4">Overview</a></li>
+<li><a class="reference internal" href="#image-content-validation" id="id5">Image content validation</a></li>
+<li><a class="reference internal" href="#update-content-validation" id="id6">Update content validation</a></li>
+</ul>
+</div>
+<div class="section" id="overview">
+<h2><a class="toc-backref" href="#id4">Overview</a></h2>
+<p>Validating the contents of an image is a manual process and is the same process
+that <a class="reference internal" href="../../tooling/swupd-guide.html#swupd-guide"><span class="std std-ref">swupd</span></a> performs internally.</p>
+<p>Clear Linux OS offers a way to validate the content of an image or an update. All
+validation of content works by creating and signing a hash. A valid signature
+creates a chain of trust. A broken chain of trust, seen as an invalid
+signature, means the content is not valid.</p>
+</div>
+<div class="section" id="image-content-validation">
+<span id="id3"></span><h2><a class="toc-backref" href="#id5">Image content validation</a></h2>
+<p>In the steps below, we used the installer image of the latest release
+of Clear Linux OS. You may use any image of Clear Linux OS you choose.</p>
+<ol class="arabic">
+<li><p class="first">Download the image, the signature of the SHA512 sum of the image, and the
+Clear Linux OS certificate used for signing the SHA512 sum.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> Image
+<span class="go">curl -O https://cdn.download.clearlinux.org/current/clear-$(curl https://cdn.download.clearlinux.org/latest)-installer.img.xz</span>
+<span class="gp">#</span> Signature of SHA512 sum of image
+<span class="go">curl -O https://cdn.download.clearlinux.org/current/clear-$(curl https://cdn.download.clearlinux.org/latest)-installer.img.xz-SHA512SUMS.sig</span>
+<span class="gp">#</span> Certificate
+<span class="go">curl -O https://cdn.download.clearlinux.org/releases/$(curl https://cdn.download.clearlinux.org/latest)/clear/ClearLinuxRoot.pem</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Generate the SHA256 sum of the Clear Linux OS certificate.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sha256sum ClearLinuxRoot.pem</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Ensure the generated SHA256 sum of the Clear Linux OS certificate matches the
+following SHA256 sum to verify the integrity of the certificate.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">4b0ca67300727477913c331ff124928a98bcf2fb12c011a855f17cd73137a890  ClearLinuxRoot.pem</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Generate the SHA512 sum of the image and save it to a file.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sha512sum clear-$(curl https://cdn.download.clearlinux.org/latest)-installer.img.xz &gt; sha512sum.out</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Ensure the signature of the SHA512 sum of the image was created using the
+Clear Linux OS certificate. This confirms that the image is trusted and has not
+been modified.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">openssl smime -verify -purpose any -in clear-$(curl https://cdn.download.clearlinux.org/latest)-installer.img.xz-SHA512SUMS.sig -inform der -content sha512sum.out -CAfile ClearLinuxRoot.pem</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">The <strong class="command">-purpose any</strong> option is required when using OpenSSL 1.1.
+If you use an earlier version of OpenSSL, omit this option to perform
+signature validation.  The <strong class="command">openssl version</strong> command may be used
+to determine the version of OpenSSL in use.</p>
+</div>
+</li>
+<li><p class="first">The output should contain “Verification successful”. If the output
+contains “bad_signature” anywhere, then the image is not trustworthy.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="update-content-validation">
+<h2><a class="toc-backref" href="#id6">Update content validation</a></h2>
+<p><strong>swupd</strong> validates all update content automatically before applying the
+update content. The process swupd follows internally is illustrated here
+with manual steps using the latest Clear Linux OS release. There is no need to perform
+these steps manually when performing a <strong class="command">swupd update</strong>.</p>
+<ol class="arabic">
+<li><p class="first">Download the <abbr title="top-level manifest">MoM</abbr>, the signature of the MoM,
+and the Swupd certificate used for signing the signature of the MoM.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> MoM
+<span class="go">curl -O https://cdn.download.clearlinux.org/update/$(curl https://cdn.download.clearlinux.org/latest)/Manifest.MoM</span>
+<span class="gp">#</span> Signature of MoM
+<span class="go">curl -O https://cdn.download.clearlinux.org/update/$(curl https://cdn.download.clearlinux.org/latest)/Manifest.MoM.sig</span>
+<span class="gp">#</span> Swupd certificate
+<span class="go">curl -O https://cdn.download.clearlinux.org/releases/$(curl https://cdn.download.clearlinux.org/latest)/clear/Swupd_Root.pem</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Generate the SHA256 sum of the swupd certificate.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sha256sum Swupd_Root.pem</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Confirm that the generated SHA256 sum of the swupd certificate matches the
+SHA256 sum shown below to verify the integrity of the certificate.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">ff06fc76ec5148040acb4fcb2bc8105cc72f1963b55de0daf3a4ed664c6fe72c  Swupd_Root.pem</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Confirm that the signature of the MoM was created using the Swupd
+certificate. This signature validates the update content is trustworthy and
+has not been modified.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">openssl smime -verify -purpose any -in Manifest.MoM.sig -inform der -content Manifest.MoM -CAfile Swupd_Root.pem</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">The <strong class="command">-purpose any</strong> option is required when using OpenSSL 1.1.
+If you use an earlier version of OpenSSL, omit this option to perform
+signature validation.  The <strong class="command">openssl version</strong> command may be used
+to determine the version of OpenSSL in use.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">The SHA512 sum of the MoM is not generated and then signed. Instead, the
+MoM is signed directly because it is small in size compared to an image of
+Clear Linux OS.</p>
+</div>
+</li>
+<li><p class="first">The output should contain “Verification successful”. If the output
+contains “bad_signature” anywhere, then the MoM cannot be trusted.
+Because the MoM contains a list of hashes for bundle manifests, if the MoM
+cannot be trusted, then the bundle content cannot be trusted.</p>
+</li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../deploy-at-scale.html" class="btn btn-neutral float-right" title="Deploy at Scale" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="time.html" class="btn btn-neutral float-left" title="Set the time" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, many
+      <span class="lastupdated">
+        最后更新于 7月 24, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+
+<script type="text/javascript" src="../../_static/tcs_theme.js"></script>
+
+
+
+</body>
+</html>

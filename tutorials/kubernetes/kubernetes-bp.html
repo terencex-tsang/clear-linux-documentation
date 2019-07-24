@@ -1,0 +1,398 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Kubernetes Best Practices on Clear Linux OS &mdash; Documentation for Clear Linux* project</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Enable YubiKey U2F Support" href="../yubikey-u2f.html" />
+    <link rel="prev" title="Run Kubernetes*" href="kubernetes.html" />
+
+<link rel="stylesheet" href="../../_static/tcs_theme.css" type="text/css" />
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #007ab2" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Clear Linux* Project Docs
+          
+
+          
+            
+            <img src="../../_static/clearlinux.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Clear Linux</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Language Versions</dt>
+        
+          <dd><a href="/clearlinux/tutorials/kubernetes/kubernetes-bp.html">English</a></dd>
+        
+          <dd><a href="/clearlinux/zh_CN/tutorials/kubernetes/kubernetes-bp.html">Chinese</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Document Versions</dt>
+        
+          <dd><a href="/clearlinux/tutorials/kubernetes/kubernetes-bp.html">latest</a></dd>
+        
+          <dd><a href="/clearlinux/L19.01/tutorials/kubernetes/kubernetes-bp.html">L19.01</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>clearlinux.org links</dt>
+          <dd>
+            <a href="https://www.clearlinux.org/">Project Home</a>
+          </dd>
+          <dd>
+            <a href="https://github.com/clearlinux/clear-linux-documentation">GitHub</a>
+          </dd>
+      </dl>
+    </div>
+  </div>
+  
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/get-started.html">Get started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tooling/tooling.html">How to Clear</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/guides.html">Guides</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../tutorials.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../wordpress/wordpress.html">WordPress* on Clear Linux* OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../flatpak/flatpak.html">Use Flatpak* to install applications on Clear Linux* OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/machine-learning.html">TensorFlow* machine learning on Clear Linux* OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docker/docker.html">Run Docker* on Clear Linux* OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../azure.html">Run Clear Linux* OS using Microsoft Azure CLI 2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hadoop.html">Set up a single node cluster with Hadoop*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fmv.html">Use the function multi-version patch generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../aws-web/aws-web.html">Create and launch Clear Linux* OS from Amazon Web Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../smb/smb.html">Enable simple file sharing with a Windows* machine using Samba*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../smb/smb-desktop.html">Connect to Windows* shared location from Clear Linux* OS desktop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../spark.html">Set up a standalone cluster system using Apache* Spark*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kata.html">Install Kata Containers*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kata_migration.html">Migrate Clear Containers to Kata Containers*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kubernetes.html">Run Kubernetes*</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Kubernetes Best Practices on Clear Linux OS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#use-swupd-to-update-clusters">Use swupd to update clusters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#update-the-control-plane">Update the control plane</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#update-worker-nodes">Update worker nodes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../yubikey-u2f.html">Enable YubiKey U2F Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nvidia.html">Install NVIDIA* Drivers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../redis.html">Run Redis on Clear Linux* OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial-proxy.html">Setting up proxy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../FAQ/faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Clear Linux* Project Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+
+<header id="header">
+  <div class="padding-md--left-right">
+
+    <div class="header__site_info">
+           <div class="header__site_info_name">
+             <a href ="https://clearlinux.org"> Clear Linux* Project</a>
+           </div>
+    </div>
+    <nav class="header__menu">
+        <ul class="header__menu_list">
+                         <li class="header__menu_list_item green  ">
+                <a tabindex='1' href="https://clearlinux.org/about">About</a>
+              </li>
+                         <li class="header__menu_list_item purple  ">
+                <a tabindex='1' href="https://clearlinux.org/developer">Developer</a>
+              </li>
+                         <li class="header__menu_list_item blue  ">
+                <a tabindex='1' href="https://clearlinux.org/software">Software</a>
+              </li>
+        </ul>
+    </nav>
+
+  </div>
+
+
+
+</header>
+
+
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../tutorials.html">Tutorials</a> &raquo;</li>
+        
+      <li>Kubernetes Best Practices on Clear Linux OS</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/clearlinux/clear-linux-documentation/blob/rtd-theme/source/tutorials/kubernetes/kubernetes-bp.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="kubernetes-best-practices-on-cl">
+<span id="kubernetes-bp"></span><h1>Kubernetes Best Practices on Clear Linux OS</h1>
+<div class="section" id="use-swupd-to-update-clusters">
+<h2>Use swupd to update clusters</h2>
+<p>This tutorial shows you how to manage your Kubernetes cluster while using
+<strong class="command">swupd</strong> to update Clear Linux* OS.</p>
+<p>In our tutorial <a class="reference internal" href="kubernetes.html#kubernetes"><span class="std std-ref">Run Kubernetes*</span></a>, we explain how to set up a Kubernetes
+cluster on Clear Linux OS using <cite>kubeadm</cite>. <a class="reference external" href="https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm-upgrade/">Kubeadm documentation</a> often builds on the
+assumption that the distribution uses a traditional package manager (e.g.,
+RPM/DEB).</p>
+<p>In contrast, Clear Linux OS uses <cite>swupd</cite> to update the OS, which in this case updates
+all of the kubernetes node and client binaries simultaneously, as part of
+the <cite>cloud-native-basic</cite> bundle (e.g., kubectl, kubeadm, kubelet). Running
+<strong class="command">sudo swupd update</strong> requires special care to ensure the OS
+incorporates the latest Kubernetes upgrades.</p>
+<p>This document describes best practices to manage cluster upgrades with
+<cite>kubeadm</cite> on a Clear Linux OS-based cluster.</p>
+</div>
+<div class="section" id="prerequisites">
+<h2>Prerequisites</h2>
+<p>Assure that you:</p>
+<ul class="simple">
+<li>Completed <a class="reference internal" href="kubernetes.html#kubernetes"><span class="std std-ref">Run Kubernetes*</span></a></li>
+<li>Installed the bundle <cite>cloud-native-basic</cite></li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Other Linux* distros shown in Kubernetes upgrade documentation reflect
+<cite>apt-get update</cite>, <cite>apt-mark hold kubeadm</cite>, and similar commands; however, such commands <strong>are not valid</strong> on Clear Linux OS.</p>
+</div>
+</div>
+<div class="section" id="update-the-control-plane">
+<h2>Update the control plane</h2>
+<ol class="arabic">
+<li><p class="first">Read kubernetes documentation <a class="reference external" href="https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade-1-13/#before-you-begin">before you begin</a>.</p>
+</li>
+<li><p class="first">On your master node, run the command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo swupd update
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If the minor version of Kubernetes changes, Clear Linux OS shows a message-of-the-day, or <cite>motd</cite>. When the <cite>motd</cite> appears, you <strong>must postpone</strong> a kubelet restart on master and nodes until the control plane is properly updated. <strong class="command">swupd update</strong> does not restart services automatically unless explicitly configured to do so.</p>
+</div>
+</li>
+<li><p class="first">Now follow these instructions in kubernetes documentation.</p>
+<ul class="simple">
+<li><a class="reference external" href="https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade-1-13/#upgrade-the-control-plane-node">Upgrade control plane</a></li>
+<li><a class="reference external" href="https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade-1-13/#drain-control-plane-and-worker-nodes">Drain control plane node</a></li>
+<li><a class="reference external" href="https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade-1-13/#restart-the-kubelet-for-all-nodes">Restart Kubelet and undrain node</a></li>
+</ul>
+</li>
+</ol>
+</div>
+<div class="section" id="update-worker-nodes">
+<h2>Update worker nodes</h2>
+<ol class="arabic">
+<li><p class="first">On each worker node, run the command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo swupd update
+</pre></div>
+</div>
+</li>
+<li><p class="first">Now follow these instructions in kubernetes documentation:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade-1-13/#drain-control-plane-and-worker-nodes">Drain node</a></li>
+<li><a class="reference external" href="https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade-1-13/#upgrade-the-kubelet-config-on-worker-nodes">Update kubelet configuration</a></li>
+<li><a class="reference external" href="https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade-1-13/#restart-the-kubelet-for-all-nodes">Restart Kubelet and undrain node</a></li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<div></div></blockquote>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../yubikey-u2f.html" class="btn btn-neutral float-right" title="Enable YubiKey U2F Support" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="kubernetes.html" class="btn btn-neutral float-left" title="Run Kubernetes*" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, many
+      <span class="lastupdated">
+        Last updated on Jul 24, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+
+<script type="text/javascript" src="../../_static/tcs_theme.js"></script>
+
+
+
+</body>
+</html>

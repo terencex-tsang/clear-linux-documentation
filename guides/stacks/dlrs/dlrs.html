@@ -1,0 +1,792 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Deep Learning Reference Stack &mdash; Documentation for Clear Linux* project</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../../',
+              VERSION:'',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Tutorials" href="../../../tutorials/tutorials.html" />
+    <link rel="prev" title="Enable AWS Greengrass* and OpenVINO™ toolkit" href="../greengrass.html" />
+
+<link rel="stylesheet" href="../../../_static/tcs_theme.css" type="text/css" />
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #007ab2" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> Clear Linux* Project Docs
+          
+
+          
+            
+            <img src="../../../_static/clearlinux.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Clear Linux</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Language Versions</dt>
+        
+          <dd><a href="/clearlinux/guides/stacks/dlrs/dlrs.html">English</a></dd>
+        
+          <dd><a href="/clearlinux/zh_CN/guides/stacks/dlrs/dlrs.html">Chinese</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Document Versions</dt>
+        
+          <dd><a href="/clearlinux/guides/stacks/dlrs/dlrs.html">latest</a></dd>
+        
+          <dd><a href="/clearlinux/L19.01/guides/stacks/dlrs/dlrs.html">L19.01</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>clearlinux.org links</dt>
+          <dd>
+            <a href="https://www.clearlinux.org/">Project Home</a>
+          </dd>
+          <dd>
+            <a href="https://github.com/clearlinux/clear-linux-documentation">GitHub</a>
+          </dd>
+      </dl>
+    </div>
+  </div>
+  
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../get-started/get-started.html">Get started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tooling/tooling.html">How to Clear</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../guides.html">Guides</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../guides.html#maintenance">Maintenance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides.html#network">Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../guides.html#kernel">Kernel</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../guides.html#stacks">Stacks</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../dars.html">Data Analytics Reference Stack</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../greengrass.html">Enable AWS Greengrass* and OpenVINO™ toolkit</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Deep Learning Reference Stack</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tensorflow-single-and-multi-node-benchmarks">TensorFlow single and multi-node benchmarks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pytorch-single-and-multi-node-benchmarks">PyTorch single and multi-node benchmarks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#kubeflow-multi-node-benchmarks">Kubeflow multi-node benchmarks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#use-jupyter-notebook">Use Jupyter Notebook</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#uninstallation">Uninstallation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#related-topics">Related topics</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference/reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ/faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Clear Linux* Project Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+
+<header id="header">
+  <div class="padding-md--left-right">
+
+    <div class="header__site_info">
+           <div class="header__site_info_name">
+             <a href ="https://clearlinux.org"> Clear Linux* Project</a>
+           </div>
+    </div>
+    <nav class="header__menu">
+        <ul class="header__menu_list">
+                         <li class="header__menu_list_item green  ">
+                <a tabindex='1' href="https://clearlinux.org/about">About</a>
+              </li>
+                         <li class="header__menu_list_item purple  ">
+                <a tabindex='1' href="https://clearlinux.org/developer">Developer</a>
+              </li>
+                         <li class="header__menu_list_item blue  ">
+                <a tabindex='1' href="https://clearlinux.org/software">Software</a>
+              </li>
+        </ul>
+    </nav>
+
+  </div>
+
+
+
+</header>
+
+
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../guides.html">Guides</a> &raquo;</li>
+        
+      <li>Deep Learning Reference Stack</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/clearlinux/clear-linux-documentation/blob/rtd-theme/source/guides/stacks/dlrs/dlrs.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="deep-learning-reference-stack">
+<span id="dlrs"></span><h1>Deep Learning Reference Stack</h1>
+<p>This guide describes how to run benchmarking workloads for TensorFlow*,
+PyTorch*, and Kubeflow in Clear Linux* OS using the Deep Learning Reference Stack.</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#overview" id="id2">Overview</a></li>
+<li><a class="reference internal" href="#tensorflow-single-and-multi-node-benchmarks" id="id3">TensorFlow single and multi-node benchmarks</a></li>
+<li><a class="reference internal" href="#pytorch-single-and-multi-node-benchmarks" id="id4">PyTorch single and multi-node benchmarks</a></li>
+<li><a class="reference internal" href="#kubeflow-multi-node-benchmarks" id="id5">Kubeflow multi-node benchmarks</a></li>
+<li><a class="reference internal" href="#use-jupyter-notebook" id="id6">Use Jupyter Notebook</a></li>
+<li><a class="reference internal" href="#uninstallation" id="id7">Uninstallation</a></li>
+<li><a class="reference internal" href="#related-topics" id="id8">Related topics</a></li>
+</ul>
+</div>
+<div class="section" id="overview">
+<h2><a class="toc-backref" href="#id2">Overview</a></h2>
+<p>We created the Deep Learning Reference Stack to help AI developers deliver
+the best experience on Intel® Architecture. This stack reduces complexity
+common with deep learning software components, provides flexibility for
+customized solutions, and enables you to quickly prototype and deploy Deep
+Learning workloads. Use this guide to run benchmarking workloads on your
+solution.</p>
+<p>The Deep Learning Reference Stack is available in the following versions:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://hub.docker.com/r/clearlinux/stacks-dlrs-mkl-vnni">Intel MKL-DNN-VNNI</a>, which is optimized using Intel® Math Kernel Library
+for Deep Neural Networks (Intel® MKL-DNN) primitives and introduces support
+for Intel® AVX-512 Vector Neural Network Instructions (VNNI).</li>
+<li><a class="reference external" href="https://hub.docker.com/r/clearlinux/stacks-dlrs-mkl/">Intel MKL-DNN</a>, which includes the TensorFlow framework optimized using
+Intel® Math Kernel Library for Deep Neural Networks (Intel® MKL-DNN)
+primitives.</li>
+<li><a class="reference external" href="https://hub.docker.com/r/clearlinux/stacks-dlrs-oss/">Eigen</a>, which includes <a class="reference external" href="https://www.tensorflow.org/">TensorFlow</a> optimized for Intel® architecture.</li>
+<li><a class="reference external" href="https://hub.docker.com/r/clearlinux/stacks-pytorch-oss">PyTorch with OpenBLAS</a>, which includes PyTorch with OpenBlas.</li>
+<li><a class="reference external" href="https://hub.docker.com/r/clearlinux/stacks-pytorch-mkl">PyTorch with Intel MKL-DNN</a>, which includes PyTorch optimized using Intel®
+Math Kernel Library (Intel® MKL) and Intel MKL-DNN.</li>
+</ul>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p>To take advantage of the Intel® AVX-512 and VNNI functionality with the Deep
+Learning Reference Stack, you must use the following hardware:</p>
+<ul class="last simple">
+<li>Intel® AVX-512 images require an Intel® Xeon® Scalable Platform</li>
+<li>VNNI requires a 2nd generation Intel® Xeon® Scalable Platform</li>
+</ul>
+</div>
+<div class="section" id="stack-features">
+<h3>Stack features</h3>
+<ul class="simple">
+<li><a class="reference external" href="https://clearlinux.org/stacks/deep-learning-reference-stack-v3">DLRS V3.0</a>  release announcement.</li>
+<li>Deep Learning Reference Stack v2.0 including current
+<a class="reference external" href="https://clearlinux.org/stacks/deep-learning-reference-stack-pytorch">PyTorch benchmark</a>.</li>
+<li>Deep Learning Reference Stack v1.0 including current
+<a class="reference external" href="https://clearlinux.org/stacks/deep-learning-reference-stack">TensorFlow benchmark</a> results.</li>
+<li><a class="reference external" href="https://github.com/clearlinux/dockerfiles/blob/master/stacks/dlrs/releasenote.md">DLRS Release notes</a>  on Github* for the latest release of Deep Learning
+Reference Stack.</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The Deep Learning Reference Stack is a collective work, and each piece of
+software within the work has its own license.  Please see the <a class="reference external" href="https://clearlinux.org/stacks/deep-learning/terms-of-use">DLRS Terms of Use</a>
+for more details about licensing and usage of the Deep Learning Reference Stack.</p>
+</div>
+</div>
+<div class="section" id="prerequisites">
+<h3>Prerequisites</h3>
+<ul class="simple">
+<li><a class="reference internal" href="../../../get-started/bare-metal-install-desktop/bare-metal-install-desktop.html#bare-metal-install-desktop"><span class="std std-ref">Install</span></a> Clear Linux OS on your host system</li>
+<li><strong class="command">containers-basic</strong> bundle</li>
+<li><strong class="command">cloud-native-basic</strong> bundle</li>
+</ul>
+<p>In Clear Linux OS, <strong class="command">containers-basic</strong> includes Docker*, which is required for
+TensorFlow and PyTorch benchmarking. Use the <strong class="command">swupd</strong> utility to
+check if <strong class="command">containers-basic</strong> and <strong class="command">cloud-native-basic</strong> are
+present:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo swupd bundle-list
+</pre></div>
+</div>
+<p>To install the <strong class="command">containers-basic</strong> or <strong class="command">cloud-native-basic</strong>
+bundles, enter:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo swupd bundle-add containers-basic cloud-native-basic
+</pre></div>
+</div>
+<p>Docker is not started upon installation of the <strong class="command">containers-basic</strong>
+bundle. To start Docker, enter:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo systemctl start docker
+</pre></div>
+</div>
+<p>To ensure that Kubernetes is correctly installed and configured, follow the
+instructions in <a class="reference internal" href="../../../tutorials/kubernetes/kubernetes.html#kubernetes"><span class="std std-ref">Run Kubernetes*</span></a>.</p>
+</div>
+<div class="section" id="version-compatibility">
+<h3>Version compatibility</h3>
+<p>We validated these steps against the following software package versions:</p>
+<ul class="simple">
+<li>Clear Linux OS 26240 (Minimum supported version)</li>
+<li>Docker 18.06.1</li>
+<li>Kubernetes 1.11.3</li>
+<li>Go 1.11.12</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The Deep Learning Reference Stack was developed to provide the best user
+experience when executed on a Clear Linux OS host.  However, as the stack runs in a
+container environment, you should be able to complete the following sections of this guide on other Linux* distributions, provided they comply with the Docker*, Kubernetes* and Go* package versions listed above. Look for your distribution documentation on how to update packages and manage Docker services.</p>
+</div>
+</div>
+</div>
+<div class="section" id="tensorflow-single-and-multi-node-benchmarks">
+<h2><a class="toc-backref" href="#id3">TensorFlow single and multi-node benchmarks</a></h2>
+<p>This section describes running the <a class="reference external" href="https://www.tensorflow.org/guide/performance/benchmarks">TensorFlow Benchmarks</a> in single node.
+For multi-node testing, replicate these steps for each node. These steps
+provide a template to run other benchmarks, provided that they can invoke
+TensorFlow.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Performance test results for the Deep Learning Reference Stack and for this
+guide were obtained using <cite>runc</cite> as the runtime.</p>
+</div>
+<ol class="arabic">
+<li><p class="first">Download either the <a class="reference external" href="https://hub.docker.com/r/clearlinux/stacks-dlrs-oss/">Eigen</a> or the <a class="reference external" href="https://hub.docker.com/r/clearlinux/stacks-dlrs-mkl/">Intel MKL-DNN</a> Docker image
+from <a class="reference external" href="https://hub.docker.com/">Docker Hub</a>.</p>
+</li>
+<li><p class="first">Run the image with Docker:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker run --name &lt;image name&gt;  --rm -i -t &lt;clearlinux/
+stacks-dlrs-TYPE&gt; bash
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Launching the Docker image with the <strong class="command">-i</strong> argument starts
+interactive mode within the container. Enter the following commands in
+the running container.</p>
+</div>
+</li>
+<li><p class="first">Clone the benchmark repository in the container:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone http://github.com/tensorflow/benchmarks -b cnn_tf_v1.12_compatible
+</pre></div>
+</div>
+</li>
+<li><p class="first">Execute the benchmark script:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python benchmarks/scripts/tf_cnn_benchmarks/tf_cnn_benchmarks.py --device<span class="o">=</span>cpu --model<span class="o">=</span>resnet50 --data_format<span class="o">=</span>NHWC
+</pre></div>
+</div>
+</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>You can replace the model with one of your choice supported by the
+TensorFlow benchmarks.</p>
+<p class="last">If you are using an FP32 based model, it can be converted to an int8 model
+using <a class="reference external" href="https://github.com/IntelAI/tools/blob/master/tensorflow_quantization/README.md#quantization-tools">Intel® quantization tools</a>.</p>
+</div>
+</div>
+<div class="section" id="pytorch-single-and-multi-node-benchmarks">
+<h2><a class="toc-backref" href="#id4">PyTorch single and multi-node benchmarks</a></h2>
+<p>This section describes running the <a class="reference external" href="https://github.com/pytorch/pytorch/blob/master/caffe2/python/convnet_benchmarks.py">PyTorch benchmarks</a> for Caffe2 in
+single node.</p>
+<ol class="arabic">
+<li><p class="first">Download either the <a class="reference external" href="https://hub.docker.com/r/clearlinux/stacks-pytorch-oss">PyTorch with OpenBLAS</a> or the <a class="reference external" href="https://hub.docker.com/r/clearlinux/stacks-pytorch-mkl">PyTorch with Intel
+MKL-DNN</a> Docker image from <a class="reference external" href="https://hub.docker.com/">Docker Hub</a>.</p>
+</li>
+<li><p class="first">Run the image with Docker:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker run --name &lt;image name&gt;  --rm -i -t &lt;clearlinux/stacks-dlrs-TYPE&gt; bash
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Launching the Docker image with the <strong class="command">-i</strong> argument starts
+interactive mode within the container. Enter the following commands in
+the running container.</p>
+</div>
+</li>
+<li><p class="first">Clone the benchmark repository:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/pytorch/pytorch.git
+</pre></div>
+</div>
+</li>
+<li><p class="first">Execute the benchmark script:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> pytorch/caffe2/python
+python convnet_benchmarks.py --batch_size <span class="m">32</span> <span class="se">\</span>
+                      --cpu <span class="se">\</span>
+                      --model AlexNet
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="kubeflow-multi-node-benchmarks">
+<h2><a class="toc-backref" href="#id5">Kubeflow multi-node benchmarks</a></h2>
+<p>The benchmark workload runs in a Kubernetes cluster. The guide uses
+<a class="reference external" href="https://www.kubeflow.org/">Kubeflow</a> for the Machine Learning workload deployment on three nodes.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If you choose the Intel® MKL-DNN or Intel® MKL-DNN-VNNI image, your platform
+must support the Intel® AVX-512 instruction set. Otherwise, an
+<em>illegal instruction</em> error may appear, and you won’t be able to complete this guide.</p>
+</div>
+<div class="section" id="kubernetes-setup">
+<h3>Kubernetes setup</h3>
+<p>Follow the instructions in the <a class="reference internal" href="../../../tutorials/kubernetes/kubernetes.html#kubernetes"><span class="std std-ref">Run Kubernetes*</span></a> tutorial to get set up on
+Clear Linux OS. The Kubernetes community also has instructions for creating a cluster,
+described in <a class="reference external" href="https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/">Creating a single control-plane cluster with kubeadm</a>.</p>
+</div>
+<div class="section" id="kubernetes-networking">
+<h3>Kubernetes networking</h3>
+<p>We used <a class="reference external" href="https://github.com/coreos/flannel">flannel</a> as the network provider for these tests. If you
+prefer a different network layer, refer to the Kubernetes network documentation
+described in <a class="reference external" href="https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/">Creating a single control-plane cluster with kubeadm</a> for setup.</p>
+</div>
+<div class="section" id="kubectl">
+<h3>Kubectl</h3>
+<p>You can use kubectl to run commands against your Kubernetes cluster.  Refer to
+the <a class="reference external" href="https://kubernetes.io/docs/reference/kubectl/overview/">Overview of kubectl</a> for details on syntax and operations. Once you have a
+working cluster on Kubernetes, use the following YAML script to start a pod with
+a simple shell script, and keep the pod open.</p>
+<ol class="arabic">
+<li><p class="first">Copy this example.yaml script to your system:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">apiVersion: v1</span>
+<span class="go">kind: Pod</span>
+<span class="go">metadata:</span>
+<span class="go">  name: example-pod</span>
+<span class="go">  labels:</span>
+<span class="go">    app: ex-pod</span>
+<span class="go">spec:</span>
+<span class="go">  containers:</span>
+<span class="go">  - name: ex-pod-container</span>
+<span class="go">    image: clearlinux/stacks-dlrs-mkl:latest</span>
+<span class="go">    command: [&#39;/bin/bash&#39;, &#39;-c&#39;, &#39;--&#39;]</span>
+<span class="go">    args: [ &quot;while true; do sleep 30; done&quot; ]</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Execute the script with kubectl:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>kubectl apply –f &lt;path-to-yaml-file&gt;/example.yaml
+</pre></div>
+</div>
+</li>
+</ol>
+<p>This script opens a single pod. More robust solutions would create a deployment
+or inject a python script or larger shell script into the container.</p>
+</div>
+<div class="section" id="images">
+<h3>Images</h3>
+<p>You must add <a class="reference external" href="https://github.com/clearlinux/dockerfiles/tree/master/stacks/dlrs/kubeflow">launcher.py</a> to the Docker image to include the Deep
+Learning Reference Stack and put the benchmarks repo in the correct
+location. Note that this guide uses Kubeflow v0.4.0, and cannot guarantee results if you use a different version.</p>
+<p>From the Docker image, run the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir -p /opt
+git clone https://github.com/tensorflow/benchmarks.git /opt/tf-benchmarks
+cp launcher.py /opt
+chmod u+x /opt/*
+</pre></div>
+</div>
+<p>Your entry point becomes: <code class="file docutils literal notranslate"><span class="pre">/opt/launcher.py</span></code>.</p>
+<p>This builds an image that can be consumed directly by TFJob from Kubeflow.</p>
+</div>
+<div class="section" id="ksonnet">
+<h3>ksonnet*</h3>
+<p>Kubeflow uses ksonnet* to manage deployments, so you must install it
+before setting up Kubeflow.</p>
+<p>ksonnet was added to the <strong class="command">cloud-native-basic</strong> bundle in Clear Linux OS version
+27550. If you are using an older Clear Linux OS version (not recommended), you must
+manually install ksonnet as described below.</p>
+<p>On Clear Linux OS, follow these steps:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>swupd bundle-add go-basic-dev
+<span class="nb">export</span> <span class="nv">GOPATH</span><span class="o">=</span><span class="nv">$HOME</span>/go
+<span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$GOPATH</span>/bin
+go get github.com/ksonnet/ksonnet
+<span class="nb">cd</span> <span class="nv">$GOPATH</span>/src/github.com/ksonnet/ksonnet
+make install
+</pre></div>
+</div>
+<p>After the ksonnet installation is complete, ensure that binary <cite>ks</cite> is
+accessible across the environment.</p>
+</div>
+<div class="section" id="kubeflow">
+<h3>Kubeflow</h3>
+<p>Once you have Kubernetes running on your nodes, set up <a class="reference external" href="https://www.kubeflow.org/">Kubeflow</a> by
+following these instructions from the <a class="reference external" href="https://www.kubeflow.org/docs/started/getting-started/">Getting Started with Kubeflow</a> guide.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">KUBEFLOW_SRC</span><span class="o">=</span><span class="nv">$HOME</span>/kflow
+<span class="nb">export</span> <span class="nv">KUBEFLOW_TAG</span><span class="o">=</span><span class="s2">&quot;v0.4.1&quot;</span>
+<span class="nb">export</span> <span class="nv">KFAPP</span><span class="o">=</span><span class="s2">&quot;kflow_app&quot;</span>
+<span class="nb">export</span> <span class="nv">K8S_NAMESPACE</span><span class="o">=</span><span class="s2">&quot;kubeflow&quot;</span>
+
+mkdir <span class="si">${</span><span class="nv">KUBEFLOW_SRC</span><span class="si">}</span>
+<span class="nb">cd</span> <span class="si">${</span><span class="nv">KUBEFLOW_SRC</span><span class="si">}</span>
+ks init <span class="si">${</span><span class="nv">KFAPP</span><span class="si">}</span>
+<span class="nb">cd</span> <span class="si">${</span><span class="nv">KFAPP</span><span class="si">}</span>
+ks registry add kubeflow github.com/kubeflow/kubeflow/tree/<span class="si">${</span><span class="nv">KUBEFLOW_TAG</span><span class="si">}</span>/kubeflow
+ks pkg install kubeflow/common
+ks pkg install kubeflow/tf-training
+</pre></div>
+</div>
+<p>Next, deploy the primary package for our purposes: tf-job-operator.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ks env rm default
+kubectl create namespace <span class="si">${</span><span class="nv">K8S_NAMESPACE</span><span class="si">}</span>
+ks env add default --namespace <span class="s2">&quot;</span><span class="si">${</span><span class="nv">K8S_NAMESPACE</span><span class="si">}</span><span class="s2">&quot;</span>
+ks generate tf-job-operator tf-job-operator
+ks apply default -c tf-job-operator
+</pre></div>
+</div>
+<p>This creates the CustomResourceDefinition (CRD) endpoint to launch a TFJob.</p>
+</div>
+<div class="section" id="run-a-tfjob">
+<h3>Run a TFJob</h3>
+<ol class="arabic">
+<li><p class="first">Get the ksonnet registries for deploying TFJobs from <a class="reference external" href="https://github.com/clearlinux/dockerfiles/tree/master/stacks/dlrs/kubeflow/dlrs-tfjob">dlrs-tfjob</a>.</p>
+</li>
+<li><p class="first">Install the TFJob components as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ks registry add dlrs-tfjob github.com/clearlinux/dockerfiles/tree/master/stacks/dlrs/kubeflow/dlrs-tfjob
+
+ks pkg install dlrs-tfjob/dlrs-bench
+</pre></div>
+</div>
+</li>
+<li><p class="first">Export the image name to use for the deployment:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">DLRS_IMAGE</span><span class="o">=</span>&lt;docker_name&gt;
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Replace &lt;docker_name&gt; with the image name you specified in previous steps.</p>
+</div>
+</li>
+<li><p class="first">Generate Kubernetes manifests for the workloads and apply them using these
+commands:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ks generate dlrs-resnet50 dlrsresnet50 --name<span class="o">=</span>dlrsresnet50 --image<span class="o">=</span><span class="si">${</span><span class="nv">DLRS_IMAGE</span><span class="si">}</span>
+ks generate dlrs-alexnet dlrsalexnet --name<span class="o">=</span>dlrsalexnet --image<span class="o">=</span><span class="si">${</span><span class="nv">DLRS_IMAGE</span><span class="si">}</span>
+ks apply default -c dlrsresnet50
+ks apply default -c dlrsalexnet
+</pre></div>
+</div>
+</li>
+</ol>
+<p>This replicates and deploys three test setups in your Kubernetes cluster.</p>
+</div>
+<div class="section" id="results-of-running-this-guide">
+<h3>Results of running this guide</h3>
+<p>You must parse the logs of the Kubernetes pod to retrieve performance
+data. The pods will still exist post-completion and will be in
+‘Completed’ state. You can get the logs from any of the pods to inspect the
+benchmark results. More information about Kubernetes logging is available
+in the Kubernetes <a class="reference external" href="https://kubernetes.io/docs/concepts/cluster-administration/logging/">Logging Architecture</a> documentation.</p>
+</div>
+</div>
+<div class="section" id="use-jupyter-notebook">
+<h2><a class="toc-backref" href="#id6">Use Jupyter Notebook</a></h2>
+<p>This example uses the <a class="reference external" href="https://hub.docker.com/r/clearlinux/stacks-pytorch-oss">PyTorch with OpenBLAS</a> container image. After it is
+downloaded, run the Docker image with <strong class="command">-p</strong> to specify the shared port
+between the container and the host. This example uses port 8888.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker run --name pytorchtest --rm -i -t -p <span class="m">8888</span>:8888 clearlinux/stacks-pytorch-oss bash
+</pre></div>
+</div>
+<p>After you start the container, launch the Jupyter Notebook. This
+command is executed inside the container image.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter notebook --ip <span class="m">0</span>.0.0.0 --no-browser --allow-root
+</pre></div>
+</div>
+<p>After the notebook has loaded, you will see output similar to the following:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">To access the notebook, open this file in a browser: file:///.local/share/jupyter/runtime/nbserver-16-open.html</span>
+<span class="go">Or copy and paste one of these URLs:</span>
+<span class="go">http://(846e526765e3 or 127.0.0.1):8888/?token=6357dbd072bea7287c5f0b85d31d70df344f5d8843fbfa09</span>
+</pre></div>
+</div>
+<p>From your host system, or any system that can access the host’s IP address,
+start a web browser with the following. If you are not running the browser on
+the host system, replace <strong class="command">127.0.0.1</strong> with the IP address of the host.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>http://127.0.0.1:8888/?token<span class="o">=</span>6357dbd072bea7287c5f0b85d31d70df344f5d8843fbfa09
+</pre></div>
+</div>
+<p>Your browser displays the following:</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../../../_images/dlrs-fig-1.png"><img alt="Jupyter Notebook" src="../../../_images/dlrs-fig-1.png" style="width: 520.0px; height: 201.0px;" /></a>
+</div>
+<p>Figure 1: <span class="guilabel">Jupyter Notebook</span></p>
+<p>To create a new notebook, click <span class="guilabel">New</span> and select <span class="guilabel">Python 3</span>.</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../../../_images/dlrs-fig-2.png"><img alt="Create a new notebook" src="../../../_images/dlrs-fig-2.png" style="width: 548.5px; height: 241.5px;" /></a>
+</div>
+<p>Figure 2: Create a new notebook</p>
+<p>A new, blank notebook is displayed, with a cell ready for input.</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../../../_images/dlrs-fig-3.png"><img alt="New blank notebook" src="../../../_images/dlrs-fig-3.png" style="width: 550.5px; height: 254.0px;" /></a>
+</div>
+<p>To verify that PyTorch is working, copy the following snippet into the blank
+cell, and run the cell.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">from __future__ import print_function</span>
+<span class="go">import torch</span>
+<span class="go">x = torch.rand(5, 3)</span>
+<span class="go">print(x)</span>
+</pre></div>
+</div>
+<div class="figure">
+<a class="reference internal image-reference" href="../../../_images/dlrs-fig-4.png"><img alt="Sample code snippet" src="../../../_images/dlrs-fig-4.png" style="width: 550.5px; height: 253.0px;" /></a>
+</div>
+<p>When you run the cell, your output will look something like this:</p>
+<div class="figure">
+<a class="reference internal image-reference" href="../../../_images/dlrs-fig-5.png"><img alt="code output" src="../../../_images/dlrs-fig-5.png" style="width: 550.0px; height: 252.5px;" /></a>
+</div>
+<p>You can continue working in this notebook, or you can download existing
+notebooks to take advantage of the Deep Learning Reference Stack’s optimized
+deep learning frameworks. Refer to <a class="reference external" href="https://jupyter.org/">Jupyter Notebook</a> for details.</p>
+</div>
+<div class="section" id="uninstallation">
+<h2><a class="toc-backref" href="#id7">Uninstallation</a></h2>
+<p>To uninstall the Deep Learning Reference Stack, you can choose to stop the
+container so that it is not using system resources, or you can stop the
+container and delete it to free storage space.</p>
+<p>To stop the container, execute the following from your host system:</p>
+<ol class="arabic">
+<li><p class="first">Find the container’s ID</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker container ls
+</pre></div>
+</div>
+<p>This will result in output similar to the following:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">CONTAINER ID        IMAGE                        COMMAND               CREATED             STATUS              PORTS               NAMES</span>
+<span class="go">e131dc71d339        clearlinux/stacks-dlrs-oss   &quot;/bin/sh -c &#39;bash&#39;&quot;   23 seconds ago      Up 21 seconds                           oss</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">You can then use the ID or container name to stop the container. This example
+uses the name “oss”:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker container stop oss
+</pre></div>
+</div>
+</li>
+<li><p class="first">Verify that the container is not running</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker container ls
+</pre></div>
+</div>
+</li>
+<li><p class="first">To delete the container from your system you need to know the Image ID:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker images
+</pre></div>
+</div>
+<p>This command results in output similar to the following:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">REPOSITORY                   TAG                 IMAGE ID            CREATED             SIZE</span>
+<span class="go">clearlinux/stacks-dlrs-oss   latest              82757ec1648a        4 weeks ago         3.43GB</span>
+<span class="go">clearlinux/stacks-dlrs-mkl   latest              61c178102228        4 weeks ago         2.76GB</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">To remove an image use the image ID:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker rmi 82757ec1648a
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> docker rmi <span class="m">827</span>
+<span class="go">Untagged: clearlinux/stacks-dlrs-oss:latest</span>
+<span class="go">Untagged: clearlinux/stacks-dlrs-oss@sha256:381f4b604537b2cb7fb5b583a8a847a50c4ed776f8e677e2354932eb82f18898</span>
+<span class="go">Deleted: sha256:82757ec1648a906c504e50e43df74ad5fc333deee043dbfe6559c86908fac15e</span>
+<span class="go">Deleted: sha256:e47ecc039d48409b1c62e5ba874921d7f640243a4c3115bb41b3e1009ecb48e4</span>
+<span class="go">Deleted: sha256:50c212235d3c33a3c035e586ff14359d03895c7bc701bb5dfd62dbe0e91fb486</span>
+</pre></div>
+</div>
+<p>Note that you can execute the <strong class="command">docker rmi</strong> command using only the first few characters of the image ID, provided they are unique on the system.</p>
+</li>
+<li><p class="first">Once you have removed the image, you can verify it has been deleted with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker images
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="related-topics">
+<h2><a class="toc-backref" href="#id8">Related topics</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://clearlinux.org/stacks/deep-learning-reference-stack-v3">DLRS V3.0</a> release announcement</li>
+<li><a class="reference external" href="https://www.tensorflow.org/guide/performance/benchmarks">TensorFlow Benchmarks</a></li>
+<li><a class="reference external" href="https://github.com/pytorch/pytorch/blob/master/caffe2/python/convnet_benchmarks.py">PyTorch benchmarks</a></li>
+<li><a class="reference external" href="https://www.kubeflow.org/">Kubeflow</a></li>
+<li><a class="reference internal" href="../../../tutorials/kubernetes/kubernetes.html#kubernetes"><span class="std std-ref">Run Kubernetes*</span></a> tutorial</li>
+<li><a class="reference external" href="https://jupyter.org/">Jupyter Notebook</a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../../tutorials/tutorials.html" class="btn btn-neutral float-right" title="Tutorials" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../greengrass.html" class="btn btn-neutral float-left" title="Enable AWS Greengrass* and OpenVINO™ toolkit" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, many
+      <span class="lastupdated">
+        Last updated on Jul 24, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+
+<script type="text/javascript" src="../../../_static/tcs_theme.js"></script>
+
+
+
+</body>
+</html>

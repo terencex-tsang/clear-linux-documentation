@@ -1,0 +1,412 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Combine multiple interfaces with network bonding &mdash; Documentation for Clear Linux* project</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Remote-desktop to a host using VNC" href="vnc.html" />
+    <link rel="prev" title="Install over the network with iPXE" href="ipxe-install.html" />
+
+<link rel="stylesheet" href="../../_static/tcs_theme.css" type="text/css" />
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #007ab2" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Clear Linux* Project Docs
+          
+
+          
+            
+            <img src="../../_static/clearlinux.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Clear Linux</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Language Versions</dt>
+        
+          <dd><a href="/clearlinux/guides/network/network-bonding.html">English</a></dd>
+        
+          <dd><a href="/clearlinux/zh_CN/guides/network/network-bonding.html">Chinese</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Document Versions</dt>
+        
+          <dd><a href="/clearlinux/guides/network/network-bonding.html">latest</a></dd>
+        
+          <dd><a href="/clearlinux/L19.01/guides/network/network-bonding.html">L19.01</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>clearlinux.org links</dt>
+          <dd>
+            <a href="https://www.clearlinux.org/">Project Home</a>
+          </dd>
+          <dd>
+            <a href="https://github.com/clearlinux/clear-linux-documentation">GitHub</a>
+          </dd>
+      </dl>
+    </div>
+  </div>
+  
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/get-started.html">Get started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tooling/tooling.html">How to Clear</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides.html">Guides</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../guides.html#maintenance">Maintenance</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../guides.html#network">Network</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="custom-clear-container.html">Build a custom Clear Linux* OS based Docker container image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dpdk.html">Use DPDK to send packets between platforms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ipxe-install.html">Install over the network with iPXE</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Combine multiple interfaces with network bonding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vnc.html">Remote-desktop to a host using VNC</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides.html#kernel">Kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides.html#stacks">Stacks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../FAQ/faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Clear Linux* Project Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+
+<header id="header">
+  <div class="padding-md--left-right">
+
+    <div class="header__site_info">
+           <div class="header__site_info_name">
+             <a href ="https://clearlinux.org"> Clear Linux* Project</a>
+           </div>
+    </div>
+    <nav class="header__menu">
+        <ul class="header__menu_list">
+                         <li class="header__menu_list_item green  ">
+                <a tabindex='1' href="https://clearlinux.org/about">About</a>
+              </li>
+                         <li class="header__menu_list_item purple  ">
+                <a tabindex='1' href="https://clearlinux.org/developer">Developer</a>
+              </li>
+                         <li class="header__menu_list_item blue  ">
+                <a tabindex='1' href="https://clearlinux.org/software">Software</a>
+              </li>
+        </ul>
+    </nav>
+
+  </div>
+
+
+
+</header>
+
+
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../guides.html">Guides</a> &raquo;</li>
+        
+      <li>Combine multiple interfaces with network bonding</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/clearlinux/clear-linux-documentation/blob/rtd-theme/source/guides/network/network-bonding.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="combine-multiple-interfaces-with-network-bonding">
+<span id="network-bonding"></span><h1>Combine multiple interfaces with network bonding</h1>
+<p>This guide describes how to configure systemd to use the <strong class="command">bonding</strong>
+driver.</p>
+<p>Network bonding combines multiple network interfaces into a single logical
+interface to provide redundancy and bandwidth aggregation.</p>
+<p>Clear Linux* OS includes the Linux <a class="reference external" href="https://www.kernel.org/doc/Documentation/networking/bonding.txt">Bonding driver</a> and <a class="reference external" href="https://www.kernel.org/doc/Documentation/networking/team.txt">Team driver</a> .</p>
+<p>The example demonstrates how to:</p>
+<ul class="simple">
+<li>Bond all four ports of a quad-port NIC in 802.3ad mode.</li>
+<li>Enable jumbo frames to optimize large data transfers on the local network.</li>
+</ul>
+<p>Your NICs and network switch must support 802.3ad mode and jumbo frames. The
+example explains how to configure your NICs for both features. Your switch may
+require additional configuration. See your switch documentation for details.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You must run all commands in this guide as root.</p>
+</div>
+<ol class="arabic">
+<li><p class="first">Log in and get root privileges.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo -s</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Create the <code class="file docutils literal notranslate"><span class="pre">/etc/systemd/network</span></code> directory.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir -p /etc/systemd/network
+</pre></div>
+</div>
+<p>The <code class="file docutils literal notranslate"><span class="pre">/etc/systemd/network</span></code> directory contains configuration files and
+network settings for the virtual device and its underlying physical
+interfaces.</p>
+</li>
+<li><p class="first">Configure systemd to create a virtual network device called <cite>bond1</cite>. Use a
+text editor to create a file named <code class="file docutils literal notranslate"><span class="pre">30-bond1.netdev</span></code>.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">[NetDev]</span>
+<span class="go">Name=bond1</span>
+<span class="go">Kind=bond</span>
+
+<span class="go">[Bond]</span>
+<span class="go">Mode=802.3ad</span>
+<span class="go">TransmitHashPolicy=layer3+4</span>
+<span class="go">MIIMonitorSec=1s</span>
+<span class="go">LACPTransmitRate=fast</span>
+</pre></div>
+</div>
+<p>Refer to the <a class="reference external" href="https://www.freedesktop.org/software/systemd/man/systemd.netdev.html">systemd.netdev</a> manpage for <code class="file docutils literal notranslate"><span class="pre">30-bond1.netdev</span></code> file
+syntax. This example is based on Example 9 on the manpage. Modify the
+example for your configuration.</p>
+</li>
+<li><p class="first">Configure the slave interfaces. Create a text file named
+<code class="file docutils literal notranslate"><span class="pre">30-bond1-enp1s0.network</span></code>. Assign the slave interfaces to the virtual
+<cite>bond1</cite> device and use the syntax shown in <a class="reference external" href="https://www.freedesktop.org/software/systemd/man/systemd.network.html">systemd.network</a>.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">[Match]</span>
+<span class="go">Name=enp1s0f*</span>
+
+<span class="go">[Network]</span>
+<span class="go">Bond=bond1</span>
+
+<span class="go">[Link]</span>
+<span class="go">MTUBytes=9000</span>
+</pre></div>
+</div>
+<p>The example bonds all four ports of a quad-port NIC as a slave of <cite>bond1</cite>.
+The example uses a wildcard match because the NIC names are in the range
+<cite>enp1s0f0-enp1s0f3</cite>. If your NIC names are not wildcard-compatible, create
+a separate <code class="file docutils literal notranslate"><span class="pre">.network</span></code> file for each NIC.</p>
+<p>For best results, do not assign addresses or DHCP support to the individual
+NICs.</p>
+<p>The <cite>MTUBytes</cite> setting enables jumbo frames of up to 9000 bytes. Your
+switch may require additional configuration to support this setting.</p>
+</li>
+<li><p class="first">Configure the bonded interface in a file named <code class="file docutils literal notranslate"><span class="pre">30-bond1.network</span></code>.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">[Match]</span>
+<span class="go">Name=bond1</span>
+
+<span class="go">[Network]</span>
+<span class="go">BindCarrier=enp1s0f0 enp1s0f1 enp1s0f2 enp1s0f3</span>
+<span class="go">Address=192.168.1.201/24</span>
+
+<span class="go">[Link]</span>
+<span class="go">MTUBytes=9000</span>
+</pre></div>
+</div>
+<p><cite>bond1</cite> is a virtual interface with no physical link status.</p>
+<p><cite>BindCarrier</cite> indicates that the <cite>bond1</cite> link status is determined by the
+status of the listed slave devices.</p>
+<p><cite>Address</cite> contains an IP address that you assign to the logical interface.
+DHCP bonded interfaces are complex and outside the scope of this example.</p>
+<p><cite>MTUBytes</cite> must be set to 9000 on all slave interfaces and on the bonded
+interface for successful jumbo frames operation. If <cite>MTUBytes</cite> is not the
+same on all interfaces, then the lowest value is used.</p>
+</li>
+<li><p class="first">Apply the new network configuration with the command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>systemctl restart systemd-networkd
+</pre></div>
+</div>
+<p>The <cite>MTUBytes</cite> settings do not take effect until you reboot or manually
+apply the settings with a utility such as ifconfig.</p>
+</li>
+</ol>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="vnc.html" class="btn btn-neutral float-right" title="Remote-desktop to a host using VNC" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ipxe-install.html" class="btn btn-neutral float-left" title="Install over the network with iPXE" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, many
+      <span class="lastupdated">
+        Last updated on Jul 24, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+
+<script type="text/javascript" src="../../_static/tcs_theme.js"></script>
+
+
+
+</body>
+</html>

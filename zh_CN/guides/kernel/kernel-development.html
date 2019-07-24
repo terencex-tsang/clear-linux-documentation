@@ -1,0 +1,740 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh-CN" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh-CN" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Kernel development &mdash; Documentation for Clear Linux* project</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'',
+              LANGUAGE:'zh_CN',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" />
+    <link rel="next" title="Add kernel modules manually" href="kernel-modules.html" />
+    <link rel="prev" title="Remote-desktop to a host using VNC" href="../network/vnc.html" />
+
+<link rel="stylesheet" href="../../_static/tcs_theme.css" type="text/css" />
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #007ab2" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Clear Linux* Project Docs
+          
+
+          
+            
+            <img src="../../_static/clearlinux.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Clear Linux</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Language Versions</dt>
+        
+          <dd><a href="/clearlinux/guides/kernel/kernel-development.html">English</a></dd>
+        
+          <dd><a href="/clearlinux/zh_CN/guides/kernel/kernel-development.html">Chinese</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Document Versions</dt>
+        
+          <dd><a href="/clearlinux/guides/kernel/kernel-development.html">latest</a></dd>
+        
+          <dd><a href="/clearlinux/L19.01/guides/kernel/kernel-development.html">L19.01</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>clearlinux.org links</dt>
+          <dd>
+            <a href="https://www.clearlinux.org/">Project Home</a>
+          </dd>
+          <dd>
+            <a href="https://github.com/clearlinux/clear-linux-documentation">GitHub</a>
+          </dd>
+      </dl>
+    </div>
+  </div>
+  
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/get-started.html">Get started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tooling/tooling.html">How to Clear</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides.html">Guides</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../guides.html#maintenance">Maintenance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides.html#network">Network</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../guides.html#kernel">Kernel</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Kernel development</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#request-changes-be-included-with-the-cl-kernel">Request changes be included with the Clear Linux OS kernel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#set-up-kernel-development-environment">Set up kernel development environment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#customize-the-linux-kernel-source">Customize the Linux kernel source</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#build-and-install-the-kernel">Build and install the kernel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#related-topics">Related topics</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="kernel-modules.html">Add kernel modules manually</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kernel-modules-dkms.html">Add kernel modules with DKMS</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides.html#stacks">Stacks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../FAQ/faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Clear Linux* Project Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+
+<header id="header">
+  <div class="padding-md--left-right">
+
+    <div class="header__site_info">
+           <div class="header__site_info_name">
+             <a href ="https://clearlinux.org"> Clear Linux* Project</a>
+           </div>
+    </div>
+    <nav class="header__menu">
+        <ul class="header__menu_list">
+                         <li class="header__menu_list_item green  ">
+                <a tabindex='1' href="https://clearlinux.org/about">About</a>
+              </li>
+                         <li class="header__menu_list_item purple  ">
+                <a tabindex='1' href="https://clearlinux.org/developer">Developer</a>
+              </li>
+                         <li class="header__menu_list_item blue  ">
+                <a tabindex='1' href="https://clearlinux.org/software">Software</a>
+              </li>
+        </ul>
+    </nav>
+
+  </div>
+
+
+
+</header>
+
+
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../guides.html">Guides</a> &raquo;</li>
+        
+      <li>Kernel development</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/clearlinux/clear-linux-documentation/blob/rtd-theme/source/guides/kernel/kernel-development.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="kernel-development">
+<span id="id1"></span><h1>Kernel development</h1>
+<p>This guide shows how to obtain and compile a Linux* kernel source using
+Clear Linux* OS development tooling.</p>
+<div class="contents local topic" id="id2">
+<ul class="simple">
+<li><a class="reference internal" href="#overview" id="id3">Overview</a></li>
+<li><a class="reference internal" href="#request-changes-be-included-with-the-cl-kernel" id="id4">Request changes be included with the Clear Linux OS kernel</a></li>
+<li><a class="reference internal" href="#set-up-kernel-development-environment" id="id5">Set up kernel development environment</a></li>
+<li><a class="reference internal" href="#customize-the-linux-kernel-source" id="id6">Customize the Linux kernel source</a></li>
+<li><a class="reference internal" href="#build-and-install-the-kernel" id="id7">Build and install the kernel</a></li>
+<li><a class="reference internal" href="#related-topics" id="id8">Related topics</a></li>
+</ul>
+</div>
+<div class="section" id="overview">
+<h2><a class="toc-backref" href="#id2">Overview</a></h2>
+<p>The <a class="reference internal" href="../../tooling/compatible-kernels.html#compatible-kernels"><span class="std std-ref">Kernels</span></a> available in Clear Linux OS aim to be performant and
+practical. In some cases, it may be necessary to modify the kernel to suit your
+specific needs or test new kernel code as a developer.</p>
+<p><a class="reference external" href="https://cdn.download.clearlinux.org/current/source/SRPMS/">Source RPMs (SRPMS)</a> are also available for all Clear Linux OS kernels, and can be
+used for development instead.</p>
+</div>
+<div class="section" id="request-changes-be-included-with-the-cl-kernel">
+<h2><a class="toc-backref" href="#id2">Request changes be included with the Clear Linux OS kernel</a></h2>
+<p>If the kernel modification you need is already open source and likely to be
+useful to others, consider submitting a request to include it in the
+Clear Linux OS kernels. If your change request is accepted, you do not need to maintain
+your own modified kernel.</p>
+<p>Make enhancement requests to the Clear Linux OS <a class="reference external" href="https://github.com/clearlinux/distribution/issues/new/choose">Distribution Project</a> on GitHub*.</p>
+</div>
+<div class="section" id="set-up-kernel-development-environment">
+<h2><a class="toc-backref" href="#id2">Set up kernel development environment</a></h2>
+<p>In some cases, it may be necessary to modify the kernel to suit your specific
+needs or to test new kernel code.</p>
+<p>You can build and install a custom kernel; however you must:</p>
+<ul class="simple">
+<li>Disable Secure Boot</li>
+<li>Maintain any updates to the kernel going forward</li>
+</ul>
+<p>To create a custom kernel, start with the Clear Linux OS development environment.
+Then make changes to the kernel, build it, and install it.</p>
+<div class="section" id="install-the-cl-development-tooling-framework">
+<h3>Install the Clear Linux OS development tooling framework</h3>
+<p>Setup of the workspace and tooling used for building source in Clear Linux OS is mostly
+automated for you with a setup script. It uses tools from the
+<strong class="command">os-clr-on-clr</strong> bundle.</p>
+<p>The setup script creates a workspace in the <code class="file docutils literal notranslate"><span class="pre">clearlinux</span></code> folder, with the
+subfolders <code class="file docutils literal notranslate"><span class="pre">Makefile</span></code>, <code class="file docutils literal notranslate"><span class="pre">packages</span></code>, and <code class="file docutils literal notranslate"><span class="pre">projects</span></code>. The
+<code class="file docutils literal notranslate"><span class="pre">projects</span></code> folder contains the main tools used for making packages in
+Clear Linux OS <code class="file docutils literal notranslate"><span class="pre">autospec</span></code> and <code class="file docutils literal notranslate"><span class="pre">common</span></code>.</p>
+<p>Follow these steps to setup the workspace and tooling for building source:</p>
+<ol class="arabic">
+<li><p class="first">Install the <strong class="command">os-clr-on-clr</strong> bundle:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo swupd bundle-add os-clr-on-clr
+</pre></div>
+</div>
+</li>
+<li><p class="first">Download the <code class="file docutils literal notranslate"><span class="pre">user-setup.sh</span></code> script:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl -O https://raw.githubusercontent.com/clearlinux/common/master/user-setup.sh
+</pre></div>
+</div>
+</li>
+<li><p class="first">Make <code class="file docutils literal notranslate"><span class="pre">user-setup.sh</span></code> executable:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chmod +x user-setup.sh
+</pre></div>
+</div>
+</li>
+<li><p class="first">Run the script as an unprivileged user:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./user-setup.sh
+</pre></div>
+</div>
+</li>
+<li><p class="first">After the script completes, log out and log in again to complete the setup
+process.</p>
+</li>
+<li><p class="first">Set your Git user email and username for the repos on your system:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git config --global user.email <span class="s2">&quot;you@example.com&quot;</span>
+git config --global user.name <span class="s2">&quot;Your Name&quot;</span>
+</pre></div>
+</div>
+<p>This global setting is used by Clear Linux OS tools that make use of Git.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="clone-the-kernel-package">
+<h3>Clone the kernel package</h3>
+<p>Clone the existing kernel package repository from Clear Linux OS as a starting point.</p>
+<ol class="arabic">
+<li><p class="first">Clone the Linux kernel package from Clear Linux OS. Using the
+<strong class="command">make clone_&lt;PACKAGENAME&gt;</strong> command in the
+<code class="file docutils literal notranslate"><span class="pre">clearlinux/</span></code> directory clones the package from the
+<a class="reference external" href="https://github.com/clearlinux-pkgs">clearlinux-pkgs</a> repo on GitHub.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/clearlinux
+make clone_linux
+</pre></div>
+</div>
+</li>
+<li><p class="first">Navigate into the cloned package directory.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/clearlinux/packages/linux
+</pre></div>
+</div>
+</li>
+</ol>
+<p>The “linux” package is the kernel that comes with Clear Linux OS in the <strong class="command">kernel-native</strong>
+bundle. Alternatively, you can use a different kernel variant as the base for
+modification. For a list of kernel package names which you can clone instead,
+see the <a class="reference external" href="https://github.com/clearlinux-pkgs">clearlinux-pkgs</a> repo on GitHub.</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">The latest version of the Clear Linux OS kernel package is pulled as a starting
+point. An older version can pulled by switching to different git tag by using
+<strong class="command">git checkout tag/&lt;TAG_NAME&gt;</strong>.</p>
+</div>
+</div>
+<div class="section" id="change-the-kernel-version">
+<h3>Change the kernel version</h3>
+<p>Clear Linux OS tends to use the latest kernel available from <a class="reference external" href="https://www.kernel.org/">kernel.org</a>, the Linux
+upstream. The kernel version that will be built can be changed in the
+RPM SPEC file. While most packages in Clear Linux are typically packaged
+using <a class="reference internal" href="../../concepts/autospec-about.html#autospec-about"><span class="std std-ref">Autospec</span></a>, the kernel is not. This means control files
+provided by autospec are not available and changes must be made manually.</p>
+<ol class="arabic">
+<li><p class="first">Open the Linux kernel package RPM SPEC file in an editor.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">$EDITOR</span> linux.spec
+</pre></div>
+</div>
+</li>
+<li><p class="first">Modify the Version, Release, and Source0 URL entries at the top of the
+file to change the version of Linux kernel that will be compiled.</p>
+<p>A list of current and available kernel release can be found on
+<a class="reference external" href="https://www.kernel.org/">kernel.org</a>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Name:           linux
+Version:        <span class="m">4</span>.20.8
+Release:        <span class="m">696</span>
+License:        GPL-2.0
+Summary:        The Linux kernel
+Url:            http://www.kernel.org/
+Group:          kernel
+Source0:        https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.20.8.tar.xz
+Source1:        config
+Source2:        cmdline
+
+%define ktarget  native
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<ul class="last simple">
+<li>Consider changing the Name from <em>linux</em> in the RPM spec file to easily
+identify a modified kernel.</li>
+<li>Consider changing the ktarget from <em>native</em> in the RPM spec file to
+easily identify a modified kernel.</li>
+</ul>
+</div>
+</li>
+<li><p class="first">Commit and save the changes to the file.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="pull-a-copy-of-the-linux-kernel-source-code">
+<span id="pull-copy-kernel-source"></span><h3>Pull a copy of the Linux kernel source code</h3>
+<p>Obtain a local copy of the source code to make modifications against.</p>
+<ol class="arabic">
+<li><p class="first">Run make sources to pull the kernel source code specified in the RPM
+SPEC file. In the example, it downloads the <code class="file docutils literal notranslate"><span class="pre">linux-4.20.8.tar.xz</span></code> file.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make sources
+</pre></div>
+</div>
+</li>
+<li><p class="first">Extract the kernel source code archive. This will create a working copy
+of the Linux source that you can modify.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tar -xvf linux-4.20.8.tar.xz
+</pre></div>
+</div>
+</li>
+<li><p class="first">Navigate to the extracted directory. In this example, it has been
+extracted into a <code class="file docutils literal notranslate"><span class="pre">linux-4.20.8</span></code> directory.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> linux-4.20.8/
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="customize-the-linux-kernel-source">
+<h2><a class="toc-backref" href="#id2">Customize the Linux kernel source</a></h2>
+<p>After the kernel sources have been obtained, customizations to the kernel
+configuration or source code can be made for inclusion with the kernel
+build. These customizations are optional.</p>
+<div class="section" id="modify-kernel-configuration">
+<h3>Modify kernel configuration</h3>
+<p>The kernel source has many configuration options available to pick support for
+different hardware and software features.</p>
+<p>These configuration values must be provided in the <code class="file docutils literal notranslate"><span class="pre">.config</span></code> file at
+compile time. You will need to make modifications to the <code class="file docutils literal notranslate"><span class="pre">.config</span></code>
+file, and include it in the kernel package.</p>
+<ol class="arabic">
+<li><p class="first">Make sure you have followed the steps to <a class="reference internal" href="#pull-copy-kernel-source"><span class="std std-ref">Pull a copy of the Linux kernel source code</span></a>
+and are in the kernel source working directory.</p>
+</li>
+<li><p class="first">If you have an existing <code class="file docutils literal notranslate"><span class="pre">.config</span></code> file from an old kernel, copy it
+into the working directory as <code class="file docutils literal notranslate"><span class="pre">.config</span></code> for comparison.
+Otherwise, use the Clear Linux OS kernel configuration file as template</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cp ~/clearlinux/packages/linux/config .config
+</pre></div>
+</div>
+</li>
+<li><p class="first">Make any desired changes to the <code class="file docutils literal notranslate"><span class="pre">.config</span></code> using a kernel
+configuration tool. Below are some popular options:</p>
+<ul class="simple">
+<li><strong class="command">$EDITOR .config</strong> - the .config file can be directly edited
+for simple changes with names that are already known.</li>
+<li><strong class="command">make config</strong> - a text-based tool that asks questions
+one-by-one to decide configuration options.</li>
+<li><strong class="command">make menuconfig</strong> - a terminal user interface that provides
+menus to decide configuration options.</li>
+<li><strong class="command">make xconfig</strong> - a graphical user interface that provides
+tree views to decide configuration options.</li>
+</ul>
+<p>More configuration tools can be found by looking at the make help:
+<strong class="command">make help | grep config</strong></p>
+</li>
+<li><p class="first">Commit and save the changes to the <code class="file docutils literal notranslate"><span class="pre">.config</span></code> file.</p>
+</li>
+<li><p class="first">Copy the <code class="file docutils literal notranslate"><span class="pre">.config</span></code> file from the kernel source directory into
+the kernel package directory as <code class="file docutils literal notranslate"><span class="pre">config</span></code> for inclusion in the build.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cp .config ../config
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="modify-kernel-source-code">
+<h3>Modify kernel source code</h3>
+<p>Changes to kernel code are applied with patch files. Patch files are
+formatted git commits that can be applied to the main source code.</p>
+<p>You will need to obtain a copy of the source code,
+make modifications, generate patch file(s), and add them to the RPM SPEC
+file for inclusion during the kernel build.</p>
+<p>If you have a large number of patches or a more complex workflow,
+consider using a patch management tool in addition to Git such as
+<a class="reference external" href="http://savannah.nongnu.org/projects/quilt">Quilt</a>.</p>
+<ol class="arabic">
+<li><p class="first">Make sure you have followed the steps to <a class="reference internal" href="#pull-copy-kernel-source"><span class="std std-ref">Pull a copy of the Linux kernel source code</span></a> and
+are in the kernel source working directory.</p>
+</li>
+<li><p class="first">Initialize the kernel source directory as a new git repo and create a
+commit with all the existing source files to begin tracking changes.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git init
+git add -A
+git commit -m <span class="s2">&quot;Initial commit of Linux kernel source&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Apply patches provided by the Clear Linux OS kernel package to the kernel source
+in the working directory.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git am ../*.patch
+</pre></div>
+</div>
+</li>
+<li><p class="first">Make any of your desired code changes to the Linux source code files.</p>
+</li>
+<li><p class="first">Track and commit your changes to the local git repo.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git add &lt;FILENAME&gt;
+git commit -m <span class="s2">&quot;My patch for driver A&quot;</span> &lt;FILENAME&gt;
+</pre></div>
+</div>
+</li>
+<li><p class="first">Generate a patch file based on your git commits.
+&lt;n&gt; represents the number of local commits to create patch file.
+See the <a class="reference external" href="https://git-scm.com/docs/git-format-patch">git-format-patch</a> documentation for detailed information
+on using <strong class="command">git format-patch</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git format-patch -&lt;n&gt;
+</pre></div>
+</div>
+</li>
+<li><p class="first">Copy the patch files from the patches directory in the linux
+source tree to the RPM build directory.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cp *.patch ~/clearlinux/packages/linux/
+</pre></div>
+</div>
+</li>
+<li><p class="first">Navigate back to the RPM build directory.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/clearlinux/packages/linux/
+</pre></div>
+</div>
+</li>
+<li><p class="first">Open the Linux kernel package RPM SPEC file in an editor.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">$EDITOR</span> linux.spec
+</pre></div>
+</div>
+</li>
+<li><p class="first">Locate the section of the SPEC file that contains existing patch
+variable definitions and append your patch file name. Ensure the
+patch number does not collide with an existing patch.
+In this example, the patch file is called
+<code class="file docutils literal notranslate"><span class="pre">2001-my-patch-for-driver-A.patch</span></code></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#</span>
+<span class="c1"># Small Clear Linux Tweaks</span>
+<span class="c1">#</span>
+Patch0501: <span class="m">0501</span>-zero-extra-registers.patch
+Patch0502: <span class="m">0502</span>-locking-rwsem-spin-faster.patch
+
+<span class="c1">#Serie1.name WireGuard</span>
+<span class="c1">#Serie1.git  https://git.zx2c4.com/WireGuard</span>
+<span class="c1">#Serie1.tag  00bf4f8c8c0ec006633a48fd9ee746b30bb9df17</span>
+Patch1001: <span class="m">1001</span>-WireGuard-fast-modern-secure-kernel-VPN-tunnel.patch
+<span class="c1">#Serie1.end</span>
+
+Patch2001: <span class="m">2001</span>-my-patch-for-driver-A.patch
+</pre></div>
+</div>
+</li>
+<li><p class="first">Locate the section of the SPEC file further down that contains
+patch application and append your patch file number used in the step above.
+In this example, patch2001 is added.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#</span>
+<span class="c1"># Small tweaks</span>
+<span class="c1">#</span>
+%patch0501 -p1
+%patch0502 -p1
+
+<span class="c1">#Serie1.patch.start</span>
+%patch1001 -p1
+<span class="c1">#Serie1.patch.end</span>
+
+%patch2001 -p1
+</pre></div>
+</div>
+</li>
+<li><p class="first">Commit and save the changes to the RPM SPEC file.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="modify-kernel-boot-parameters">
+<h3>Modify kernel boot parameters</h3>
+<p>The kernel boot options are passed from the bootloader to the kernel with
+command-line parameters.</p>
+<p>While temporary changes can be made to kernel parameters on a running
+system or on a during boot, you can also modify the default parameters that
+are persistent and distributed with a customized kernel.</p>
+<ol class="arabic">
+<li><p class="first">Open the kernel <code class="file docutils literal notranslate"><span class="pre">cmdline</span></code> file in an editor.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">$EDITOR</span> cmdline
+</pre></div>
+</div>
+</li>
+<li><p class="first">Make any desired change to the kernel parameters.
+For example, you can remove the <strong class="command">quiet</strong> parameter to see more
+verbose output of kernel log messages during the boot process.</p>
+</li>
+<li><p class="first">Commit and save the changes to the <code class="file docutils literal notranslate"><span class="pre">cmdline</span></code> file.</p>
+</li>
+</ol>
+<p>See the <a class="reference external" href="https://www.kernel.org/doc/Documentation/admin-guide/kernel-parameters.txt">kernel parameters</a>  documentation for a list of available
+parameters.</p>
+</div>
+</div>
+<div class="section" id="build-and-install-the-kernel">
+<h2><a class="toc-backref" href="#id2">Build and install the kernel</a></h2>
+<p>After changes have been made to the kernel source and RPM SPEC file,
+the kernel is ready to be compiled and packaged into an RPM.</p>
+<p>The Clear Linux OS development tooling makes use of <strong class="command">mock</strong> environments to
+isolate building of packages in a sanitized workspace.</p>
+<ol class="arabic">
+<li><p class="first">Start the compilation process by issuing the <strong class="command">make build</strong>
+command. This process is typically resource intensive and will take a while.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make build
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">The mock plugin <a class="reference external" href="https://fedoraproject.org/wiki/Mock/Plugin/CCache?rd=Subprojects/Mock/Plugin/CCache">ccache</a> can be enabled to help speed up any future
+rebuilds of the kernel package by caching compiler outputs and reusing
+them.</p>
+</div>
+</li>
+<li><p class="first">The result will be multiple <code class="file docutils literal notranslate"><span class="pre">.rpm</span></code> files in the <code class="file docutils literal notranslate"><span class="pre">rpms</span></code>
+directory as output.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls rpms/
+</pre></div>
+</div>
+<p>The kernel RPM will be named
+<code class="file docutils literal notranslate"><span class="pre">linux&lt;NAME&gt;-&lt;VERSION&gt;-&lt;RELEASE&gt;.x86_64.rpm</span></code></p>
+</li>
+<li><p class="first">The kernel RPM file can be input to the <a class="reference internal" href="../../tooling/mixer.html#mixer"><span class="std std-ref">mixer</span></a> to create a
+custom bundle and mix of Clear Linux OS.</p>
+</li>
+</ol>
+<p>Alternatively, the kernel RPM bundle can be installed manually on a local
+machine for testing. This approach works well for individual development or
+testing. For a more scalable and customizable approach, consider using the
+<a class="reference internal" href="../../tooling/mixer.html#mixer"><span class="std std-ref">mixer</span></a> to provide a custom kernel with updates.</p>
+<ol class="arabic">
+<li><p class="first">Install the kernel onto the local system by extracting the RPM with the
+<strong class="command">rpm2cpio</strong> command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rpm2cpio linux&lt;NAME&gt;-&lt;VERSION&gt;-&lt;RELEASE&gt;.x86_64.rpm <span class="p">|</span> <span class="o">(</span><span class="nb">cd</span> /<span class="p">;</span> sudo cpio -i -d -u -v<span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Update the Clear Linux OS boot manager using <strong class="command">clr-boot-manager</strong> and reboot.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo clr-boot-manager list-kernels
+sudo clr-boot-manager set-kernel org.clearlinux.&lt;TARGET&gt;.&lt;VERSION&gt;-&lt;RELEASE&gt;
+
+sudo reboot
+</pre></div>
+</div>
+</li>
+<li><p class="first">After a reboot, verify the customized kernel is running.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uname -a
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="related-topics">
+<h2><a class="toc-backref" href="#id2">Related topics</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="kernel-modules.html#kernel-modules"><span class="std std-ref">Add kernel modules manually</span></a></li>
+<li><a class="reference internal" href="../../tooling/mixer.html#mixer"><span class="std std-ref">mixer</span></a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="kernel-modules.html" class="btn btn-neutral float-right" title="Add kernel modules manually" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../network/vnc.html" class="btn btn-neutral float-left" title="Remote-desktop to a host using VNC" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, many
+      <span class="lastupdated">
+        最后更新于 7月 24, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+
+<script type="text/javascript" src="../../_static/tcs_theme.js"></script>
+
+
+
+</body>
+</html>

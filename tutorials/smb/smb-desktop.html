@@ -1,0 +1,389 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Connect to Windows* shared location from Clear Linux* OS desktop &mdash; Documentation for Clear Linux* project</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Set up a standalone cluster system using Apache* Spark*" href="../spark.html" />
+    <link rel="prev" title="Enable simple file sharing with a Windows* machine using Samba*" href="smb.html" />
+
+<link rel="stylesheet" href="../../_static/tcs_theme.css" type="text/css" />
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #007ab2" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Clear Linux* Project Docs
+          
+
+          
+            
+            <img src="../../_static/clearlinux.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Clear Linux</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Language Versions</dt>
+        
+          <dd><a href="/clearlinux/tutorials/smb/smb-desktop.html">English</a></dd>
+        
+          <dd><a href="/clearlinux/zh_CN/tutorials/smb/smb-desktop.html">Chinese</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Document Versions</dt>
+        
+          <dd><a href="/clearlinux/tutorials/smb/smb-desktop.html">latest</a></dd>
+        
+          <dd><a href="/clearlinux/L19.01/tutorials/smb/smb-desktop.html">L19.01</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>clearlinux.org links</dt>
+          <dd>
+            <a href="https://www.clearlinux.org/">Project Home</a>
+          </dd>
+          <dd>
+            <a href="https://github.com/clearlinux/clear-linux-documentation">GitHub</a>
+          </dd>
+      </dl>
+    </div>
+  </div>
+  
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/get-started.html">Get started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tooling/tooling.html">How to Clear</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/guides.html">Guides</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../tutorials.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../wordpress/wordpress.html">WordPress* on Clear Linux* OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../flatpak/flatpak.html">Use Flatpak* to install applications on Clear Linux* OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/machine-learning.html">TensorFlow* machine learning on Clear Linux* OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../docker/docker.html">Run Docker* on Clear Linux* OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../azure.html">Run Clear Linux* OS using Microsoft Azure CLI 2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hadoop.html">Set up a single node cluster with Hadoop*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fmv.html">Use the function multi-version patch generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../aws-web/aws-web.html">Create and launch Clear Linux* OS from Amazon Web Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smb.html">Enable simple file sharing with a Windows* machine using Samba*</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Connect to Windows* shared location from Clear Linux* OS desktop</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#connect-to-windows-shared-location-with-nautilus">Connect to Windows shared location with Nautilus</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../spark.html">Set up a standalone cluster system using Apache* Spark*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kata.html">Install Kata Containers*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kata_migration.html">Migrate Clear Containers to Kata Containers*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kubernetes/kubernetes.html">Run Kubernetes*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kubernetes/kubernetes-bp.html">Kubernetes Best Practices on Clear Linux OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../yubikey-u2f.html">Enable YubiKey U2F Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nvidia.html">Install NVIDIA* Drivers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../redis.html">Run Redis on Clear Linux* OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial-proxy.html">Setting up proxy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../FAQ/faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Clear Linux* Project Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+
+<header id="header">
+  <div class="padding-md--left-right">
+
+    <div class="header__site_info">
+           <div class="header__site_info_name">
+             <a href ="https://clearlinux.org"> Clear Linux* Project</a>
+           </div>
+    </div>
+    <nav class="header__menu">
+        <ul class="header__menu_list">
+                         <li class="header__menu_list_item green  ">
+                <a tabindex='1' href="https://clearlinux.org/about">About</a>
+              </li>
+                         <li class="header__menu_list_item purple  ">
+                <a tabindex='1' href="https://clearlinux.org/developer">Developer</a>
+              </li>
+                         <li class="header__menu_list_item blue  ">
+                <a tabindex='1' href="https://clearlinux.org/software">Software</a>
+              </li>
+        </ul>
+    </nav>
+
+  </div>
+
+
+
+</header>
+
+
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../tutorials.html">Tutorials</a> &raquo;</li>
+        
+      <li>Connect to Windows* shared location from Clear Linux* OS desktop</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/clearlinux/clear-linux-documentation/blob/rtd-theme/source/tutorials/smb/smb-desktop.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="connect-to-windows-shared-location-from-cl-attr-desktop">
+<span id="smb-desktop"></span><h1>Connect to Windows* shared location from Clear Linux* OS desktop</h1>
+<p>This tutorial explains how to access an existing shared drive on
+Windows* via Server Message Block (SMB) / Common Internet File System (CIFS)
+from the Clear Linux OS GNOME desktop.  CIFS filesystem is generally used to access
+shared storage locations, or share files.</p>
+<div class="section" id="prerequisites">
+<h2>Prerequisites</h2>
+<ul class="simple">
+<li>You have already <a class="reference external" href="https://www.howtogeek.com/176471/how-to-share-files-between-windows-and-linux/">set up a shared location on Windows</a></li>
+</ul>
+</div>
+<div class="section" id="connect-to-windows-shared-location-with-nautilus">
+<h2>Connect to Windows shared location with Nautilus</h2>
+<ol class="arabic">
+<li><p class="first">From the desktop, select <span class="guilabel">Files</span> from the application menu.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">GNOME Files is also known as <cite>Nautilus</cite>.</p>
+</div>
+</li>
+<li><p class="first">In <span class="guilabel">Files</span>, select <span class="guilabel">Other Locations</span>.</p>
+<div class="figure" id="id1">
+<a class="reference internal image-reference" href="../../_images/smb-desktop-1.png"><img alt="Files, Other Locations" src="../../_images/smb-desktop-1.png" style="width: 1024.0px; height: 605.0px;" /></a>
+<p class="caption"><span class="caption-text">Figure 1: Files, Other Locations</span></p>
+</div>
+</li>
+<li><p class="first">In the lower taskbar, beside <span class="guilabel">Connect to Server</span>,
+enter the file-sharing address using the Windows sharing schema:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>smb://servername/Share
+</pre></div>
+</div>
+<div class="figure" id="id2">
+<a class="reference internal image-reference" href="../../_images/smb-desktop-2.png"><img alt="Connect to Server" src="../../_images/smb-desktop-2.png" style="width: 891.0px; height: 596.0px;" /></a>
+<p class="caption"><span class="caption-text">Figure 2: Connect to Server</span></p>
+</div>
+</li>
+<li><p class="first">Optional: If there are issues with DNS, you can use an IP address in
+place of the <cite>servername</cite> above. You must still specify the share.</p>
+</li>
+<li><p class="first">Optional: On the Windows machine, in a CLI, retrieve the IP address by
+entering the command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ifconfig
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If using the IP address, assure that it is accessible and secure.</p>
+</div>
+</li>
+<li><p class="first">Select <span class="guilabel">Connect</span>.</p>
+</li>
+<li><p class="first">The server will request authentication, as shown in Figure 3.</p>
+<div class="figure" id="id3">
+<a class="reference internal image-reference" href="../../_images/smb-desktop-3.png"><img alt="Authentication" src="../../_images/smb-desktop-3.png" style="width: 407.0px; height: 458.0px;" /></a>
+<p class="caption"><span class="caption-text">Figure 3: Authentication</span></p>
+</div>
+</li>
+<li><p class="first">Log in with the same Windows system credentials for which you granted
+access to the share.</p>
+</li>
+<li><p class="first">Select the appropriate checkbox to save your credentials. Consider
+carefully the security risks as a result of your selection.</p>
+</li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../spark.html" class="btn btn-neutral float-right" title="Set up a standalone cluster system using Apache* Spark*" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="smb.html" class="btn btn-neutral float-left" title="Enable simple file sharing with a Windows* machine using Samba*" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, many
+      <span class="lastupdated">
+        Last updated on Jul 24, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+
+<script type="text/javascript" src="../../_static/tcs_theme.js"></script>
+
+
+
+</body>
+</html>

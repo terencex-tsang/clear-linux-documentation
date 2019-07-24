@@ -1,0 +1,451 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Set up a standalone cluster system using Apache* Spark* &mdash; Documentation for Clear Linux* project</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Install Kata Containers*" href="kata.html" />
+    <link rel="prev" title="Connect to Windows* shared location from Clear Linux* OS desktop" href="smb/smb-desktop.html" />
+
+<link rel="stylesheet" href="../_static/tcs_theme.css" type="text/css" />
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #007ab2" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Clear Linux* Project Docs
+          
+
+          
+            
+            <img src="../_static/clearlinux.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Clear Linux</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Language Versions</dt>
+        
+          <dd><a href="/clearlinux/tutorials/spark.html">English</a></dd>
+        
+          <dd><a href="/clearlinux/zh_CN/tutorials/spark.html">Chinese</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Document Versions</dt>
+        
+          <dd><a href="/clearlinux/tutorials/spark.html">latest</a></dd>
+        
+          <dd><a href="/clearlinux/L19.01/tutorials/spark.html">L19.01</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>clearlinux.org links</dt>
+          <dd>
+            <a href="https://www.clearlinux.org/">Project Home</a>
+          </dd>
+          <dd>
+            <a href="https://github.com/clearlinux/clear-linux-documentation">GitHub</a>
+          </dd>
+      </dl>
+    </div>
+  </div>
+  
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/get-started.html">Get started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tooling/tooling.html">How to Clear</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/guides.html">Guides</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="tutorials.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="wordpress/wordpress.html">WordPress* on Clear Linux* OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="flatpak/flatpak.html">Use Flatpak* to install applications on Clear Linux* OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="machine-learning/machine-learning.html">TensorFlow* machine learning on Clear Linux* OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker/docker.html">Run Docker* on Clear Linux* OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="azure.html">Run Clear Linux* OS using Microsoft Azure CLI 2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hadoop.html">Set up a single node cluster with Hadoop*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fmv.html">Use the function multi-version patch generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aws-web/aws-web.html">Create and launch Clear Linux* OS from Amazon Web Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smb/smb.html">Enable simple file sharing with a Windows* machine using Samba*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smb/smb-desktop.html">Connect to Windows* shared location from Clear Linux* OS desktop</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Set up a standalone cluster system using Apache* Spark*</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-apache-spark">Install Apache Spark</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configure-apache-spark">Configure Apache Spark</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#start-the-master-server-and-a-worker-daemon">Start the master server and a worker daemon</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-the-spark-wordcount-example">Run the Spark wordcount example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="kata.html">Install Kata Containers*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kata_migration.html">Migrate Clear Containers to Kata Containers*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kubernetes/kubernetes.html">Run Kubernetes*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kubernetes/kubernetes-bp.html">Kubernetes Best Practices on Clear Linux OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="yubikey-u2f.html">Enable YubiKey U2F Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nvidia.html">Install NVIDIA* Drivers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="redis.html">Run Redis on Clear Linux* OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial-proxy.html">Setting up proxy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ/faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Clear Linux* Project Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+
+<header id="header">
+  <div class="padding-md--left-right">
+
+    <div class="header__site_info">
+           <div class="header__site_info_name">
+             <a href ="https://clearlinux.org"> Clear Linux* Project</a>
+           </div>
+    </div>
+    <nav class="header__menu">
+        <ul class="header__menu_list">
+                         <li class="header__menu_list_item green  ">
+                <a tabindex='1' href="https://clearlinux.org/about">About</a>
+              </li>
+                         <li class="header__menu_list_item purple  ">
+                <a tabindex='1' href="https://clearlinux.org/developer">Developer</a>
+              </li>
+                         <li class="header__menu_list_item blue  ">
+                <a tabindex='1' href="https://clearlinux.org/software">Software</a>
+              </li>
+        </ul>
+    </nav>
+
+  </div>
+
+
+
+</header>
+
+
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="tutorials.html">Tutorials</a> &raquo;</li>
+        
+      <li>Set up a standalone cluster system using Apache* Spark*</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/clearlinux/clear-linux-documentation/blob/rtd-theme/source/tutorials/spark.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <blockquote>
+<div></div></blockquote>
+<div class="section" id="set-up-a-standalone-cluster-system-using-apache-spark">
+<span id="spark"></span><h1>Set up a standalone cluster system using Apache* Spark*</h1>
+<p>This tutorial describes how to install, configure, and run Apache Spark on
+Clear Linux* OS. Apache Spark is a fast general-purpose cluster computing system with
+the following features:</p>
+<ul class="simple">
+<li>Provides high-level APIs in Java*, Scala*, Python*, and R*.</li>
+<li>Includes an optimized engine that supports general execution graphs.</li>
+<li>Supports high-level tools including Spark SQL, MLlib, GraphX, and Spark
+Streaming.</li>
+</ul>
+<p>In this tutorial, you will install Spark on a single machine running the
+master daemon and a worker daemon.</p>
+<div class="section" id="prerequisites">
+<h2>Prerequisites</h2>
+<p>This tutorial assumes you have installed Clear Linux OS on your host system.
+For detailed instructions on installing Clear Linux OS on a bare metal system, visit
+the <a class="reference internal" href="../get-started/bare-metal-install-desktop/bare-metal-install-desktop.html#bare-metal-install-desktop"><span class="std std-ref">bare metal installation guide</span></a>.</p>
+<p>Before you install any new packages, update Clear Linux OS with the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo swupd update
+</pre></div>
+</div>
+</div>
+<div class="section" id="install-apache-spark">
+<h2>Install Apache Spark</h2>
+<p>Apache Spark is included in the <code class="file docutils literal notranslate"><span class="pre">big-data-basic</span></code> bundle. To install the
+framework, enter:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo swupd bundle-add big-data-basic
+</pre></div>
+</div>
+</div>
+<div class="section" id="configure-apache-spark">
+<h2>Configure Apache Spark</h2>
+<ol class="arabic">
+<li><p class="first">Create the configuration directory with the command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo mkdir /etc/spark
+</pre></div>
+</div>
+</li>
+<li><p class="first">Copy the default templates from <code class="file docutils literal notranslate"><span class="pre">/usr/share/defaults/spark</span></code> to
+<code class="file docutils literal notranslate"><span class="pre">/etc/spark</span></code> with the command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo cp /usr/share/defaults/spark/* /etc/spark
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Since Clear Linux OS is a stateless system, you should never modify the
+files under the <code class="file docutils literal notranslate"><span class="pre">/usr/share/defaults</span></code> directory. The software
+updater overwrites those files.</p>
+</div>
+</li>
+<li><p class="first">Copy the template files below to create custom configuration files:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo cp /etc/spark/spark-defaults.conf.template /etc/spark/spark-defaults.conf
+sudo cp /etc/spark/spark-env.sh.template /etc/spark/spark-env.sh
+sudo cp /etc/spark/log4j.properties.template /etc/spark/log4j.properties
+</pre></div>
+</div>
+</li>
+<li><p class="first">Edit the <code class="file docutils literal notranslate"><span class="pre">/etc/spark/spark-env.sh</span></code> file and add the
+<span class="target" id="index-0"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">SPARK_MASTER_HOST</span></code> variable. Replace the example address below
+with your localhost IP address. View your IP address using the
+<strong class="command">hostname -I</strong> command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">SPARK_MASTER_HOST</span><span class="o">=</span><span class="s2">&quot;10.300.200.100&quot;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This optional step enables the master’s web user interface to
+view information needed later in this tutorial.</p>
+</div>
+</li>
+<li><p class="first">Edit the <code class="file docutils literal notranslate"><span class="pre">/etc/spark/spark-defaults.conf</span></code> file and update the
+<cite>spark.master</cite> variable with the <cite>SPARK_MASTER_HOST</cite> address and port <cite>7077</cite>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>spark.master    spark://10.300.200.100:7077
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="start-the-master-server-and-a-worker-daemon">
+<h2>Start the master server and a worker daemon</h2>
+<ol class="arabic">
+<li><p class="first">Start the master server using:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo /usr/share/apache-spark/sbin/./start-master.sh
+</pre></div>
+</div>
+</li>
+<li><p class="first">Start one worker daemon and connect it to the master using the
+<cite>spark.master</cite> variable defined earlier:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo /usr/share/apache-spark/sbin/./start-slave.sh spark://10.300.200.100:7077
+</pre></div>
+</div>
+</li>
+<li><p class="first">Open an internet browser and view the worker daemon information using
+the master’s IP address and port <cite>8080</cite>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>http://10.300.200.100:8080
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="run-the-spark-wordcount-example">
+<h2>Run the Spark wordcount example</h2>
+<ol class="arabic">
+<li><p class="first">Run the wordcount example using a file on your local host and output the
+results to a new file with the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo spark-submit /usr/share/apache-spark/examples/src/main/python/wordcount.py ~/Documents/example_file &gt; ~/Documents/results
+</pre></div>
+</div>
+</li>
+<li><p class="first">Open an internet browser and view the application information using
+the master’s IP address and port <cite>8080</cite>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>http://10.300.200.100:8080
+</pre></div>
+</div>
+</li>
+<li><p class="first">View the results of the wordcount application in the <code class="file docutils literal notranslate"><span class="pre">~/Documents/results</span></code> file.</p>
+</li>
+</ol>
+<p><strong>Congratulations!</strong></p>
+<p>You successfully installed and set up a standalone Apache Spark cluster.
+Additionally, you ran a simple wordcount example.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="kata.html" class="btn btn-neutral float-right" title="Install Kata Containers*" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="smb/smb-desktop.html" class="btn btn-neutral float-left" title="Connect to Windows* shared location from Clear Linux* OS desktop" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, many
+      <span class="lastupdated">
+        Last updated on Jul 24, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+
+<script type="text/javascript" src="../_static/tcs_theme.js"></script>
+
+
+
+</body>
+</html>

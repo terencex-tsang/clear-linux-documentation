@@ -1,0 +1,440 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh-CN" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh-CN" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Stateless &mdash; Documentation for Clear Linux* project</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'zh_CN',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="swupd" href="swupd-guide.html" />
+    <link rel="prev" title="OS Security" href="security.html" />
+
+<link rel="stylesheet" href="../_static/tcs_theme.css" type="text/css" />
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #007ab2" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Clear Linux* Project Docs
+          
+
+          
+            
+            <img src="../_static/clearlinux.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Clear Linux</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Language Versions</dt>
+        
+          <dd><a href="/clearlinux/tooling/stateless.html">English</a></dd>
+        
+          <dd><a href="/clearlinux/zh_CN/tooling/stateless.html">Chinese</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Document Versions</dt>
+        
+          <dd><a href="/clearlinux/tooling/stateless.html">latest</a></dd>
+        
+          <dd><a href="/clearlinux/L19.01/tooling/stateless.html">L19.01</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>clearlinux.org links</dt>
+          <dd>
+            <a href="https://www.clearlinux.org/">Project Home</a>
+          </dd>
+          <dd>
+            <a href="https://github.com/clearlinux/clear-linux-documentation">GitHub</a>
+          </dd>
+      </dl>
+    </div>
+  </div>
+  
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/get-started.html">Get started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="tooling.html">How to Clear</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="autoproxy.html">Autoproxy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autospec.html">autospec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compatible-kernels.html">Kernels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debug.html">Debug system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ister.html">ister.py image builder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mixer.html">mixer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">OS Security</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Stateless</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#file-level-separation">File-level separation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#system-areas">System areas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#user-areas">User areas</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#software-configuration">Software configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#default-configurations">Default configurations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#overriding-configurations">Overriding configurations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#system-reset">System reset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#additional-information">Additional information</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="swupd-guide.html">swupd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/telemetrics/telem-guide.html">Telemetrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tooling.html#training">Training</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/guides.html">Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ/faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Clear Linux* Project Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+
+<header id="header">
+  <div class="padding-md--left-right">
+
+    <div class="header__site_info">
+           <div class="header__site_info_name">
+             <a href ="https://clearlinux.org"> Clear Linux* Project</a>
+           </div>
+    </div>
+    <nav class="header__menu">
+        <ul class="header__menu_list">
+                         <li class="header__menu_list_item green  ">
+                <a tabindex='1' href="https://clearlinux.org/about">About</a>
+              </li>
+                         <li class="header__menu_list_item purple  ">
+                <a tabindex='1' href="https://clearlinux.org/developer">Developer</a>
+              </li>
+                         <li class="header__menu_list_item blue  ">
+                <a tabindex='1' href="https://clearlinux.org/software">Software</a>
+              </li>
+        </ul>
+    </nav>
+
+  </div>
+
+
+
+</header>
+
+
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="tooling.html">How to Clear</a> &raquo;</li>
+        
+      <li>Stateless</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/clearlinux/clear-linux-documentation/blob/rtd-theme/source/tooling/stateless.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="stateless">
+<span id="id1"></span><h1>Stateless</h1>
+<p>In most operating systems, user data, system data, and configuration files
+can become intermingled.</p>
+<div class="figure align-center" id="id3">
+<a class="reference internal image-reference" href="../_images/stateless-1.png"><img alt="Stateless: User and system files mixed" src="../_images/stateless-1.png" style="width: 412.2px; height: 225.0px;" /></a>
+<p class="caption"><span class="caption-text">Figure 1: Without stateless, user and system files become mixed on the filesystem over time.</span></p>
+</div>
+<p>Clear Linux* OS has a stateless design philosophy with the goal to provide an
+<abbr title="operating system">OS</abbr> that functions without excessive user
+configuration or customization. Stateless in this context does <em>not</em> mean
+ephemeral or non-persistent.</p>
+<div class="contents local topic" id="id2">
+<ul class="simple">
+<li><a class="reference internal" href="#file-level-separation" id="id5">File-level separation</a></li>
+<li><a class="reference internal" href="#software-configuration" id="id6">Software configuration</a></li>
+<li><a class="reference internal" href="#system-reset" id="id7">System reset</a></li>
+<li><a class="reference internal" href="#additional-information" id="id8">Additional information</a></li>
+</ul>
+</div>
+<div class="section" id="file-level-separation">
+<h2><a class="toc-backref" href="#id5">File-level separation</a></h2>
+<p>To accomplish a stateless design the Linux Filesystem Hierarchy is separated
+between user-owned areas and Clear Linux OS-owned areas.</p>
+<div class="figure align-center" id="id4">
+<a class="reference internal image-reference" href="../_images/stateless-2.png"><img alt="Stateless: User and system files separation" src="../_images/stateless-2.png" style="width: 411.3px; height: 224.1px;" /></a>
+<p class="caption"><span class="caption-text">Figure 2: With stateless, user and system files are separated on the filesystem.</span></p>
+</div>
+<div class="section" id="system-areas">
+<h3>System areas</h3>
+<p>File under the <code class="file docutils literal notranslate"><span class="pre">/usr</span></code> directory are managed by Clear Linux OS as system files.
+Files written under the <code class="file docutils literal notranslate"><span class="pre">/usr</span></code> directory by users can get removed
+through system updates with <a class="reference internal" href="../concepts/swupd-about.html#swupd-about"><span class="std std-ref">swupd</span></a>. This operating
+assumption allows Clear Linux OS to verify and maintain integrity of system files.</p>
+</div>
+<div class="section" id="user-areas">
+<h3>User areas</h3>
+<p>Files under the <code class="file docutils literal notranslate"><span class="pre">/etc/</span></code>, <code class="file docutils literal notranslate"><span class="pre">/home</span></code>, and <code class="file docutils literal notranslate"><span class="pre">/var</span></code> directories are
+owned and managed by the user. A freshly installed Clear Linux OS system will only have
+a minimal set of files in the <code class="file docutils literal notranslate"><span class="pre">/etc/</span></code> directory and software installed
+by Clear Linux OS does not write to <code class="file docutils literal notranslate"><span class="pre">/etc</span></code>. This operating assumption allows Clear Linux OS
+users to clearly identify the configuration that makes their system unique.</p>
+</div>
+</div>
+<div class="section" id="software-configuration">
+<h2><a class="toc-backref" href="#id6">Software configuration</a></h2>
+<p>With stateless separation, default software configurations are read in order
+from predefined source code, Clear Linux OS provided defaults, and user-provided
+configuration.</p>
+<div class="section" id="default-configurations">
+<h3>Default configurations</h3>
+<p>Software in Clear Linux OS provides default configuration values so that it is
+immediately functional, whenever it is appropriate to do so.</p>
+<p>Clear Linux OS distributed software packages may be directly modified to include default
+configuration values or default configuration files may be provided by Clear Linux OS
+under <code class="file docutils literal notranslate"><span class="pre">/usr/share/defaults</span></code>. These files can be referenced as templates
+for customization.</p>
+<p>For example, the default configuration that Apache uses when installed can be
+found at <code class="file docutils literal notranslate"><span class="pre">/usr/share/defaults/httpd/httpd.conf</span></code> directory.</p>
+</div>
+<div class="section" id="overriding-configurations">
+<h3>Overriding configurations</h3>
+<p>If a configuration needs to be changed, the appropriate file should be
+modified by the user under <code class="file docutils literal notranslate"><span class="pre">/etc/</span></code>. If the configuration file does not
+already exist, it can be created in the appropriate location.</p>
+<p>User defined configuration files should contain the minimal set of desired
+changes and rely on default configuration for the rest.</p>
+<p>For example, a customized Apache configuration can be used instead by:</p>
+<ol class="arabic">
+<li><p class="first">Create the destination directory for the configuration:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo mkdir /etc/httpd
+</pre></div>
+</div>
+</li>
+<li><p class="first">Copy the default configuration as a reference template:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo cp /usr/share/defaults/httpd/httpd.conf /etc/httpd/
+</pre></div>
+</div>
+</li>
+<li><p class="first">Make any desired modifications to the configurations:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudoedit /etc/httpd/httpd.conf
+</pre></div>
+</div>
+</li>
+<li><p class="first">Reload the service or reboot the system to pickup any changes:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>systemctl daemon-reload httpd <span class="o">&amp;&amp;</span> systemctl restart httpd
+</pre></div>
+</div>
+</li>
+</ol>
+<p>This pattern can be used to modify the configurations of other programs too.
+The <a class="reference external" href="https://github.com/clearlinux/clr-man-pages/blob/master/stateless.7.rst">stateless man page</a> has application-specific examples.</p>
+</div>
+</div>
+<div class="section" id="system-reset">
+<h2><a class="toc-backref" href="#id7">System reset</a></h2>
+<p>Once advantage of the stateless design is that the system defaults can be
+easily restored by simply deleting everything under <code class="file docutils literal notranslate"><span class="pre">/etc/</span></code> and
+<code class="file docutils literal notranslate"><span class="pre">/var</span></code>.</p>
+<p>Running the commands below effectively performs a system reset as if it was
+just installed:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo rm -rf /etc
+sudo rm -rf /var
+</pre></div>
+</div>
+<p>In other Linux distributions, this can be a catastrophic action that renders
+a system unable to boot.</p>
+</div>
+<div class="section" id="additional-information">
+<h2><a class="toc-backref" href="#id8">Additional information</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/clearlinux/clr-man-pages/blob/master/stateless.7.rst">stateless man page</a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="swupd-guide.html" class="btn btn-neutral float-right" title="swupd" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="security.html" class="btn btn-neutral float-left" title="OS Security" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, many
+      <span class="lastupdated">
+        最后更新于 7月 24, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+
+<script type="text/javascript" src="../_static/tcs_theme.js"></script>
+
+
+
+</body>
+</html>

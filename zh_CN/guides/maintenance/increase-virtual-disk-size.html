@@ -1,0 +1,489 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh-CN" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh-CN" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Increase virtual disk size of an image &mdash; Documentation for Clear Linux* project</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'',
+              LANGUAGE:'zh_CN',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" />
+    <link rel="next" title="How to Clear" href="../../tooling/tooling.html" />
+    <link rel="prev" title="Run preconfigured Clear Linux* OS image as a VMware* ESXi guest OS" href="../../get-started/virtual-machine-install/vmware-esxi-preconfigured-cl-image.html" />
+
+<link rel="stylesheet" href="../../_static/tcs_theme.css" type="text/css" />
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #007ab2" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Clear Linux* Project Docs
+          
+
+          
+            
+            <img src="../../_static/clearlinux.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Clear Linux</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Language Versions</dt>
+        
+          <dd><a href="/clearlinux/guides/maintenance/increase-virtual-disk-size.html">English</a></dd>
+        
+          <dd><a href="/clearlinux/zh_CN/guides/maintenance/increase-virtual-disk-size.html">Chinese</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Document Versions</dt>
+        
+          <dd><a href="/clearlinux/guides/maintenance/increase-virtual-disk-size.html">latest</a></dd>
+        
+          <dd><a href="/clearlinux/L19.01/guides/maintenance/increase-virtual-disk-size.html">L19.01</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>clearlinux.org links</dt>
+          <dd>
+            <a href="https://www.clearlinux.org/">Project Home</a>
+          </dd>
+          <dd>
+            <a href="https://github.com/clearlinux/clear-linux-documentation">GitHub</a>
+          </dd>
+      </dl>
+    </div>
+  </div>
+  
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/get-started.html">Get started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tooling/tooling.html">How to Clear</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../guides.html">Guides</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../guides.html#maintenance">Maintenance</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="architect-lifecycle.html">Architect the life-cycle of Clear Linux* OS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="assign-static-ip.html">Assign a static IP address</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bulk-provision.html">Bulk provision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cpu-performance.html">CPU Power and Performance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="developer-workstation.html">Developer Workstation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="download-verify-decompress.html">Download, verify, and decompress a Clear Linux* OS image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="enable-user-space.html">Create and enable a new user space</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fix-broken-install.html">Fix a broken installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hostname.html">Modify hostname</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Increase virtual disk size of an image</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#determine-the-partition-order-and-sizes-of-the-prebuilt-image">Determine the partition order and sizes of the prebuilt image</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Increase virtual disk size</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="query-upstream.html">Query package info from upstream repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="restart.html">Restart system services after an OS update</a></li>
+<li class="toctree-l3"><a class="reference internal" href="time.html">Set the time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="validate-signatures.html">Validate signatures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deploy-at-scale.html">Deploy at Scale</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../guides.html#network">Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides.html#kernel">Kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides.html#stacks">Stacks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../FAQ/faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Clear Linux* Project Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+
+<header id="header">
+  <div class="padding-md--left-right">
+
+    <div class="header__site_info">
+           <div class="header__site_info_name">
+             <a href ="https://clearlinux.org"> Clear Linux* Project</a>
+           </div>
+    </div>
+    <nav class="header__menu">
+        <ul class="header__menu_list">
+                         <li class="header__menu_list_item green  ">
+                <a tabindex='1' href="https://clearlinux.org/about">About</a>
+              </li>
+                         <li class="header__menu_list_item purple  ">
+                <a tabindex='1' href="https://clearlinux.org/developer">Developer</a>
+              </li>
+                         <li class="header__menu_list_item blue  ">
+                <a tabindex='1' href="https://clearlinux.org/software">Software</a>
+              </li>
+        </ul>
+    </nav>
+
+  </div>
+
+
+
+</header>
+
+
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../get-started/get-started.html">Get started</a> &raquo;</li>
+        
+      <li>Increase virtual disk size of an image</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/clearlinux/clear-linux-documentation/blob/rtd-theme/source/guides/maintenance/increase-virtual-disk-size.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="increase-virtual-disk-size-of-an-image">
+<span id="increase-virtual-disk-size"></span><h1>Increase virtual disk size of an image</h1>
+<p>This guide describes how to increase the disk size of your prebuilt Clear Linux* OS
+image if you need more capacity.</p>
+<div class="contents local topic" id="id1">
+<ul class="simple">
+<li><a class="reference internal" href="#determine-the-partition-order-and-sizes-of-the-prebuilt-image" id="id5">Determine the partition order and sizes of the prebuilt image</a></li>
+<li><a class="reference internal" href="#id2" id="id6">Increase virtual disk size</a></li>
+</ul>
+</div>
+<div class="section" id="determine-the-partition-order-and-sizes-of-the-prebuilt-image">
+<h2><a class="toc-backref" href="#id5">Determine the partition order and sizes of the prebuilt image</a></h2>
+<p>Clear Linux OS prebuilt images come in different sizes, ranging from 300 MB to 20
+GB.</p>
+<p>There are two methods to find the order and sizes of partitions virtual disk
+of your prebuilt Clear Linux OS image.</p>
+<p>In both examples, the prebuilt Hyper-V image has a disk size of 8.5 GB with
+<code class="file docutils literal notranslate"><span class="pre">/dev/sda3</span></code> being the partition for the root filesystem (/)</p>
+<div class="section" id="checking-lsblk-on-the-vm">
+<h3>Checking <strong class="command">lsblk</strong> on the VM</h3>
+<p>The first method is to boot up your <abbr title="Virtual Machine">VM</abbr> and
+execute the <strong class="command">lsblk</strong> command as shown below:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo lsblk
+</pre></div>
+</div>
+<p>An example output of the <strong class="command">lsblk</strong> command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">NAME   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT</span>
+<span class="go">sda      8:0   0    8.5G  0 disk</span>
+<span class="go">├─sda1   8:1   0    512M  0 part</span>
+<span class="go">├─sda2   8:2   0     32M  0 part [SWAP]</span>
+<span class="go">└─sda3   8:3   0      8G  0 part /</span>
+</pre></div>
+</div>
+<p>An example of this can also be seen in Figure 1.</p>
+</div>
+<div class="section" id="checking-config-json-used-to-build-the-image">
+<h3>Checking <code class="file docutils literal notranslate"><span class="pre">config.json</span></code> used to build the image</h3>
+<p>The second method to determine partition to check the <code class="file docutils literal notranslate"><span class="pre">config.json</span></code>
+file used to create prebuilt image, located in the <a class="reference external" href="https://cdn.download.clearlinux.org/releases/">releases</a> repository.
+For example, to find the size of the Hyper-V* image version number 20450,
+follow these steps:</p>
+<ol class="arabic">
+<li><p class="first">Go to the <a class="reference external" href="https://cdn.download.clearlinux.org/releases/">releases</a> repository.</p>
+</li>
+<li><p class="first">Drill down into the <cite>20450 &gt; clear &gt; config &gt; image</cite> directory.</p>
+</li>
+<li><p class="first">Open the <code class="file docutils literal notranslate"><span class="pre">hyperv-config.json</span></code> file.</p>
+</li>
+<li><p class="first">Locate the <cite>PartitionLayout</cite> key.</p>
+<p>The example shows 512 MB for the EFI partition, 32 MB for the swap
+partition, and 8 GB for the root partition.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&quot;PartitionLayout&quot; : [ { &quot;disk&quot; : &quot;hyperv.img&quot;,</span>
+<span class="go">                        &quot;partition&quot; : 1,</span>
+<span class="go">                        &quot;size&quot; : &quot;512M&quot;,</span>
+<span class="go">                        &quot;type&quot; : &quot;EFI&quot; },</span>
+<span class="go">                        { &quot;disk&quot; : &quot;hyperv.img&quot;,</span>
+<span class="go">                        &quot;partition&quot; : 2,</span>
+<span class="go">                        &quot;size&quot; : &quot;32M&quot;,</span>
+<span class="go">                        &quot;type&quot; : &quot;swap&quot; },</span>
+<span class="go">                        { &quot;disk&quot; : &quot;hyperv.img&quot;,</span>
+<span class="go">                        &quot;partition&quot; : 3,</span>
+<span class="go">                        &quot;size&quot; : &quot;8G&quot;,</span>
+<span class="go">                        &quot;type&quot; : &quot;linux&quot; } ],</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id6">Increase virtual disk size</a></h2>
+<p>Once you have determined the disk and partition to be increased, you are
+ready to perform the actual increase of the disk, partition, and filesystem.</p>
+<div class="section" id="power-off-vm-and-increase-virtual-disk-size">
+<h3>Power off VM and increase virtual disk size</h3>
+<p>To increase the virtual disk size for a prebuilt image, perform the steps
+below:</p>
+<ol class="arabic simple">
+<li>Shut down your VM if it is running.</li>
+<li>Use the process defined by your hypervisor  or cloud provider to increase
+the virtual disk size of your Clear Linux OS VM.</li>
+<li>Power up the VM.</li>
+</ol>
+</div>
+<div class="section" id="resize-the-partition-of-the-virtual-disk">
+<h3>Resize the partition of the virtual disk</h3>
+<ol class="arabic">
+<li><p class="first">Log in to an account with root privileges.</p>
+</li>
+<li><p class="first">Open a terminal emulator.</p>
+</li>
+<li><p class="first">Add the <strong class="command">storage-utils</strong> bundle to install the
+<strong class="command">parted</strong> and <strong class="command">resize2fs</strong> tools.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo swupd bundle-add storage-utils
+</pre></div>
+</div>
+</li>
+<li><p class="first">Launch the <cite>parted</cite> tool.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo parted
+</pre></div>
+</div>
+</li>
+<li><p class="first">In the <cite>parted</cite> tool, perform these steps:</p>
+<ol class="arabic">
+<li><p class="first">Press <strong class="command">p</strong> to print the partitions table.</p>
+</li>
+<li><p class="first">If the warning message below is displayed, enter <strong class="command">Fix</strong>.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Warning: Not all of the space available to :file:`/dev/sda` appears to be</span>
+<span class="go">used, you can fix the GPT to use all of the space (an extra ...</span>
+<span class="go">blocks) or continue with the current setting?</span>
+
+<span class="go">Fix/Ignore?</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Enter <strong class="command">resizepart [partition number]</strong> where
+<em>[partition number]</em> is the partition number of the partition to modify.</p>
+</li>
+<li><p class="first">Enter <strong class="command">yes</strong> when prompted.</p>
+</li>
+<li><p class="first">Enter the new End size.</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p>If you want a partition to take up the remaining disk space, then
+enter the total size of the disk. When you print the partitions
+table with the <strong class="command">p</strong> command, the total disk size is shown
+after the <span class="guilabel">Disk</span> label.</p>
+<p class="last">An example of this can be seen in Figure 1.</p>
+</div>
+</li>
+<li><p class="first">Enter <strong class="command">q</strong> to exit <cite>parted</cite> when you are finished resizing the
+image.</p>
+<p>Figure 1 depicts the described steps  to resize the partition of the virtual disk from 8.5GB to 20GB.</p>
+<div class="figure" id="id3">
+<a class="reference internal image-reference" href="../../_images/increase-virtual-disk-size-1.png"><img alt="Increase root partition size" src="../../_images/increase-virtual-disk-size-1.png" style="width: 1019.0px; height: 497.0px;" /></a>
+<p class="caption"><span class="caption-text">Figure 1: Increase root partition size.</span></p>
+</div>
+</li>
+</ol>
+</li>
+</ol>
+</div>
+<div class="section" id="resize-the-filesystem">
+<h3>Resize the filesystem</h3>
+<ol class="arabic">
+<li><p class="first">Enter <strong class="command">sudo resize2fs -p /dev/[modified partition name]</strong> where
+<em>[modified partition name]</em> is the partition that was changed in the <cite>parted</cite>
+tool.</p>
+</li>
+<li><p class="first">Run the <strong class="command">df -h</strong> to verify that the filesystem size has
+increased.</p>
+<p>Figure 2 depicts the described steps to resize the partition of the virtual
+disk from 8.5GB to 20GB.</p>
+<div class="figure" id="id4">
+<a class="reference internal image-reference" href="../../_images/increase-virtual-disk-size-2.png"><img alt="Increase root filesystem with resize2fs" src="../../_images/increase-virtual-disk-size-2.png" style="width: 1024.0px; height: 194.0px;" /></a>
+<p class="caption"><span class="caption-text">Figure 2: Increase root filesystem size after partition has been expanded.</span></p>
+</div>
+</li>
+</ol>
+<p><strong>Congratulations!</strong> You have resized the disk, partition, and filesystem. At
+this point, the increase in disk capacity is usable.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../tooling/tooling.html" class="btn btn-neutral float-right" title="How to Clear" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../../get-started/virtual-machine-install/vmware-esxi-preconfigured-cl-image.html" class="btn btn-neutral float-left" title="Run preconfigured Clear Linux* OS image as a VMware* ESXi guest OS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, many
+      <span class="lastupdated">
+        最后更新于 7月 24, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+
+<script type="text/javascript" src="../../_static/tcs_theme.js"></script>
+
+
+
+</body>
+</html>

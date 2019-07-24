@@ -1,0 +1,441 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Setting up proxy &mdash; Documentation for Clear Linux* project</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Reference" href="../reference/reference.html" />
+    <link rel="prev" title="Run Redis on Clear Linux* OS" href="redis.html" />
+
+<link rel="stylesheet" href="../_static/tcs_theme.css" type="text/css" />
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #007ab2" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Clear Linux* Project Docs
+          
+
+          
+            
+            <img src="../_static/clearlinux.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Clear Linux</span>
+      v: latest
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Language Versions</dt>
+        
+          <dd><a href="/clearlinux/tutorials/tutorial-proxy.html">English</a></dd>
+        
+          <dd><a href="/clearlinux/zh_CN/tutorials/tutorial-proxy.html">Chinese</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>Document Versions</dt>
+        
+          <dd><a href="/clearlinux/tutorials/tutorial-proxy.html">latest</a></dd>
+        
+          <dd><a href="/clearlinux/L19.01/tutorials/tutorial-proxy.html">L19.01</a></dd>
+        
+      </dl>
+      <dl>
+        <dt>clearlinux.org links</dt>
+          <dd>
+            <a href="https://www.clearlinux.org/">Project Home</a>
+          </dd>
+          <dd>
+            <a href="https://github.com/clearlinux/clear-linux-documentation">GitHub</a>
+          </dd>
+      </dl>
+    </div>
+  </div>
+  
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/get-started.html">Get started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tooling/tooling.html">How to Clear</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/guides.html">Guides</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="tutorials.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="wordpress/wordpress.html">WordPress* on Clear Linux* OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="flatpak/flatpak.html">Use Flatpak* to install applications on Clear Linux* OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="machine-learning/machine-learning.html">TensorFlow* machine learning on Clear Linux* OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker/docker.html">Run Docker* on Clear Linux* OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="azure.html">Run Clear Linux* OS using Microsoft Azure CLI 2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hadoop.html">Set up a single node cluster with Hadoop*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fmv.html">Use the function multi-version patch generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aws-web/aws-web.html">Create and launch Clear Linux* OS from Amazon Web Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smb/smb.html">Enable simple file sharing with a Windows* machine using Samba*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smb/smb-desktop.html">Connect to Windows* shared location from Clear Linux* OS desktop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spark.html">Set up a standalone cluster system using Apache* Spark*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kata.html">Install Kata Containers*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kata_migration.html">Migrate Clear Containers to Kata Containers*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kubernetes/kubernetes.html">Run Kubernetes*</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kubernetes/kubernetes-bp.html">Kubernetes Best Practices on Clear Linux OS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="yubikey-u2f.html">Enable YubiKey U2F Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nvidia.html">Install NVIDIA* Drivers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="redis.html">Run Redis on Clear Linux* OS</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Setting up proxy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#shells-and-programs-in-a-desktop-session">Shells and programs in a desktop session</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#terminal">Terminal</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#wget">wget</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#system-service-docker">System service (Docker)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#git-over-ssh">git over ssh</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ/faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Clear Linux* Project Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+
+<header id="header">
+  <div class="padding-md--left-right">
+
+    <div class="header__site_info">
+           <div class="header__site_info_name">
+             <a href ="https://clearlinux.org"> Clear Linux* Project</a>
+           </div>
+    </div>
+    <nav class="header__menu">
+        <ul class="header__menu_list">
+                         <li class="header__menu_list_item green  ">
+                <a tabindex='1' href="https://clearlinux.org/about">About</a>
+              </li>
+                         <li class="header__menu_list_item purple  ">
+                <a tabindex='1' href="https://clearlinux.org/developer">Developer</a>
+              </li>
+                         <li class="header__menu_list_item blue  ">
+                <a tabindex='1' href="https://clearlinux.org/software">Software</a>
+              </li>
+        </ul>
+    </nav>
+
+  </div>
+
+
+
+</header>
+
+
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="tutorials.html">Tutorials</a> &raquo;</li>
+        
+      <li>Setting up proxy</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/clearlinux/clear-linux-documentation/blob/rtd-theme/source/tutorials/tutorial-proxy.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="setting-up-proxy">
+<span id="tutorial-proxy"></span><h1>Setting up proxy</h1>
+<p>This tutorial shows you how to configure your system for use behind an
+outbound proxy to access the Internet.</p>
+<p>Clear Linux OS <a class="reference internal" href="../tooling/tooling.html#tooling"><span class="std std-ref">How to Clear</span></a> applications already benefit from the <a class="reference internal" href="../tooling/autoproxy.html#autoproxy"><span class="std std-ref">Autoproxy</span></a>
+feature.</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#prerequisites" id="id1">Prerequisites</a></li>
+<li><a class="reference internal" href="#shells-and-programs-in-a-desktop-session" id="id2">Shells and programs in a desktop session</a></li>
+<li><a class="reference internal" href="#wget" id="id3">wget</a></li>
+<li><a class="reference internal" href="#system-service-docker" id="id4">System service (Docker)</a></li>
+<li><a class="reference internal" href="#git-over-ssh" id="id5">git over ssh</a></li>
+</ul>
+</div>
+<div class="section" id="prerequisites">
+<h2><a class="toc-backref" href="#id1">Prerequisites</a></h2>
+<p>This tutorial assumes you have installed Clear Linux OS on your host system.
+For detailed instructions on installing Clear Linux OS on a bare metal system, visit
+the <a class="reference internal" href="../get-started/bare-metal-install-desktop/bare-metal-install-desktop.html#bare-metal-install-desktop"><span class="std std-ref">bare metal installation guide</span></a>.</p>
+</div>
+<div class="section" id="shells-and-programs-in-a-desktop-session">
+<h2><a class="toc-backref" href="#id2">Shells and programs in a desktop session</a></h2>
+<div class="section" id="terminal">
+<h3>Terminal</h3>
+<p>Add the following to your ~/.bashrc:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">http_proxy</span><span class="o">=</span>http://your.http-proxy.url:port
+<span class="nb">export</span> <span class="nv">https_proxy</span><span class="o">=</span>http://your.https-proxy.url:port
+<span class="nb">export</span> <span class="nv">ftp_proxy</span><span class="o">=</span>http://your.ftp-proxy.url:port
+<span class="nb">export</span> <span class="nv">socks_proxy</span><span class="o">=</span>http://your.socks-proxy.url:port
+<span class="nb">export</span> <span class="nv">no_proxy</span><span class="o">=</span><span class="s2">&quot;.your-company-domain.com,localhost&quot;</span>
+<span class="nb">export</span> <span class="nv">HTTP_PROXY</span><span class="o">=</span><span class="nv">$http_proxy</span>
+<span class="nb">export</span> <span class="nv">HTTPS_PROXY</span><span class="o">=</span><span class="nv">$https_proxy</span>
+<span class="nb">export</span> <span class="nv">FTP_PROXY</span><span class="o">=</span><span class="nv">$ftp_proxy</span>
+<span class="nb">export</span> <span class="nv">SOCKS_PROXY</span><span class="o">=</span><span class="nv">$socks_proxy</span>
+<span class="nb">export</span> <span class="nv">NO_PROXY</span><span class="o">=</span><span class="nv">$no_proxy</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="wget">
+<h2><a class="toc-backref" href="#id3">wget</a></h2>
+<p>Run this command to enable downloading from websites from the terminal:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> &gt;&gt; ~/.wgetrc <span class="s">&lt;&lt;EOF</span>
+<span class="s">http_proxy = your.http-proxy.url:port</span>
+<span class="s">https_proxy = your.https-proxy.url:port</span>
+<span class="s">ftp_proxy = your.http-proxy.url:port</span>
+<span class="s">no_proxy = your-company-domain.com, localhost</span>
+<span class="s">EOF</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="system-service-docker">
+<h2><a class="toc-backref" href="#id4">System service (Docker)</a></h2>
+<p>For Docker (and other services that use systemd), you can follow these steps to configure and check proxy settings:</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Be sure to use <strong class="command">sudo</strong>, as you will need elevated permissions.</p>
+</div>
+<ol class="arabic">
+<li><p class="first">Create <code class="file docutils literal notranslate"><span class="pre">/etc/systemd/system/docker.service.d</span></code> directory to host
+configuration information for the Docker service.</p>
+</li>
+<li><p class="first">Create <code class="file docutils literal notranslate"><span class="pre">/etc/systemd/system/docker.service.d/http-proxy.conf</span></code> and add:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>Service<span class="o">]</span>
+<span class="nv">Environment</span><span class="o">=</span><span class="s2">&quot;HTTP_PROXY=http://your.http-proxy.url:port/&quot;</span>
+<span class="nv">Environment</span><span class="o">=</span><span class="s2">&quot;HTTPS_PROXY=http://your.https-proxy.url:port/&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Load the changes and restart the service:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo systemctl daemon-reload
+sudo systemctl restart docker
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Verify that changes have loaded:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>systemctl show --property<span class="o">=</span>Environment docker
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Environment=HTTP_PROXY=http://your.http-proxy.url:port/ HTTPS_PROXY=http://your.https-proxy.url:port/</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This process enables the ability to successfully run <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">pull</span></code>.
+Containers themselves must be configured independently.</p>
+</div>
+</div>
+<div class="section" id="git-over-ssh">
+<h2><a class="toc-backref" href="#id5">git over ssh</a></h2>
+<p>Add the following to your <code class="file docutils literal notranslate"><span class="pre">~/.ssh/config</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>host github.com
+    port <span class="m">22</span>
+    user git
+    ProxyCommand connect-proxy -S your.ssh-proxy.url:port %h %p
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Though netcat is included with Clear Linux, it is not the BSD version,
+which is the one usually used to enable git over ssh.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../reference/reference.html" class="btn btn-neutral float-right" title="Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="redis.html" class="btn btn-neutral float-left" title="Run Redis on Clear Linux* OS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, many
+      <span class="lastupdated">
+        Last updated on Jul 24, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+
+<script type="text/javascript" src="../_static/tcs_theme.js"></script>
+
+
+
+</body>
+</html>
